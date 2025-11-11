@@ -11,6 +11,7 @@ import ContactsSection from '@/components/sections/ContactsSection';
 const Index = () => {
   const tabs = ['news', 'oazyse', 'institute', 'services', 'about', 'contacts'];
   const [activeTab, setActiveTab] = useState('news');
+  const [direction, setDirection] = useState<'left' | 'right' | null>(null);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,10 +25,18 @@ const Index = () => {
       
       if (diff > 0 && currentIndex < tabs.length - 1) {
         // Свайп влево - следующая вкладка
-        setActiveTab(tabs[currentIndex + 1]);
+        setDirection('left');
+        setTimeout(() => {
+          setActiveTab(tabs[currentIndex + 1]);
+          setDirection(null);
+        }, 50);
       } else if (diff < 0 && currentIndex > 0) {
         // Свайп вправо - предыдущая вкладка
-        setActiveTab(tabs[currentIndex - 1]);
+        setDirection('right');
+        setTimeout(() => {
+          setActiveTab(tabs[currentIndex - 1]);
+          setDirection(null);
+        }, 50);
       }
     }
   };
@@ -70,9 +79,17 @@ const Index = () => {
         const currentIndex = tabs.indexOf(activeTab);
         
         if (diff > 0 && currentIndex < tabs.length - 1) {
-          setActiveTab(tabs[currentIndex + 1]);
+          setDirection('left');
+          setTimeout(() => {
+            setActiveTab(tabs[currentIndex + 1]);
+            setDirection(null);
+          }, 50);
         } else if (diff < 0 && currentIndex > 0) {
-          setActiveTab(tabs[currentIndex - 1]);
+          setDirection('right');
+          setTimeout(() => {
+            setActiveTab(tabs[currentIndex - 1]);
+            setDirection(null);
+          }, 50);
         }
       }
 
@@ -94,22 +111,36 @@ const Index = () => {
   }, [activeTab, tabs]);
 
   const renderSection = () => {
-    switch (activeTab) {
-      case 'news':
-        return <NewsSection />;
-      case 'oazyse':
-        return <OazyseSection />;
-      case 'institute':
-        return <InstituteSection />;
-      case 'services':
-        return <ServicesSection />;
-      case 'about':
-        return <AboutSection />;
-      case 'contacts':
-        return <ContactsSection />;
-      default:
-        return <NewsSection />;
-    }
+    const getAnimationClass = () => {
+      if (direction === 'left') return 'animate-slide-in-left';
+      if (direction === 'right') return 'animate-slide-in-right';
+      return 'animate-slide-in-right';
+    };
+
+    const content = (() => {
+      switch (activeTab) {
+        case 'news':
+          return <NewsSection />;
+        case 'oazyse':
+          return <OazyseSection />;
+        case 'institute':
+          return <InstituteSection />;
+        case 'services':
+          return <ServicesSection />;
+        case 'about':
+          return <AboutSection />;
+        case 'contacts':
+          return <ContactsSection />;
+        default:
+          return <NewsSection />;
+      }
+    })();
+
+    return (
+      <div key={activeTab} className={getAnimationClass()}>
+        {content}
+      </div>
+    );
   };
 
   return (
