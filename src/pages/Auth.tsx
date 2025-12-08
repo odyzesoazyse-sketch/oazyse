@@ -106,11 +106,11 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="w-full max-w-sm space-y-8 animate-fade-in">
-        <div className="text-center">
-          <h1 className="font-serif italic text-3xl mb-2">Oazyse</h1>
-          <p className="text-sm text-muted-foreground">
+    <div className="min-h-screen bg-background flex items-center justify-center px-5">
+      <div className="w-full max-w-sm space-y-10 animate-fade-in">
+        <div className="text-center space-y-3">
+          <h1 className="font-serif italic text-4xl">Oazyse</h1>
+          <p className="text-sm text-muted-foreground tracking-wide">
             {isSignUp ? t('auth.createAccount') : t('auth.welcomeBack')}
           </p>
         </div>
@@ -122,7 +122,7 @@ const Auth = () => {
               placeholder={t('auth.fullName')}
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="h-12 border-border/50 focus:border-foreground transition-colors"
+              className="input-elegant"
             />
           )}
           
@@ -132,7 +132,7 @@ const Auth = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="h-12 border-border/50 focus:border-foreground transition-colors"
+            className="input-elegant"
           />
           
           <Input
@@ -141,13 +141,13 @@ const Auth = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="h-12 border-border/50 focus:border-foreground transition-colors"
+            className="input-elegant"
           />
 
           <Button
             type="submit"
             disabled={loading}
-            className="w-full h-12 text-xs uppercase tracking-widest font-semibold"
+            className="btn-primary w-full mt-2"
           >
             {loading ? '...' : isSignUp ? t('auth.signUp') : t('auth.signIn')}
           </Button>
@@ -155,10 +155,10 @@ const Auth = () => {
 
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border/50" />
+            <span className="w-full border-t border-border/30" />
           </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">{t('auth.or')}</span>
+          <div className="relative flex justify-center text-[10px] uppercase tracking-[0.15em]">
+            <span className="bg-background px-4 text-muted-foreground">{t('auth.or')}</span>
           </div>
         </div>
 
@@ -167,7 +167,7 @@ const Auth = () => {
           variant="outline"
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="w-full h-12 text-xs uppercase tracking-widest font-semibold border-border/50 hover:border-foreground transition-colors"
+          className="w-full h-12 text-xs uppercase tracking-[0.1em] font-medium border-border/50 hover:border-foreground hover:bg-muted/30 transition-all"
         >
           {t('auth.continueWithGoogle')}
         </Button>
@@ -177,7 +177,7 @@ const Auth = () => {
           <button
             type="button"
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-foreground underline underline-offset-4 hover:no-underline"
+            className="text-foreground font-medium link-underline"
           >
             {isSignUp ? t('auth.signIn') : t('auth.signUp')}
           </button>
@@ -186,7 +186,7 @@ const Auth = () => {
         <button
           type="button"
           onClick={() => navigate('/')}
-          className="block w-full text-center text-xs text-muted-foreground hover:text-foreground transition-colors"
+          className="block w-full text-center text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider"
         >
           ← {t('auth.backToHome')}
         </button>

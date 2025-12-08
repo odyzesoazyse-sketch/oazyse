@@ -11,13 +11,13 @@ const ThemeToggle = () => {
   }, []);
 
   if (!mounted) {
-    return <div className="w-8 h-8" />;
+    return <div className="w-10 h-10" />;
   }
 
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 hover:bg-muted rounded-sm transition-colors"
+      className="p-2.5 hover:bg-muted/50 rounded-sm transition-colors"
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? (

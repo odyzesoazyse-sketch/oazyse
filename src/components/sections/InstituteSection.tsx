@@ -10,22 +10,30 @@ const InstituteSection = () => {
   ];
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       <div className="space-y-6 animate-fade-up">
-        <h2 className="text-xs font-semibold uppercase tracking-widest">{t('institute.title')}</h2>
-        <p className="text-sm md:text-base leading-relaxed font-serif text-pretty">{t('institute.description')}</p>
+        <h2 className="section-title">{t('institute.title')}</h2>
+        <p className="text-sm md:text-base leading-[1.8] font-serif text-muted-foreground text-pretty">
+          {t('institute.description')}
+        </p>
       </div>
 
-      {sections.map((section, index) => (
-        <div 
-          key={section.titleKey} 
-          className="space-y-4 animate-fade-up"
-          style={{ animationDelay: `${(index + 1) * 100}ms` }}
-        >
-          <h3 className="text-xs font-semibold uppercase tracking-widest">{t(section.titleKey)}</h3>
-          <p className="text-sm md:text-base leading-relaxed font-serif text-pretty">{t(section.textKey)}</p>
-        </div>
-      ))}
+      <div className="grid gap-4">
+        {sections.map((section, index) => (
+          <div 
+            key={section.titleKey} 
+            className="content-card animate-fade-up"
+            style={{ animationDelay: `${(index + 1) * 100}ms` }}
+          >
+            <h3 className="text-xs font-semibold uppercase tracking-[0.15em] mb-3">
+              {t(section.titleKey)}
+            </h3>
+            <p className="text-sm leading-relaxed font-serif text-muted-foreground text-pretty">
+              {t(section.textKey)}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

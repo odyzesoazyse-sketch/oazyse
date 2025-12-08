@@ -10,15 +10,15 @@ const Header = () => {
   const { user, signOut } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm z-50 py-6 px-4 border-b border-border/50">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-end items-center gap-2 mb-3">
+    <header className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-md z-50 border-b border-border/30">
+      <div className="max-w-4xl mx-auto px-5 md:px-8">
+        <div className="flex justify-end items-center gap-1 py-3 border-b border-border/20">
           <ThemeToggle />
           <LanguageSwitcher />
           {user ? (
             <button
               onClick={() => signOut()}
-              className="p-2 hover:bg-muted rounded-sm transition-colors"
+              className="p-2.5 hover:bg-muted/50 rounded-sm transition-colors"
               aria-label="Sign out"
             >
               <LogOut className="w-4 h-4" />
@@ -26,18 +26,23 @@ const Header = () => {
           ) : (
             <Link
               to="/auth"
-              className="p-2 hover:bg-muted rounded-sm transition-colors"
+              className="p-2.5 hover:bg-muted/50 rounded-sm transition-colors"
               aria-label="Sign in"
             >
               <User className="w-4 h-4" />
             </Link>
           )}
         </div>
-        <div className="text-center">
-          <h1 className="text-sm md:text-base leading-relaxed tracking-wide">
-            <span className="font-semibold uppercase tracking-widest text-xs md:text-sm">{t('header.title')}</span>
-            <span className="text-muted-foreground mx-2">{t('header.presents')}</span>
-            <span className="font-serif italic text-lg md:text-xl">Oazyse</span>
+        
+        <div className="py-5 text-center">
+          <p className="text-[10px] md:text-xs text-muted-foreground tracking-[0.2em] uppercase mb-2">
+            {t('header.title')}
+          </p>
+          <p className="text-muted-foreground/60 text-[10px] tracking-wider mb-1">
+            {t('header.presents')}
+          </p>
+          <h1 className="font-serif italic text-2xl md:text-3xl tracking-wide">
+            Oazyse
           </h1>
         </div>
       </div>
