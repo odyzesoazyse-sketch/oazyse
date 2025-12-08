@@ -7,6 +7,7 @@ import InstituteSection from '@/components/sections/InstituteSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ContactsSection from '@/components/sections/ContactsSection';
+import HypnotherapyChat from '@/components/HypnotherapyChat';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('news');
@@ -45,6 +46,8 @@ const Index = () => {
       </footer>
 
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      
+      <HypnotherapyChat />
     </div>
   );
 };
