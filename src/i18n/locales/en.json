@@ -182,5 +182,23 @@
   },
   "language": {
     "select": "Language"
+  },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "createAccount": "Create your account",
+    "fullName": "Full name",
+    "password": "Password",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "or": "or",
+    "continueWithGoogle": "Continue with Google",
+    "haveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "backToHome": "Back to home",
+    "error": "Error",
+    "success": "Success",
+    "signupSuccess": "Registration successful",
+    "alreadyRegistered": "User already registered",
+    "invalidCredentials": "Invalid email or password"
   }
 }
