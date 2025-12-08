@@ -31,14 +31,21 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-32 pb-28 px-6 md:px-8">
-        <div className="max-w-xl mx-auto animate-fade-in">
-          {renderSection()}
+      
+      <main className="pt-36 md:pt-40 pb-32 px-5 md:px-8 lg:px-12">
+        <div className="max-w-2xl mx-auto">
+          <div key={activeTab} className="animate-fade-in">
+            {renderSection()}
+          </div>
         </div>
       </main>
-      <footer className="fixed bottom-14 left-0 right-0 bg-background/80 backdrop-blur-sm py-2 px-4 text-center">
-        <p className="text-[10px] text-muted-foreground tracking-wider uppercase">{t('footer.rights')}</p>
+
+      <footer className="fixed bottom-16 left-0 right-0 bg-gradient-to-t from-background via-background to-transparent py-4 px-4 text-center pointer-events-none">
+        <p className="text-[10px] text-muted-foreground/60 tracking-[0.15em] uppercase">
+          {t('footer.rights')}
+        </p>
       </footer>
+
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
       <HypnotherapyChat />
     </div>

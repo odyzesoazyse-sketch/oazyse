@@ -81,41 +81,79 @@ const HypnotherapyChat = () => {
 
   if (!isOpen) {
     return (
-      <Button onClick={() => setIsOpen(true)} className="fixed bottom-20 right-4 z-50 rounded-full w-14 h-14 p-0 bg-foreground text-background hover:bg-foreground/90">
-        <MessageCircle className="w-6 h-6" />
+      <Button 
+        onClick={() => setIsOpen(true)} 
+        className="fixed bottom-20 right-5 z-50 w-12 h-12 rounded-full p-0 bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+      >
+        <MessageCircle className="w-5 h-5" />
       </Button>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-background flex flex-col">
-      <div className="flex items-center justify-between p-4 border-b border-foreground">
-        <h2 className="text-lg font-medium">{t('chat.title')}</h2>
-        <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}><X className="w-5 h-5" /></Button>
+    <div className="fixed inset-0 z-50 bg-background flex flex-col animate-fade-in">
+      <div className="flex items-center justify-between px-5 py-4 border-b border-border/50">
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.1em]">{t('chat.title')}</h2>
+        </div>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          onClick={() => setIsOpen(false)}
+          className="hover:bg-muted/50"
+        >
+          <X className="w-5 h-5" />
+        </Button>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-5 space-y-4 scrollbar-hide">
         {messages.length === 0 && (
-          <div className="text-center text-muted-foreground py-8">
-            <p className="mb-2">{t('chat.greeting')}</p>
-            <p className="text-sm">{t('chat.prompt')}</p>
+          <div className="text-center py-12 animate-fade-up">
+            <p className="text-lg font-serif italic mb-3 text-foreground">{t('chat.greeting')}</p>
+            <p className="text-sm text-muted-foreground max-w-xs mx-auto">{t('chat.prompt')}</p>
           </div>
         )}
         {messages.map((msg, i) => (
-          <div key={i} className={`p-3 border border-foreground ${msg.role === 'user' ? 'ml-8 bg-foreground text-background' : 'mr-8'}`}>
-            <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+          <div 
+            key={i} 
+            className={`p-4 ${
+              msg.role === 'user' 
+                ? 'ml-8 bg-foreground text-background' 
+                : 'mr-8 bg-muted/50 border border-border/50'
+            } animate-fade-up`}
+          >
+            <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
           </div>
         ))}
         {isLoading && messages[messages.length - 1]?.role === 'user' && (
-          <div className="mr-8 p-3 border border-foreground"><p className="text-sm text-muted-foreground">{t('chat.typing')}</p></div>
+          <div className="mr-8 p-4 bg-muted/50 border border-border/50 animate-fade-up">
+            <div className="flex gap-1">
+              <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse" />
+              <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+              <span className="w-2 h-2 bg-muted-foreground/40 rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+            </div>
+          </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 border-t border-foreground">
-        <div className="flex gap-2">
-          <Textarea value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={t('chat.inputPlaceholder')} className="min-h-[44px] max-h-32 resize-none" disabled={isLoading} />
-          <Button onClick={sendMessage} disabled={!input.trim() || isLoading} className="shrink-0"><Send className="w-4 h-4" /></Button>
+      <div className="p-4 border-t border-border/50 bg-background">
+        <div className="flex gap-3 max-w-2xl mx-auto">
+          <Textarea 
+            value={input} 
+            onChange={(e) => setInput(e.target.value)} 
+            onKeyDown={handleKeyDown} 
+            placeholder={t('chat.inputPlaceholder')} 
+            className="input-elegant min-h-[48px] max-h-32 resize-none flex-1" 
+            disabled={isLoading} 
+          />
+          <Button 
+            onClick={sendMessage} 
+            disabled={!input.trim() || isLoading} 
+            className="btn-primary shrink-0 w-12 h-12 p-0"
+          >
+            <Send className="w-4 h-4" />
+          </Button>
         </div>
       </div>
     </div>
