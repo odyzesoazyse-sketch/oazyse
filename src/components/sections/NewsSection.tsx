@@ -1,48 +1,21 @@
-import { useEffect, useState } from 'react';
-
-interface Article {
-  id: number;
-  title: string;
-  date: string;
-  content: string;
-}
+import { useTranslation } from 'react-i18next';
 
 const NewsSection = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
+  const { t } = useTranslation();
 
-  useEffect(() => {
-    // Начальные статьи
-    const initialArticles: Article[] = [
-      {
-        id: 1,
-        title: 'ДОСТИЖЕНИЕ НЕДЕЛИ',
-        date: '15 января 2025',
-        content: 'Наш проект достиг важной вехи в развитии сознания. Более 100 участников прошли курс по осознанности и медитации, открывая новые грани своего внутреннего мира. Мы продолжаем исследовать глубины человеческого сознания.',
-      },
-      {
-        id: 2,
-        title: 'НОВЫЙ КУРС ПО МЕДИТАЦИИ',
-        date: '10 января 2025',
-        content: 'Представляем обновленную программу медитативных практик, разработанную с учетом последних исследований в области нейронауки и древних техник осознанности. Курс включает практики для начинающих и продвинутых.',
-      },
-      {
-        id: 3,
-        title: 'ОТКРЫТИЕ ИНСТИТУТА',
-        date: '5 января 2025',
-        content: 'Институт Сознания Космического Разума официально открыл свои двери для всех желающих исследовать природу сознания. Мы предлагаем уникальную возможность погрузиться в практику осознанности под руководством опытных наставников.',
-      },
-    ];
-
-    setArticles(initialArticles);
-  }, []);
+  const articles = [
+    { id: 1, titleKey: 'news.article1.title', dateKey: 'news.article1.date', contentKey: 'news.article1.content' },
+    { id: 2, titleKey: 'news.article2.title', dateKey: 'news.article2.date', contentKey: 'news.article2.content' },
+    { id: 3, titleKey: 'news.article3.title', dateKey: 'news.article3.date', contentKey: 'news.article3.content' },
+  ];
 
   return (
     <div className="space-y-12">
       {articles.map((article) => (
         <article key={article.id} className="space-y-2">
-          <h2 className="font-bold uppercase text-base md:text-lg">{article.title}</h2>
-          <p className="text-sm">{article.date}</p>
-          <p className="text-sm md:text-base leading-relaxed">{article.content}</p>
+          <h2 className="font-bold uppercase text-base md:text-lg">{t(article.titleKey)}</h2>
+          <p className="text-sm">{t(article.dateKey)}</p>
+          <p className="text-sm md:text-base leading-relaxed">{t(article.contentKey)}</p>
         </article>
       ))}
     </div>
