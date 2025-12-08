@@ -10,15 +10,19 @@ const Header = () => {
   const { user, signOut } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-md z-50 border-b border-border/30">
-      <div className="max-w-4xl mx-auto px-5 md:px-8">
-        <div className="flex justify-end items-center gap-1 py-3 border-b border-border/20">
+    <header className="fixed top-0 left-0 right-0 bg-background/90 backdrop-blur-sm z-50 border-b border-border/30">
+      <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="flex-1">
+          <h1 className="font-serif italic text-lg md:text-xl">Oazyse</h1>
+        </div>
+        
+        <div className="flex items-center gap-1">
           <ThemeToggle />
           <LanguageSwitcher />
           {user ? (
             <button
               onClick={() => signOut()}
-              className="p-2.5 hover:bg-muted/50 rounded-sm transition-colors"
+              className="p-2 hover:bg-muted/50 rounded-sm transition-colors"
               aria-label="Sign out"
             >
               <LogOut className="w-4 h-4" />
@@ -26,24 +30,12 @@ const Header = () => {
           ) : (
             <Link
               to="/auth"
-              className="p-2.5 hover:bg-muted/50 rounded-sm transition-colors"
+              className="p-2 hover:bg-muted/50 rounded-sm transition-colors"
               aria-label="Sign in"
             >
               <User className="w-4 h-4" />
             </Link>
           )}
-        </div>
-        
-        <div className="py-5 text-center">
-          <p className="text-[10px] md:text-xs text-muted-foreground tracking-[0.2em] uppercase mb-2">
-            {t('header.title')}
-          </p>
-          <p className="text-muted-foreground/60 text-[10px] tracking-wider mb-1">
-            {t('header.presents')}
-          </p>
-          <h1 className="font-serif italic text-2xl md:text-3xl tracking-wide">
-            Oazyse
-          </h1>
         </div>
       </div>
     </header>
