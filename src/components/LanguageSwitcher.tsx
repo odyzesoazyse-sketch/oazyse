@@ -16,7 +16,7 @@ const LanguageSwitcher = () => {
         className="flex items-center gap-1 text-sm px-2 py-1 border border-foreground"
       >
         <Globe className="w-4 h-4" />
-        <span>{currentLang.flag}</span>
+        <span className="uppercase">{currentLang.code}</span>
       </button>
 
       {isOpen && (
@@ -27,12 +27,11 @@ const LanguageSwitcher = () => {
               <button
                 key={lang.code}
                 onClick={() => { i18n.changeLanguage(lang.code); setIsOpen(false); }}
-                className={`w-full text-left px-3 py-2 text-sm flex items-center gap-2 hover:bg-foreground/10 ${
+                className={`w-full text-left px-3 py-2 text-sm hover:bg-foreground/10 ${
                   i18n.language === lang.code ? 'bg-foreground text-background' : ''
                 }`}
               >
-                <span>{lang.flag}</span>
-                <span>{lang.name}</span>
+                {lang.name}
               </button>
             ))}
           </div>
