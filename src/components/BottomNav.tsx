@@ -19,14 +19,16 @@ const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-background border-t border-foreground z-50">
-      <div className="flex justify-around items-center h-16 max-w-4xl mx-auto">
+    <nav className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-sm border-t border-border/50 z-50">
+      <div className="flex justify-around items-center h-14 max-w-4xl mx-auto px-2">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`text-xs md:text-sm px-2 py-2 ${
-              activeTab === tab.id ? 'font-bold' : 'font-normal'
+            className={`text-[10px] md:text-xs px-1.5 py-2 transition-all duration-200 uppercase tracking-wider ${
+              activeTab === tab.id 
+                ? 'font-semibold text-foreground' 
+                : 'font-normal text-muted-foreground hover:text-foreground'
             }`}
           >
             {t(tab.labelKey)}

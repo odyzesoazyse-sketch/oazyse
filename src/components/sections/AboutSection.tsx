@@ -3,14 +3,21 @@ import { useTranslation } from 'react-i18next';
 const AboutSection = () => {
   const { t } = useTranslation();
 
+  const paragraphs = ['about.text1', 'about.text2', 'about.text3', 'about.text4'];
+
   return (
     <div className="space-y-8">
-      <h2 className="font-bold uppercase text-base md:text-lg">{t('about.title')}</h2>
-      <div className="space-y-4">
-        <p className="text-sm md:text-base leading-relaxed">{t('about.text1')}</p>
-        <p className="text-sm md:text-base leading-relaxed">{t('about.text2')}</p>
-        <p className="text-sm md:text-base leading-relaxed">{t('about.text3')}</p>
-        <p className="text-sm md:text-base leading-relaxed">{t('about.text4')}</p>
+      <h2 className="text-xs font-semibold uppercase tracking-widest animate-fade-up">{t('about.title')}</h2>
+      <div className="space-y-6">
+        {paragraphs.map((key, index) => (
+          <p 
+            key={key}
+            className="text-sm md:text-base leading-relaxed font-serif text-pretty animate-fade-up"
+            style={{ animationDelay: `${(index + 1) * 100}ms` }}
+          >
+            {t(key)}
+          </p>
+        ))}
       </div>
     </div>
   );
