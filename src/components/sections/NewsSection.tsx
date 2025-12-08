@@ -10,12 +10,18 @@ const NewsSection = () => {
   ];
 
   return (
-    <div className="space-y-12">
-      {articles.map((article) => (
-        <article key={article.id} className="space-y-2">
-          <h2 className="font-bold uppercase text-base md:text-lg">{t(article.titleKey)}</h2>
-          <p className="text-sm">{t(article.dateKey)}</p>
-          <p className="text-sm md:text-base leading-relaxed">{t(article.contentKey)}</p>
+    <div className="space-y-16">
+      {articles.map((article, index) => (
+        <article 
+          key={article.id} 
+          className="space-y-4 animate-fade-up"
+          style={{ animationDelay: `${index * 100}ms` }}
+        >
+          <div className="space-y-1">
+            <h2 className="text-xs font-semibold uppercase tracking-widest">{t(article.titleKey)}</h2>
+            <p className="text-xs text-muted-foreground">{t(article.dateKey)}</p>
+          </div>
+          <p className="text-sm md:text-base leading-relaxed text-pretty font-serif">{t(article.contentKey)}</p>
         </article>
       ))}
     </div>

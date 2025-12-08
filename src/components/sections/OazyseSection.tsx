@@ -20,20 +20,43 @@ const OazyseSection = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-4">
-        <h2 className="font-bold uppercase text-base md:text-lg">{t('oazyse.aboutTitle')}</h2>
-        <p className="text-sm md:text-base leading-relaxed">{t('oazyse.aboutText1')}</p>
-        <p className="text-sm md:text-base leading-relaxed">{t('oazyse.aboutText2')}</p>
+    <div className="space-y-12">
+      <div className="space-y-6 animate-fade-up">
+        <h2 className="text-xs font-semibold uppercase tracking-widest">{t('oazyse.aboutTitle')}</h2>
+        <div className="space-y-4">
+          <p className="text-sm md:text-base leading-relaxed font-serif text-pretty">{t('oazyse.aboutText1')}</p>
+          <p className="text-sm md:text-base leading-relaxed font-serif text-pretty">{t('oazyse.aboutText2')}</p>
+        </div>
       </div>
 
-      <div className="space-y-4">
-        <h3 className="font-bold uppercase text-base md:text-lg">{t('oazyse.joinTitle')}</h3>
+      <div className="space-y-6 animate-fade-up" style={{ animationDelay: '100ms' }}>
+        <h3 className="text-xs font-semibold uppercase tracking-widest">{t('oazyse.joinTitle')}</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <Input placeholder={t('oazyse.namePlaceholder')} value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="border-foreground rounded-none" />
-          <Input type="email" placeholder={t('oazyse.emailPlaceholder')} value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="border-foreground rounded-none" />
-          <Input placeholder={t('oazyse.motivationPlaceholder')} value={formData.motivation} onChange={(e) => setFormData({ ...formData, motivation: e.target.value })} className="border-foreground rounded-none" />
-          <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none">{t('oazyse.submitButton')}</Button>
+          <Input 
+            placeholder={t('oazyse.namePlaceholder')} 
+            value={formData.name} 
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
+            className="border-border focus:border-foreground rounded-none bg-transparent text-sm transition-colors" 
+          />
+          <Input 
+            type="email" 
+            placeholder={t('oazyse.emailPlaceholder')} 
+            value={formData.email} 
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
+            className="border-border focus:border-foreground rounded-none bg-transparent text-sm transition-colors" 
+          />
+          <Input 
+            placeholder={t('oazyse.motivationPlaceholder')} 
+            value={formData.motivation} 
+            onChange={(e) => setFormData({ ...formData, motivation: e.target.value })} 
+            className="border-border focus:border-foreground rounded-none bg-transparent text-sm transition-colors" 
+          />
+          <Button 
+            type="submit" 
+            className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none text-xs uppercase tracking-widest font-medium h-11 transition-all"
+          >
+            {t('oazyse.submitButton')}
+          </Button>
         </form>
       </div>
     </div>
