@@ -1,0 +1,96 @@
+{
+  "header": { "title": "מכון התודעה הקוסמית", "presents": "מציג" },
+  "nav": { "news": "חדשות", "help": "עזרה", "oazyse": "Oazyse", "institute": "מכון", "services": "שירותים", "about": "עליי", "contacts": "צור קשר" },
+  "footer": { "rights": "© 2025 Oazyse. כל הזכויות שמורות." },
+  "news": {
+    "article1": { "title": "הישג השבוע", "date": "15 בינואר 2025", "content": "הפרויקט שלנו הגיע לאבן דרך חשובה בפיתוח התודעה." },
+    "article2": { "title": "קורס מדיטציה חדש", "date": "10 בינואר 2025", "content": "אנו מציגים תוכנית מעודכנת של תרגולי מדיטציה." },
+    "article3": { "title": "פתיחת המכון", "date": "5 בינואר 2025", "content": "מכון התודעה הקוסמית פתח רשמית את שעריו." }
+  },
+  "help": {
+    "title": "כיצד היפנותרפיה יכולה לעזור?",
+    "subtitle": "לחץ על הכרטיסים כדי לחשוף סודות",
+    "explored": "נחקר",
+    "clickToClose": "לחץ לסגירה",
+    "allExplored": "🎉 חקרת את כל האפשרויות!",
+    "readyToStart": "מוכן להתחיל את המסע שלך לשינוי?",
+    "cards": {
+      "anxiety": { "title": "חרדה", "shortDesc": "פחדים ופאניקה", "fullDesc": "היפנותרפיה עוזרת למצוא את שורש מצבי החרדה בתת-מודע." },
+      "sleep": { "title": "נדודי שינה", "shortDesc": "בעיות שינה", "fullDesc": "טכניקות הרפיה עמוקה משחזרות את מחזור השינה הטבעי." },
+      "habits": { "title": "הרגלים", "shortDesc": "עישון, אכילת יתר", "fullDesc": "היפנוזה עובדת ישירות עם התת-מודע." },
+      "confidence": { "title": "ביטחון עצמי", "shortDesc": "הערכה עצמית", "fullDesc": "אנו משחררים פוטנציאל פנימי ומסירים אמונות מגבילות." },
+      "phobias": { "title": "פוביות", "shortDesc": "פחדים לא רציונליים", "fullDesc": "היפנותרפיה מוצאת את הרגע שבו נוצרה הפוביה." },
+      "stress": { "title": "לחץ", "shortDesc": "שחיקה", "fullDesc": "אנו מלמדים טכניקות הרפיה מיידית." },
+      "relationships": { "title": "יחסים", "shortDesc": "קשרים עם אנשים", "fullDesc": "דפוסי יחסים נוצרים בילדות." },
+      "focus": { "title": "ריכוז", "shortDesc": "מיקוד וזיכרון", "fullDesc": "מצב ההיפנוזה עצמו מאמן ריכוז." },
+      "pain": { "title": "כאב", "shortDesc": "ניהול כאב", "fullDesc": "היפנוזה משמשת ברפואה להקלה על כאב." },
+      "trauma": { "title": "טראומה", "shortDesc": "אירועי עבר", "fullDesc": "עבודה בטוחה עם חוויה טראומטית בהיפנוזה." },
+      "creativity": { "title": "יצירתיות", "shortDesc": "פוטנציאל יצירתי", "fullDesc": "היפנוזה פותחת גישה לחצי הכדור הימני." },
+      "motivation": { "title": "מוטיבציה", "shortDesc": "השגת מטרות", "fullDesc": "התת-מודע הוא בעל ברית חזק." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "על פרויקט OAZYSE",
+    "aboutText1": "Oazyse הוא מרחב לפיתוח תודעה ותרגול מיינדפולנס.",
+    "aboutText2": "הפרויקט כולל תרגולי מדיטציה ושיטות טיפוליות.",
+    "joinTitle": "הצטרף לפרויקט",
+    "namePlaceholder": "שם",
+    "emailPlaceholder": "אימייל",
+    "motivationPlaceholder": "מוטיבציה",
+    "submitButton": "שלח",
+    "errorTitle": "שגיאה",
+    "errorMessage": "אנא מלא את כל השדות",
+    "successTitle": "הבקשה נשלחה",
+    "successMessage": "ניצור איתך קשר בקרוב"
+  },
+  "institute": {
+    "title": "מכון התודעה הקוסמית",
+    "description": "המכון הוא פלטפורמה חינוכית.",
+    "coursesTitle": "קורסים",
+    "coursesText": "הקורסים שלנו מכסים מגוון רחב של נושאים.",
+    "testsTitle": "מבחנים והערכה",
+    "testsText": "אנו מציעים מערכת מבחנים.",
+    "chatTitle": "צ'אט ותמיכה",
+    "chatText": "משתתפי התוכנית מקבלים גישה לצ'אט פרטי."
+  },
+  "services": {
+    "title": "שירותים",
+    "items": {
+      "tea": { "title": "טקסי תה", "description": "טקסי תה מסורתיים כתרגול מיינדפולנס." },
+      "satsang": { "title": "סאטסאנג", "description": "מפגשים בפורמט סאטסאנג." },
+      "hypnotherapy": { "title": "היפנותרפיה", "description": "מפגשי היפנותרפיה אישיים." },
+      "meditation": { "title": "תרגולי מדיטציה", "description": "מדיטציות קבוצתיות ואישיות." },
+      "consultations": { "title": "ייעוץ", "description": "ייעוץ אישי על התפתחות רוחנית." }
+    }
+  },
+  "about": {
+    "title": "עליי",
+    "text1": "שמי [שם], והקדשתי את חיי לחקר ותרגול של פיתוח תודעה.",
+    "text2": "למדתי מדיטציה במסורות מזרחיות ומערביות.",
+    "text3": "לאורך השנים עזרתי למאות אנשים.",
+    "text4": "Oazyse והמכון הם הגשמת החזון שלי."
+  },
+  "contacts": {
+    "title": "צור קשר",
+    "description": "צור איתנו קשר למידע נוסף.",
+    "email": "אימייל",
+    "namePlaceholder": "שם",
+    "emailPlaceholder": "אימייל",
+    "messagePlaceholder": "הודעה",
+    "submitButton": "שלח",
+    "errorTitle": "שגיאה",
+    "errorMessage": "אנא מלא את כל השדות",
+    "successTitle": "ההודעה נשלחה",
+    "successMessage": "נשיב בקרוב"
+  },
+  "chat": {
+    "title": "ייעוץ היפנותרפיה",
+    "greeting": "שלום!",
+    "prompt": "שאל שאלה על היפנותרפיה.",
+    "inputPlaceholder": "הקלד הודעה...",
+    "typing": "מקליד...",
+    "errorTitle": "שגיאה",
+    "errorMessage": "שליחת ההודעה נכשלה"
+  },
+  "language": { "select": "שפה" }
+}

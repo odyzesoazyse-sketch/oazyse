@@ -1,0 +1,121 @@
+{
+  "header": {
+    "title": "Instituto de la Conciencia de la Mente Cósmica",
+    "presents": "presenta"
+  },
+  "nav": {
+    "news": "Noticias",
+    "help": "Ayuda",
+    "oazyse": "Oazyse",
+    "institute": "Instituto",
+    "services": "Servicios",
+    "about": "Sobre mí",
+    "contacts": "Contactos"
+  },
+  "footer": {
+    "rights": "© 2025 Oazyse. Todos los derechos reservados."
+  },
+  "news": {
+    "article1": {
+      "title": "LOGRO DE LA SEMANA",
+      "date": "15 de enero de 2025",
+      "content": "Nuestro proyecto ha alcanzado un hito importante en el desarrollo de la conciencia. Más de 100 participantes han completado el curso de atención plena y meditación."
+    },
+    "article2": {
+      "title": "NUEVO CURSO DE MEDITACIÓN",
+      "date": "10 de enero de 2025",
+      "content": "Presentamos un programa actualizado de prácticas meditativas, desarrollado teniendo en cuenta las últimas investigaciones en neurociencia."
+    },
+    "article3": {
+      "title": "APERTURA DEL INSTITUTO",
+      "date": "5 de enero de 2025",
+      "content": "El Instituto de la Conciencia de la Mente Cósmica ha abierto oficialmente sus puertas a todos los que deseen explorar la naturaleza de la conciencia."
+    }
+  },
+  "help": {
+    "title": "¿Cómo puede ayudar la hipnoterapia?",
+    "subtitle": "Haga clic en las tarjetas para revelar secretos",
+    "explored": "Explorado",
+    "clickToClose": "clic para cerrar",
+    "allExplored": "🎉 ¡Has explorado todas las posibilidades!",
+    "readyToStart": "¿Listo para comenzar tu camino hacia el cambio?",
+    "cards": {
+      "anxiety": { "title": "Ansiedad", "shortDesc": "Miedos y pánico", "fullDesc": "La hipnoterapia ayuda a encontrar la raíz de los estados de ansiedad en el subconsciente." },
+      "sleep": { "title": "Insomnio", "shortDesc": "Problemas de sueño", "fullDesc": "Las técnicas de relajación profunda restauran el ciclo natural del sueño." },
+      "habits": { "title": "Hábitos", "shortDesc": "Fumar, comer en exceso", "fullDesc": "La hipnosis trabaja directamente con el subconsciente donde viven los hábitos." },
+      "confidence": { "title": "Confianza", "shortDesc": "Autoestima", "fullDesc": "Desbloqueamos el potencial interior y eliminamos las creencias limitantes." },
+      "phobias": { "title": "Fobias", "shortDesc": "Miedos irracionales", "fullDesc": "La hipnoterapia encuentra el momento de origen de la fobia y neutraliza la carga emocional." },
+      "stress": { "title": "Estrés", "shortDesc": "Agotamiento", "fullDesc": "Enseñamos técnicas de relajación instantánea y trabajamos con las causas profundas." },
+      "relationships": { "title": "Relaciones", "shortDesc": "Conexiones con personas", "fullDesc": "Los patrones de relación se forman en la infancia." },
+      "focus": { "title": "Concentración", "shortDesc": "Enfoque y memoria", "fullDesc": "El estado de hipnosis en sí mismo entrena la concentración." },
+      "pain": { "title": "Dolor", "shortDesc": "Manejo del dolor", "fullDesc": "La hipnosis se usa en medicina para el alivio del dolor." },
+      "trauma": { "title": "Trauma", "shortDesc": "Eventos pasados", "fullDesc": "Trabajo seguro con experiencias traumáticas en hipnosis." },
+      "creativity": { "title": "Creatividad", "shortDesc": "Potencial creativo", "fullDesc": "La hipnosis abre el acceso al hemisferio derecho y recursos profundos de la psique." },
+      "motivation": { "title": "Motivación", "shortDesc": "Logro de metas", "fullDesc": "El subconsciente es un poderoso aliado. Lo programamos para apoyar tus metas." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "SOBRE EL PROYECTO OAZYSE",
+    "aboutText1": "Oazyse es un espacio para el desarrollo de la conciencia y la práctica de la atención plena.",
+    "aboutText2": "El proyecto incluye prácticas de meditación y métodos terapéuticos.",
+    "joinTitle": "ÚNETE AL PROYECTO",
+    "namePlaceholder": "Nombre",
+    "emailPlaceholder": "Correo electrónico",
+    "motivationPlaceholder": "Motivación",
+    "submitButton": "ENVIAR",
+    "errorTitle": "Error",
+    "errorMessage": "Por favor complete todos los campos",
+    "successTitle": "Solicitud enviada",
+    "successMessage": "Nos pondremos en contacto pronto"
+  },
+  "institute": {
+    "title": "INSTITUTO DE LA CONCIENCIA DE LA MENTE CÓSMICA",
+    "description": "El Instituto es una plataforma educativa dedicada al estudio profundo de la naturaleza de la conciencia.",
+    "coursesTitle": "CURSOS",
+    "coursesText": "Nuestros cursos cubren una amplia gama de temas.",
+    "testsTitle": "TESTS Y EVALUACIÓN",
+    "testsText": "Ofrecemos un sistema de pruebas para evaluar tu progreso.",
+    "chatTitle": "CHAT Y SOPORTE",
+    "chatText": "Los participantes del programa obtienen acceso a un chat privado."
+  },
+  "services": {
+    "title": "SERVICIOS",
+    "items": {
+      "tea": { "title": "CEREMONIAS DEL TÉ", "description": "Ceremonias tradicionales del té como práctica de atención plena." },
+      "satsang": { "title": "SATSANGS", "description": "Encuentros en formato satsang." },
+      "hypnotherapy": { "title": "HIPNOTERAPIA", "description": "Sesiones individuales de hipnoterapia." },
+      "meditation": { "title": "PRÁCTICAS MEDITATIVAS", "description": "Meditaciones grupales e individuales." },
+      "consultations": { "title": "CONSULTAS", "description": "Consultas personales sobre desarrollo espiritual." }
+    }
+  },
+  "about": {
+    "title": "SOBRE MÍ",
+    "text1": "Mi nombre es [Nombre], y he dedicado mi vida al estudio y práctica del desarrollo de la conciencia.",
+    "text2": "Estudié meditación en tradiciones orientales y occidentales.",
+    "text3": "A lo largo de los años he ayudado a cientos de personas.",
+    "text4": "Oazyse y el Instituto son la encarnación de mi visión."
+  },
+  "contacts": {
+    "title": "CONTACTOS",
+    "description": "Contáctenos para más información.",
+    "email": "Correo electrónico",
+    "namePlaceholder": "Nombre",
+    "emailPlaceholder": "Correo electrónico",
+    "messagePlaceholder": "Mensaje",
+    "submitButton": "ENVIAR",
+    "errorTitle": "Error",
+    "errorMessage": "Por favor complete todos los campos",
+    "successTitle": "Mensaje enviado",
+    "successMessage": "Le responderemos pronto"
+  },
+  "chat": {
+    "title": "Consulta de Hipnoterapia",
+    "greeting": "¡Hola!",
+    "prompt": "Haga una pregunta sobre hipnoterapia.",
+    "inputPlaceholder": "Escriba un mensaje...",
+    "typing": "Escribiendo...",
+    "errorTitle": "Error",
+    "errorMessage": "No se pudo enviar el mensaje"
+  },
+  "language": { "select": "Idioma" }
+}

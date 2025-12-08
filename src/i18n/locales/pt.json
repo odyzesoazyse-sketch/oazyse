@@ -1,0 +1,96 @@
+{
+  "header": { "title": "Instituto da Consciência Cósmica", "presents": "apresenta" },
+  "nav": { "news": "Notícias", "help": "Ajuda", "oazyse": "Oazyse", "institute": "Instituto", "services": "Serviços", "about": "Sobre", "contacts": "Contatos" },
+  "footer": { "rights": "© 2025 Oazyse. Todos os direitos reservados." },
+  "news": {
+    "article1": { "title": "CONQUISTA DA SEMANA", "date": "15 de janeiro de 2025", "content": "Nosso projeto alcançou um marco importante no desenvolvimento da consciência." },
+    "article2": { "title": "NOVO CURSO DE MEDITAÇÃO", "date": "10 de janeiro de 2025", "content": "Apresentamos um programa atualizado de práticas meditativas." },
+    "article3": { "title": "ABERTURA DO INSTITUTO", "date": "5 de janeiro de 2025", "content": "O Instituto da Consciência Cósmica abriu oficialmente suas portas." }
+  },
+  "help": {
+    "title": "Como a hipnoterapia pode ajudar?",
+    "subtitle": "Clique nos cartões para revelar segredos",
+    "explored": "Explorado",
+    "clickToClose": "clique para fechar",
+    "allExplored": "🎉 Você explorou todas as possibilidades!",
+    "readyToStart": "Pronto para começar sua jornada de mudança?",
+    "cards": {
+      "anxiety": { "title": "Ansiedade", "shortDesc": "Medos e pânico", "fullDesc": "A hipnoterapia ajuda a encontrar a raiz dos estados ansiosos no subconsciente." },
+      "sleep": { "title": "Insônia", "shortDesc": "Problemas de sono", "fullDesc": "Técnicas de relaxamento profundo restauram o ciclo natural do sono." },
+      "habits": { "title": "Hábitos", "shortDesc": "Fumar, comer demais", "fullDesc": "A hipnose trabalha diretamente com o subconsciente." },
+      "confidence": { "title": "Confiança", "shortDesc": "Autoestima", "fullDesc": "Desbloqueamos o potencial interior e removemos crenças limitantes." },
+      "phobias": { "title": "Fobias", "shortDesc": "Medos irracionais", "fullDesc": "A hipnoterapia encontra o momento de origem da fobia." },
+      "stress": { "title": "Estresse", "shortDesc": "Esgotamento", "fullDesc": "Ensinamos técnicas de relaxamento instantâneo." },
+      "relationships": { "title": "Relacionamentos", "shortDesc": "Conexões com pessoas", "fullDesc": "Padrões de relacionamento são formados na infância." },
+      "focus": { "title": "Concentração", "shortDesc": "Foco e memória", "fullDesc": "O estado de hipnose treina a concentração." },
+      "pain": { "title": "Dor", "shortDesc": "Gerenciamento da dor", "fullDesc": "A hipnose é usada na medicina para alívio da dor." },
+      "trauma": { "title": "Trauma", "shortDesc": "Eventos passados", "fullDesc": "Trabalho seguro com experiência traumática em hipnose." },
+      "creativity": { "title": "Criatividade", "shortDesc": "Potencial criativo", "fullDesc": "A hipnose abre acesso ao hemisfério direito." },
+      "motivation": { "title": "Motivação", "shortDesc": "Alcançar objetivos", "fullDesc": "O subconsciente é um aliado poderoso." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "SOBRE O PROJETO OAZYSE",
+    "aboutText1": "Oazyse é um espaço para desenvolvimento da consciência e prática de mindfulness.",
+    "aboutText2": "O projeto inclui práticas de meditação e métodos terapêuticos.",
+    "joinTitle": "PARTICIPAR DO PROJETO",
+    "namePlaceholder": "Nome",
+    "emailPlaceholder": "Email",
+    "motivationPlaceholder": "Motivação",
+    "submitButton": "ENVIAR",
+    "errorTitle": "Erro",
+    "errorMessage": "Por favor, preencha todos os campos",
+    "successTitle": "Inscrição enviada",
+    "successMessage": "Entraremos em contato em breve"
+  },
+  "institute": {
+    "title": "INSTITUTO DA CONSCIÊNCIA CÓSMICA",
+    "description": "O Instituto é uma plataforma educacional.",
+    "coursesTitle": "CURSOS",
+    "coursesText": "Nossos cursos cobrem uma ampla gama de tópicos.",
+    "testsTitle": "TESTES E AVALIAÇÃO",
+    "testsText": "Oferecemos um sistema de testes.",
+    "chatTitle": "CHAT E SUPORTE",
+    "chatText": "Participantes do programa têm acesso a um chat privado."
+  },
+  "services": {
+    "title": "SERVIÇOS",
+    "items": {
+      "tea": { "title": "CERIMÔNIAS DO CHÁ", "description": "Cerimônias tradicionais do chá como prática de mindfulness." },
+      "satsang": { "title": "SATSANGS", "description": "Encontros no formato satsang." },
+      "hypnotherapy": { "title": "HIPNOTERAPIA", "description": "Sessões individuais de hipnoterapia." },
+      "meditation": { "title": "PRÁTICAS MEDITATIVAS", "description": "Meditações em grupo e individuais." },
+      "consultations": { "title": "CONSULTAS", "description": "Consultas pessoais sobre desenvolvimento espiritual." }
+    }
+  },
+  "about": {
+    "title": "SOBRE MIM",
+    "text1": "Meu nome é [Nome], e dediquei minha vida ao estudo e prática do desenvolvimento da consciência.",
+    "text2": "Estudei meditação nas tradições orientais e ocidentais.",
+    "text3": "Ao longo dos anos, ajudei centenas de pessoas.",
+    "text4": "Oazyse e o Instituto são a concretização da minha visão."
+  },
+  "contacts": {
+    "title": "CONTATOS",
+    "description": "Entre em contato conosco para mais informações.",
+    "email": "Email",
+    "namePlaceholder": "Nome",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Mensagem",
+    "submitButton": "ENVIAR",
+    "errorTitle": "Erro",
+    "errorMessage": "Por favor, preencha todos os campos",
+    "successTitle": "Mensagem enviada",
+    "successMessage": "Responderemos em breve"
+  },
+  "chat": {
+    "title": "Consulta de Hipnoterapia",
+    "greeting": "Olá!",
+    "prompt": "Faça uma pergunta sobre hipnoterapia.",
+    "inputPlaceholder": "Digite uma mensagem...",
+    "typing": "Digitando...",
+    "errorTitle": "Erro",
+    "errorMessage": "Falha ao enviar mensagem"
+  },
+  "language": { "select": "Idioma" }
+}

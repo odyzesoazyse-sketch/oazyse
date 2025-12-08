@@ -1,0 +1,186 @@
+{
+  "header": {
+    "title": "Institute of Cosmic Mind Consciousness",
+    "presents": "presents"
+  },
+  "nav": {
+    "news": "News",
+    "help": "Help",
+    "oazyse": "Oazyse",
+    "institute": "Institute",
+    "services": "Services",
+    "about": "About",
+    "contacts": "Contacts"
+  },
+  "footer": {
+    "rights": "© 2025 Oazyse. All rights reserved."
+  },
+  "news": {
+    "article1": {
+      "title": "ACHIEVEMENT OF THE WEEK",
+      "date": "January 15, 2025",
+      "content": "Our project has reached an important milestone in consciousness development. More than 100 participants have completed the mindfulness and meditation course, discovering new facets of their inner world. We continue to explore the depths of human consciousness."
+    },
+    "article2": {
+      "title": "NEW MEDITATION COURSE",
+      "date": "January 10, 2025",
+      "content": "We present an updated program of meditative practices, developed taking into account the latest research in neuroscience and ancient mindfulness techniques. The course includes practices for beginners and advanced students."
+    },
+    "article3": {
+      "title": "INSTITUTE OPENING",
+      "date": "January 5, 2025",
+      "content": "The Institute of Cosmic Mind Consciousness has officially opened its doors to all who wish to explore the nature of consciousness. We offer a unique opportunity to immerse yourself in mindfulness practice under the guidance of experienced mentors."
+    }
+  },
+  "help": {
+    "title": "How can hypnotherapy help?",
+    "subtitle": "Click on the cards to reveal secrets",
+    "explored": "Explored",
+    "clickToClose": "click to close",
+    "allExplored": "🎉 You've explored all possibilities!",
+    "readyToStart": "Ready to start your journey to change?",
+    "cards": {
+      "anxiety": {
+        "title": "Anxiety",
+        "shortDesc": "Fears and panic",
+        "fullDesc": "Hypnotherapy helps find the root of anxious states in the subconscious and reprogram reactions. You will learn to enter a state of calm at will."
+      },
+      "sleep": {
+        "title": "Insomnia",
+        "shortDesc": "Sleep problems",
+        "fullDesc": "Deep relaxation techniques and work with subconscious blocks restore the natural sleep cycle. Many notice improvements after the first session."
+      },
+      "habits": {
+        "title": "Habits",
+        "shortDesc": "Smoking, overeating",
+        "fullDesc": "Hypnosis works directly with the subconscious where habits live. We find triggers and replace unwanted behavior with healthy alternatives."
+      },
+      "confidence": {
+        "title": "Confidence",
+        "shortDesc": "Self-esteem",
+        "fullDesc": "We unlock inner potential and remove limiting beliefs. You begin to see yourself in a new light and act from a state of strength."
+      },
+      "phobias": {
+        "title": "Phobias",
+        "shortDesc": "Irrational fears",
+        "fullDesc": "From fear of heights to arachnophobia — hypnotherapy finds the moment of phobia origin and neutralizes the emotional charge. Fast and without trauma."
+      },
+      "stress": {
+        "title": "Stress",
+        "shortDesc": "Burnout",
+        "fullDesc": "We teach instant relaxation techniques and work with the deep causes of chronic stress. You get tools for independent practice."
+      },
+      "relationships": {
+        "title": "Relationships",
+        "shortDesc": "Connections with people",
+        "fullDesc": "Relationship patterns are formed in childhood. Hypnotherapy helps to recognize and change subconscious scenarios that prevent intimacy."
+      },
+      "focus": {
+        "title": "Concentration",
+        "shortDesc": "Focus and memory",
+        "fullDesc": "The state of hypnosis itself trains concentration. Additionally, we remove internal distractions and enhance mental clarity."
+      },
+      "pain": {
+        "title": "Pain",
+        "shortDesc": "Pain management",
+        "fullDesc": "Hypnosis is used in medicine for pain relief. We teach the brain to change pain perception — this works for chronic pain and even childbirth."
+      },
+      "trauma": {
+        "title": "Trauma",
+        "shortDesc": "Past events",
+        "fullDesc": "Safe work with traumatic experience in hypnosis allows processing events without retraumatization. Liberation comes gently."
+      },
+      "creativity": {
+        "title": "Creativity",
+        "shortDesc": "Creative potential",
+        "fullDesc": "Hypnosis opens access to the right hemisphere and deep resources of the psyche. Many artists and musicians use self-hypnosis for inspiration."
+      },
+      "motivation": {
+        "title": "Motivation",
+        "shortDesc": "Achieving goals",
+        "fullDesc": "The subconscious is a powerful ally. We program it to support your goals, removing internal resistance and procrastination."
+      }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "ABOUT OAZYSE PROJECT",
+    "aboutText1": "Oazyse is a space for consciousness development and mindfulness practice. We combine ancient meditation traditions with modern approaches to studying the human mind. Our mission is to help everyone unlock the potential of their consciousness and achieve harmony with themselves and the world.",
+    "aboutText2": "The project includes meditation practices, consciousness work, exploration of esoteric knowledge and therapeutic methods that help transform life.",
+    "joinTitle": "JOIN THE PROJECT",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "motivationPlaceholder": "Motivation",
+    "submitButton": "SUBMIT",
+    "errorTitle": "Error",
+    "errorMessage": "Please fill in all fields",
+    "successTitle": "Application sent",
+    "successMessage": "We will contact you soon"
+  },
+  "institute": {
+    "title": "INSTITUTE OF COSMIC MIND CONSCIOUSNESS",
+    "description": "The Institute is an educational platform dedicated to the deep study of the nature of consciousness. We offer comprehensive training programs that combine theoretical knowledge with practical experience.",
+    "coursesTitle": "COURSES",
+    "coursesText": "Our courses cover a wide range of topics: from basic meditation techniques to advanced consciousness work practices. Each course is developed by experienced practitioners and includes both a theoretical foundation and practical exercises.",
+    "testsTitle": "TESTS AND ASSESSMENT",
+    "testsText": "We offer a testing system to assess your progress and understand your level of consciousness development. Tests help determine directions for further work.",
+    "chatTitle": "CHAT AND SUPPORT",
+    "chatText": "Program participants get access to a private chat where they can discuss their experiences, ask questions and receive support from mentors and like-minded people."
+  },
+  "services": {
+    "title": "SERVICES",
+    "items": {
+      "tea": {
+        "title": "TEA CEREMONIES",
+        "description": "Traditional tea ceremonies as a practice of mindfulness and meditation. Immersion in a state of presence through the ritual of tea drinking."
+      },
+      "satsang": {
+        "title": "SATSANGS",
+        "description": "Meetings in satsang format — a space for sharing experiences, questions and answers about the nature of reality and consciousness."
+      },
+      "hypnotherapy": {
+        "title": "HYPNOTHERAPY",
+        "description": "Individual hypnotherapy sessions for working with the subconscious, transforming beliefs and healing emotional trauma."
+      },
+      "meditation": {
+        "title": "MEDITATIVE PRACTICES",
+        "description": "Group and individual meditations of various traditions for developing mindfulness and inner peace."
+      },
+      "consultations": {
+        "title": "CONSULTATIONS",
+        "description": "Personal consultations on spiritual development, consciousness work and life transformations."
+      }
+    }
+  },
+  "about": {
+    "title": "ABOUT ME",
+    "text1": "My name is [Name], and I have dedicated my life to the study and practice of consciousness development. My journey began more than 15 years ago with a deep interest in the nature of the human mind and the possibilities of its transformation.",
+    "text2": "I studied meditation in Eastern and Western traditions, practiced in various schools and under the guidance of experienced teachers. I received education in psychology, neuroscience and hypnotherapy.",
+    "text3": "Over the years of practice, I have helped hundreds of people discover new facets of their consciousness, overcome internal barriers and find the path to genuine freedom and awareness.",
+    "text4": "Oazyse and the Institute of Cosmic Mind Consciousness are the embodiment of my vision of a space where everyone can find tools and support for their spiritual development."
+  },
+  "contacts": {
+    "title": "CONTACTS",
+    "description": "Contact us for more information about the project, to book a consultation or to participate in programs.",
+    "email": "Email",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Message",
+    "submitButton": "SUBMIT",
+    "errorTitle": "Error",
+    "errorMessage": "Please fill in all fields",
+    "successTitle": "Message sent",
+    "successMessage": "We will reply to you soon"
+  },
+  "chat": {
+    "title": "Hypnotherapy Consultation",
+    "greeting": "Hello!",
+    "prompt": "Ask a question about hypnotherapy, meditation or working with the subconscious.",
+    "inputPlaceholder": "Enter message...",
+    "typing": "Typing...",
+    "errorTitle": "Error",
+    "errorMessage": "Failed to send message"
+  },
+  "language": {
+    "select": "Language"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "header": { "title": "Instituut voor Kosmisch Bewustzijn", "presents": "presenteert" },
+  "nav": { "news": "Nieuws", "help": "Hulp", "oazyse": "Oazyse", "institute": "Instituut", "services": "Diensten", "about": "Over mij", "contacts": "Contact" },
+  "footer": { "rights": "© 2025 Oazyse. Alle rechten voorbehouden." },
+  "news": {
+    "article1": { "title": "PRESTATIE VAN DE WEEK", "date": "15 januari 2025", "content": "Ons project heeft een belangrijke mijlpaal bereikt in bewustzijnsontwikkeling." },
+    "article2": { "title": "NIEUWE MEDITATIECURSUS", "date": "10 januari 2025", "content": "We presenteren een bijgewerkt programma van meditatieve praktijken." },
+    "article3": { "title": "OPENING VAN HET INSTITUUT", "date": "5 januari 2025", "content": "Het Instituut voor Kosmisch Bewustzijn heeft officieel zijn deuren geopend." }
+  },
+  "help": {
+    "title": "Hoe kan hypnotherapie helpen?",
+    "subtitle": "Klik op de kaarten om geheimen te onthullen",
+    "explored": "Verkend",
+    "clickToClose": "klik om te sluiten",
+    "allExplored": "🎉 Je hebt alle mogelijkheden verkend!",
+    "readyToStart": "Klaar om je reis naar verandering te beginnen?",
+    "cards": {
+      "anxiety": { "title": "Angst", "shortDesc": "Angsten en paniek", "fullDesc": "Hypnotherapie helpt de wortel van angstige toestanden in het onderbewustzijn te vinden." },
+      "sleep": { "title": "Slapeloosheid", "shortDesc": "Slaapproblemen", "fullDesc": "Diepe ontspanningstechnieken herstellen de natuurlijke slaapcyclus." },
+      "habits": { "title": "Gewoontes", "shortDesc": "Roken, overeten", "fullDesc": "Hypnose werkt rechtstreeks met het onderbewustzijn." },
+      "confidence": { "title": "Zelfvertrouwen", "shortDesc": "Zelfbeeld", "fullDesc": "We ontsluiten innerlijk potentieel en verwijderen beperkende overtuigingen." },
+      "phobias": { "title": "Fobieën", "shortDesc": "Irrationele angsten", "fullDesc": "Hypnotherapie vindt het moment van oorsprong van de fobie." },
+      "stress": { "title": "Stress", "shortDesc": "Burn-out", "fullDesc": "We leren technieken voor onmiddellijke ontspanning." },
+      "relationships": { "title": "Relaties", "shortDesc": "Verbindingen met mensen", "fullDesc": "Relatiepatronen worden in de kindertijd gevormd." },
+      "focus": { "title": "Concentratie", "shortDesc": "Focus en geheugen", "fullDesc": "De hypnotische toestand zelf traint concentratie." },
+      "pain": { "title": "Pijn", "shortDesc": "Pijnmanagement", "fullDesc": "Hypnose wordt in de geneeskunde gebruikt voor pijnverlichting." },
+      "trauma": { "title": "Trauma", "shortDesc": "Gebeurtenissen uit het verleden", "fullDesc": "Veilig werken met traumatische ervaring in hypnose." },
+      "creativity": { "title": "Creativiteit", "shortDesc": "Creatief potentieel", "fullDesc": "Hypnose opent toegang tot de rechter hersenhelft." },
+      "motivation": { "title": "Motivatie", "shortDesc": "Doelen bereiken", "fullDesc": "Het onderbewustzijn is een krachtige bondgenoot." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "OVER HET OAZYSE PROJECT",
+    "aboutText1": "Oazyse is een ruimte voor bewustzijnsontwikkeling en mindfulness-praktijk.",
+    "aboutText2": "Het project omvat meditatiepraktijken en therapeutische methoden.",
+    "joinTitle": "SLUIT JE AAN BIJ HET PROJECT",
+    "namePlaceholder": "Naam",
+    "emailPlaceholder": "E-mail",
+    "motivationPlaceholder": "Motivatie",
+    "submitButton": "VERZENDEN",
+    "errorTitle": "Fout",
+    "errorMessage": "Vul alstublieft alle velden in",
+    "successTitle": "Aanvraag verzonden",
+    "successMessage": "We nemen binnenkort contact met u op"
+  },
+  "institute": {
+    "title": "INSTITUUT VOOR KOSMISCH BEWUSTZIJN",
+    "description": "Het Instituut is een educatief platform.",
+    "coursesTitle": "CURSUSSEN",
+    "coursesText": "Onze cursussen behandelen een breed scala aan onderwerpen.",
+    "testsTitle": "TESTS EN BEOORDELING",
+    "testsText": "We bieden een testsysteem aan.",
+    "chatTitle": "CHAT EN ONDERSTEUNING",
+    "chatText": "Programma-deelnemers krijgen toegang tot een privéchat."
+  },
+  "services": {
+    "title": "DIENSTEN",
+    "items": {
+      "tea": { "title": "THEECEREMONIES", "description": "Traditionele theeceremonies als mindfulness-praktijk." },
+      "satsang": { "title": "SATSANGS", "description": "Bijeenkomsten in satsang-formaat." },
+      "hypnotherapy": { "title": "HYPNOTHERAPIE", "description": "Individuele hypnotherapiesessies." },
+      "meditation": { "title": "MEDITATIEVE PRAKTIJKEN", "description": "Groeps- en individuele meditaties." },
+      "consultations": { "title": "CONSULTEN", "description": "Persoonlijke consulten over spirituele ontwikkeling." }
+    }
+  },
+  "about": {
+    "title": "OVER MIJ",
+    "text1": "Mijn naam is [Naam], en ik heb mijn leven gewijd aan de studie en praktijk van bewustzijnsontwikkeling.",
+    "text2": "Ik heb meditatie gestudeerd in oosterse en westerse tradities.",
+    "text3": "Door de jaren heen heb ik honderden mensen geholpen.",
+    "text4": "Oazyse en het Instituut zijn de belichaming van mijn visie."
+  },
+  "contacts": {
+    "title": "CONTACT",
+    "description": "Neem contact met ons op voor meer informatie.",
+    "email": "E-mail",
+    "namePlaceholder": "Naam",
+    "emailPlaceholder": "E-mail",
+    "messagePlaceholder": "Bericht",
+    "submitButton": "VERZENDEN",
+    "errorTitle": "Fout",
+    "errorMessage": "Vul alstublieft alle velden in",
+    "successTitle": "Bericht verzonden",
+    "successMessage": "We antwoorden binnenkort"
+  },
+  "chat": {
+    "title": "Hypnotherapie Consult",
+    "greeting": "Hallo!",
+    "prompt": "Stel een vraag over hypnotherapie.",
+    "inputPlaceholder": "Voer bericht in...",
+    "typing": "Typt...",
+    "errorTitle": "Fout",
+    "errorMessage": "Bericht verzenden mislukt"
+  },
+  "language": { "select": "Taal" }
+}

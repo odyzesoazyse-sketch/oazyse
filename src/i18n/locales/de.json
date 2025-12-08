@@ -1,0 +1,109 @@
+{
+  "header": {
+    "title": "Institut für Kosmisches Bewusstsein",
+    "presents": "präsentiert"
+  },
+  "nav": {
+    "news": "Nachrichten",
+    "help": "Hilfe",
+    "oazyse": "Oazyse",
+    "institute": "Institut",
+    "services": "Dienste",
+    "about": "Über mich",
+    "contacts": "Kontakte"
+  },
+  "footer": {
+    "rights": "© 2025 Oazyse. Alle Rechte vorbehalten."
+  },
+  "news": {
+    "article1": { "title": "LEISTUNG DER WOCHE", "date": "15. Januar 2025", "content": "Unser Projekt hat einen wichtigen Meilenstein in der Bewusstseinsentwicklung erreicht." },
+    "article2": { "title": "NEUER MEDITATIONSKURS", "date": "10. Januar 2025", "content": "Wir präsentieren ein aktualisiertes Programm für meditative Praktiken." },
+    "article3": { "title": "INSTITUTSERÖFFNUNG", "date": "5. Januar 2025", "content": "Das Institut für Kosmisches Bewusstsein hat offiziell seine Türen geöffnet." }
+  },
+  "help": {
+    "title": "Wie kann Hypnotherapie helfen?",
+    "subtitle": "Klicken Sie auf die Karten, um Geheimnisse zu enthüllen",
+    "explored": "Erforscht",
+    "clickToClose": "klicken zum Schließen",
+    "allExplored": "🎉 Sie haben alle Möglichkeiten erforscht!",
+    "readyToStart": "Bereit, Ihren Weg zur Veränderung zu beginnen?",
+    "cards": {
+      "anxiety": { "title": "Angst", "shortDesc": "Ängste und Panik", "fullDesc": "Hypnotherapie hilft, die Wurzel ängstlicher Zustände im Unterbewusstsein zu finden." },
+      "sleep": { "title": "Schlaflosigkeit", "shortDesc": "Schlafprobleme", "fullDesc": "Tiefenentspannungstechniken stellen den natürlichen Schlafzyklus wieder her." },
+      "habits": { "title": "Gewohnheiten", "shortDesc": "Rauchen, Überessen", "fullDesc": "Hypnose arbeitet direkt mit dem Unterbewusstsein." },
+      "confidence": { "title": "Selbstvertrauen", "shortDesc": "Selbstwertgefühl", "fullDesc": "Wir entfalten inneres Potenzial und beseitigen einschränkende Überzeugungen." },
+      "phobias": { "title": "Phobien", "shortDesc": "Irrationale Ängste", "fullDesc": "Hypnotherapie findet den Ursprungsmoment der Phobie." },
+      "stress": { "title": "Stress", "shortDesc": "Burnout", "fullDesc": "Wir lehren Techniken zur sofortigen Entspannung." },
+      "relationships": { "title": "Beziehungen", "shortDesc": "Verbindungen mit Menschen", "fullDesc": "Beziehungsmuster werden in der Kindheit geformt." },
+      "focus": { "title": "Konzentration", "shortDesc": "Fokus und Gedächtnis", "fullDesc": "Der Hypnosezustand selbst trainiert die Konzentration." },
+      "pain": { "title": "Schmerz", "shortDesc": "Schmerzmanagement", "fullDesc": "Hypnose wird in der Medizin zur Schmerzlinderung eingesetzt." },
+      "trauma": { "title": "Trauma", "shortDesc": "Vergangene Ereignisse", "fullDesc": "Sichere Arbeit mit traumatischen Erfahrungen in Hypnose." },
+      "creativity": { "title": "Kreativität", "shortDesc": "Kreatives Potenzial", "fullDesc": "Hypnose öffnet den Zugang zur rechten Gehirnhälfte." },
+      "motivation": { "title": "Motivation", "shortDesc": "Zielerreichung", "fullDesc": "Das Unterbewusstsein ist ein mächtiger Verbündeter." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "ÜBER DAS OAZYSE-PROJEKT",
+    "aboutText1": "Oazyse ist ein Raum für Bewusstseinsentwicklung und Achtsamkeitspraxis.",
+    "aboutText2": "Das Projekt umfasst Meditationspraktiken und therapeutische Methoden.",
+    "joinTitle": "PROJEKT BEITRETEN",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "E-Mail",
+    "motivationPlaceholder": "Motivation",
+    "submitButton": "SENDEN",
+    "errorTitle": "Fehler",
+    "errorMessage": "Bitte füllen Sie alle Felder aus",
+    "successTitle": "Bewerbung gesendet",
+    "successMessage": "Wir werden Sie bald kontaktieren"
+  },
+  "institute": {
+    "title": "INSTITUT FÜR KOSMISCHES BEWUSSTSEIN",
+    "description": "Das Institut ist eine Bildungsplattform.",
+    "coursesTitle": "KURSE",
+    "coursesText": "Unsere Kurse decken ein breites Themenspektrum ab.",
+    "testsTitle": "TESTS UND BEWERTUNG",
+    "testsText": "Wir bieten ein Testsystem an.",
+    "chatTitle": "CHAT UND SUPPORT",
+    "chatText": "Programmteilnehmer erhalten Zugang zu einem privaten Chat."
+  },
+  "services": {
+    "title": "DIENSTLEISTUNGEN",
+    "items": {
+      "tea": { "title": "TEEZEREMONIEN", "description": "Traditionelle Teezeremonien als Achtsamkeitspraxis." },
+      "satsang": { "title": "SATSANGS", "description": "Treffen im Satsang-Format." },
+      "hypnotherapy": { "title": "HYPNOTHERAPIE", "description": "Einzelne Hypnotherapie-Sitzungen." },
+      "meditation": { "title": "MEDITATIVE PRAKTIKEN", "description": "Gruppen- und Einzelmeditationen." },
+      "consultations": { "title": "BERATUNGEN", "description": "Persönliche Beratungen zur spirituellen Entwicklung." }
+    }
+  },
+  "about": {
+    "title": "ÜBER MICH",
+    "text1": "Mein Name ist [Name], und ich habe mein Leben dem Studium und der Praxis der Bewusstseinsentwicklung gewidmet.",
+    "text2": "Ich habe Meditation in östlichen und westlichen Traditionen studiert.",
+    "text3": "Im Laufe der Jahre habe ich Hunderten von Menschen geholfen.",
+    "text4": "Oazyse und das Institut sind die Verkörperung meiner Vision."
+  },
+  "contacts": {
+    "title": "KONTAKTE",
+    "description": "Kontaktieren Sie uns für weitere Informationen.",
+    "email": "E-Mail",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "E-Mail",
+    "messagePlaceholder": "Nachricht",
+    "submitButton": "SENDEN",
+    "errorTitle": "Fehler",
+    "errorMessage": "Bitte füllen Sie alle Felder aus",
+    "successTitle": "Nachricht gesendet",
+    "successMessage": "Wir werden Ihnen bald antworten"
+  },
+  "chat": {
+    "title": "Hypnotherapie-Beratung",
+    "greeting": "Hallo!",
+    "prompt": "Stellen Sie eine Frage zur Hypnotherapie.",
+    "inputPlaceholder": "Nachricht eingeben...",
+    "typing": "Schreibt...",
+    "errorTitle": "Fehler",
+    "errorMessage": "Nachricht konnte nicht gesendet werden"
+  },
+  "language": { "select": "Sprache" }
+}
