@@ -182,5 +182,23 @@
   },
   "language": {
     "select": "Язык"
+  },
+  "auth": {
+    "welcomeBack": "С возвращением",
+    "createAccount": "Создайте аккаунт",
+    "fullName": "Полное имя",
+    "password": "Пароль",
+    "signIn": "Войти",
+    "signUp": "Регистрация",
+    "or": "или",
+    "continueWithGoogle": "Войти через Google",
+    "haveAccount": "Уже есть аккаунт?",
+    "noAccount": "Нет аккаунта?",
+    "backToHome": "Вернуться на главную",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "signupSuccess": "Регистрация прошла успешно",
+    "alreadyRegistered": "Пользователь уже зарегистрирован",
+    "invalidCredentials": "Неверный email или пароль"
   }
 }
