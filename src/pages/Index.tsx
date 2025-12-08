@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
 import NewsSection from '@/components/sections/NewsSection';
+import HelpSection from '@/components/sections/HelpSection';
 import OazyseSection from '@/components/sections/OazyseSection';
 import InstituteSection from '@/components/sections/InstituteSection';
 import ServicesSection from '@/components/sections/ServicesSection';
@@ -16,6 +17,8 @@ const Index = () => {
     switch (activeTab) {
       case 'news':
         return <NewsSection />;
+      case 'help':
+        return <HelpSection />;
       case 'oazyse':
         return <OazyseSection />;
       case 'institute':

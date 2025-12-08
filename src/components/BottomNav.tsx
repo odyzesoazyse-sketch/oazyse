@@ -6,6 +6,7 @@ interface BottomNavProps {
 const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
   const tabs = [
     { id: 'news', label: 'Новости' },
+    { id: 'help', label: 'Помощь' },
     { id: 'oazyse', label: 'Oazyse' },
     { id: 'institute', label: 'Институт' },
     { id: 'services', label: 'Услуги' },
