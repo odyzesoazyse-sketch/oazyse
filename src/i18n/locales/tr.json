@@ -1,0 +1,96 @@
+{
+  "header": { "title": "Kozmik Bilinç Enstitüsü", "presents": "sunar" },
+  "nav": { "news": "Haberler", "help": "Yardım", "oazyse": "Oazyse", "institute": "Enstitü", "services": "Hizmetler", "about": "Hakkımda", "contacts": "İletişim" },
+  "footer": { "rights": "© 2025 Oazyse. Tüm hakları saklıdır." },
+  "news": {
+    "article1": { "title": "HAFTANIN BAŞARISI", "date": "15 Ocak 2025", "content": "Projemiz bilinç gelişiminde önemli bir kilometre taşına ulaştı." },
+    "article2": { "title": "YENİ MEDİTASYON KURSU", "date": "10 Ocak 2025", "content": "Güncellenmiş meditasyon pratikleri programını sunuyoruz." },
+    "article3": { "title": "ENSTİTÜ AÇILIŞI", "date": "5 Ocak 2025", "content": "Kozmik Bilinç Enstitüsü resmi olarak kapılarını açtı." }
+  },
+  "help": {
+    "title": "Hipnoterapi nasıl yardımcı olabilir?",
+    "subtitle": "Sırları ortaya çıkarmak için kartlara tıklayın",
+    "explored": "Keşfedildi",
+    "clickToClose": "kapatmak için tıklayın",
+    "allExplored": "🎉 Tüm olasılıkları keşfettiniz!",
+    "readyToStart": "Değişim yolculuğunuza başlamaya hazır mısınız?",
+    "cards": {
+      "anxiety": { "title": "Kaygı", "shortDesc": "Korkular ve panik", "fullDesc": "Hipnoterapi bilinçaltında kaygı durumlarının kökünü bulmaya yardımcı olur." },
+      "sleep": { "title": "Uykusuzluk", "shortDesc": "Uyku sorunları", "fullDesc": "Derin gevşeme teknikleri doğal uyku döngüsünü geri kazandırır." },
+      "habits": { "title": "Alışkanlıklar", "shortDesc": "Sigara, aşırı yeme", "fullDesc": "Hipnoz doğrudan bilinçaltıyla çalışır." },
+      "confidence": { "title": "Güven", "shortDesc": "Öz-saygı", "fullDesc": "İç potansiyeli açığa çıkarır ve sınırlayıcı inançları kaldırırız." },
+      "phobias": { "title": "Fobiler", "shortDesc": "İrrasyonel korkular", "fullDesc": "Hipnoterapi fobi kaynağının anını bulur." },
+      "stress": { "title": "Stres", "shortDesc": "Tükenmişlik", "fullDesc": "Anında gevşeme teknikleri öğretiyoruz." },
+      "relationships": { "title": "İlişkiler", "shortDesc": "İnsanlarla bağlantılar", "fullDesc": "İlişki kalıpları çocuklukta oluşur." },
+      "focus": { "title": "Konsantrasyon", "shortDesc": "Odak ve hafıza", "fullDesc": "Hipnoz durumu kendisi konsantrasyonu eğitir." },
+      "pain": { "title": "Ağrı", "shortDesc": "Ağrı yönetimi", "fullDesc": "Hipnoz tıpta ağrı kesici olarak kullanılır." },
+      "trauma": { "title": "Travma", "shortDesc": "Geçmiş olaylar", "fullDesc": "Hipnozda travmatik deneyimle güvenli çalışma." },
+      "creativity": { "title": "Yaratıcılık", "shortDesc": "Yaratıcı potansiyel", "fullDesc": "Hipnoz sağ beyine erişimi açar." },
+      "motivation": { "title": "Motivasyon", "shortDesc": "Hedeflere ulaşma", "fullDesc": "Bilinçaltı güçlü bir müttefiktir." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "OAZYSE PROJESİ HAKKINDA",
+    "aboutText1": "Oazyse, bilinç gelişimi ve farkındalık pratiği için bir alandır.",
+    "aboutText2": "Proje meditasyon pratikleri ve terapötik yöntemler içerir.",
+    "joinTitle": "PROJEYE KATILIN",
+    "namePlaceholder": "İsim",
+    "emailPlaceholder": "E-posta",
+    "motivationPlaceholder": "Motivasyon",
+    "submitButton": "GÖNDER",
+    "errorTitle": "Hata",
+    "errorMessage": "Lütfen tüm alanları doldurun",
+    "successTitle": "Başvuru gönderildi",
+    "successMessage": "Yakında sizinle iletişime geçeceğiz"
+  },
+  "institute": {
+    "title": "KOZMİK BİLİNÇ ENSTİTÜSÜ",
+    "description": "Enstitü bir eğitim platformudur.",
+    "coursesTitle": "KURSLAR",
+    "coursesText": "Kurslarımız geniş bir konu yelpazesini kapsar.",
+    "testsTitle": "TESTLER VE DEĞERLENDİRME",
+    "testsText": "Bir test sistemi sunuyoruz.",
+    "chatTitle": "SOHBET VE DESTEK",
+    "chatText": "Program katılımcıları özel sohbete erişim sağlar."
+  },
+  "services": {
+    "title": "HİZMETLER",
+    "items": {
+      "tea": { "title": "ÇAY TÖRENLERİ", "description": "Farkındalık pratiği olarak geleneksel çay törenleri." },
+      "satsang": { "title": "SATSANG", "description": "Satsang formatında buluşmalar." },
+      "hypnotherapy": { "title": "HİPNOTERAPİ", "description": "Bireysel hipnoterapi seansları." },
+      "meditation": { "title": "MEDİTATİF PRATİKLER", "description": "Grup ve bireysel meditasyonlar." },
+      "consultations": { "title": "DANIŞMANLIK", "description": "Ruhsal gelişim üzerine kişisel danışmanlık." }
+    }
+  },
+  "about": {
+    "title": "HAKKIMDA",
+    "text1": "Adım [İsim] ve hayatımı bilinç gelişiminin araştırılmasına ve pratiğine adadım.",
+    "text2": "Doğu ve Batı geleneklerinde meditasyon çalıştım.",
+    "text3": "Yıllar içinde yüzlerce kişiye yardım ettim.",
+    "text4": "Oazyse ve Enstitü vizyonumun somutlaşmasıdır."
+  },
+  "contacts": {
+    "title": "İLETİŞİM",
+    "description": "Daha fazla bilgi için bizimle iletişime geçin.",
+    "email": "E-posta",
+    "namePlaceholder": "İsim",
+    "emailPlaceholder": "E-posta",
+    "messagePlaceholder": "Mesaj",
+    "submitButton": "GÖNDER",
+    "errorTitle": "Hata",
+    "errorMessage": "Lütfen tüm alanları doldurun",
+    "successTitle": "Mesaj gönderildi",
+    "successMessage": "Yakında yanıt vereceğiz"
+  },
+  "chat": {
+    "title": "Hipnoterapi Danışmanlığı",
+    "greeting": "Merhaba!",
+    "prompt": "Hipnoterapi hakkında soru sorun.",
+    "inputPlaceholder": "Mesaj girin...",
+    "typing": "Yazıyor...",
+    "errorTitle": "Hata",
+    "errorMessage": "Mesaj gönderilemedi"
+  },
+  "language": { "select": "Dil" }
+}

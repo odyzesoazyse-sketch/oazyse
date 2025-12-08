@@ -1,0 +1,109 @@
+{
+  "header": {
+    "title": "宇宙意识研究所",
+    "presents": "呈现"
+  },
+  "nav": {
+    "news": "新闻",
+    "help": "帮助",
+    "oazyse": "Oazyse",
+    "institute": "研究所",
+    "services": "服务",
+    "about": "关于我",
+    "contacts": "联系"
+  },
+  "footer": {
+    "rights": "© 2025 Oazyse. 保留所有权利。"
+  },
+  "news": {
+    "article1": { "title": "本周成就", "date": "2025年1月15日", "content": "我们的项目在意识发展方面达到了重要里程碑。" },
+    "article2": { "title": "新冥想课程", "date": "2025年1月10日", "content": "我们推出了更新的冥想实践计划。" },
+    "article3": { "title": "研究所开幕", "date": "2025年1月5日", "content": "宇宙意识研究所正式向所有希望探索意识本质的人敞开大门。" }
+  },
+  "help": {
+    "title": "催眠疗法如何帮助你？",
+    "subtitle": "点击卡片揭示秘密",
+    "explored": "已探索",
+    "clickToClose": "点击关闭",
+    "allExplored": "🎉 你已探索所有可能性！",
+    "readyToStart": "准备好开始你的改变之旅了吗？",
+    "cards": {
+      "anxiety": { "title": "焦虑", "shortDesc": "恐惧和恐慌", "fullDesc": "催眠疗法帮助在潜意识中找到焦虑状态的根源。" },
+      "sleep": { "title": "失眠", "shortDesc": "睡眠问题", "fullDesc": "深度放松技术恢复自然睡眠周期。" },
+      "habits": { "title": "习惯", "shortDesc": "吸烟、暴饮暴食", "fullDesc": "催眠直接与习惯所在的潜意识工作。" },
+      "confidence": { "title": "自信", "shortDesc": "自尊", "fullDesc": "我们释放内在潜能，消除限制性信念。" },
+      "phobias": { "title": "恐惧症", "shortDesc": "非理性恐惧", "fullDesc": "催眠疗法找到恐惧症起源的时刻。" },
+      "stress": { "title": "压力", "shortDesc": "倦怠", "fullDesc": "我们教授即时放松技术。" },
+      "relationships": { "title": "关系", "shortDesc": "与人的联系", "fullDesc": "关系模式在童年形成。" },
+      "focus": { "title": "专注力", "shortDesc": "集中和记忆", "fullDesc": "催眠状态本身训练专注力。" },
+      "pain": { "title": "疼痛", "shortDesc": "疼痛管理", "fullDesc": "催眠在医学中用于止痛。" },
+      "trauma": { "title": "创伤", "shortDesc": "过去的事件", "fullDesc": "在催眠中安全处理创伤经历。" },
+      "creativity": { "title": "创造力", "shortDesc": "创意潜力", "fullDesc": "催眠打开通往右脑的通道。" },
+      "motivation": { "title": "动力", "shortDesc": "实现目标", "fullDesc": "潜意识是强大的盟友。" }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "关于OAZYSE项目",
+    "aboutText1": "Oazyse是意识发展和正念练习的空间。",
+    "aboutText2": "该项目包括冥想练习和治疗方法。",
+    "joinTitle": "加入项目",
+    "namePlaceholder": "姓名",
+    "emailPlaceholder": "电子邮件",
+    "motivationPlaceholder": "动机",
+    "submitButton": "提交",
+    "errorTitle": "错误",
+    "errorMessage": "请填写所有字段",
+    "successTitle": "申请已发送",
+    "successMessage": "我们会尽快联系您"
+  },
+  "institute": {
+    "title": "宇宙意识研究所",
+    "description": "研究所是一个教育平台。",
+    "coursesTitle": "课程",
+    "coursesText": "我们的课程涵盖广泛的主题。",
+    "testsTitle": "测试和评估",
+    "testsText": "我们提供测试系统。",
+    "chatTitle": "聊天和支持",
+    "chatText": "项目参与者可以访问私人聊天。"
+  },
+  "services": {
+    "title": "服务",
+    "items": {
+      "tea": { "title": "茶道", "description": "传统茶道作为正念练习。" },
+      "satsang": { "title": "萨桑", "description": "萨桑格式的聚会。" },
+      "hypnotherapy": { "title": "催眠疗法", "description": "个人催眠疗法会话。" },
+      "meditation": { "title": "冥想练习", "description": "团体和个人冥想。" },
+      "consultations": { "title": "咨询", "description": "关于精神发展的个人咨询。" }
+    }
+  },
+  "about": {
+    "title": "关于我",
+    "text1": "我叫[姓名]，我把一生献给了意识发展的研究和实践。",
+    "text2": "我在东西方传统中学习冥想。",
+    "text3": "多年来，我帮助了数百人。",
+    "text4": "Oazyse和研究所是我愿景的体现。"
+  },
+  "contacts": {
+    "title": "联系方式",
+    "description": "联系我们获取更多信息。",
+    "email": "电子邮件",
+    "namePlaceholder": "姓名",
+    "emailPlaceholder": "电子邮件",
+    "messagePlaceholder": "消息",
+    "submitButton": "发送",
+    "errorTitle": "错误",
+    "errorMessage": "请填写所有字段",
+    "successTitle": "消息已发送",
+    "successMessage": "我们会尽快回复您"
+  },
+  "chat": {
+    "title": "催眠疗法咨询",
+    "greeting": "你好！",
+    "prompt": "关于催眠疗法提问。",
+    "inputPlaceholder": "输入消息...",
+    "typing": "正在输入...",
+    "errorTitle": "错误",
+    "errorMessage": "发送消息失败"
+  },
+  "language": { "select": "语言" }
+}

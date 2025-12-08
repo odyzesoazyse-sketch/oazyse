@@ -1,0 +1,96 @@
+{
+  "header": { "title": "Viện Ý Thức Vũ Trụ", "presents": "trình bày" },
+  "nav": { "news": "Tin tức", "help": "Trợ giúp", "oazyse": "Oazyse", "institute": "Viện", "services": "Dịch vụ", "about": "Về tôi", "contacts": "Liên hệ" },
+  "footer": { "rights": "© 2025 Oazyse. Đã đăng ký bản quyền." },
+  "news": {
+    "article1": { "title": "THÀNH TỰU TUẦN NÀY", "date": "15 tháng 1, 2025", "content": "Dự án của chúng tôi đã đạt được cột mốc quan trọng trong phát triển ý thức." },
+    "article2": { "title": "KHÓA THIỀN MỚI", "date": "10 tháng 1, 2025", "content": "Chúng tôi giới thiệu chương trình thực hành thiền định cập nhật." },
+    "article3": { "title": "KHAI TRƯƠNG VIỆN", "date": "5 tháng 1, 2025", "content": "Viện Ý Thức Vũ Trụ đã chính thức mở cửa." }
+  },
+  "help": {
+    "title": "Liệu pháp thôi miên có thể giúp gì?",
+    "subtitle": "Nhấp vào thẻ để khám phá bí mật",
+    "explored": "Đã khám phá",
+    "clickToClose": "nhấp để đóng",
+    "allExplored": "🎉 Bạn đã khám phá tất cả khả năng!",
+    "readyToStart": "Sẵn sàng bắt đầu hành trình thay đổi?",
+    "cards": {
+      "anxiety": { "title": "Lo âu", "shortDesc": "Sợ hãi và hoảng loạn", "fullDesc": "Liệu pháp thôi miên giúp tìm ra gốc rễ của trạng thái lo âu trong tiềm thức." },
+      "sleep": { "title": "Mất ngủ", "shortDesc": "Vấn đề giấc ngủ", "fullDesc": "Kỹ thuật thư giãn sâu phục hồi chu kỳ giấc ngủ tự nhiên." },
+      "habits": { "title": "Thói quen", "shortDesc": "Hút thuốc, ăn quá nhiều", "fullDesc": "Thôi miên làm việc trực tiếp với tiềm thức." },
+      "confidence": { "title": "Tự tin", "shortDesc": "Lòng tự trọng", "fullDesc": "Chúng tôi khai phóng tiềm năng bên trong và loại bỏ niềm tin hạn chế." },
+      "phobias": { "title": "Ám ảnh", "shortDesc": "Nỗi sợ phi lý", "fullDesc": "Liệu pháp thôi miên tìm ra khoảnh khắc xuất hiện ám ảnh." },
+      "stress": { "title": "Căng thẳng", "shortDesc": "Kiệt sức", "fullDesc": "Chúng tôi dạy kỹ thuật thư giãn tức thì." },
+      "relationships": { "title": "Mối quan hệ", "shortDesc": "Kết nối với mọi người", "fullDesc": "Mô hình quan hệ được hình thành từ thời thơ ấu." },
+      "focus": { "title": "Tập trung", "shortDesc": "Tập trung và trí nhớ", "fullDesc": "Trạng thái thôi miên tự nó rèn luyện sự tập trung." },
+      "pain": { "title": "Đau", "shortDesc": "Quản lý đau", "fullDesc": "Thôi miên được sử dụng trong y học để giảm đau." },
+      "trauma": { "title": "Chấn thương", "shortDesc": "Sự kiện quá khứ", "fullDesc": "Làm việc an toàn với trải nghiệm chấn thương trong thôi miên." },
+      "creativity": { "title": "Sáng tạo", "shortDesc": "Tiềm năng sáng tạo", "fullDesc": "Thôi miên mở ra quyền truy cập vào bán cầu não phải." },
+      "motivation": { "title": "Động lực", "shortDesc": "Đạt mục tiêu", "fullDesc": "Tiềm thức là đồng minh mạnh mẽ." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "VỀ DỰ ÁN OAZYSE",
+    "aboutText1": "Oazyse là không gian phát triển ý thức và thực hành chánh niệm.",
+    "aboutText2": "Dự án bao gồm thực hành thiền định và phương pháp trị liệu.",
+    "joinTitle": "THAM GIA DỰ ÁN",
+    "namePlaceholder": "Tên",
+    "emailPlaceholder": "Email",
+    "motivationPlaceholder": "Động lực",
+    "submitButton": "GỬI",
+    "errorTitle": "Lỗi",
+    "errorMessage": "Vui lòng điền tất cả các trường",
+    "successTitle": "Đã gửi đơn đăng ký",
+    "successMessage": "Chúng tôi sẽ liên hệ sớm"
+  },
+  "institute": {
+    "title": "VIỆN Ý THỨC VŨ TRỤ",
+    "description": "Viện là nền tảng giáo dục.",
+    "coursesTitle": "KHÓA HỌC",
+    "coursesText": "Các khóa học của chúng tôi bao gồm nhiều chủ đề.",
+    "testsTitle": "BÀI KIỂM TRA VÀ ĐÁNH GIÁ",
+    "testsText": "Chúng tôi cung cấp hệ thống kiểm tra.",
+    "chatTitle": "TRÒ CHUYỆN VÀ HỖ TRỢ",
+    "chatText": "Người tham gia chương trình có quyền truy cập trò chuyện riêng tư."
+  },
+  "services": {
+    "title": "DỊCH VỤ",
+    "items": {
+      "tea": { "title": "NGHI LỄ TRÀ", "description": "Nghi lễ trà truyền thống như thực hành chánh niệm." },
+      "satsang": { "title": "SATSANG", "description": "Gặp gỡ theo định dạng satsang." },
+      "hypnotherapy": { "title": "LIỆU PHÁP THÔI MIÊN", "description": "Phiên liệu pháp thôi miên cá nhân." },
+      "meditation": { "title": "THỰC HÀNH THIỀN ĐỊNH", "description": "Thiền nhóm và cá nhân." },
+      "consultations": { "title": "TƯ VẤN", "description": "Tư vấn cá nhân về phát triển tâm linh." }
+    }
+  },
+  "about": {
+    "title": "VỀ TÔI",
+    "text1": "Tên tôi là [Tên], và tôi đã cống hiến cuộc đời cho việc nghiên cứu và thực hành phát triển ý thức.",
+    "text2": "Tôi đã học thiền trong truyền thống phương Đông và phương Tây.",
+    "text3": "Trong nhiều năm, tôi đã giúp đỡ hàng trăm người.",
+    "text4": "Oazyse và Viện là hiện thân của tầm nhìn của tôi."
+  },
+  "contacts": {
+    "title": "LIÊN HỆ",
+    "description": "Liên hệ với chúng tôi để biết thêm thông tin.",
+    "email": "Email",
+    "namePlaceholder": "Tên",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Tin nhắn",
+    "submitButton": "GỬI",
+    "errorTitle": "Lỗi",
+    "errorMessage": "Vui lòng điền tất cả các trường",
+    "successTitle": "Đã gửi tin nhắn",
+    "successMessage": "Chúng tôi sẽ trả lời sớm"
+  },
+  "chat": {
+    "title": "Tư vấn Liệu pháp Thôi miên",
+    "greeting": "Xin chào!",
+    "prompt": "Đặt câu hỏi về liệu pháp thôi miên.",
+    "inputPlaceholder": "Nhập tin nhắn...",
+    "typing": "Đang gõ...",
+    "errorTitle": "Lỗi",
+    "errorMessage": "Không gửi được tin nhắn"
+  },
+  "language": { "select": "Ngôn ngữ" }
+}

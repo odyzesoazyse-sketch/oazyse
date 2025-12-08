@@ -1,0 +1,96 @@
+{
+  "header": { "title": "Institut för Kosmiskt Medvetande", "presents": "presenterar" },
+  "nav": { "news": "Nyheter", "help": "Hjälp", "oazyse": "Oazyse", "institute": "Institut", "services": "Tjänster", "about": "Om mig", "contacts": "Kontakt" },
+  "footer": { "rights": "© 2025 Oazyse. Alla rättigheter förbehållna." },
+  "news": {
+    "article1": { "title": "VECKANS PRESTATION", "date": "15 januari 2025", "content": "Vårt projekt har nått en viktig milstolpe i medvetandeutveckling." },
+    "article2": { "title": "NY MEDITATIONSKURS", "date": "10 januari 2025", "content": "Vi presenterar ett uppdaterat program för meditativa praktiker." },
+    "article3": { "title": "INSTITUTETS ÖPPNING", "date": "5 januari 2025", "content": "Institutet för Kosmiskt Medvetande har officiellt öppnat sina dörrar." }
+  },
+  "help": {
+    "title": "Hur kan hypnoterapi hjälpa?",
+    "subtitle": "Klicka på korten för att avslöja hemligheter",
+    "explored": "Utforskat",
+    "clickToClose": "klicka för att stänga",
+    "allExplored": "🎉 Du har utforskat alla möjligheter!",
+    "readyToStart": "Redo att börja din resa mot förändring?",
+    "cards": {
+      "anxiety": { "title": "Ångest", "shortDesc": "Rädslor och panik", "fullDesc": "Hypnoterapi hjälper till att hitta roten till ångesttillstånd i det undermedvetna." },
+      "sleep": { "title": "Sömnlöshet", "shortDesc": "Sömnproblem", "fullDesc": "Djupa avslappningstekniker återställer den naturliga sömncykeln." },
+      "habits": { "title": "Vanor", "shortDesc": "Rökning, överätande", "fullDesc": "Hypnos arbetar direkt med det undermedvetna." },
+      "confidence": { "title": "Självförtroende", "shortDesc": "Självkänsla", "fullDesc": "Vi frigör inre potential och tar bort begränsande övertygelser." },
+      "phobias": { "title": "Fobier", "shortDesc": "Irrationella rädslor", "fullDesc": "Hypnoterapi hittar ögonblicket då fobin uppstod." },
+      "stress": { "title": "Stress", "shortDesc": "Utbrändhet", "fullDesc": "Vi lär ut tekniker för omedelbar avslappning." },
+      "relationships": { "title": "Relationer", "shortDesc": "Kopplingar med människor", "fullDesc": "Relationsmönster formas i barndomen." },
+      "focus": { "title": "Koncentration", "shortDesc": "Fokus och minne", "fullDesc": "Hypnostillståndet i sig tränar koncentration." },
+      "pain": { "title": "Smärta", "shortDesc": "Smärthantering", "fullDesc": "Hypnos används i medicin för smärtlindring." },
+      "trauma": { "title": "Trauma", "shortDesc": "Tidigare händelser", "fullDesc": "Säkert arbete med traumatisk erfarenhet i hypnos." },
+      "creativity": { "title": "Kreativitet", "shortDesc": "Kreativ potential", "fullDesc": "Hypnos öppnar tillgång till höger hjärnhalva." },
+      "motivation": { "title": "Motivation", "shortDesc": "Uppnå mål", "fullDesc": "Det undermedvetna är en mäktig allierad." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "OM OAZYSE-PROJEKTET",
+    "aboutText1": "Oazyse är ett utrymme för medvetandeutveckling och mindfulness-praktik.",
+    "aboutText2": "Projektet inkluderar meditationspraktiker och terapeutiska metoder.",
+    "joinTitle": "GÅ MED I PROJEKTET",
+    "namePlaceholder": "Namn",
+    "emailPlaceholder": "E-post",
+    "motivationPlaceholder": "Motivation",
+    "submitButton": "SKICKA",
+    "errorTitle": "Fel",
+    "errorMessage": "Vänligen fyll i alla fält",
+    "successTitle": "Ansökan skickad",
+    "successMessage": "Vi kontaktar dig snart"
+  },
+  "institute": {
+    "title": "INSTITUT FÖR KOSMISKT MEDVETANDE",
+    "description": "Institutet är en utbildningsplattform.",
+    "coursesTitle": "KURSER",
+    "coursesText": "Våra kurser täcker ett brett spektrum av ämnen.",
+    "testsTitle": "TESTER OCH UTVÄRDERING",
+    "testsText": "Vi erbjuder ett testsystem.",
+    "chatTitle": "CHATT OCH SUPPORT",
+    "chatText": "Programdeltagare får tillgång till en privat chatt."
+  },
+  "services": {
+    "title": "TJÄNSTER",
+    "items": {
+      "tea": { "title": "TECEREMONIER", "description": "Traditionella teceremonier som mindfulness-praktik." },
+      "satsang": { "title": "SATSANG", "description": "Möten i satsang-format." },
+      "hypnotherapy": { "title": "HYPNOTERAPI", "description": "Individuella hypnoterapisessioner." },
+      "meditation": { "title": "MEDITATIVA PRAKTIKER", "description": "Grupp- och individuella meditationer." },
+      "consultations": { "title": "KONSULTATIONER", "description": "Personliga konsultationer om andlig utveckling." }
+    }
+  },
+  "about": {
+    "title": "OM MIG",
+    "text1": "Mitt namn är [Namn], och jag har ägnat mitt liv åt studier och praktik av medvetandeutveckling.",
+    "text2": "Jag har studerat meditation i österländska och västerländska traditioner.",
+    "text3": "Genom åren har jag hjälpt hundratals människor.",
+    "text4": "Oazyse och Institutet är förverkligandet av min vision."
+  },
+  "contacts": {
+    "title": "KONTAKT",
+    "description": "Kontakta oss för mer information.",
+    "email": "E-post",
+    "namePlaceholder": "Namn",
+    "emailPlaceholder": "E-post",
+    "messagePlaceholder": "Meddelande",
+    "submitButton": "SKICKA",
+    "errorTitle": "Fel",
+    "errorMessage": "Vänligen fyll i alla fält",
+    "successTitle": "Meddelande skickat",
+    "successMessage": "Vi svarar snart"
+  },
+  "chat": {
+    "title": "Hypnoterapi-konsultation",
+    "greeting": "Hej!",
+    "prompt": "Ställ en fråga om hypnoterapi.",
+    "inputPlaceholder": "Skriv ett meddelande...",
+    "typing": "Skriver...",
+    "errorTitle": "Fel",
+    "errorMessage": "Kunde inte skicka meddelandet"
+  },
+  "language": { "select": "Språk" }
+}

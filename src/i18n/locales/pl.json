@@ -1,0 +1,96 @@
+{
+  "header": { "title": "Instytut Kosmicznej Świadomości", "presents": "przedstawia" },
+  "nav": { "news": "Aktualności", "help": "Pomoc", "oazyse": "Oazyse", "institute": "Instytut", "services": "Usługi", "about": "O mnie", "contacts": "Kontakt" },
+  "footer": { "rights": "© 2025 Oazyse. Wszelkie prawa zastrzeżone." },
+  "news": {
+    "article1": { "title": "OSIĄGNIĘCIE TYGODNIA", "date": "15 stycznia 2025", "content": "Nasz projekt osiągnął ważny kamień milowy w rozwoju świadomości." },
+    "article2": { "title": "NOWY KURS MEDYTACJI", "date": "10 stycznia 2025", "content": "Przedstawiamy zaktualizowany program praktyk medytacyjnych." },
+    "article3": { "title": "OTWARCIE INSTYTUTU", "date": "5 stycznia 2025", "content": "Instytut Kosmicznej Świadomości oficjalnie otworzył swoje drzwi." }
+  },
+  "help": {
+    "title": "Jak hipnoterapia może pomóc?",
+    "subtitle": "Kliknij na karty, aby odkryć sekrety",
+    "explored": "Zbadane",
+    "clickToClose": "kliknij aby zamknąć",
+    "allExplored": "🎉 Zbadałeś wszystkie możliwości!",
+    "readyToStart": "Gotowy, aby rozpocząć swoją podróż do zmiany?",
+    "cards": {
+      "anxiety": { "title": "Lęk", "shortDesc": "Strachy i panika", "fullDesc": "Hipnoterapia pomaga znaleźć źródło stanów lękowych w podświadomości." },
+      "sleep": { "title": "Bezsenność", "shortDesc": "Problemy ze snem", "fullDesc": "Techniki głębokiej relaksacji przywracają naturalny cykl snu." },
+      "habits": { "title": "Nawyki", "shortDesc": "Palenie, przejadanie się", "fullDesc": "Hipnoza pracuje bezpośrednio z podświadomością." },
+      "confidence": { "title": "Pewność siebie", "shortDesc": "Samoocena", "fullDesc": "Odblokowujemy wewnętrzny potencjał i usuwamy ograniczające przekonania." },
+      "phobias": { "title": "Fobie", "shortDesc": "Irracjonalne strachy", "fullDesc": "Hipnoterapia znajduje moment powstania fobii." },
+      "stress": { "title": "Stres", "shortDesc": "Wypalenie", "fullDesc": "Uczymy technik natychmiastowej relaksacji." },
+      "relationships": { "title": "Związki", "shortDesc": "Więzi z ludźmi", "fullDesc": "Wzorce relacji kształtują się w dzieciństwie." },
+      "focus": { "title": "Koncentracja", "shortDesc": "Skupienie i pamięć", "fullDesc": "Sam stan hipnozy trenuje koncentrację." },
+      "pain": { "title": "Ból", "shortDesc": "Zarządzanie bólem", "fullDesc": "Hipnoza jest stosowana w medycynie do łagodzenia bólu." },
+      "trauma": { "title": "Trauma", "shortDesc": "Przeszłe wydarzenia", "fullDesc": "Bezpieczna praca z traumatycznym doświadczeniem w hipnozie." },
+      "creativity": { "title": "Kreatywność", "shortDesc": "Potencjał twórczy", "fullDesc": "Hipnoza otwiera dostęp do prawej półkuli." },
+      "motivation": { "title": "Motywacja", "shortDesc": "Osiąganie celów", "fullDesc": "Podświadomość jest potężnym sojusznikiem." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "O PROJEKCIE OAZYSE",
+    "aboutText1": "Oazyse to przestrzeń do rozwoju świadomości i praktyki uważności.",
+    "aboutText2": "Projekt obejmuje praktyki medytacyjne i metody terapeutyczne.",
+    "joinTitle": "DOŁĄCZ DO PROJEKTU",
+    "namePlaceholder": "Imię",
+    "emailPlaceholder": "Email",
+    "motivationPlaceholder": "Motywacja",
+    "submitButton": "WYŚLIJ",
+    "errorTitle": "Błąd",
+    "errorMessage": "Proszę wypełnić wszystkie pola",
+    "successTitle": "Zgłoszenie wysłane",
+    "successMessage": "Skontaktujemy się wkrótce"
+  },
+  "institute": {
+    "title": "INSTYTUT KOSMICZNEJ ŚWIADOMOŚCI",
+    "description": "Instytut to platforma edukacyjna.",
+    "coursesTitle": "KURSY",
+    "coursesText": "Nasze kursy obejmują szeroki zakres tematów.",
+    "testsTitle": "TESTY I OCENA",
+    "testsText": "Oferujemy system testów.",
+    "chatTitle": "CZAT I WSPARCIE",
+    "chatText": "Uczestnicy programu mają dostęp do prywatnego czatu."
+  },
+  "services": {
+    "title": "USŁUGI",
+    "items": {
+      "tea": { "title": "CEREMONIE HERBACIANE", "description": "Tradycyjne ceremonie herbaciane jako praktyka uważności." },
+      "satsang": { "title": "SATSANGI", "description": "Spotkania w formacie satsang." },
+      "hypnotherapy": { "title": "HIPNOTERAPIA", "description": "Indywidualne sesje hipnoterapii." },
+      "meditation": { "title": "PRAKTYKI MEDYTACYJNE", "description": "Medytacje grupowe i indywidualne." },
+      "consultations": { "title": "KONSULTACJE", "description": "Osobiste konsultacje na temat rozwoju duchowego." }
+    }
+  },
+  "about": {
+    "title": "O MNIE",
+    "text1": "Nazywam się [Imię] i poświęciłem życie badaniu i praktyce rozwoju świadomości.",
+    "text2": "Studiowałem medytację w tradycjach wschodnich i zachodnich.",
+    "text3": "Przez lata pomogłem setkom osób.",
+    "text4": "Oazyse i Instytut to ucieleśnienie mojej wizji."
+  },
+  "contacts": {
+    "title": "KONTAKT",
+    "description": "Skontaktuj się z nami po więcej informacji.",
+    "email": "Email",
+    "namePlaceholder": "Imię",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Wiadomość",
+    "submitButton": "WYŚLIJ",
+    "errorTitle": "Błąd",
+    "errorMessage": "Proszę wypełnić wszystkie pola",
+    "successTitle": "Wiadomość wysłana",
+    "successMessage": "Odpowiemy wkrótce"
+  },
+  "chat": {
+    "title": "Konsultacja hipnoterapii",
+    "greeting": "Cześć!",
+    "prompt": "Zadaj pytanie o hipnoterapię.",
+    "inputPlaceholder": "Wpisz wiadomość...",
+    "typing": "Pisze...",
+    "errorTitle": "Błąd",
+    "errorMessage": "Nie udało się wysłać wiadomości"
+  },
+  "language": { "select": "Język" }
+}

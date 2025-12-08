@@ -1,0 +1,96 @@
+{
+  "header": { "title": "우주 의식 연구소", "presents": "프레젠트" },
+  "nav": { "news": "뉴스", "help": "도움말", "oazyse": "Oazyse", "institute": "연구소", "services": "서비스", "about": "소개", "contacts": "연락처" },
+  "footer": { "rights": "© 2025 Oazyse. 모든 권리 보유." },
+  "news": {
+    "article1": { "title": "이번 주 성과", "date": "2025년 1월 15일", "content": "우리 프로젝트가 의식 개발에서 중요한 이정표에 도달했습니다." },
+    "article2": { "title": "새로운 명상 코스", "date": "2025년 1월 10일", "content": "업데이트된 명상 프로그램을 소개합니다." },
+    "article3": { "title": "연구소 개설", "date": "2025년 1월 5일", "content": "우주 의식 연구소가 공식적으로 문을 열었습니다." }
+  },
+  "help": {
+    "title": "최면 치료가 어떻게 도움이 될까요?",
+    "subtitle": "카드를 클릭하여 비밀을 밝히세요",
+    "explored": "탐험함",
+    "clickToClose": "닫으려면 클릭",
+    "allExplored": "🎉 모든 가능성을 탐험했습니다!",
+    "readyToStart": "변화의 여정을 시작할 준비가 되셨나요?",
+    "cards": {
+      "anxiety": { "title": "불안", "shortDesc": "두려움과 공황", "fullDesc": "최면 치료는 잠재의식에서 불안 상태의 근원을 찾습니다." },
+      "sleep": { "title": "불면증", "shortDesc": "수면 문제", "fullDesc": "심층 이완 기술이 자연스러운 수면 주기를 회복합니다." },
+      "habits": { "title": "습관", "shortDesc": "흡연, 과식", "fullDesc": "최면은 습관이 살고 있는 잠재의식과 직접 작동합니다." },
+      "confidence": { "title": "자신감", "shortDesc": "자존감", "fullDesc": "내면의 잠재력을 해방하고 제한적인 믿음을 제거합니다." },
+      "phobias": { "title": "공포증", "shortDesc": "비합리적인 두려움", "fullDesc": "최면 치료는 공포증 발생 순간을 찾습니다." },
+      "stress": { "title": "스트레스", "shortDesc": "번아웃", "fullDesc": "즉각적인 이완 기술을 가르칩니다." },
+      "relationships": { "title": "관계", "shortDesc": "사람과의 연결", "fullDesc": "관계 패턴은 어린 시절에 형성됩니다." },
+      "focus": { "title": "집중력", "shortDesc": "집중과 기억", "fullDesc": "최면 상태 자체가 집중력을 훈련합니다." },
+      "pain": { "title": "통증", "shortDesc": "통증 관리", "fullDesc": "최면은 의학에서 진통에 사용됩니다." },
+      "trauma": { "title": "트라우마", "shortDesc": "과거 사건", "fullDesc": "최면에서 트라우마 경험을 안전하게 처리합니다." },
+      "creativity": { "title": "창의성", "shortDesc": "창의적 잠재력", "fullDesc": "최면은 우뇌로의 접근을 엽니다." },
+      "motivation": { "title": "동기", "shortDesc": "목표 달성", "fullDesc": "잠재의식은 강력한 동맹입니다." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "OAZYSE 프로젝트 소개",
+    "aboutText1": "Oazyse는 의식 개발과 마음챙김 실천을 위한 공간입니다.",
+    "aboutText2": "프로젝트에는 명상 실천과 치료 방법이 포함됩니다.",
+    "joinTitle": "프로젝트 참여",
+    "namePlaceholder": "이름",
+    "emailPlaceholder": "이메일",
+    "motivationPlaceholder": "동기",
+    "submitButton": "제출",
+    "errorTitle": "오류",
+    "errorMessage": "모든 필드를 입력하세요",
+    "successTitle": "신청이 전송되었습니다",
+    "successMessage": "곧 연락드리겠습니다"
+  },
+  "institute": {
+    "title": "우주 의식 연구소",
+    "description": "연구소는 교육 플랫폼입니다.",
+    "coursesTitle": "코스",
+    "coursesText": "우리 코스는 광범위한 주제를 다룹니다.",
+    "testsTitle": "테스트 및 평가",
+    "testsText": "테스트 시스템을 제공합니다.",
+    "chatTitle": "채팅 및 지원",
+    "chatText": "프로그램 참가자는 프라이빗 채팅에 접근할 수 있습니다."
+  },
+  "services": {
+    "title": "서비스",
+    "items": {
+      "tea": { "title": "다도", "description": "마음챙김 실천으로서의 전통 다도." },
+      "satsang": { "title": "사트상", "description": "사트상 형식의 모임." },
+      "hypnotherapy": { "title": "최면 치료", "description": "개인 최면 치료 세션." },
+      "meditation": { "title": "명상 실천", "description": "그룹 및 개인 명상." },
+      "consultations": { "title": "상담", "description": "영적 발달에 관한 개인 상담." }
+    }
+  },
+  "about": {
+    "title": "소개",
+    "text1": "제 이름은 [이름]입니다. 의식 개발의 연구와 실천에 인생을 바쳤습니다.",
+    "text2": "동양과 서양 전통에서 명상을 공부했습니다.",
+    "text3": "수년간 수백 명을 도왔습니다.",
+    "text4": "Oazyse와 연구소는 제 비전의 구현입니다."
+  },
+  "contacts": {
+    "title": "연락처",
+    "description": "자세한 정보는 문의하세요.",
+    "email": "이메일",
+    "namePlaceholder": "이름",
+    "emailPlaceholder": "이메일",
+    "messagePlaceholder": "메시지",
+    "submitButton": "보내기",
+    "errorTitle": "오류",
+    "errorMessage": "모든 필드를 입력하세요",
+    "successTitle": "메시지가 전송되었습니다",
+    "successMessage": "곧 답변드리겠습니다"
+  },
+  "chat": {
+    "title": "최면 치료 상담",
+    "greeting": "안녕하세요!",
+    "prompt": "최면 치료에 대해 질문하세요.",
+    "inputPlaceholder": "메시지 입력...",
+    "typing": "입력 중...",
+    "errorTitle": "오류",
+    "errorMessage": "메시지 전송 실패"
+  },
+  "language": { "select": "언어" }
+}

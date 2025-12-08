@@ -1,0 +1,59 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+import ru from './locales/ru.json';
+import en from './locales/en.json';
+import es from './locales/es.json';
+import de from './locales/de.json';
+import fr from './locales/fr.json';
+import zh from './locales/zh.json';
+import ja from './locales/ja.json';
+import ko from './locales/ko.json';
+import ar from './locales/ar.json';
+import hi from './locales/hi.json';
+import pt from './locales/pt.json';
+import it from './locales/it.json';
+import tr from './locales/tr.json';
+import pl from './locales/pl.json';
+import nl from './locales/nl.json';
+import uk from './locales/uk.json';
+import vi from './locales/vi.json';
+import th from './locales/th.json';
+import sv from './locales/sv.json';
+import he from './locales/he.json';
+
+export const languages = [
+  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'zh', name: '中文', flag: '🇨🇳' },
+  { code: 'ja', name: '日本語', flag: '🇯🇵' },
+  { code: 'ko', name: '한국어', flag: '🇰🇷' },
+  { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+  { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
+  { code: 'pt', name: 'Português', flag: '🇧🇷' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+  { code: 'pl', name: 'Polski', flag: '🇵🇱' },
+  { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+  { code: 'uk', name: 'Українська', flag: '🇺🇦' },
+  { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
+  { code: 'th', name: 'ไทย', flag: '🇹🇭' },
+  { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
+  { code: 'he', name: 'עברית', flag: '🇮🇱' },
+];
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources: { ru: { translation: ru }, en: { translation: en }, es: { translation: es }, de: { translation: de }, fr: { translation: fr }, zh: { translation: zh }, ja: { translation: ja }, ko: { translation: ko }, ar: { translation: ar }, hi: { translation: hi }, pt: { translation: pt }, it: { translation: it }, tr: { translation: tr }, pl: { translation: pl }, nl: { translation: nl }, uk: { translation: uk }, vi: { translation: vi }, th: { translation: th }, sv: { translation: sv }, he: { translation: he } },
+    fallbackLng: 'ru',
+    interpolation: { escapeValue: false },
+    detection: { order: ['localStorage', 'navigator'], caches: ['localStorage'] }
+  });
+
+export default i18n;

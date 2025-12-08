@@ -1,0 +1,96 @@
+{
+  "header": { "title": "Istituto della Coscienza Cosmica", "presents": "presenta" },
+  "nav": { "news": "Notizie", "help": "Aiuto", "oazyse": "Oazyse", "institute": "Istituto", "services": "Servizi", "about": "Chi sono", "contacts": "Contatti" },
+  "footer": { "rights": "© 2025 Oazyse. Tutti i diritti riservati." },
+  "news": {
+    "article1": { "title": "RISULTATO DELLA SETTIMANA", "date": "15 gennaio 2025", "content": "Il nostro progetto ha raggiunto una pietra miliare importante nello sviluppo della coscienza." },
+    "article2": { "title": "NUOVO CORSO DI MEDITAZIONE", "date": "10 gennaio 2025", "content": "Presentiamo un programma aggiornato di pratiche meditative." },
+    "article3": { "title": "APERTURA DELL'ISTITUTO", "date": "5 gennaio 2025", "content": "L'Istituto della Coscienza Cosmica ha ufficialmente aperto le sue porte." }
+  },
+  "help": {
+    "title": "Come può aiutare l'ipnoterapia?",
+    "subtitle": "Clicca sulle carte per rivelare i segreti",
+    "explored": "Esplorato",
+    "clickToClose": "clicca per chiudere",
+    "allExplored": "🎉 Hai esplorato tutte le possibilità!",
+    "readyToStart": "Pronto a iniziare il tuo viaggio verso il cambiamento?",
+    "cards": {
+      "anxiety": { "title": "Ansia", "shortDesc": "Paure e panico", "fullDesc": "L'ipnoterapia aiuta a trovare la radice degli stati ansiosi nel subconscio." },
+      "sleep": { "title": "Insonnia", "shortDesc": "Problemi di sonno", "fullDesc": "Le tecniche di rilassamento profondo ripristinano il ciclo naturale del sonno." },
+      "habits": { "title": "Abitudini", "shortDesc": "Fumo, eccesso di cibo", "fullDesc": "L'ipnosi lavora direttamente con il subconscio." },
+      "confidence": { "title": "Fiducia", "shortDesc": "Autostima", "fullDesc": "Sblocchiamo il potenziale interiore e rimuoviamo le credenze limitanti." },
+      "phobias": { "title": "Fobie", "shortDesc": "Paure irrazionali", "fullDesc": "L'ipnoterapia trova il momento di origine della fobia." },
+      "stress": { "title": "Stress", "shortDesc": "Esaurimento", "fullDesc": "Insegniamo tecniche di rilassamento istantaneo." },
+      "relationships": { "title": "Relazioni", "shortDesc": "Legami con le persone", "fullDesc": "I modelli relazionali si formano nell'infanzia." },
+      "focus": { "title": "Concentrazione", "shortDesc": "Focus e memoria", "fullDesc": "Lo stato ipnotico stesso allena la concentrazione." },
+      "pain": { "title": "Dolore", "shortDesc": "Gestione del dolore", "fullDesc": "L'ipnosi viene usata in medicina per alleviare il dolore." },
+      "trauma": { "title": "Trauma", "shortDesc": "Eventi passati", "fullDesc": "Lavoro sicuro con l'esperienza traumatica in ipnosi." },
+      "creativity": { "title": "Creatività", "shortDesc": "Potenziale creativo", "fullDesc": "L'ipnosi apre l'accesso all'emisfero destro." },
+      "motivation": { "title": "Motivazione", "shortDesc": "Raggiungimento degli obiettivi", "fullDesc": "Il subconscio è un potente alleato." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "SUL PROGETTO OAZYSE",
+    "aboutText1": "Oazyse è uno spazio per lo sviluppo della coscienza e la pratica della mindfulness.",
+    "aboutText2": "Il progetto include pratiche di meditazione e metodi terapeutici.",
+    "joinTitle": "UNISCITI AL PROGETTO",
+    "namePlaceholder": "Nome",
+    "emailPlaceholder": "Email",
+    "motivationPlaceholder": "Motivazione",
+    "submitButton": "INVIA",
+    "errorTitle": "Errore",
+    "errorMessage": "Per favore compila tutti i campi",
+    "successTitle": "Richiesta inviata",
+    "successMessage": "Ti contatteremo presto"
+  },
+  "institute": {
+    "title": "ISTITUTO DELLA COSCIENZA COSMICA",
+    "description": "L'Istituto è una piattaforma educativa.",
+    "coursesTitle": "CORSI",
+    "coursesText": "I nostri corsi coprono una vasta gamma di argomenti.",
+    "testsTitle": "TEST E VALUTAZIONE",
+    "testsText": "Offriamo un sistema di test.",
+    "chatTitle": "CHAT E SUPPORTO",
+    "chatText": "I partecipanti al programma hanno accesso a una chat privata."
+  },
+  "services": {
+    "title": "SERVIZI",
+    "items": {
+      "tea": { "title": "CERIMONIE DEL TÈ", "description": "Cerimonie del tè tradizionali come pratica di mindfulness." },
+      "satsang": { "title": "SATSANG", "description": "Incontri in formato satsang." },
+      "hypnotherapy": { "title": "IPNOTERAPIA", "description": "Sessioni individuali di ipnoterapia." },
+      "meditation": { "title": "PRATICHE MEDITATIVE", "description": "Meditazioni di gruppo e individuali." },
+      "consultations": { "title": "CONSULENZE", "description": "Consulenze personali sullo sviluppo spirituale." }
+    }
+  },
+  "about": {
+    "title": "CHI SONO",
+    "text1": "Mi chiamo [Nome], e ho dedicato la mia vita allo studio e alla pratica dello sviluppo della coscienza.",
+    "text2": "Ho studiato meditazione nelle tradizioni orientali e occidentali.",
+    "text3": "Nel corso degli anni, ho aiutato centinaia di persone.",
+    "text4": "Oazyse e l'Istituto sono la realizzazione della mia visione."
+  },
+  "contacts": {
+    "title": "CONTATTI",
+    "description": "Contattaci per maggiori informazioni.",
+    "email": "Email",
+    "namePlaceholder": "Nome",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Messaggio",
+    "submitButton": "INVIA",
+    "errorTitle": "Errore",
+    "errorMessage": "Per favore compila tutti i campi",
+    "successTitle": "Messaggio inviato",
+    "successMessage": "Ti risponderemo presto"
+  },
+  "chat": {
+    "title": "Consulenza di Ipnoterapia",
+    "greeting": "Ciao!",
+    "prompt": "Fai una domanda sull'ipnoterapia.",
+    "inputPlaceholder": "Inserisci un messaggio...",
+    "typing": "Scrivendo...",
+    "errorTitle": "Errore",
+    "errorMessage": "Invio messaggio fallito"
+  },
+  "language": { "select": "Lingua" }
+}

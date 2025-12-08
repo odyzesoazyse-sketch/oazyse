@@ -1,0 +1,109 @@
+{
+  "header": {
+    "title": "Institut de la Conscience Cosmique",
+    "presents": "présente"
+  },
+  "nav": {
+    "news": "Actualités",
+    "help": "Aide",
+    "oazyse": "Oazyse",
+    "institute": "Institut",
+    "services": "Services",
+    "about": "À propos",
+    "contacts": "Contacts"
+  },
+  "footer": {
+    "rights": "© 2025 Oazyse. Tous droits réservés."
+  },
+  "news": {
+    "article1": { "title": "RÉALISATION DE LA SEMAINE", "date": "15 janvier 2025", "content": "Notre projet a atteint une étape importante dans le développement de la conscience." },
+    "article2": { "title": "NOUVEAU COURS DE MÉDITATION", "date": "10 janvier 2025", "content": "Nous présentons un programme mis à jour de pratiques méditatives." },
+    "article3": { "title": "OUVERTURE DE L'INSTITUT", "date": "5 janvier 2025", "content": "L'Institut de la Conscience Cosmique a officiellement ouvert ses portes." }
+  },
+  "help": {
+    "title": "Comment l'hypnothérapie peut-elle aider?",
+    "subtitle": "Cliquez sur les cartes pour révéler les secrets",
+    "explored": "Exploré",
+    "clickToClose": "cliquez pour fermer",
+    "allExplored": "🎉 Vous avez exploré toutes les possibilités!",
+    "readyToStart": "Prêt à commencer votre chemin vers le changement?",
+    "cards": {
+      "anxiety": { "title": "Anxiété", "shortDesc": "Peurs et panique", "fullDesc": "L'hypnothérapie aide à trouver la racine des états anxieux dans le subconscient." },
+      "sleep": { "title": "Insomnie", "shortDesc": "Problèmes de sommeil", "fullDesc": "Les techniques de relaxation profonde restaurent le cycle naturel du sommeil." },
+      "habits": { "title": "Habitudes", "shortDesc": "Tabagisme, suralimentation", "fullDesc": "L'hypnose travaille directement avec le subconscient." },
+      "confidence": { "title": "Confiance", "shortDesc": "Estime de soi", "fullDesc": "Nous libérons le potentiel intérieur et éliminons les croyances limitantes." },
+      "phobias": { "title": "Phobies", "shortDesc": "Peurs irrationnelles", "fullDesc": "L'hypnothérapie trouve le moment d'origine de la phobie." },
+      "stress": { "title": "Stress", "shortDesc": "Épuisement", "fullDesc": "Nous enseignons des techniques de relaxation instantanée." },
+      "relationships": { "title": "Relations", "shortDesc": "Liens avec les gens", "fullDesc": "Les schémas relationnels se forment dans l'enfance." },
+      "focus": { "title": "Concentration", "shortDesc": "Focus et mémoire", "fullDesc": "L'état d'hypnose lui-même entraîne la concentration." },
+      "pain": { "title": "Douleur", "shortDesc": "Gestion de la douleur", "fullDesc": "L'hypnose est utilisée en médecine pour soulager la douleur." },
+      "trauma": { "title": "Traumatisme", "shortDesc": "Événements passés", "fullDesc": "Travail sécurisé avec l'expérience traumatique en hypnose." },
+      "creativity": { "title": "Créativité", "shortDesc": "Potentiel créatif", "fullDesc": "L'hypnose ouvre l'accès à l'hémisphère droit." },
+      "motivation": { "title": "Motivation", "shortDesc": "Atteinte des objectifs", "fullDesc": "Le subconscient est un allié puissant." }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "À PROPOS DU PROJET OAZYSE",
+    "aboutText1": "Oazyse est un espace pour le développement de la conscience et la pratique de la pleine conscience.",
+    "aboutText2": "Le projet comprend des pratiques de méditation et des méthodes thérapeutiques.",
+    "joinTitle": "REJOINDRE LE PROJET",
+    "namePlaceholder": "Nom",
+    "emailPlaceholder": "Email",
+    "motivationPlaceholder": "Motivation",
+    "submitButton": "ENVOYER",
+    "errorTitle": "Erreur",
+    "errorMessage": "Veuillez remplir tous les champs",
+    "successTitle": "Candidature envoyée",
+    "successMessage": "Nous vous contacterons bientôt"
+  },
+  "institute": {
+    "title": "INSTITUT DE LA CONSCIENCE COSMIQUE",
+    "description": "L'Institut est une plateforme éducative.",
+    "coursesTitle": "COURS",
+    "coursesText": "Nos cours couvrent un large éventail de sujets.",
+    "testsTitle": "TESTS ET ÉVALUATION",
+    "testsText": "Nous proposons un système de tests.",
+    "chatTitle": "CHAT ET SUPPORT",
+    "chatText": "Les participants au programme ont accès à un chat privé."
+  },
+  "services": {
+    "title": "SERVICES",
+    "items": {
+      "tea": { "title": "CÉRÉMONIES DU THÉ", "description": "Cérémonies du thé traditionnelles comme pratique de pleine conscience." },
+      "satsang": { "title": "SATSANGS", "description": "Rencontres en format satsang." },
+      "hypnotherapy": { "title": "HYPNOTHÉRAPIE", "description": "Séances individuelles d'hypnothérapie." },
+      "meditation": { "title": "PRATIQUES MÉDITATIVES", "description": "Méditations de groupe et individuelles." },
+      "consultations": { "title": "CONSULTATIONS", "description": "Consultations personnelles sur le développement spirituel." }
+    }
+  },
+  "about": {
+    "title": "À PROPOS DE MOI",
+    "text1": "Je m'appelle [Nom], et j'ai consacré ma vie à l'étude et à la pratique du développement de la conscience.",
+    "text2": "J'ai étudié la méditation dans les traditions orientales et occidentales.",
+    "text3": "Au fil des années, j'ai aidé des centaines de personnes.",
+    "text4": "Oazyse et l'Institut sont l'incarnation de ma vision."
+  },
+  "contacts": {
+    "title": "CONTACTS",
+    "description": "Contactez-nous pour plus d'informations.",
+    "email": "Email",
+    "namePlaceholder": "Nom",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Message",
+    "submitButton": "ENVOYER",
+    "errorTitle": "Erreur",
+    "errorMessage": "Veuillez remplir tous les champs",
+    "successTitle": "Message envoyé",
+    "successMessage": "Nous vous répondrons bientôt"
+  },
+  "chat": {
+    "title": "Consultation d'Hypnothérapie",
+    "greeting": "Bonjour!",
+    "prompt": "Posez une question sur l'hypnothérapie.",
+    "inputPlaceholder": "Entrez un message...",
+    "typing": "Écrit...",
+    "errorTitle": "Erreur",
+    "errorMessage": "Échec de l'envoi du message"
+  },
+  "language": { "select": "Langue" }
+}

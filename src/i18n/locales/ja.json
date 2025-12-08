@@ -1,0 +1,96 @@
+{
+  "header": { "title": "宇宙意識研究所", "presents": "プレゼンツ" },
+  "nav": { "news": "ニュース", "help": "ヘルプ", "oazyse": "Oazyse", "institute": "研究所", "services": "サービス", "about": "私について", "contacts": "連絡先" },
+  "footer": { "rights": "© 2025 Oazyse. 全著作権所有。" },
+  "news": {
+    "article1": { "title": "今週の達成", "date": "2025年1月15日", "content": "私たちのプロジェクトは意識開発において重要なマイルストーンに達しました。" },
+    "article2": { "title": "新しい瞑想コース", "date": "2025年1月10日", "content": "更新された瞑想プログラムをご紹介します。" },
+    "article3": { "title": "研究所開設", "date": "2025年1月5日", "content": "宇宙意識研究所が正式にオープンしました。" }
+  },
+  "help": {
+    "title": "催眠療法はどのように役立ちますか？",
+    "subtitle": "カードをクリックして秘密を明らかにする",
+    "explored": "探索済み",
+    "clickToClose": "クリックして閉じる",
+    "allExplored": "🎉 すべての可能性を探索しました！",
+    "readyToStart": "変化への旅を始める準備はできましたか？",
+    "cards": {
+      "anxiety": { "title": "不安", "shortDesc": "恐怖とパニック", "fullDesc": "催眠療法は潜在意識の中で不安状態の根源を見つけます。" },
+      "sleep": { "title": "不眠症", "shortDesc": "睡眠の問題", "fullDesc": "深いリラクゼーション技術が自然な睡眠サイクルを回復します。" },
+      "habits": { "title": "習慣", "shortDesc": "喫煙、過食", "fullDesc": "催眠は習慣が存在する潜在意識と直接働きます。" },
+      "confidence": { "title": "自信", "shortDesc": "自尊心", "fullDesc": "内なる可能性を解放し、制限的な信念を取り除きます。" },
+      "phobias": { "title": "恐怖症", "shortDesc": "不合理な恐怖", "fullDesc": "催眠療法は恐怖症の発生時点を見つけます。" },
+      "stress": { "title": "ストレス", "shortDesc": "燃え尽き", "fullDesc": "即座のリラクゼーション技術を教えます。" },
+      "relationships": { "title": "関係", "shortDesc": "人との繋がり", "fullDesc": "関係パターンは幼少期に形成されます。" },
+      "focus": { "title": "集中力", "shortDesc": "集中と記憶", "fullDesc": "催眠状態自体が集中力を訓練します。" },
+      "pain": { "title": "痛み", "shortDesc": "痛みの管理", "fullDesc": "催眠は医学で鎮痛に使用されます。" },
+      "trauma": { "title": "トラウマ", "shortDesc": "過去の出来事", "fullDesc": "催眠でトラウマ体験を安全に処理。" },
+      "creativity": { "title": "創造性", "shortDesc": "創造的ポテンシャル", "fullDesc": "催眠は右脳へのアクセスを開きます。" },
+      "motivation": { "title": "モチベーション", "shortDesc": "目標達成", "fullDesc": "潜在意識は強力な味方です。" }
+    }
+  },
+  "oazyse": {
+    "aboutTitle": "OAZYSEプロジェクトについて",
+    "aboutText1": "Oazyseは意識開発とマインドフルネス実践のための空間です。",
+    "aboutText2": "プロジェクトには瞑想実践と治療法が含まれます。",
+    "joinTitle": "プロジェクトに参加",
+    "namePlaceholder": "名前",
+    "emailPlaceholder": "メール",
+    "motivationPlaceholder": "動機",
+    "submitButton": "送信",
+    "errorTitle": "エラー",
+    "errorMessage": "すべてのフィールドを入力してください",
+    "successTitle": "申請が送信されました",
+    "successMessage": "まもなくご連絡いたします"
+  },
+  "institute": {
+    "title": "宇宙意識研究所",
+    "description": "研究所は教育プラットフォームです。",
+    "coursesTitle": "コース",
+    "coursesText": "私たちのコースは幅広いトピックをカバーしています。",
+    "testsTitle": "テストと評価",
+    "testsText": "テストシステムを提供しています。",
+    "chatTitle": "チャットとサポート",
+    "chatText": "プログラム参加者はプライベートチャットにアクセスできます。"
+  },
+  "services": {
+    "title": "サービス",
+    "items": {
+      "tea": { "title": "茶道", "description": "マインドフルネス実践としての伝統的な茶道。" },
+      "satsang": { "title": "サットサン", "description": "サットサン形式の会合。" },
+      "hypnotherapy": { "title": "催眠療法", "description": "個別の催眠療法セッション。" },
+      "meditation": { "title": "瞑想実践", "description": "グループおよび個人の瞑想。" },
+      "consultations": { "title": "相談", "description": "精神的発達に関する個人相談。" }
+    }
+  },
+  "about": {
+    "title": "私について",
+    "text1": "私の名前は[名前]です。意識開発の研究と実践に人生を捧げてきました。",
+    "text2": "東洋と西洋の伝統で瞑想を学びました。",
+    "text3": "長年にわたり、何百人もの人々を助けてきました。",
+    "text4": "Oazyseと研究所は私のビジョンの具現化です。"
+  },
+  "contacts": {
+    "title": "連絡先",
+    "description": "詳細についてはお問い合わせください。",
+    "email": "メール",
+    "namePlaceholder": "名前",
+    "emailPlaceholder": "メール",
+    "messagePlaceholder": "メッセージ",
+    "submitButton": "送信",
+    "errorTitle": "エラー",
+    "errorMessage": "すべてのフィールドを入力してください",
+    "successTitle": "メッセージが送信されました",
+    "successMessage": "まもなく返信いたします"
+  },
+  "chat": {
+    "title": "催眠療法相談",
+    "greeting": "こんにちは！",
+    "prompt": "催眠療法について質問してください。",
+    "inputPlaceholder": "メッセージを入力...",
+    "typing": "入力中...",
+    "errorTitle": "エラー",
+    "errorMessage": "メッセージの送信に失敗しました"
+  },
+  "language": { "select": "言語" }
+}

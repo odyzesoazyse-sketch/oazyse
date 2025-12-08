@@ -1,17 +1,21 @@
+import { useTranslation } from 'react-i18next';
+
 interface BottomNavProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
 }
 
 const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
+  const { t } = useTranslation();
+
   const tabs = [
-    { id: 'news', label: 'Новости' },
-    { id: 'help', label: 'Помощь' },
-    { id: 'oazyse', label: 'Oazyse' },
-    { id: 'institute', label: 'Институт' },
-    { id: 'services', label: 'Услуги' },
-    { id: 'about', label: 'Обо мне' },
-    { id: 'contacts', label: 'Контакты' },
+    { id: 'news', labelKey: 'nav.news' },
+    { id: 'help', labelKey: 'nav.help' },
+    { id: 'oazyse', labelKey: 'nav.oazyse' },
+    { id: 'institute', labelKey: 'nav.institute' },
+    { id: 'services', labelKey: 'nav.services' },
+    { id: 'about', labelKey: 'nav.about' },
+    { id: 'contacts', labelKey: 'nav.contacts' },
   ];
 
   return (
@@ -25,7 +29,7 @@ const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
               activeTab === tab.id ? 'font-bold' : 'font-normal'
             }`}
           >
-            {tab.label}
+            {t(tab.labelKey)}
           </button>
         ))}
       </div>
