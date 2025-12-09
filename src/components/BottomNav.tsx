@@ -19,25 +19,26 @@ const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-background border-t border-border/50 z-50 safe-area-pb">
-      <div className="flex items-center h-16 max-w-4xl mx-auto px-2 overflow-x-auto scrollbar-hide">
+    <nav className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-md border-t border-border z-50">
+      <div className="flex items-stretch h-16 overflow-x-auto scrollbar-hide">
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             className={`
-              relative flex-shrink-0 text-[10px] md:text-xs px-3 md:px-4 py-3 
-              transition-all duration-300 uppercase tracking-wider
+              relative flex-1 min-w-max flex items-center justify-center px-4 md:px-6
+              transition-all duration-300 border-r border-border last:border-r-0
               ${activeTab === tab.id 
-                ? 'font-semibold text-foreground' 
-                : 'font-normal text-muted-foreground hover:text-foreground'
+                ? 'bg-foreground text-background' 
+                : 'bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted'
               }
             `}
-            style={{ animationDelay: `${index * 50}ms` }}
           >
-            {t(tab.labelKey)}
+            <span className="yeezy-label whitespace-nowrap">
+              {t(tab.labelKey)}
+            </span>
             {activeTab === tab.id && (
-              <span className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-foreground rounded-full" />
+              <span className="absolute top-0 left-0 right-0 h-[2px] bg-background" />
             )}
           </button>
         ))}

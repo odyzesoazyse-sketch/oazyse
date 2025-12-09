@@ -4,65 +4,73 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 5%;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 4%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 5%;
+    --card: 0 0% 96%;
+    --card-foreground: 0 0% 4%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 5%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 0 0% 4%;
 
-    --primary: 0 0% 5%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 4%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 5%;
+    --secondary: 0 0% 92%;
+    --secondary-foreground: 0 0% 4%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 40 6% 90%;
+    --accent-foreground: 0 0% 4%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 5%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 0 0% 4%;
 
-    --radius: 0.25rem;
+    --radius: 0px;
+    
+    --yeezy-sand: 40 20% 94%;
+    --yeezy-bone: 40 15% 88%;
+    --yeezy-concrete: 0 0% 75%;
   }
 
   .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 3%;
+    --foreground: 0 0% 96%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 5%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 3%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 96%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 96%;
+    
+    --yeezy-sand: 0 0% 12%;
+    --yeezy-bone: 0 0% 16%;
+    --yeezy-concrete: 0 0% 25%;
   }
 }
 
@@ -83,11 +91,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-semibold tracking-tight;
-  }
-
-  .font-display {
-    @apply font-serif italic;
+    @apply font-display font-normal uppercase;
   }
 
   ::selection {
@@ -96,49 +100,96 @@
 }
 
 @layer components {
-  .text-balance {
-    text-wrap: balance;
+  /* YEEZY-INSPIRED COMPONENTS */
+  
+  .yeezy-title {
+    @apply font-display text-[12vw] md:text-[8vw] leading-[0.85] uppercase tracking-[-0.02em];
   }
-
-  .hover-lift {
-    @apply transition-all duration-300 ease-out;
+  
+  .yeezy-subtitle {
+    @apply font-display text-[6vw] md:text-[4vw] leading-[0.9] uppercase tracking-[-0.01em];
   }
-
-  .hover-lift:hover {
-    @apply -translate-y-0.5;
+  
+  .yeezy-label {
+    @apply font-sans text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-medium;
   }
-
-  .link-underline {
+  
+  .yeezy-body {
+    @apply font-sans text-sm md:text-base font-light leading-relaxed tracking-wide;
+  }
+  
+  .yeezy-card {
+    @apply bg-card border-0 p-8 md:p-12 transition-all duration-500;
+  }
+  
+  .yeezy-card-interactive {
+    @apply yeezy-card cursor-pointer hover:bg-muted;
+  }
+  
+  .yeezy-btn {
+    @apply h-14 px-12 bg-foreground text-background font-sans text-[10px] uppercase tracking-[0.3em] font-medium 
+           border-0 transition-all duration-300 hover:tracking-[0.4em] active:scale-[0.98];
+  }
+  
+  .yeezy-btn-outline {
+    @apply h-12 px-8 bg-transparent text-foreground font-sans text-[10px] uppercase tracking-[0.25em] font-medium 
+           border border-foreground transition-all duration-300 hover:bg-foreground hover:text-background;
+  }
+  
+  .yeezy-divider {
+    @apply w-full h-px bg-border my-8 md:my-12;
+  }
+  
+  .yeezy-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-border;
+  }
+  
+  .yeezy-grid-item {
+    @apply border-b border-border md:border-r md:last:border-r-0 p-8 md:p-12;
+  }
+  
+  .yeezy-number {
+    @apply font-display text-[20vw] md:text-[12vw] leading-none text-muted-foreground/20;
+  }
+  
+  .yeezy-section {
+    @apply min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24;
+  }
+  
+  .yeezy-scroll-indicator {
+    @apply fixed bottom-24 right-6 text-[9px] uppercase tracking-[0.3em] text-muted-foreground 
+           writing-mode-vertical rotate-180;
+    writing-mode: vertical-rl;
+  }
+  
+  /* BRUTALIST INTERACTIONS */
+  .hover-brutal {
+    @apply transition-all duration-200;
+  }
+  
+  .hover-brutal:hover {
+    @apply translate-x-2;
+  }
+  
+  .link-brutal {
     @apply relative inline-block;
   }
-
-  .link-underline::after {
+  
+  .link-brutal::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-px bg-current origin-left scale-x-0 transition-transform duration-300;
+    @apply absolute bottom-0 left-0 w-full h-[2px] bg-foreground origin-left scale-x-0 transition-transform duration-300;
   }
-
-  .link-underline:hover::after {
+  
+  .link-brutal:hover::after {
     @apply scale-x-100;
-  }
-
-  .section-title {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] mb-8 pb-4 border-b border-border/50;
-  }
-
-  .content-card {
-    @apply p-6 bg-card/50 border border-border/40 hover:border-border transition-all duration-300;
-  }
-
-  .input-elegant {
-    @apply h-12 border-border/50 focus:border-foreground bg-transparent transition-all duration-300;
-  }
-
-  .btn-primary {
-    @apply h-12 bg-foreground text-background hover:bg-foreground/90 text-xs uppercase tracking-[0.15em] font-medium transition-all duration-300;
   }
 }
 
 @layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
   .text-pretty {
     text-wrap: pretty;
   }
@@ -151,37 +202,12 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-}
-
-@layer components {
-  .text-balance {
-    text-wrap: balance;
+  
+  .aspect-book {
+    aspect-ratio: 3/4;
   }
-
-  .hover-lift {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  .hover-lift:hover {
-    @apply -translate-y-0.5;
-  }
-
-  .link-underline {
-    @apply relative inline-block;
-  }
-
-  .link-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-full h-px bg-current origin-left scale-x-0 transition-transform duration-300;
-  }
-
-  .link-underline:hover::after {
-    @apply scale-x-100;
-  }
-}
-
-@layer utilities {
-  .text-pretty {
-    text-wrap: pretty;
+  
+  .blend-difference {
+    mix-blend-mode: difference;
   }
 }

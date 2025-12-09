@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { ChevronRight, Book, Sparkles, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import bookCover from '@/assets/book-cover.png';
 
 const HomeSection = () => {
@@ -15,170 +14,156 @@ const HomeSection = () => {
     { id: 3, titleKey: 'news.article3.title', dateKey: 'news.article3.date', contentKey: 'news.article3.content' },
   ];
 
-  const getPreview = (text: string, maxLength: number = 100) => {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength).trim() + '...';
-  };
-
   const handlePurchase = () => {
-    // Opens payment link - replace with actual payment URL
     const paymentUrl = 'https://example.com/payment';
     window.open(paymentUrl, '_blank');
   };
 
   return (
-    <div className="space-y-10">
-      {/* Book Section */}
-      <section className="animate-fade-up">
-        <div className="content-card p-6 md:p-8">
-          <div className="flex items-center gap-2 mb-6">
-            <Sparkles className="w-4 h-4 text-foreground" />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground">
-              {t('home.featured')}
-            </span>
-          </div>
-          
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
-            {/* Book Cover */}
-            <div className="w-40 md:w-48 flex-shrink-0 group">
-              <div className="relative overflow-hidden rounded-sm shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                <img 
-                  src={bookCover} 
-                  alt={t('home.book.title')}
-                  className="w-full h-auto"
-                />
-              </div>
+    <div className="min-h-screen">
+      {/* Hero Book Section */}
+      <section className="relative px-6 md:px-12 lg:px-24 py-12 md:py-24 animate-slide-up">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          {/* Book Cover */}
+          <div className="relative order-2 lg:order-1">
+            <div className="absolute -top-8 -left-8 yeezy-number opacity-10 pointer-events-none">
+              01
             </div>
-            
-            {/* Book Info */}
-            <div className="flex-1 text-center md:text-left space-y-4">
-              <div className="flex items-center justify-center md:justify-start gap-2">
-                <Book className="w-4 h-4 text-muted-foreground" />
-                <span className="text-[10px] text-muted-foreground tracking-wider uppercase">
-                  {t('home.book.label')}
-                </span>
-              </div>
-              
-              <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.1em]">
+            <div className="relative aspect-book max-w-sm mx-auto lg:mx-0 bg-card overflow-hidden group">
+              <img 
+                src={bookCover} 
+                alt={t('home.book.title')}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-foreground/5 mix-blend-multiply" />
+            </div>
+          </div>
+
+          {/* Book Info */}
+          <div className="order-1 lg:order-2 space-y-8">
+            <div className="space-y-4">
+              <span className="yeezy-label text-muted-foreground block">
+                {t('home.featured')}
+              </span>
+              <h1 className="font-display text-huge tracking-tight">
                 {t('home.book.title')}
-              </h2>
-              
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              </h1>
+              <p className="yeezy-body text-muted-foreground max-w-md">
                 {t('home.book.description')}
               </p>
-              
-              {/* Format Selection */}
-              <div className="space-y-3">
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                  {t('home.book.selectFormat')}
-                </p>
-                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                  <button
-                    onClick={() => setSelectedFormat('physical')}
-                    className={`px-4 py-2 text-xs uppercase tracking-wider border transition-all duration-300 ${
-                      selectedFormat === 'physical'
-                        ? 'bg-foreground text-background border-foreground'
-                        : 'bg-transparent text-foreground border-border hover:border-foreground'
-                    }`}
-                  >
-                    {t('home.book.physical')}
-                  </button>
-                  <button
-                    onClick={() => setSelectedFormat('digital')}
-                    className={`px-4 py-2 text-xs uppercase tracking-wider border transition-all duration-300 ${
-                      selectedFormat === 'digital'
-                        ? 'bg-foreground text-background border-foreground'
-                        : 'bg-transparent text-foreground border-border hover:border-foreground'
-                    }`}
-                  >
-                    {t('home.book.digital')}
-                  </button>
-                </div>
-              </div>
-              
-              {/* Price and Buy Button */}
-              <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
-                <div className="text-xl font-bold">
-                  {selectedFormat === 'digital' ? t('home.book.priceDigital') : t('home.book.pricePhysical')}
-                </div>
-                <Button
-                  onClick={handlePurchase}
-                  disabled={!selectedFormat}
-                  className="group gap-2"
+            </div>
+
+            {/* Format Selection */}
+            <div className="space-y-4">
+              <span className="yeezy-label text-muted-foreground block">
+                {t('home.book.selectFormat')}
+              </span>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setSelectedFormat('physical')}
+                  className={`yeezy-btn-outline ${
+                    selectedFormat === 'physical' ? 'bg-foreground text-background' : ''
+                  }`}
                 >
-                  {t('home.book.buyButton')}
-                  <ExternalLink className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
-                </Button>
+                  {t('home.book.physical')}
+                </button>
+                <button
+                  onClick={() => setSelectedFormat('digital')}
+                  className={`yeezy-btn-outline ${
+                    selectedFormat === 'digital' ? 'bg-foreground text-background' : ''
+                  }`}
+                >
+                  {t('home.book.digital')}
+                </button>
               </div>
+            </div>
+
+            {/* Price & CTA */}
+            <div className="flex items-center gap-8">
+              <div className="font-display text-display">
+                {selectedFormat === 'digital' ? t('home.book.priceDigital') : t('home.book.pricePhysical')}
+              </div>
+              <button
+                onClick={handlePurchase}
+                disabled={!selectedFormat}
+                className="yeezy-btn disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-3"
+              >
+                {t('home.book.buyButton')}
+                <ArrowUpRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Promotions Section */}
-      <section className="animate-fade-up" style={{ animationDelay: '100ms' }}>
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground">
-            {t('home.promotions.title')}
-          </span>
+      <div className="yeezy-divider mx-6 md:mx-12 lg:mx-24" />
+
+      {/* Promotions */}
+      <section className="px-6 md:px-12 lg:px-24 py-12 animate-slide-up" style={{ animationDelay: '100ms' }}>
+        <div className="flex items-baseline gap-6 mb-8">
+          <span className="yeezy-label">{t('home.promotions.title')}</span>
           <span className="flex-1 h-px bg-border" />
         </div>
         
-        <div className="content-card p-5">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.15em] mb-2">
-            {t('home.promotions.item1.title')}
-          </h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {t('home.promotions.item1.description')}
-          </p>
+        <div className="yeezy-card hover:bg-muted transition-colors cursor-pointer group">
+          <div className="flex items-start justify-between gap-6">
+            <div className="space-y-4 flex-1">
+              <h3 className="font-display text-display tracking-tight">
+                {t('home.promotions.item1.title')}
+              </h3>
+              <p className="yeezy-body text-muted-foreground max-w-2xl">
+                {t('home.promotions.item1.description')}
+              </p>
+            </div>
+            <ArrowRight className="w-6 h-6 text-muted-foreground transition-transform group-hover:translate-x-2" />
+          </div>
         </div>
       </section>
 
-      {/* News Section */}
-      <section className="animate-fade-up" style={{ animationDelay: '200ms' }}>
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground">
-            {t('home.news.title')}
-          </span>
+      <div className="yeezy-divider mx-6 md:mx-12 lg:mx-24" />
+
+      {/* News Grid */}
+      <section className="px-6 md:px-12 lg:px-24 py-12 pb-32 animate-slide-up" style={{ animationDelay: '200ms' }}>
+        <div className="flex items-baseline gap-6 mb-8">
+          <span className="yeezy-label">{t('home.news.title')}</span>
           <span className="flex-1 h-px bg-border" />
         </div>
         
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-border">
           {articles.map((article, index) => {
             const isExpanded = expandedId === article.id;
             const content = t(article.contentKey);
             
             return (
               <article 
-                key={article.id} 
+                key={article.id}
                 onClick={() => setExpandedId(isExpanded ? null : article.id)}
-                className="content-card cursor-pointer group"
+                className={`
+                  p-8 md:p-10 border-b md:border-b-0 md:border-r last:border-r-0 last:border-b-0
+                  cursor-pointer transition-all duration-300
+                  ${isExpanded ? 'bg-foreground text-background col-span-1 md:col-span-3' : 'hover:bg-muted'}
+                `}
               >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className="text-[10px] font-medium text-muted-foreground/60 tracking-wider">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <span className="w-4 h-px bg-border" />
-                      <span className="text-[10px] text-muted-foreground tracking-wider">
-                        {t(article.dateKey)}
-                      </span>
-                    </div>
-                    <ChevronRight 
-                      className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${
-                        isExpanded ? 'rotate-90' : 'group-hover:translate-x-0.5'
-                      }`} 
-                    />
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <span className={`font-display text-6xl ${isExpanded ? 'text-background/20' : 'text-muted-foreground/20'}`}>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                   </div>
                   
-                  <h2 className="text-xs font-semibold uppercase tracking-[0.15em] group-hover:tracking-[0.2em] transition-all duration-300">
+                  <span className={`yeezy-label block ${isExpanded ? 'text-background/60' : 'text-muted-foreground'}`}>
+                    {t(article.dateKey)}
+                  </span>
+                  
+                  <h2 className="font-display text-2xl md:text-3xl tracking-tight leading-tight">
                     {t(article.titleKey)}
                   </h2>
                   
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {isExpanded ? content : getPreview(content)}
-                  </p>
+                  {isExpanded && (
+                    <p className="yeezy-body text-background/80 pt-4 animate-slide-up">
+                      {content}
+                    </p>
+                  )}
                 </div>
               </article>
             );

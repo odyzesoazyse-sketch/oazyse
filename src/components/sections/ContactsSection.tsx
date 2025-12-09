@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { ArrowUpRight } from 'lucide-react';
 
 const ContactsSection = () => {
   const { t } = useTranslation();
@@ -21,51 +19,75 @@ const ContactsSection = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <h2 className="section-title animate-fade-up">{t('contacts.title')}</h2>
-      
-      <div className="space-y-6 animate-fade-up" style={{ animationDelay: '100ms' }}>
-        <p className="text-sm md:text-base leading-[1.8] font-serif text-muted-foreground text-pretty">
-          {t('contacts.description')}
-        </p>
-        
-        <div className="content-card">
-          <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground/60 mb-1">
-            {t('contacts.email')}
-          </p>
-          <a 
-            href="mailto:contact@oazyse.ooo" 
-            className="text-sm font-medium link-underline"
-          >
-            contact@oazyse.ooo
-          </a>
+    <div className="min-h-screen px-6 md:px-12 lg:px-24 py-12 pb-32">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        {/* Left - Info */}
+        <div className="space-y-12 animate-slide-up">
+          <div className="space-y-6">
+            <span className="yeezy-label text-muted-foreground">{t('contacts.title')}</span>
+            <h1 className="font-display text-huge tracking-tight">
+              СВЯЗАТЬСЯ
+            </h1>
+            <p className="yeezy-body text-muted-foreground max-w-md">
+              {t('contacts.description')}
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="yeezy-card">
+              <span className="yeezy-label text-muted-foreground block mb-3">
+                {t('contacts.email')}
+              </span>
+              <a 
+                href="mailto:contact@oazyse.ooo" 
+                className="font-display text-2xl md:text-3xl link-brutal"
+              >
+                CONTACT@OAZYSE.OOO
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Right - Form */}
+        <div className="animate-slide-up" style={{ animationDelay: '150ms' }}>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <label className="yeezy-label text-muted-foreground">{t('contacts.namePlaceholder')}</label>
+              <input 
+                type="text"
+                value={formData.name} 
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
+                className="w-full h-14 px-0 bg-transparent border-0 border-b border-border text-lg font-sans focus:outline-none focus:border-foreground transition-colors"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="yeezy-label text-muted-foreground">{t('contacts.emailPlaceholder')}</label>
+              <input 
+                type="email"
+                value={formData.email} 
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
+                className="w-full h-14 px-0 bg-transparent border-0 border-b border-border text-lg font-sans focus:outline-none focus:border-foreground transition-colors"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="yeezy-label text-muted-foreground">{t('contacts.messagePlaceholder')}</label>
+              <textarea 
+                value={formData.message} 
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })} 
+                rows={4}
+                className="w-full px-0 py-4 bg-transparent border-0 border-b border-border text-lg font-sans focus:outline-none focus:border-foreground transition-colors resize-none"
+              />
+            </div>
+
+            <button type="submit" className="yeezy-btn w-full flex items-center justify-center gap-3 mt-8">
+              {t('contacts.submitButton')}
+              <ArrowUpRight className="w-4 h-4" />
+            </button>
+          </form>
         </div>
       </div>
-
-      <form onSubmit={handleSubmit} className="space-y-4 animate-fade-up" style={{ animationDelay: '200ms' }}>
-        <Input 
-          placeholder={t('contacts.namePlaceholder')} 
-          value={formData.name} 
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
-          className="input-elegant" 
-        />
-        <Input 
-          type="email" 
-          placeholder={t('contacts.emailPlaceholder')} 
-          value={formData.email} 
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
-          className="input-elegant" 
-        />
-        <Textarea 
-          placeholder={t('contacts.messagePlaceholder')} 
-          value={formData.message} 
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })} 
-          className="input-elegant min-h-[120px] resize-none" 
-        />
-        <Button type="submit" className="btn-primary w-full mt-2">
-          {t('contacts.submitButton')}
-        </Button>
-      </form>
     </div>
   );
 };
