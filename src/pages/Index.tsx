@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
 import HomeSection from '@/components/sections/HomeSection';
@@ -13,7 +12,6 @@ import HypnotherapyChat from '@/components/HypnotherapyChat';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('home');
-  const { t } = useTranslation();
 
   const renderSection = () => {
     switch (activeTab) {
@@ -31,13 +29,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
-      <main className="pt-14">
-        <div key={activeTab} className="animate-slide-up">
+      <main className="pt-12 pb-16">
+        <div key={activeTab} className="animate-fade-in">
           {renderSection()}
         </div>
       </main>
-
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
       <HypnotherapyChat />
     </div>
