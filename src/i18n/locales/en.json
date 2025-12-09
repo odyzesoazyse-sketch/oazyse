@@ -4,7 +4,7 @@
     "presents": "presents"
   },
   "nav": {
-    "news": "News",
+    "home": "Home",
     "help": "Help",
     "oazyse": "Oazyse",
     "institute": "Institute",
@@ -14,6 +14,30 @@
   },
   "footer": {
     "rights": "© 2025 Oazyse. All rights reserved."
+  },
+  "home": {
+    "featured": "Featured",
+    "book": {
+      "label": "New Book",
+      "title": "The Art of Ascension",
+      "description": "A guide to spiritual awakening and consciousness transformation. Practices and meditations for achieving higher states of awareness.",
+      "selectFormat": "Select format",
+      "physical": "Physical",
+      "digital": "Digital",
+      "pricePhysical": "$35",
+      "priceDigital": "$15",
+      "buyButton": "Buy Now"
+    },
+    "promotions": {
+      "title": "Promotions",
+      "item1": {
+        "title": "20% off first consultation",
+        "description": "New clients receive a special offer — 20% off their first hypnotherapy session. Start your journey to change today."
+      }
+    },
+    "news": {
+      "title": "News"
+    }
   },
   "news": {
     "article1": {

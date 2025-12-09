@@ -9,7 +9,7 @@ const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
   const { t } = useTranslation();
 
   const tabs = [
-    { id: 'news', labelKey: 'nav.news' },
+    { id: 'home', labelKey: 'nav.home' },
     { id: 'help', labelKey: 'nav.help' },
     { id: 'oazyse', labelKey: 'nav.oazyse' },
     { id: 'institute', labelKey: 'nav.institute' },

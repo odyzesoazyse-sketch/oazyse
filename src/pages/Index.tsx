@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
-import NewsSection from '@/components/sections/NewsSection';
+import HomeSection from '@/components/sections/HomeSection';
 import HelpSection from '@/components/sections/HelpSection';
 import OazyseSection from '@/components/sections/OazyseSection';
 import InstituteSection from '@/components/sections/InstituteSection';
@@ -12,19 +12,19 @@ import ContactsSection from '@/components/sections/ContactsSection';
 import HypnotherapyChat from '@/components/HypnotherapyChat';
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState('news');
+  const [activeTab, setActiveTab] = useState('home');
   const { t } = useTranslation();
 
   const renderSection = () => {
     switch (activeTab) {
-      case 'news': return <NewsSection />;
+      case 'home': return <HomeSection />;
       case 'help': return <HelpSection />;
       case 'oazyse': return <OazyseSection />;
       case 'institute': return <InstituteSection />;
       case 'services': return <ServicesSection />;
       case 'about': return <AboutSection />;
       case 'contacts': return <ContactsSection />;
-      default: return <NewsSection />;
+      default: return <HomeSection />;
     }
   };
 
