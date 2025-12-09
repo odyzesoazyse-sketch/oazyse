@@ -6,41 +6,21 @@ import ThemeToggle from './ThemeToggle';
 import { useAuth } from '@/hooks/useAuth';
 
 const Header = () => {
-  const { t } = useTranslation();
   const { user, signOut } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-md z-50 border-b border-border">
-      <div className="flex items-center justify-between h-14 px-6 md:px-12">
-        {/* Logo */}
-        <div className="flex items-center gap-4">
-          <span className="font-display text-2xl md:text-3xl tracking-tight">
-            OAZYSE
-          </span>
-          <span className="hidden md:block h-4 w-px bg-border" />
-          <span className="hidden md:block yeezy-label text-muted-foreground">
-            {t('header.title')}
-          </span>
-        </div>
-
-        {/* Controls */}
-        <div className="flex items-center gap-1">
+    <header className="fixed top-0 left-0 right-0 bg-background z-50">
+      <div className="flex items-center justify-between h-12 px-6">
+        <span className="text-sm tracking-wide">OAZYSE</span>
+        <div className="flex items-center">
           <ThemeToggle />
           <LanguageSwitcher />
           {user ? (
-            <button
-              onClick={() => signOut()}
-              className="p-3 hover:bg-muted transition-colors"
-              aria-label="Sign out"
-            >
+            <button onClick={() => signOut()} className="p-3 hover:opacity-50 transition-opacity">
               <LogOut className="w-4 h-4" />
             </button>
           ) : (
-            <Link
-              to="/auth"
-              className="p-3 hover:bg-muted transition-colors"
-              aria-label="Sign in"
-            >
+            <Link to="/auth" className="p-3 hover:opacity-50 transition-opacity">
               <User className="w-4 h-4" />
             </Link>
           )}
