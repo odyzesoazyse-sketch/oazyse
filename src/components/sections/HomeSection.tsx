@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Share2, Copy, MessageCircle } from 'lucide-react';
 import bookCover from '@/assets/book-cover.png';
+import { supabase } from '@/integrations/supabase/client';
 import {
   Dialog,
   DialogContent,
@@ -10,24 +11,38 @@ import {
 } from '@/components/ui/dialog';
 import { toast } from '@/hooks/use-toast';
 
-interface Article {
-  id: number;
-  titleKey: string;
-  dateKey: string;
-  contentKey: string;
-  previewKey: string;
+interface NewsArticle {
+  id: string;
+  title: string;
+  preview: string;
+  content: string;
+  created_at: string;
 }
 
 const HomeSection = () => {
   const { t } = useTranslation();
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
   const [selectedFormat, setSelectedFormat] = useState<'physical' | 'digital' | null>(null);
+  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const articles: Article[] = [
-    { id: 1, titleKey: 'news.article1.title', dateKey: 'news.article1.date', contentKey: 'news.article1.content', previewKey: 'news.article1.preview' },
-    { id: 2, titleKey: 'news.article2.title', dateKey: 'news.article2.date', contentKey: 'news.article2.content', previewKey: 'news.article2.preview' },
-    { id: 3, titleKey: 'news.article3.title', dateKey: 'news.article3.date', contentKey: 'news.article3.content', previewKey: 'news.article3.preview' },
-  ];
+  useEffect(() => {
+    const fetchNews = async () => {
+      const { data, error } = await supabase
+        .from('news')
+        .select('id, title, preview, content, created_at')
+        .eq('published', true)
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+      if (!error && data) {
+        setNews(data);
+      }
+      setLoading(false);
+    };
+
+    fetchNews();
+  }, []);
 
   const handlePurchase = () => {
     window.open('https://example.com/payment', '_blank');
@@ -40,7 +55,7 @@ const HomeSection = () => {
 
   const handleShareTelegram = () => {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(selectedArticle ? t(selectedArticle.titleKey) : '');
+    const text = encodeURIComponent(selectedArticle?.title || '');
     window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
   };
 
@@ -48,14 +63,18 @@ const HomeSection = () => {
     if (navigator.share && selectedArticle) {
       try {
         await navigator.share({
-          title: t(selectedArticle.titleKey),
-          text: t(selectedArticle.previewKey),
+          title: selectedArticle.title,
+          text: selectedArticle.preview,
           url: window.location.href,
         });
       } catch (err) {
-        console.log('Share cancelled');
+        // Share cancelled
       }
     }
+  };
+
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString();
   };
 
   return (
@@ -111,17 +130,23 @@ const HomeSection = () => {
         <span className="label">{t('home.news.title')}</span>
         
         <div className="space-y-4">
-          {articles.map((article) => (
-            <div
-              key={article.id}
-              onClick={() => setSelectedArticle(article)}
-              className="py-4 border-b border-border cursor-pointer hover:opacity-70 transition-opacity"
-            >
-              <span className="label">{t(article.dateKey)}</span>
-              <h3 className="mt-2 text-sm">{t(article.titleKey)}</h3>
-              <p className="mt-2 body line-clamp-2">{t(article.previewKey)}</p>
-            </div>
-          ))}
+          {loading ? (
+            <p className="body">Loading...</p>
+          ) : news.length === 0 ? (
+            <p className="body">{t('home.news.empty') || 'No news yet'}</p>
+          ) : (
+            news.map((article) => (
+              <div
+                key={article.id}
+                onClick={() => setSelectedArticle(article)}
+                className="py-4 border-b border-border cursor-pointer hover:opacity-70 transition-opacity"
+              >
+                <span className="label">{formatDate(article.created_at)}</span>
+                <h3 className="mt-2 text-sm">{article.title}</h3>
+                <p className="mt-2 body line-clamp-2">{article.preview}</p>
+              </div>
+            ))
+          )}
         </div>
       </section>
 
@@ -129,11 +154,11 @@ const HomeSection = () => {
       <Dialog open={!!selectedArticle} onOpenChange={() => setSelectedArticle(null)}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <span className="label">{selectedArticle && t(selectedArticle.dateKey)}</span>
-            <DialogTitle className="text-lg mt-2">{selectedArticle && t(selectedArticle.titleKey)}</DialogTitle>
+            <span className="label">{selectedArticle && formatDate(selectedArticle.created_at)}</span>
+            <DialogTitle className="text-lg mt-2">{selectedArticle?.title}</DialogTitle>
           </DialogHeader>
           
-          <p className="body">{selectedArticle && t(selectedArticle.contentKey)}</p>
+          <p className="body whitespace-pre-wrap">{selectedArticle?.content}</p>
           
           <div className="flex gap-3 pt-4 border-t border-border">
             <button
