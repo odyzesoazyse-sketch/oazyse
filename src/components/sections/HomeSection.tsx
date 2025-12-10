@@ -1,15 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import { Share2, Copy, MessageCircle } from 'lucide-react';
 import bookCover from '@/assets/book-cover.png';
 import { supabase } from '@/integrations/supabase/client';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { toast } from '@/hooks/use-toast';
+import NewsViewer from '@/components/NewsViewer';
 
 interface NewsArticle {
   id: string;
@@ -21,7 +14,7 @@ interface NewsArticle {
 
 const HomeSection = () => {
   const { t } = useTranslation();
-  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [selectedFormat, setSelectedFormat] = useState<'physical' | 'digital' | null>(null);
   const [news, setNews] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
@@ -46,31 +39,6 @@ const HomeSection = () => {
 
   const handlePurchase = () => {
     window.open('https://example.com/payment', '_blank');
-  };
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    toast({ title: t('home.news.copied') });
-  };
-
-  const handleShareTelegram = () => {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(selectedArticle?.title || '');
-    window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
-  };
-
-  const handleShareNative = async () => {
-    if (navigator.share && selectedArticle) {
-      try {
-        await navigator.share({
-          title: selectedArticle.title,
-          text: selectedArticle.preview,
-          url: window.location.href,
-        });
-      } catch (err) {
-        // Share cancelled
-      }
-    }
   };
 
   const formatDate = (dateStr: string) => {
@@ -135,10 +103,10 @@ const HomeSection = () => {
           ) : news.length === 0 ? (
             <p className="body">{t('home.news.empty') || 'No news yet'}</p>
           ) : (
-            news.map((article) => (
+            news.map((article, index) => (
               <div
                 key={article.id}
-                onClick={() => setSelectedArticle(article)}
+                onClick={() => setSelectedIndex(index)}
                 className="py-4 border-b border-border cursor-pointer hover:opacity-70 transition-opacity"
               >
                 <span className="label">{formatDate(article.created_at)}</span>
@@ -150,43 +118,14 @@ const HomeSection = () => {
         </div>
       </section>
 
-      {/* News Dialog */}
-      <Dialog open={!!selectedArticle} onOpenChange={() => setSelectedArticle(null)}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <span className="label">{selectedArticle && formatDate(selectedArticle.created_at)}</span>
-            <DialogTitle className="text-lg mt-2">{selectedArticle?.title}</DialogTitle>
-          </DialogHeader>
-          
-          <p className="body whitespace-pre-wrap">{selectedArticle?.content}</p>
-          
-          <div className="flex gap-3 pt-4 border-t border-border">
-            <button
-              onClick={handleCopyLink}
-              className="flex items-center gap-2 px-3 py-2 text-[10px] uppercase tracking-[0.15em] border border-border hover:border-foreground transition-colors"
-            >
-              <Copy className="w-3 h-3" />
-              {t('home.news.copy')}
-            </button>
-            <button
-              onClick={handleShareTelegram}
-              className="flex items-center gap-2 px-3 py-2 text-[10px] uppercase tracking-[0.15em] border border-border hover:border-foreground transition-colors"
-            >
-              <MessageCircle className="w-3 h-3" />
-              Telegram
-            </button>
-            {navigator.share && (
-              <button
-                onClick={handleShareNative}
-                className="flex items-center gap-2 px-3 py-2 text-[10px] uppercase tracking-[0.15em] border border-border hover:border-foreground transition-colors"
-              >
-                <Share2 className="w-3 h-3" />
-                {t('home.news.share')}
-              </button>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* Full-screen News Viewer */}
+      {selectedIndex !== null && (
+        <NewsViewer
+          articles={news}
+          initialIndex={selectedIndex}
+          onClose={() => setSelectedIndex(null)}
+        />
+      )}
     </div>
   );
 };
