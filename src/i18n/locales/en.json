@@ -36,23 +36,29 @@
       }
     },
     "news": {
-      "title": "News"
+      "title": "News",
+      "copy": "Copy",
+      "share": "Share",
+      "copied": "Link copied"
     }
   },
   "news": {
     "article1": {
       "title": "ACHIEVEMENT OF THE WEEK",
       "date": "January 15, 2025",
+      "preview": "Our project has reached an important milestone. More than 100 participants completed the course.",
       "content": "Our project has reached an important milestone in consciousness development. More than 100 participants have completed the mindfulness and meditation course, discovering new facets of their inner world. We continue to explore the depths of human consciousness."
     },
     "article2": {
       "title": "NEW MEDITATION COURSE",
       "date": "January 10, 2025",
+      "preview": "We present an updated program of meditative practices based on the latest neuroscience research.",
       "content": "We present an updated program of meditative practices, developed taking into account the latest research in neuroscience and ancient mindfulness techniques. The course includes practices for beginners and advanced students."
     },
     "article3": {
       "title": "INSTITUTE OPENING",
       "date": "January 5, 2025",
+      "preview": "The Institute has officially opened its doors to all who wish to explore consciousness.",
       "content": "The Institute of Cosmic Mind Consciousness has officially opened its doors to all who wish to explore the nature of consciousness. We offer a unique opportunity to immerse yourself in mindfulness practice under the guidance of experienced mentors."
     }
   },
