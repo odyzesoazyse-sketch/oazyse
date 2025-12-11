@@ -1,12 +1,197 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Loader2, Wand2 } from 'lucide-react';
 import { quizLevels, getQuestionNumber, getTotalQuestions } from './quizData';
 import { QuizQuestionComponent } from './QuizQuestion';
 import { QuizProgress } from './QuizProgress';
 import { QuizReport } from './QuizReport';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+
+// Generate random test data
+const generateTestAnswers = () => {
+  return {
+    code_name: "Тест-Субъект-42",
+    birth_sex: "Мужской",
+    current_gender: "Мужчина",
+    orientation: "Гетеросексуал",
+    romantic_orientation: "Гетероромантик",
+    age: 32,
+    height: 178,
+    weight: 75,
+    body_fat_percent: 18,
+    eye_color: "Карие",
+    blood_type: "II (A)",
+    chronic_diseases: "Нет",
+    allergies: "Пыльца",
+    surgeries: "Аппендицит в детстве",
+    birth_country: "Россия",
+    current_country: "Россия",
+    city: "Москва",
+    city_district: "Центр",
+    mother_nationality: "Русская",
+    father_nationality: "Русский",
+    childhood_language: "Русский",
+    second_language: "Английский",
+    official_religion: "Православие",
+    actual_belief: "Агностик с верой в высший разум и кармические законы",
+    believes_reincarnation: true,
+    past_lives_count: 3,
+    starseed_type: "Плеядеанец",
+    earth_mission: "Помочь человечеству пройти квантовый переход",
+    believes_god: "Источник/Вселенная",
+    daily_meditation_hours: 1,
+    believes_simulation: true,
+    believes_adrenochrome: false,
+    believes_flat_earth: false,
+    believes_antarctica: true,
+    believes_moon_station: false,
+    believes_chips: true,
+    believes_5g: false,
+    believes_reptilians: true,
+    believes_anunnaki: true,
+    believes_great_deception: true,
+    believes_deep_state: true,
+    believes_afterlife: true,
+    afterlife_type: "Реинкарнация",
+    family_size: 4,
+    birth_order: 2,
+    father_relationship: 6,
+    mother_relationship: 8,
+    has_stepparent: false,
+    grandparents_relationship: "Близкие отношения с бабушкой по маме, остальных не знал",
+    physical_abuse: false,
+    emotional_abuse: true,
+    sexual_abuse: false,
+    family_alcoholism: true,
+    family_suicides: false,
+    family_cancer: true,
+    family_poverty: true,
+    family_wealth: false,
+    parents_main_fear: "Остаться без денег",
+    mother_main_message: "Будь хорошим человеком",
+    father_main_message: "Деньги решают всё",
+    first_memory: "Мама держит меня на руках у окна, идёт снег",
+    scariest_childhood_day: "Когда родители кричали друг на друга ночью",
+    favorite_toy: "Плюшевый медведь",
+    first_sexual_experience_age: 14,
+    first_love_age: 12,
+    first_kiss_age: 13,
+    first_sex_age: 17,
+    first_cheating_age: 0,
+    relationship_status: "Женат/замужем",
+    marriages_count: 1,
+    divorces_count: 0,
+    children: "Сын Максим, 5 лет",
+    abortions_count: 0,
+    miscarriages_count: 0,
+    plans_more_children: true,
+    ideal_family_10_years: "Двое детей, дом за городом, пассивный доход",
+    parent_role_rating: 7,
+    main_fear_for_children: "Что мир станет ещё более безумным",
+    monthly_income: "500,000 рублей",
+    passive_income: 1000,
+    max_single_payment: 5000,
+    current_savings: 50000,
+    debts: 0,
+    mortgage: 100000,
+    attitude_to_rich: "Восхищение",
+    envy_or_admiration: "Восхищаюсь",
+    ready_billionaire_any_cost: false,
+    political_views: "Либертарианство",
+    ready_for_revolution: false,
+    favorite_politician: "Нет такого",
+    tax_optimization: true,
+    black_cash: false,
+    has_crypto: true,
+    has_stocks: true,
+    has_real_estate: false,
+    school_name: "Школа №1234",
+    university_name: "МГУ",
+    specialty: "Экономика",
+    honors_diploma: false,
+    expelled: false,
+    favorite_subject: "Математика",
+    hated_subject: "Физкультура",
+    iq_score: 125,
+    eq_score: 70,
+    talents: "Аналитика, писательство, музыка",
+    genius_level: "Синтез информации и поиск паттернов",
+    current_profession: "Предприниматель",
+    loves_current_job: true,
+    dream_occupation: "Писать книги и путешествовать",
+    sex_satisfaction: 7,
+    sex_frequency: "Несколько раз в неделю",
+    masturbation_frequency: "Раз в неделю",
+    porn_addiction: false,
+    favorite_porn_categories: "—",
+    main_fantasy: "—",
+    taboo: "Насилие",
+    bdsm_role: "Не практикую",
+    cheating_history: false,
+    partners_count: 5,
+    is_virgin: false,
+    prostitution_bought: false,
+    prostitution_sold: false,
+    sexual_trauma: false,
+    harassment_victim: false,
+    rape_victim: false,
+    genital_self_rating: 7,
+    orgasmic_ability: 8,
+    frigidity_impotence: false,
+    fantasy_orientation: "Гетеро",
+    real_orientation: "Гетеро",
+    naked_body_rating: 6,
+    body_complexes: "Худоба",
+    best_weight: 80,
+    worst_weight: 65,
+    eating_disorder: false,
+    anorexia: false,
+    bulimia: false,
+    current_sport: "Бег",
+    chronic_pain: "Нет",
+    psychosomatics: "Головные боли при стрессе",
+    diet_type: "Обычное питание",
+    intermittent_fasting: true,
+    raw_food: false,
+    alcohol_liters_weekly: 0.5,
+    cigarettes_daily: 0,
+    sugar_addiction: true,
+    coffee_addiction: true,
+    energy_drinks: false,
+    sex_work_doping: false,
+    official_diagnoses: "Нет",
+    antidepressants: false,
+    tranquilizers: false,
+    psychiatric_treatment: false,
+    suicide_attempts: 0,
+    self_harm: false,
+    psychopathy_self_rating: 3,
+    narcissism_self_rating: 5,
+    schizoid_self_rating: 4,
+    killed_animals: false,
+    killed_humans: false,
+    theft_history: false,
+    violence_history: false,
+    prison_history: false,
+    darkest_deed: "Врал близким людям",
+    biggest_sin: "Гордыня",
+    death_fear_rating: 4,
+    desired_death_way: "Во сне, в глубокой старости",
+    epitaph: "Он пытался понять",
+    legacy_wish: "Оставить след в сознании людей",
+    daily_practice_hours: 2,
+    transformation_investment: 10000,
+    ready_ego_death: true,
+    ready_give_all_property: false,
+    ready_public_confession: true,
+    ready_commune_life: false,
+    archive_permission: true,
+    email: "test@test.com",
+    telegram: "@test_user",
+    confirmation_word: "ГОТОВ"
+  };
+};
 
 export function Quiz() {
   const [currentLevel, setCurrentLevel] = useState(0);
@@ -29,6 +214,19 @@ export function Quiz() {
       const val = answers[key];
       return val !== null && val !== undefined && val !== '';
     }).length;
+  };
+
+  // Fill with test data
+  const fillTestData = () => {
+    const testData = generateTestAnswers();
+    setAnswers(testData);
+    // Jump to last level/question
+    setCurrentLevel(quizLevels.length - 1);
+    setCurrentQuestionIndex(quizLevels[quizLevels.length - 1].questions.length - 1);
+    toast({
+      title: "Тестовые данные загружены",
+      description: "Нажми 'Завершить' для генерации отчёта"
+    });
   };
 
   // Initialize session
@@ -192,11 +390,22 @@ export function Quiz() {
     <div className="min-h-screen flex flex-col">
       {/* Header with progress */}
       <div className="sticky top-0 bg-background/95 backdrop-blur-sm z-10 p-4 border-b border-border">
-        <QuizProgress
-          currentLevel={currentLevel}
-          currentQuestion={currentQuestionIndex}
-          totalAnswered={countAnswered()}
-        />
+        <div className="flex items-center justify-between max-w-2xl mx-auto mb-2">
+          <QuizProgress
+            currentLevel={currentLevel}
+            currentQuestion={currentQuestionIndex}
+            totalAnswered={countAnswered()}
+          />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={fillTestData}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <Wand2 className="w-4 h-4 mr-1" />
+            Тест
+          </Button>
+        </div>
       </div>
 
       {/* Question area */}
