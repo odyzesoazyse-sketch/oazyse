@@ -61,9 +61,9 @@ const HomeSection = () => {
             <Brain className="w-6 h-6" />
           </div>
           <div className="flex-1">
-            <span className="label">НОВОЕ</span>
-            <h2 className="text-lg font-medium mt-1">Омега-300</h2>
-            <p className="body mt-1">Глубинный квиз на 300 вопросов. Получи персональное AI-досье.</p>
+            <span className="label">БЕСПЛАТНО</span>
+            <h2 className="text-lg font-medium mt-1">Экспресс-анализ</h2>
+            <p className="body mt-1">Пройдите короткий тест и получите персональные рекомендации от AI</p>
           </div>
           <span className="text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
         </div>

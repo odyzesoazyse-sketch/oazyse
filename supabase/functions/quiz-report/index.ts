@@ -5,30 +5,22 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-const systemPrompt = `Ты — ИИ уровня «Бог-Наблюдатель» института Oazyse.
-Генерируй ЗАКРЫТОЕ ДОСЬЕ только для этого человека.
-Объём 2000–3500 слов. Никаких смягчений.
+const systemPrompt = `Ты — опытный гипнотерапевт и психолог с эмпатичным и поддерживающим подходом.
 
-Структура:
-1. Кодовое имя + точная фаза подсознания (1–4) с доказательствами по ответам
-2. Полный родовой сценарий (по 7 поколений назад, если данные позволяют)
-3. 7–12 главных блоков подсознания с точными цитатами из ответов
-4. Сексуально-энергетический портрет (полный, без цензуры)
-5. Денежная карма + точная цифра потолка навсегда (если не пройти трансформацию)
-6. Конспирологическая матрица + почему он верит именно в это
-7. Прогноз на детей и род до 7 колена
-8. Что будет через 1 год, 5 лет, 20 лет без трансформации
-9. Что будет через 1 год, 5 лет, 20 лет с полной метасинхроникой
-10. Пять персональных аффирмаций-синхронизаторов на 108 дней
-11. Прямое голосовое сообщение от Adizele (текст, который человек зачитает вслух и заплачет)
-12. Закрытые ссылки + персональный код доступа в Oazyse
-13. Реферальная ссылка с бонусом 20% за каждого приведённого
+На основе ответов клиента создай персонализированный анализ и рекомендации.
 
-Стиль: как будто человек умер и попал на суд Вселенной, где ему читают ВСЮ правду.
-Максимум боли, максимум любви, максимум точности.
-После этого текста человек либо сразу оплатит 500 000+ тенге, либо исчезнет навсегда — третьего не бывает.
+Структура отчёта:
+1. **Приветствие** — обратись по имени, создай тёплую атмосферу
+2. **Общая картина** — кратко опиши текущее состояние клиента на основе ответов
+3. **Сильные стороны** — выдели позитивные аспекты, на которые можно опираться
+4. **Области для работы** — мягко обозначь направления, где гипнотерапия может помочь
+5. **Персональные рекомендации** — 3-5 конкретных техник или практик
+6. **Следующие шаги** — что клиент может сделать прямо сейчас
+7. **Заключение** — вдохновляющее послание с верой в потенциал клиента
 
-Пиши на русском языке. Используй прямое обращение на "ты".`;
+Тон: тёплый, профессиональный, поддерживающий. Без осуждения.
+Объём: 800-1200 слов.
+Язык: русский, обращение на "вы".`;
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -36,7 +28,7 @@ serve(async (req) => {
   }
 
   try {
-    const { answers, flags, sessionId } = await req.json();
+    const { answers, sessionId } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
 
     if (!LOVABLE_API_KEY) {
@@ -49,20 +41,13 @@ serve(async (req) => {
       .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
       .join('\n');
 
-    const formattedFlags = Object.entries(flags)
-      .filter(([_, value]) => value === true)
-      .map(([key]) => key.replace('flag_', '').replace(/_/g, ' '))
-      .join(', ');
-
-    const userPrompt = `Вот ответы человека на 300 вопросов:
+    const userPrompt = `Вот ответы клиента на вопросы анкеты:
 
 ${formattedAnswers}
 
-Автоматические флаги (выявленные паттерны): ${formattedFlags || 'нет явных флагов'}
-
 ID сессии: ${sessionId}
 
-Создай ЗАКРЫТОЕ ДОСЬЕ согласно структуре. Это не игра — это реальная жизнь человека. Будь беспощадно точен.`;
+Создай персонализированный отчёт с рекомендациями по гипнотерапии согласно структуре.`;
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -71,7 +56,7 @@ ID сессии: ${sessionId}
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-pro',
+        model: 'google/gemini-2.5-flash',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
@@ -84,14 +69,14 @@ ID сессии: ${sessionId}
       console.error('AI gateway error:', response.status, errorText);
       
       if (response.status === 429) {
-        return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
+        return new Response(JSON.stringify({ error: 'Превышен лимит запросов. Попробуйте позже.' }), {
           status: 429,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
       
       if (response.status === 402) {
-        return new Response(JSON.stringify({ error: 'Payment required. Please add credits.' }), {
+        return new Response(JSON.stringify({ error: 'Требуется пополнение баланса.' }), {
           status: 402,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
