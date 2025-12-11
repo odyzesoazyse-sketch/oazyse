@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import bookCover from '@/assets/book-cover.png';
 import { supabase } from '@/integrations/supabase/client';
 import NewsViewer from '@/components/NewsViewer';
+import { Brain } from 'lucide-react';
 
 interface NewsArticle {
   id: string;
@@ -45,8 +47,28 @@ const HomeSection = () => {
     return new Date(dateStr).toLocaleDateString();
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="px-6 py-16 max-w-2xl mx-auto space-y-24">
+      {/* Quiz Banner */}
+      <section 
+        onClick={() => navigate('/quiz')}
+        className="p-6 border border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors group"
+      >
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center">
+            <Brain className="w-6 h-6" />
+          </div>
+          <div className="flex-1">
+            <span className="label">НОВОЕ</span>
+            <h2 className="text-lg font-medium mt-1">Омега-300</h2>
+            <p className="body mt-1">Глубинный квиз на 300 вопросов. Получи персональное AI-досье.</p>
+          </div>
+          <span className="text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+        </div>
+      </section>
+
       {/* Book */}
       <section className="space-y-8">
         <span className="label">{t('home.featured')}</span>
