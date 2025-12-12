@@ -32,7 +32,7 @@ const Header = () => {
           )}
         </div>
       </div>
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-purple to-transparent" />
+      <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-purple to-transparent animate-neon-line-pulse" />
     </header>
   );
 };
