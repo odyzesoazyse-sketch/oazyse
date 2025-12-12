@@ -9,13 +9,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-foreground text-background hover:tracking-wider active:scale-[0.98]",
+        default: "bg-primary text-primary-foreground hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.5)] active:scale-[0.98]",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        outline: "border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_15px_hsl(var(--neon-purple)/0.4)]",
+        secondary: "bg-secondary text-secondary-foreground hover:shadow-[0_0_20px_hsl(var(--neon-green)/0.5)]",
         ghost: "hover:bg-muted hover:text-foreground",
-        link: "text-foreground underline-offset-4 hover:underline",
-        brutal: "bg-foreground text-background font-sans text-[10px] uppercase tracking-[0.3em] hover:tracking-[0.4em] active:scale-[0.98]",
+        link: "text-primary underline-offset-4 hover:underline",
+        brutal: "bg-primary text-primary-foreground font-sans text-[10px] uppercase tracking-[0.3em] hover:tracking-[0.4em] hover:shadow-[0_0_25px_hsl(var(--neon-purple)/0.6)] active:scale-[0.98]",
+        neonPurple: "bg-neon-purple text-white hover:shadow-[0_0_30px_hsl(var(--neon-purple)/0.7)] active:scale-[0.98]",
+        neonGreen: "bg-neon-green text-white hover:shadow-[0_0_30px_hsl(var(--neon-green)/0.7)] active:scale-[0.98]",
       },
       size: {
         default: "h-12 px-8",

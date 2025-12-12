@@ -54,18 +54,19 @@ const HomeSection = () => {
       {/* Quiz Banner */}
       <section 
         onClick={() => navigate('/quiz')}
-        className="p-6 border border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors group"
+        className="p-6 border border-neon-purple/30 rounded-lg cursor-pointer hover:border-neon-purple hover:shadow-[0_0_30px_hsl(var(--neon-purple)/0.2)] transition-all group relative overflow-hidden"
       >
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/5 to-neon-green/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="flex items-center gap-4 relative">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-neon-green text-white flex items-center justify-center shadow-[0_0_20px_hsl(var(--neon-purple)/0.4)]">
             <Brain className="w-6 h-6" />
           </div>
           <div className="flex-1">
-            <span className="label">БЕСПЛАТНО</span>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-neon-green font-medium">БЕСПЛАТНО</span>
             <h2 className="text-lg font-medium mt-1">Экспресс-анализ</h2>
             <p className="body mt-1">Пройдите короткий тест и получите персональные рекомендации от AI</p>
           </div>
-          <span className="text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+          <span className="text-neon-purple group-hover:translate-x-1 group-hover:text-neon-green transition-all">→</span>
         </div>
       </section>
 
@@ -83,16 +84,20 @@ const HomeSection = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => setSelectedFormat('physical')}
-                className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] border transition-colors ${
-                  selectedFormat === 'physical' ? 'bg-foreground text-background' : 'border-border hover:border-foreground'
+                className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] border transition-all rounded ${
+                  selectedFormat === 'physical' 
+                    ? 'bg-neon-purple text-white border-neon-purple shadow-[0_0_15px_hsl(var(--neon-purple)/0.4)]' 
+                    : 'border-border hover:border-neon-purple hover:text-neon-purple'
                 }`}
               >
                 {t('home.book.physical')}
               </button>
               <button
                 onClick={() => setSelectedFormat('digital')}
-                className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] border transition-colors ${
-                  selectedFormat === 'digital' ? 'bg-foreground text-background' : 'border-border hover:border-foreground'
+                className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] border transition-all rounded ${
+                  selectedFormat === 'digital' 
+                    ? 'bg-neon-green text-white border-neon-green shadow-[0_0_15px_hsl(var(--neon-green)/0.4)]' 
+                    : 'border-border hover:border-neon-green hover:text-neon-green'
                 }`}
               >
                 {t('home.book.digital')}
@@ -106,7 +111,7 @@ const HomeSection = () => {
               <button
                 onClick={handlePurchase}
                 disabled={!selectedFormat}
-                className="px-6 py-3 bg-foreground text-background text-[10px] uppercase tracking-[0.15em] disabled:opacity-30"
+                className="px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-green text-white text-[10px] uppercase tracking-[0.15em] disabled:opacity-30 rounded hover:shadow-[0_0_25px_hsl(var(--neon-purple)/0.5)] transition-all"
               >
                 {t('home.book.buyButton')}
               </button>
@@ -129,10 +134,10 @@ const HomeSection = () => {
               <div
                 key={article.id}
                 onClick={() => setSelectedIndex(index)}
-                className="py-4 border-b border-border cursor-pointer hover:opacity-70 transition-opacity"
+                className="py-4 border-b border-border cursor-pointer hover:border-neon-purple transition-all group"
               >
-                <span className="label">{formatDate(article.created_at)}</span>
-                <h3 className="mt-2 text-sm">{article.title}</h3>
+                <span className="label group-hover:text-neon-green transition-colors">{formatDate(article.created_at)}</span>
+                <h3 className="mt-2 text-sm group-hover:text-neon-purple transition-colors">{article.title}</h3>
                 <p className="mt-2 body line-clamp-2">{article.preview}</p>
               </div>
             ))
