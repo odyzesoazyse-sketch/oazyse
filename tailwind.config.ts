@@ -83,11 +83,43 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        "neon-pulse-purple": {
+          "0%, 100%": { 
+            boxShadow: "0 0 5px hsl(var(--neon-purple)), 0 0 10px hsl(var(--neon-purple) / 0.5), 0 0 20px hsl(var(--neon-purple) / 0.3)" 
+          },
+          "50%": { 
+            boxShadow: "0 0 10px hsl(var(--neon-purple)), 0 0 20px hsl(var(--neon-purple) / 0.7), 0 0 40px hsl(var(--neon-purple) / 0.5)" 
+          },
+        },
+        "neon-pulse-green": {
+          "0%, 100%": { 
+            boxShadow: "0 0 5px hsl(var(--neon-green)), 0 0 10px hsl(var(--neon-green) / 0.5), 0 0 20px hsl(var(--neon-green) / 0.3)" 
+          },
+          "50%": { 
+            boxShadow: "0 0 10px hsl(var(--neon-green)), 0 0 20px hsl(var(--neon-green) / 0.7), 0 0 40px hsl(var(--neon-green) / 0.5)" 
+          },
+        },
+        "neon-text-pulse": {
+          "0%, 100%": { 
+            textShadow: "0 0 5px currentColor, 0 0 10px currentColor" 
+          },
+          "50%": { 
+            textShadow: "0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor" 
+          },
+        },
+        "neon-line-pulse": {
+          "0%, 100%": { opacity: "0.5" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.4s ease-out",
+        "neon-pulse-purple": "neon-pulse-purple 2s ease-in-out infinite",
+        "neon-pulse-green": "neon-pulse-green 2s ease-in-out infinite",
+        "neon-text-pulse": "neon-text-pulse 2s ease-in-out infinite",
+        "neon-line-pulse": "neon-line-pulse 3s ease-in-out infinite",
       },
     },
   },

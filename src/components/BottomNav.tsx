@@ -20,7 +20,7 @@ const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-background z-50">
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-green to-transparent" />
+      <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-green to-transparent animate-neon-line-pulse" />
       <div className="flex items-center h-12 overflow-x-auto scrollbar-hide">
         {tabs.map((tab) => (
           <button
@@ -34,7 +34,7 @@ const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
           >
             {t(tab.labelKey)}
             {activeTab === tab.id && (
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-neon-purple shadow-[0_0_8px_hsl(var(--neon-purple))]" />
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-neon-purple animate-neon-pulse-purple" />
             )}
           </button>
         ))}
