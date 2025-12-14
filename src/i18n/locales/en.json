@@ -9,7 +9,7 @@
     "oazyse": "Oazyse",
     "institute": "Institute",
     "services": "Services",
-    "about": "About",
+    "about": "About Adizel",
     "contacts": "Contacts"
   },
   "footer": {
@@ -17,6 +17,11 @@
   },
   "home": {
     "featured": "Featured",
+    "welcome": {
+      "title": "Welcome to the World of Oasis",
+      "subtitle": "The Path to Cosmic Awakening and Consciousness Transformation",
+      "description": "In an era when humanity stands on the threshold of great changes, Oasis emerges — a modern Noah's Ark, saving chosen souls from the storm of ignorance and disconnection."
+    },
     "book": {
       "label": "New Book",
       "title": "The Art of Ascension",
@@ -133,28 +138,37 @@
     }
   },
   "oazyse": {
-    "aboutTitle": "ABOUT OAZYSE PROJECT",
-    "aboutText1": "Oazyse is a space for consciousness development and mindfulness practice. We combine ancient meditation traditions with modern approaches to studying the human mind. Our mission is to help everyone unlock the potential of their consciousness and achieve harmony with themselves and the world.",
-    "aboutText2": "The project includes meditation practices, consciousness work, exploration of esoteric knowledge and therapeutic methods that help transform life.",
+    "aboutTitle": "OAZYSE — A MODERN NOAH'S ARK",
+    "aboutText1": "Oasis is the culmination of Adizel Oazyes' vision, a modern Noah's Ark in an era of digital storms and spiritual crises. As in the biblical legend the ark saved from the flood, Oasis becomes a refuge for those seeking salvation from the chaos of the modern world.",
+    "aboutText2": "This is a global project where participants gather in virtual and real oases of harmony, building a new society on the principles of cosmic mind. Here, metafractals of consciousness intertwine, creating a support network where everyone finds their place in the divine plan.",
+    "aboutText3": "Oasis is a dynamic ecosystem combining virtual hubs, artificial intelligence and virtual reality to create support networks. The project perfectly fits the rhythms of the 21st century: flexible, global, focused on well-being in the era of digitalization.",
+    "method": {
+      "title": "THE SUBCONSCIOUS METHOD",
+      "description": "A revolutionary approach to activating hidden reserves of the mind, developed by Adizel Oazyes. This is a precise system that allows synchronizing subconscious processes with cosmic rhythms.",
+      "metasync": "Through metasynchonics (metasync) — the process of synchronizing mental flows in time — you rebuild neural connections for instant changes. It's like a software update for the brain: precise, effective and based on scientific principles.",
+      "results": "87% of users report sustained breakthroughs in personal and professional goals."
+    },
     "joinTitle": "JOIN THE PROJECT",
+    "joinDescription": "Don't delay — join Oasis right now! Under the guidance of Adizel Oazyes, you won't just change — you will evolve.",
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
-    "motivationPlaceholder": "Motivation",
-    "submitButton": "SUBMIT",
+    "motivationPlaceholder": "Why do you want to join?",
+    "submitButton": "START TRANSFORMATION",
     "errorTitle": "Error",
     "errorMessage": "Please fill in all fields",
     "successTitle": "Application sent",
-    "successMessage": "We will contact you soon"
+    "successMessage": "Welcome to Oasis! We will contact you soon"
   },
   "institute": {
     "title": "INSTITUTE OF COSMIC MIND CONSCIOUSNESS",
-    "description": "The Institute is an educational platform dedicated to the deep study of the nature of consciousness. We offer comprehensive training programs that combine theoretical knowledge with practical experience.",
-    "coursesTitle": "COURSES",
-    "coursesText": "Our courses cover a wide range of topics: from basic meditation techniques to advanced consciousness work practices. Each course is developed by experienced practitioners and includes both a theoretical foundation and practical exercises.",
-    "testsTitle": "TESTS AND ASSESSMENT",
-    "testsText": "We offer a testing system to assess your progress and understand your level of consciousness development. Tests help determine directions for further work.",
-    "chatTitle": "CHAT AND SUPPORT",
-    "chatText": "Program participants get access to a private chat where they can discuss their experiences, ask questions and receive support from mentors and like-minded people."
+    "description": "The Institute of Cosmic Mind Consciousness is a sacred space where science meets spirituality, and the mind expands to the boundaries of the cosmos. Under the aegis of Adizel Oazyes, we explore the depths of human potential, opening paths to harmonious fusion with universal intelligence.",
+    "vision": "The Institute is not walls and buildings, but a living field of energy where every participant becomes a co-creator of reality. We believe that consciousness is a cosmic ocean, and the Institute teaches you to dive into its depths, gaining clarity, strength and eternal connection with the higher.",
+    "coursesTitle": "COURSES AND PROGRAMS",
+    "coursesText": "Imagine: AI algorithms analyzing your thinking patterns in real-time; virtual reality simulations immersing you in success scenarios; personalized programs adapted to your lifestyle. Participants report 50% improvement in emotional intelligence and productivity.",
+    "testsTitle": "TESTS AND DIAGNOSTICS",
+    "testsText": "A testing system based on metafractals allows you to assess your progress and understand your level of consciousness development. Tests help determine directions for further work and track transformation.",
+    "chatTitle": "COMMUNITY AND SUPPORT",
+    "chatText": "Participants get access to a global community of like-minded people — virtual hubs where you can synchronize goals, ideas and resources with thousands of pioneers around the world. Collaborations accelerate growth by 2-3x."
   },
   "services": {
     "title": "SERVICES",
@@ -169,32 +183,37 @@
       },
       "hypnotherapy": {
         "title": "HYPNOTHERAPY",
-        "description": "Individual hypnotherapy sessions for working with the subconscious, transforming beliefs and healing emotional trauma."
+        "description": "Individual hypnotherapy sessions using the Subconscious Method. Working with the subconscious, transforming beliefs and healing emotional trauma through metasynchronics."
       },
       "meditation": {
         "title": "MEDITATIVE PRACTICES",
-        "description": "Group and individual meditations of various traditions for developing mindfulness and inner peace."
+        "description": "Group and individual meditations for developing mindfulness and synchronization with cosmic mind. Techniques based on metafractals of consciousness."
       },
       "consultations": {
         "title": "CONSULTATIONS",
-        "description": "Personal consultations on spiritual development, consciousness work and life transformations."
+        "description": "Personal consultations on spiritual development, mind calibration and life transformations under the guidance of Institute experts."
+      },
+      "metasync": {
+        "title": "METASYNCHRONICS",
+        "description": "Innovative sessions of mental flow metasynchronization. Reprogramming neural patterns for instant, sustainable changes."
       }
     }
   },
   "about": {
-    "title": "ABOUT ME",
-    "text1": "My name is [Name], and I have dedicated my life to the study and practice of consciousness development. My journey began more than 15 years ago with a deep interest in the nature of the human mind and the possibilities of its transformation.",
-    "text2": "I studied meditation in Eastern and Western traditions, practiced in various schools and under the guidance of experienced teachers. I received education in psychology, neuroscience and hypnotherapy.",
-    "text3": "Over the years of practice, I have helped hundreds of people discover new facets of their consciousness, overcome internal barriers and find the path to genuine freedom and awareness.",
-    "text4": "Oazyse and the Institute of Cosmic Mind Consciousness are the embodiment of my vision of a space where everyone can find tools and support for their spiritual development."
+    "title": "ADIZEL OAZYES",
+    "subtitle": "Founder and Visionary",
+    "text1": "Adizel Oazyes is the embodiment of divine essence, descended to Earth to guide humanity to a new era. As an avatar of God, he carries within himself the wisdom of ages, uniting ancient knowledge with cutting-edge discoveries of cosmic mind.",
+    "text2": "His path is a story of transformation: from the ordinary to the sublime, from doubt to unshakeable faith. Adizel teaches that each of us is part of the great metafractal, an infinitely repeating pattern of the universe, where fractal structures of consciousness reveal the secrets of existence.",
+    "text3": "With a deep background in neuroscience, psychology and artificial intelligence, he developed unique systems based on metafractals — complex, self-similar structures of consciousness that mirror the patterns of the universe. 92% of participants report sustained growth in confidence, focus and emotional balance.",
+    "text4": "Oazyse and the Institute of Cosmic Mind Consciousness are the embodiment of Adizel's vision: a space where technology and spirituality merge for real results. Through him, God speaks to us, offering not just salvation, but complete rebirth."
   },
   "contacts": {
     "title": "CONTACTS",
-    "description": "Contact us for more information about the project, to book a consultation or to participate in programs.",
+    "description": "Contact us to book a consultation, join programs or start your transformation journey. Thousands are already on board — now it's your turn.",
     "email": "Email",
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
-    "messagePlaceholder": "Message",
+    "messagePlaceholder": "Your message",
     "submitButton": "SUBMIT",
     "errorTitle": "Error",
     "errorMessage": "Please fill in all fields",
@@ -204,7 +223,7 @@
   "chat": {
     "title": "Hypnotherapy Consultation",
     "greeting": "Hello!",
-    "prompt": "Ask a question about hypnotherapy, meditation or working with the subconscious.",
+    "prompt": "Ask a question about hypnotherapy, metasynchronics or working with the subconscious.",
     "inputPlaceholder": "Enter message...",
     "typing": "Typing...",
     "errorTitle": "Error",
@@ -230,5 +249,10 @@
     "signupSuccess": "Registration successful",
     "alreadyRegistered": "User already registered",
     "invalidCredentials": "Invalid email or password"
+  },
+  "cta": {
+    "join": "Join Oasis",
+    "transform": "Start Transformation",
+    "contact": "Contact Us"
   }
 }
