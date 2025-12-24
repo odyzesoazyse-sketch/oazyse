@@ -259,89 +259,156 @@
     "badge": "Revolutionary Discovery",
     "hero": {
       "title": "BECOME A METAHUMAN",
-      "subtitle": "A person with absolute control over consciousness. No inner void. Nothing missing. 100% transformation guarantee.",
+      "subtitle": "Absolute control over consciousness. No inner void. 100% guarantee.",
+      "description": "This is not a mythical hero or philosophical abstraction — but a real, achievable ideal: a person whose consciousness works as a perfectly tuned mechanism. Clear, focused, capable of instant adaptation. Not a slave to emotions — but their architect.",
       "cta": "Begin Your Journey",
       "guarantee": "You lose nothing. Guaranteed results or full refund."
     },
+    "metasync": {
+      "title": "METASYNC and METASYNCER",
+      "description": "Meta-synchronization (Metasync) is the highest level of consciousness synchronization with reality. Complete integration of mind, emotions and will into a single super-efficient system.",
+      "metasync": {
+        "title": "METASYNC",
+        "description": "A state of complete mind integration — meta-synchronization of consciousness with reality. A perfectly tuned mechanism of the psyche."
+      },
+      "metasyncer": {
+        "title": "METASYNCER",
+        "description": "One who has embarked on the path of transformation. A seeker and practitioner of metasync, consciously applying the Method to approach the Metahuman ideal."
+      }
+    },
     "metahuman": {
       "title": "What is a Metahuman?",
-      "description": "A Metahuman is someone who has gained complete control over their consciousness. Not a superhero from comics, but you — freed from inner conflicts, fears, and limiting beliefs.",
+      "description": "A Superhuman — a being who has achieved absolute control over consciousness. The inner 'self' is completely harmonious, without gaps, doubts or hidden deficits. No more tormenting 'something is missing' — that void gnawing from within.",
       "point1": "Complete control over emotions and reactions",
       "point2": "No inner void or anxiety",
-      "point3": "Clarity of thought and decision-making",
-      "point4": "Harmony in relationships with yourself and the world",
+      "point3": "Clarity of thought and instant adaptation",
+      "point4": "Ability to self-correct consciousness",
+      "point5": "Architect of your emotions, fears and states",
+      "point6": "Harmony in relationships with yourself and the world",
       "card": {
-        "title": "Metasyncer",
-        "description": "This is what we call a person who has embarked on the path to Metahuman. Someone practicing the Subconscious Method to transform themselves and others."
+        "title": "100% Transformation Guarantee",
+        "description": "The Method is built on fundamental principles of the psyche: brain neuroplasticity, mindfulness techniques, and cognitive reprogramming to eliminate barriers."
       }
     },
     "analogy": {
       "title": "Everyone can cook. But not everyone is a chef.",
-      "description": "The Method is so universal it works for everyone — at home, in family, at work, in business. You don't need to become a professional to use it daily. But those who see it as their mission can become masters.",
+      "description": "The metasync method is designed for everyone — for everyday use at home, with family, at work, or with friends. It requires no special education or expensive equipment. But those who see it as their mission can become master consciousness chefs.",
       "everyone": {
         "title": "For Everyone",
-        "description": "Use the Method to improve your life, relationships, and work. Simple techniques for everyday use."
+        "description": "Use the Method to improve your life, relationships, and work. Simple techniques for everyday use at home, with family, and at work."
       },
       "master": {
         "title": "Master Metasyncer",
-        "description": "Turn this into a profession. Help others transform. Become a consciousness chef."
+        "description": "Turn this into your mission. Help others transform. Become a consciousness chef for those around you."
       }
     },
     "examples": {
       "title": "Imagine...",
-      "subtitle": "How the Method changes life in different contexts",
+      "subtitle": "How the Method creates an Oasis in different life contexts",
       "family": {
         "title": "A New Family",
-        "description": "Husband and wife conduct sessions for each other weekly. Become better for their children. Create an Oasis around themselves for future generations."
+        "description": "Husband and wife conduct sessions for each other weekly. Identify and correct hidden thought patterns. Become better for their children. Create an Oasis inside and around themselves."
       },
       "athletes": {
         "title": "Team of Athletes",
-        "description": "Ambitious young athletes enhance mental preparation. Win not just with body, but with mind."
+        "description": "Before matches, they conduct group sessions, eliminating fear of defeat and uncertainty. The team is mentally synchronized. Performance improves by 20-30%."
       },
       "company": {
         "title": "A Company",
-        "description": "Teams improve each other's performance. Consciousness synergy boosts entire business efficiency."
+        "description": "Employees regularly conduct sessions for each other. Managers help overcome burnout. Creative teams clear barriers for innovation. The company becomes a living organism."
       },
       "spiritual": {
         "title": "For the Faithful",
-        "description": "Metasync will deepen your prayers and spiritual practice. Regardless of religion — if you need it."
+        "description": "Metasync deepens prayers and spiritual practice. Consciousness cleared of distractions is a pure channel for connection with the divine. Any religion."
+      }
+    },
+    "expanded": {
+      "title": "Universality of the Method",
+      "subtitle": "From personal growth to global change. Metasync integrates into any sphere of life.",
+      "personal": {
+        "title": "Personal Development",
+        "description": "15-20 minutes of conscious reflection. Scan consciousness for hidden patterns. Reprogram beliefs. Free yourself from the weight of the past."
+      },
+      "relationships": {
+        "title": "Relationships",
+        "description": "Friends or partners help each other work through jealousy, resentment. Couples prevent conflict escalation through joint 'reboot'."
+      },
+      "parenting": {
+        "title": "Parenting",
+        "description": "Parents conduct sessions with children. Teenagers are freed from pressure. Children grow up without accumulated trauma, with self-control skills."
+      },
+      "sports": {
+        "title": "Sports",
+        "description": "A runner clears consciousness of doubt before a marathon. A tennis player eliminates mental breakdowns. The whole team synchronizes mindset."
+      },
+      "education": {
+        "title": "Education",
+        "description": "Students form metasync groups before exams. Teachers cope with burnout. Growth in academic performance and emotional intelligence."
+      },
+      "business": {
+        "title": "Business",
+        "description": "Startups hold metasync circles for mental barriers. Creative agencies clear consciousness for innovation. HR introduces as wellness program."
+      },
+      "creativity": {
+        "title": "Creativity",
+        "description": "The artist removes the inner critic. Musicians harmonize ideas. Writers overcome writer's block. The flow of creativity opens."
+      },
+      "health": {
+        "title": "Health",
+        "description": "Reprogramming addiction triggers. Managing perception of chronic pain. Deepening yoga and meditation. Accelerating healing."
+      },
+      "social": {
+        "title": "Society",
+        "description": "Communities conduct metasync for conflict resolution. Volunteers gain resilience. Activists reduce polarization. Global empathy growth."
+      },
+      "spirituality": {
+        "title": "Spirituality",
+        "description": "For atheists — rational self-improvement. For believers — deepening practice: Christian in prayer, Muslim in namaz, Buddhist in vipassana."
       }
     },
     "computer": {
       "title": "Your Consciousness is a Computer",
-      "description": "Imagine moving bricks or rearranging objects, transforming physical reality. Now imagine doing the same with your consciousness. Moving, deleting, adding — like files on a computer. The Method gives you this control."
+      "description": "Imagine moving bricks or rearranging objects, transforming physical reality. Now imagine the same with your consciousness: 'delete' unnecessary files (traumas, habits), 'update' programs (beliefs, skills), 'optimize' the system for maximum speed. This isn't fantasy — neuroscience confirms brain plasticity."
     },
     "discovery": {
       "title": "So simple it's amazing it wasn't noticed before",
-      "description": "Know the story of penicillin? Alexander Fleming noticed mold on a Petri dish — what others had been throwing away for years. Or coffee: goats ate the berries for centuries before someone thought to brew them. Lithium for depression? John Cade found it studying urine.",
-      "quote": "The greatest discoveries were always in plain sight. The Subconscious Method is in the same category. So obvious once you see it, you wonder: how did we miss this?"
+      "description": "The Method is so simple that after mastering it you'll ask: 'How could we not have noticed this earlier?'",
+      "quote": "The greatest discoveries were always in plain sight. Like penicillin — mold that was thrown away for years saved millions of lives. Elements of metasync were always available, but no one assembled them into a single, guaranteed working system.",
+      "example": "In 1928, Alexander Fleming noticed mold on a Petri dish — what others discarded. Mold was everywhere, but no one saw salvation in it. The Subconscious Method is in the same category of obvious discoveries."
     },
     "safety": {
       "title": "This Method Cannot Harm",
-      "description": "Unlike many psyche-work techniques, the Subconscious Method is completely safe. You cannot accidentally 'break' something in consciousness. It's like rearranging furniture — you can put everything back at any moment."
+      "description": "The Method is absolutely safe — it cannot be used for harm. It is based on principles of self-knowledge and harmony, without coercion or manipulation.",
+      "details": "You cannot accidentally 'break' something in consciousness. It's like rearranging furniture — you can put everything back at any moment. No side effects, only transformation."
     },
     "history": {
       "title": "What Could Appear Now for Modern Humanity?",
-      "description": "The history of religions and traditions always carried impact for their time's culture. Islam brought cleanliness and freed women. Buddhism gave mindfulness practice. What could appear now — in the age of AI, neuroscience, and digital transformation — to quantum-shift the lives of millions? The Subconscious Method is the answer."
+      "description": "The history of religions and traditions always carried impact for their time's culture. Christianity brought mercy. Buddhism gave the path to enlightenment. Islam introduced hygienic norms and freed women from pre-Islamic practices.",
+      "question": "What could appear in the age of AI, neuroscience and digital transformation — to quantum-shift the lives of millions? The Subconscious Method is the answer. It doesn't treat symptoms, but restructures the foundation of consciousness."
+    },
+    "prediction": {
+      "title": "I Predict the Future. And I'm Putting My Money On It.",
+      "description": "What if I told you I can predict the future? But I'll be the first to guarantee it and put my money on the line.",
+      "quote": "I predict: using metasync, I can heal your chronic problems — remove anxiety, change destructive habits, expand the horizons of consciousness. And I give a 100% guarantee."
     },
     "guarantee": {
       "title": "I'm Putting My Money on Your Transformation",
-      "description": "What if I told you I can predict the future? But I'll be the first to guarantee it and put my money on it. Here's my prediction: The Method will change you. And I guarantee it.",
+      "description": "You lose nothing. You pay nothing upfront. You buy yourself out of your past life — from the chains of doubt, fear, and unrealized potential.",
       "item1": "You lose nothing",
       "item2": "You pay nothing upfront",
       "item3": "Full refund if it doesn't work",
-      "item4": "You buy yourself out of your past life",
+      "item4": "Buy yourself out of your past life",
       "item5": "100% transformation guarantee",
       "offer": {
         "title": "Ready to Buy Yourself Out of Your Past Life?",
-        "description": "This isn't an expense. It's an investment in the version of yourself you've dreamed of. And if the Method doesn't work — you get everything back. No risk.",
+        "description": "This isn't an expense — it's an investment in the version of yourself you've dreamed of. You move to a new level where consciousness is your ally, not your enemy. No risk.",
         "cta": "Start Transformation"
       }
     },
     "finalCta": {
-      "title": "Your Breakthrough Awaits",
-      "description": "Thousands are already on board, achieving the impossible. Under Adizel Oazyes' guidance, you won't just change — you'll evolve. Become a Metahuman.",
-      "cta": "Become a Metasyncer",
+      "title": "Ready to Become a Metasyncer?",
+      "description": "Thousands are already on board, achieving the impossible. Under Adizel Oazyes' guidance, you won't just change — you'll evolve. The Method awaits — simple, safe, and revolutionary. The Metasyncer in you is already awaiting activation.",
+      "cta": "Activate the Metasyncer",
       "note": "Step into the light — and let your success story inspire the world"
     }
   }
