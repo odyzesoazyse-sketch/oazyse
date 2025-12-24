@@ -19,23 +19,19 @@ const BottomNav = ({ activeTab, onTabChange }: BottomNavProps) => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-background z-50">
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-green to-transparent animate-neon-line-pulse" />
-      <div className="flex items-center h-12 overflow-x-auto scrollbar-hide">
+    <nav className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-xl z-50 border-t border-border/50">
+      <div className="flex items-center justify-center h-14 gap-1 overflow-x-auto scrollbar-hide px-4 max-w-7xl mx-auto">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex-shrink-0 px-4 h-full text-[10px] uppercase tracking-[0.15em] transition-all relative ${
+            className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-all ${
               activeTab === tab.id 
-                ? 'text-neon-purple' 
-                : 'text-muted-foreground hover:text-neon-green'
+                ? 'bg-secondary text-secondary-foreground shadow-[0_0_15px_hsl(var(--neon-green)/0.3)]' 
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted'
             }`}
           >
             {t(tab.labelKey)}
-            {activeTab === tab.id && (
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-neon-purple animate-neon-pulse-purple" />
-            )}
           </button>
         ))}
       </div>
