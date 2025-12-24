@@ -1,6 +1,6 @@
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { 
   Sparkles, 
   Heart, 
@@ -14,397 +14,517 @@ import {
   ArrowRight,
   Star,
   Gem,
-  Palette,
-  GraduationCap,
-  Briefcase,
-  Stethoscope,
-  Globe,
-  BookOpen,
+  ChevronUp,
+  ChevronDown,
+  X,
   Target,
-  Lightbulb
+  Lightbulb,
+  Share2
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { cn } from '@/lib/utils';
+
+interface Story {
+  id: string;
+  icon: React.ElementType;
+  gradient: string;
+  bgPattern?: string;
+}
+
+const stories: Story[] = [
+  { id: 'hero', icon: Gem, gradient: 'from-primary via-accent to-primary' },
+  { id: 'metasync', icon: Brain, gradient: 'from-primary to-purple-600' },
+  { id: 'metahuman', icon: Zap, gradient: 'from-accent to-emerald-500' },
+  { id: 'family', icon: Heart, gradient: 'from-pink-500 to-rose-500' },
+  { id: 'athletes', icon: Trophy, gradient: 'from-amber-500 to-orange-500' },
+  { id: 'company', icon: Building2, gradient: 'from-blue-500 to-indigo-500' },
+  { id: 'computer', icon: Target, gradient: 'from-cyan-500 to-teal-500' },
+  { id: 'discovery', icon: Lightbulb, gradient: 'from-yellow-500 to-amber-500' },
+  { id: 'safety', icon: Shield, gradient: 'from-emerald-500 to-green-500' },
+  { id: 'guarantee', icon: Star, gradient: 'from-primary to-accent' },
+  { id: 'cta', icon: Sparkles, gradient: 'from-primary via-accent to-primary' },
+];
 
 const SalesPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [direction, setDirection] = useState<'up' | 'down' | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const autoProgressRef = useRef<NodeJS.Timeout | null>(null);
 
-  const examples = [
-    { icon: Heart, key: 'family' },
-    { icon: Trophy, key: 'athletes' },
-    { icon: Building2, key: 'company' },
-    { icon: Sparkles, key: 'spiritual' }
-  ];
+  const STORY_DURATION = 8000; // 8 seconds per story
+  const ANIMATION_DURATION = 400;
 
-  const expandedExamples = [
-    { icon: Target, key: 'personal' },
-    { icon: Users, key: 'relationships' },
-    { icon: Heart, key: 'parenting' },
-    { icon: Trophy, key: 'sports' },
-    { icon: GraduationCap, key: 'education' },
-    { icon: Briefcase, key: 'business' },
-    { icon: Palette, key: 'creativity' },
-    { icon: Stethoscope, key: 'health' },
-    { icon: Globe, key: 'social' },
-    { icon: BookOpen, key: 'spirituality' }
-  ];
+  const goToNext = useCallback(() => {
+    if (isAnimating || currentIndex >= stories.length - 1) return;
+    setIsAnimating(true);
+    setDirection('up');
+    setTimeout(() => {
+      setCurrentIndex(prev => prev + 1);
+      setProgress(0);
+      setIsAnimating(false);
+      setDirection(null);
+    }, ANIMATION_DURATION);
+  }, [currentIndex, isAnimating]);
 
-  const guarantees = [
-    t('sales.guarantees.item1'),
-    t('sales.guarantees.item2'),
-    t('sales.guarantees.item3'),
-    t('sales.guarantees.item4'),
-    t('sales.guarantees.item5')
-  ];
+  const goToPrev = useCallback(() => {
+    if (isAnimating || currentIndex <= 0) return;
+    setIsAnimating(true);
+    setDirection('down');
+    setTimeout(() => {
+      setCurrentIndex(prev => prev - 1);
+      setProgress(0);
+      setIsAnimating(false);
+      setDirection(null);
+    }, ANIMATION_DURATION);
+  }, [currentIndex, isAnimating]);
 
-  const metahumanPoints = [1, 2, 3, 4, 5, 6];
+  const goToStory = useCallback((index: number) => {
+    if (isAnimating || index === currentIndex) return;
+    setIsAnimating(true);
+    setDirection(index > currentIndex ? 'up' : 'down');
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setProgress(0);
+      setIsAnimating(false);
+      setDirection(null);
+    }, ANIMATION_DURATION);
+  }, [currentIndex, isAnimating]);
 
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="relative py-24 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-neon-pulse-purple" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-neon-pulse-green" />
-        
-        <div className="container mx-auto relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 mb-8">
-            <Gem className="w-4 h-4 text-primary animate-neon-pulse-purple" />
-            <span className="text-sm text-primary">{t('sales.badge')}</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-neon-text-pulse">
-              {t('sales.hero.title')}
+  // Auto-progress
+  useEffect(() => {
+    autoProgressRef.current = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          if (currentIndex < stories.length - 1) {
+            goToNext();
+          }
+          return 0;
+        }
+        return prev + (100 / (STORY_DURATION / 100));
+      });
+    }, 100);
+
+    return () => {
+      if (autoProgressRef.current) clearInterval(autoProgressRef.current);
+    };
+  }, [currentIndex, goToNext]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown' || e.key === ' ') {
+        e.preventDefault();
+        goToNext();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        goToPrev();
+      } else if (e.key === 'Escape') {
+        navigate('/');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [goToNext, goToPrev, navigate]);
+
+  // Touch handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientY);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+    const touchEnd = e.changedTouches[0].clientY;
+    const diff = touchStart - touchEnd;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goToNext();
+      else goToPrev();
+    }
+    setTouchStart(null);
+  };
+
+  // Wheel handler
+  const handleWheel = useCallback((e: WheelEvent) => {
+    e.preventDefault();
+    if (e.deltaY > 30) goToNext();
+    else if (e.deltaY < -30) goToPrev();
+  }, [goToNext, goToPrev]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('wheel', handleWheel, { passive: false });
+      return () => container.removeEventListener('wheel', handleWheel);
+    }
+  }, [handleWheel]);
+
+  // Click to navigate
+  const handleClick = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const y = e.clientY - rect.top;
+    const threshold = rect.height / 2;
+    
+    if (y < threshold) goToPrev();
+    else goToNext();
+  };
+
+  const currentStory = stories[currentIndex];
+
+  const renderStoryContent = () => {
+    const baseClasses = cn(
+      "absolute inset-0 flex flex-col items-center justify-center p-6 md:p-12 text-center transition-all duration-500",
+      direction === 'up' && "animate-slide-up",
+      direction === 'down' && "animate-slide-down"
+    );
+
+    switch (currentStory.id) {
+      case 'hero':
+        return (
+          <div className={baseClasses}>
+            <div className="mb-6 animate-bounce-slow">
+              <Gem className="w-16 h-16 md:w-24 md:h-24 text-primary drop-shadow-[0_0_30px_hsl(var(--primary))]" />
+            </div>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/40 mb-6 backdrop-blur-sm">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm text-primary font-medium">{t('sales.badge')}</span>
             </span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-6">
-            {t('sales.hero.subtitle')}
-          </p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.hero.title')}
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8">
+              {t('sales.hero.subtitle')}
+            </p>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse">
+              <ChevronDown className="w-5 h-5" />
+              <span>Листай вниз</span>
+            </div>
+          </div>
+        );
 
-          <p className="text-lg text-foreground/80 max-w-3xl mx-auto mb-8">
-            {t('sales.hero.description')}
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Link to="/quiz">
-              <Button size="lg" className="group bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground px-8 py-6 text-lg">
+      case 'metasync':
+        return (
+          <div className={baseClasses}>
+            <div className="relative mb-8">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 rounded-full blur-2xl opacity-50 animate-pulse" />
+              <Brain className="relative w-20 h-20 md:w-28 md:h-28 text-primary drop-shadow-[0_0_40px_hsl(var(--primary))]" />
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.metasync.title')}
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8">
+              {t('sales.metasync.description')}
+            </p>
+            <div className="grid grid-cols-2 gap-4 w-full max-w-md">
+              <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-4 border border-primary/30">
+                <Brain className="w-8 h-8 text-primary mb-2 mx-auto" />
+                <p className="text-sm font-medium">{t('sales.metasync.metasync.title')}</p>
+              </div>
+              <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-4 border border-accent/30">
+                <Zap className="w-8 h-8 text-accent mb-2 mx-auto" />
+                <p className="text-sm font-medium">{t('sales.metasync.metasyncer.title')}</p>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'metahuman':
+        return (
+          <div className={baseClasses}>
+            <Zap className="w-20 h-20 md:w-28 md:h-28 text-accent mb-8 drop-shadow-[0_0_40px_hsl(var(--accent))]" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.metahuman.title')}
+              </span>
+            </h2>
+            <ul className="space-y-3 text-left max-w-md">
+              {[1, 2, 3].map(i => (
+                <li key={i} className="flex items-start gap-3 bg-card/30 backdrop-blur-sm rounded-xl p-3 border border-accent/20">
+                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-foreground">{t(`sales.metahuman.point${i}`)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+
+      case 'family':
+        return (
+          <div className={baseClasses}>
+            <Heart className="w-20 h-20 md:w-28 md:h-28 text-pink-500 mb-8 drop-shadow-[0_0_40px_theme(colors.pink.500)] animate-pulse" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.examples.family.title')}
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+              {t('sales.examples.family.description')}
+            </p>
+            <div className="mt-8 flex gap-4">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center">
+                <Heart className="w-6 h-6 text-white" />
+              </div>
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'athletes':
+        return (
+          <div className={baseClasses}>
+            <Trophy className="w-20 h-20 md:w-28 md:h-28 text-amber-500 mb-8 drop-shadow-[0_0_40px_theme(colors.amber.500)]" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.examples.athletes.title')}
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-6">
+              {t('sales.examples.athletes.description')}
+            </p>
+            <div className="flex gap-2">
+              {[1, 2, 3, 4, 5].map(i => (
+                <Star key={i} className="w-6 h-6 text-amber-500 fill-amber-500" />
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'company':
+        return (
+          <div className={baseClasses}>
+            <Building2 className="w-20 h-20 md:w-28 md:h-28 text-blue-500 mb-8 drop-shadow-[0_0_40px_theme(colors.blue.500)]" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.examples.company.title')}
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+              {t('sales.examples.company.description')}
+            </p>
+          </div>
+        );
+
+      case 'computer':
+        return (
+          <div className={baseClasses}>
+            <Target className="w-20 h-20 md:w-28 md:h-28 text-cyan-500 mb-8 drop-shadow-[0_0_40px_theme(colors.cyan.500)]" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.computer.title')}
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+              {t('sales.computer.description')}
+            </p>
+          </div>
+        );
+
+      case 'discovery':
+        return (
+          <div className={baseClasses}>
+            <Lightbulb className="w-20 h-20 md:w-28 md:h-28 text-yellow-500 mb-8 drop-shadow-[0_0_40px_theme(colors.yellow.500)] animate-pulse" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.discovery.title')}
+              </span>
+            </h2>
+            <blockquote className="text-lg md:text-xl italic text-foreground/80 max-w-xl border-l-4 border-yellow-500 pl-4">
+              {t('sales.discovery.quote')}
+            </blockquote>
+          </div>
+        );
+
+      case 'safety':
+        return (
+          <div className={baseClasses}>
+            <Shield className="w-20 h-20 md:w-28 md:h-28 text-emerald-500 mb-8 drop-shadow-[0_0_40px_theme(colors.emerald.500)]" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.safety.title')}
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-6">
+              {t('sales.safety.description')}
+            </p>
+            <div className="flex items-center gap-2 text-emerald-500">
+              <CheckCircle2 className="w-6 h-6" />
+              <span className="font-medium">100% безопасно</span>
+            </div>
+          </div>
+        );
+
+      case 'guarantee':
+        return (
+          <div className={baseClasses}>
+            <Star className="w-20 h-20 md:w-28 md:h-28 text-primary mb-8 drop-shadow-[0_0_40px_hsl(var(--primary))]" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent`}>
+                {t('sales.guarantee.title')}
+              </span>
+            </h2>
+            <div className="space-y-3 max-w-md">
+              {[
+                t('sales.guarantees.item1'),
+                t('sales.guarantees.item2'),
+                t('sales.guarantees.item3'),
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 bg-card/50 backdrop-blur-sm rounded-xl p-3 border border-primary/20">
+                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
+                  <span className="text-sm">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'cta':
+        return (
+          <div className={baseClasses}>
+            <Sparkles className="w-20 h-20 md:w-28 md:h-28 text-primary mb-8 drop-shadow-[0_0_40px_hsl(var(--primary))] animate-bounce-slow" />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <span className={`bg-gradient-to-r ${currentStory.gradient} bg-clip-text text-transparent animate-gradient-x`}>
+                {t('sales.finalCta.title')}
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8">
+              {t('sales.finalCta.description')}
+            </p>
+            <Link to="/quiz" onClick={(e) => e.stopPropagation()}>
+              <Button 
+                size="lg" 
+                className="group bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground px-8 py-6 text-lg shadow-[0_0_30px_hsl(var(--primary)/0.5)] hover:shadow-[0_0_50px_hsl(var(--primary)/0.7)] transition-all"
+              >
                 {t('sales.hero.cta')}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <p className="text-sm text-muted-foreground">{t('sales.hero.guarantee')}</p>
           </div>
+        );
 
-          <div className="w-24 h-1 mx-auto bg-gradient-to-r from-primary via-accent to-primary rounded-full animate-neon-line-pulse" />
-        </div>
-      </section>
+      default:
+        return null;
+    }
+  };
 
-      {/* Metasync Concept */}
-      <section className="py-20 px-4 bg-muted/20">
-        <div className="container mx-auto">
-          <div className="max-w-5xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {t('sales.metasync.title')}
-              </span>
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              {t('sales.metasync.description')}
-            </p>
+  return (
+    <div 
+      ref={containerRef}
+      className="fixed inset-0 bg-background overflow-hidden touch-none select-none"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onClick={handleClick}
+    >
+      {/* Animated background */}
+      <div className={cn(
+        "absolute inset-0 transition-all duration-700",
+        `bg-gradient-to-br ${currentStory.gradient} opacity-10`
+      )} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,hsl(var(--background))_70%)]" />
+      
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/30 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Progress bars */}
+      <div className="absolute top-4 left-4 right-4 z-50 flex gap-1">
+        {stories.map((_, index) => (
+          <div key={index} className="flex-1 h-1 bg-foreground/20 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-foreground/80 rounded-full transition-all duration-100"
+              style={{ 
+                width: index < currentIndex ? '100%' : 
+                       index === currentIndex ? `${progress}%` : '0%' 
+              }}
+            />
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-                  <Brain className="w-8 h-8 text-primary animate-neon-pulse-purple" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-primary">{t('sales.metasync.metasync.title')}</h3>
-                <p className="text-muted-foreground">{t('sales.metasync.metasync.description')}</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-gradient-to-br from-accent/10 to-accent/5 border-accent/30">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
-                  <Zap className="w-8 h-8 text-accent animate-neon-pulse-green" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-accent">{t('sales.metasync.metasyncer.title')}</h3>
-                <p className="text-muted-foreground">{t('sales.metasync.metasyncer.description')}</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      {/* What is Metahuman */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  {t('sales.metahuman.title')}
-                </span>
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                {t('sales.metahuman.description')}
-              </p>
-              <ul className="space-y-4">
-                {metahumanPoints.map((i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-foreground">{t(`sales.metahuman.point${i}`)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-accent/30 rounded-3xl blur-2xl" />
-              <Card className="relative bg-card/80 backdrop-blur-sm border-primary/30">
-                <CardContent className="p-8">
-                  <Lightbulb className="w-16 h-16 text-primary mx-auto mb-6 animate-neon-pulse-purple" />
-                  <h3 className="text-2xl font-bold text-center mb-4">{t('sales.metahuman.card.title')}</h3>
-                  <p className="text-muted-foreground text-center">{t('sales.metahuman.card.description')}</p>
-                </CardContent>
-              </Card>
-            </div>
+      {/* Header */}
+      <div className="absolute top-8 left-4 right-4 z-50 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className={cn(
+            "w-10 h-10 rounded-full flex items-center justify-center",
+            `bg-gradient-to-r ${currentStory.gradient}`
+          )}>
+            <currentStory.icon className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <p className="text-sm font-medium">Metahuman</p>
+            <p className="text-xs text-muted-foreground">{currentIndex + 1} из {stories.length}</p>
           </div>
         </div>
-      </section>
-
-      {/* Cook Analogy */}
-      <section className="py-20 px-4 bg-muted/30">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              {t('sales.analogy.title')}
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-12">
-            {t('sales.analogy.description')}
-          </p>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="bg-card/50 border-muted hover:border-primary/50 transition-colors">
-              <CardContent className="p-8">
-                <Users className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">{t('sales.analogy.everyone.title')}</h3>
-                <p className="text-muted-foreground">{t('sales.analogy.everyone.description')}</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50 border-muted hover:border-accent/50 transition-colors">
-              <CardContent className="p-8">
-                <Star className="w-12 h-12 text-accent mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">{t('sales.analogy.master.title')}</h3>
-                <p className="text-muted-foreground">{t('sales.analogy.master.description')}</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Basic Examples */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              {t('sales.examples.title')}
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground text-center max-w-3xl mx-auto mb-12">
-            {t('sales.examples.subtitle')}
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {examples.map((example, index) => (
-              <Card key={index} className="bg-card/50 border-muted hover:border-primary/50 transition-all hover:-translate-y-1">
-                <CardContent className="p-6">
-                  <example.icon className="w-10 h-10 text-primary mb-4" />
-                  <h3 className="text-lg font-bold mb-2">{t(`sales.examples.${example.key}.title`)}</h3>
-                  <p className="text-sm text-muted-foreground">{t(`sales.examples.${example.key}.description`)}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Expanded Examples */}
-      <section className="py-20 px-4 bg-gradient-to-b from-background via-primary/5 to-background">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              {t('sales.expanded.title')}
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground text-center max-w-4xl mx-auto mb-12">
-            {t('sales.expanded.subtitle')}
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {expandedExamples.map((example, index) => (
-              <Card key={index} className="bg-card/30 border-muted/50 hover:border-primary/50 transition-all hover:bg-card/50">
-                <CardContent className="p-5">
-                  <example.icon className="w-8 h-8 text-primary mb-3" />
-                  <h3 className="text-base font-bold mb-2">{t(`sales.expanded.${example.key}.title`)}</h3>
-                  <p className="text-xs text-muted-foreground">{t(`sales.expanded.${example.key}.description`)}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Computer Analogy */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto text-center">
-          <Zap className="w-16 h-16 text-accent mx-auto mb-8 animate-neon-pulse-green" />
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              {t('sales.computer.title')}
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-            {t('sales.computer.description')}
-          </p>
-        </div>
-      </section>
-
-      {/* Discovery */}
-      <section className="py-20 px-4 bg-muted/30">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {t('sales.discovery.title')}
-              </span>
-            </h2>
-            <Card className="bg-card/50 border-primary/30">
-              <CardContent className="p-8">
-                <p className="text-lg text-muted-foreground mb-6">{t('sales.discovery.description')}</p>
-                <blockquote className="border-l-4 border-primary pl-6 italic text-foreground mb-4">
-                  {t('sales.discovery.quote')}
-                </blockquote>
-                <p className="text-muted-foreground">{t('sales.discovery.example')}</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Safety */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto text-center">
-          <Shield className="w-16 h-16 text-accent mx-auto mb-8" />
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              {t('sales.safety.title')}
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            {t('sales.safety.description')}
-          </p>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            {t('sales.safety.details')}
-          </p>
-        </div>
-      </section>
-
-      {/* Historical Context */}
-      <section className="py-20 px-4 bg-muted/30">
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              {t('sales.history.title')}
-            </span>
-          </h2>
-          <div className="max-w-4xl mx-auto">
-            <p className="text-xl text-muted-foreground text-center mb-8">
-              {t('sales.history.description')}
-            </p>
-            <p className="text-lg text-foreground/80 text-center">
-              {t('sales.history.question')}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Prediction Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {t('sales.prediction.title')}
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-6">
-              {t('sales.prediction.description')}
-            </p>
-            <Card className="bg-gradient-to-r from-primary/10 to-accent/10 border-primary/30">
-              <CardContent className="p-8">
-                <p className="text-lg text-foreground italic">
-                  "{t('sales.prediction.quote')}"
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Guarantee Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-primary/10 via-background to-background">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                {t('sales.guarantee.title')}
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-12">{t('sales.guarantee.description')}</p>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-              {guarantees.map((guarantee, index) => (
-                <div key={index} className="flex items-center gap-3 bg-card/50 p-4 rounded-lg border border-primary/20">
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-                  <span className="text-sm text-foreground">{guarantee}</span>
-                </div>
-              ))}
-            </div>
-
-            <Card className="bg-gradient-to-r from-primary/20 to-accent/20 border-primary/30">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-4">{t('sales.guarantee.offer.title')}</h3>
-                <p className="text-lg text-muted-foreground mb-6">{t('sales.guarantee.offer.description')}</p>
-                <Link to="/quiz">
-                  <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground px-12 py-6 text-lg">
-                    {t('sales.guarantee.offer.cta')}
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-24 px-4">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-neon-text-pulse">
-              {t('sales.finalCta.title')}
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
-            {t('sales.finalCta.description')}
-          </p>
-          <Link to="/quiz">
-            <Button size="lg" className="group bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground px-12 py-8 text-xl">
-              {t('sales.finalCta.cta')}
-              <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
-            </Button>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={(e) => { e.stopPropagation(); /* share */ }} 
+            className="w-10 h-10 rounded-full bg-foreground/10 backdrop-blur-sm flex items-center justify-center hover:bg-foreground/20 transition-colors"
+          >
+            <Share2 className="w-5 h-5" />
+          </button>
+          <Link to="/" onClick={(e) => e.stopPropagation()}>
+            <button className="w-10 h-10 rounded-full bg-foreground/10 backdrop-blur-sm flex items-center justify-center hover:bg-foreground/20 transition-colors">
+              <X className="w-5 h-5" />
+            </button>
           </Link>
-          <p className="mt-6 text-muted-foreground">{t('sales.finalCta.note')}</p>
         </div>
-      </section>
+      </div>
+
+      {/* Story content */}
+      <div className="relative w-full h-full">
+        {renderStoryContent()}
+      </div>
+
+      {/* Side navigation dots */}
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+        {stories.map((story, index) => (
+          <button
+            key={story.id}
+            onClick={(e) => { e.stopPropagation(); goToStory(index); }}
+            className={cn(
+              "w-2 h-2 rounded-full transition-all duration-300",
+              index === currentIndex 
+                ? "bg-foreground scale-150" 
+                : "bg-foreground/30 hover:bg-foreground/50"
+            )}
+          />
+        ))}
+      </div>
+
+      {/* Navigation hints */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-1">
+        {currentIndex > 0 && (
+          <ChevronUp className="w-6 h-6 text-muted-foreground animate-bounce" />
+        )}
+        <span className="text-xs text-muted-foreground">
+          {currentIndex < stories.length - 1 ? 'Свайп или клик' : 'Начать'}
+        </span>
+        {currentIndex < stories.length - 1 && (
+          <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
+        )}
+      </div>
     </div>
   );
 };
