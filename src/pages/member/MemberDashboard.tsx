@@ -13,7 +13,8 @@ import {
   X,
   Home,
   User,
-  Award
+  Award,
+  Trophy
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -133,6 +134,7 @@ const MemberDashboard = () => {
     { path: '/member/sessions', icon: Calendar, label: 'Сеансы' },
     { path: '/member/certification', icon: ClipboardCheck, label: 'Сертификация' },
     { path: '/member/stats', icon: BarChart3, label: 'Статистика' },
+    { path: '/member/oasis-rating', icon: Trophy, label: 'Рейтинг Оазиса' },
     { path: '/member/profile', icon: User, label: 'Профиль' },
   ];
 

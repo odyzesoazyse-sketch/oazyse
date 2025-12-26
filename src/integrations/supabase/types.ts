@@ -145,6 +145,69 @@ export type Database = {
         }
         Relationships: []
       }
+      oasis_ratings: {
+        Row: {
+          age: number | null
+          country: string | null
+          created_at: string
+          display_name: string
+          display_type: string
+          donations_month: number
+          donations_total: number
+          donations_year: number
+          gender: string | null
+          id: string
+          is_test_data: boolean
+          reviews_avg: number | null
+          reviews_count: number | null
+          sessions_conducted: number
+          sessions_received: number
+          show_in_rating: boolean
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          age?: number | null
+          country?: string | null
+          created_at?: string
+          display_name: string
+          display_type?: string
+          donations_month?: number
+          donations_total?: number
+          donations_year?: number
+          gender?: string | null
+          id?: string
+          is_test_data?: boolean
+          reviews_avg?: number | null
+          reviews_count?: number | null
+          sessions_conducted?: number
+          sessions_received?: number
+          show_in_rating?: boolean
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          age?: number | null
+          country?: string | null
+          created_at?: string
+          display_name?: string
+          display_type?: string
+          donations_month?: number
+          donations_total?: number
+          donations_year?: number
+          gender?: string | null
+          id?: string
+          is_test_data?: boolean
+          reviews_avg?: number | null
+          reviews_count?: number | null
+          sessions_conducted?: number
+          sessions_received?: number
+          show_in_rating?: boolean
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
