@@ -47,9 +47,9 @@ const SessionsTab = ({ data, loading }: SessionsTabProps) => {
     .map(d => ({ name: d.display_name.slice(0, 10), conducted: d.sessions_conducted, received: d.sessions_received }));
 
   const genderDistribution = [
-    { name: 'М', value: data.filter(d => d.gender === 'male').length },
-    { name: 'Ж', value: data.filter(d => d.gender === 'female').length },
-    { name: 'Другое', value: data.filter(d => d.gender === 'other').length },
+    { name: 'М', value: data.filter(d => d.gender === 'M').length },
+    { name: 'Ж', value: data.filter(d => d.gender === 'F').length },
+    { name: 'Другое', value: data.filter(d => d.gender === 'Other').length },
   ].filter(d => d.value > 0);
 
   const SortIcon = ({ field }: { field: SortField }) => {
@@ -168,7 +168,7 @@ const SessionsTab = ({ data, loading }: SessionsTabProps) => {
                     </div>
                   </TableCell>
                   <TableCell>
-                    {item.gender === 'male' ? 'М' : item.gender === 'female' ? 'Ж' : 'Др'}
+                    {item.gender === 'M' ? 'М' : item.gender === 'F' ? 'Ж' : 'Др'}
                   </TableCell>
                   <TableCell>{item.age}</TableCell>
                   <TableCell>{item.country}</TableCell>

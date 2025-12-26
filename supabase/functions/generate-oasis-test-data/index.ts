@@ -77,13 +77,13 @@ function generateParticipant(): object {
   let displayType: string;
   let displayName: string;
   
-  // Gender: equal distribution
-  const genders = ['male', 'female', 'other'];
+  // Gender: equal distribution - use DB constraint values: 'M', 'F', 'Other'
+  const genders = ['M', 'F', 'Other'];
   const gender = randomChoice(genders);
   
   if (displayTypeRandom < 0.4) {
     displayType = 'name';
-    const genderKey = gender === 'other' ? randomChoice(['male', 'female']) : gender;
+    const genderKey = gender === 'Other' ? randomChoice(['male', 'female']) : (gender === 'M' ? 'male' : 'female');
     const firstName = randomChoice(firstNames[genderKey as 'male' | 'female']);
     const lastName = randomChoice(lastNames);
     displayName = `${firstName} ${lastName}`;
