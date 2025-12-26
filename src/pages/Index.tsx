@@ -29,7 +29,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-14 pb-16">
+      <main className="pt-12 pb-16">
         <div key={activeTab} className="animate-fade-in">
           {renderSection()}
         </div>
