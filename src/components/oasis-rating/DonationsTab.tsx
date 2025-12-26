@@ -161,7 +161,7 @@ const DonationsTab = ({ data, loading }: DonationsTabProps) => {
                     </div>
                   </TableCell>
                   <TableCell>
-                    {item.gender === 'male' ? 'М' : item.gender === 'female' ? 'Ж' : 'Др'}
+                    {item.gender === 'M' ? 'М' : item.gender === 'F' ? 'Ж' : 'Др'}
                   </TableCell>
                   <TableCell>{item.age}</TableCell>
                   <TableCell>{item.country}</TableCell>

@@ -42,9 +42,9 @@ const OasisFilters = ({ filters, setFilters, countries }: OasisFiltersProps) => 
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Все</SelectItem>
-              <SelectItem value="male">Мужской</SelectItem>
-              <SelectItem value="female">Женский</SelectItem>
-              <SelectItem value="other">Другое</SelectItem>
+              <SelectItem value="M">Мужской</SelectItem>
+              <SelectItem value="F">Женский</SelectItem>
+              <SelectItem value="Other">Другое</SelectItem>
             </SelectContent>
           </Select>
 
