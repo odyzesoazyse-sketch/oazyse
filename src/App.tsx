@@ -18,6 +18,7 @@ import MemberSessions from "./pages/member/MemberSessions";
 import MemberCertification from "./pages/member/MemberCertification";
 import MemberStats from "./pages/member/MemberStats";
 import MemberProfile from "./pages/member/MemberProfile";
+import MemberOasisRating from "./pages/member/MemberOasisRating";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
                 <Route path="certification" element={<MemberCertification />} />
                 <Route path="stats" element={<MemberStats />} />
                 <Route path="profile" element={<MemberProfile />} />
+                <Route path="oasis-rating" element={<MemberOasisRating />} />
               </Route>
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
