@@ -88,7 +88,7 @@ function generateParticipant(): object {
     const lastName = randomChoice(lastNames);
     displayName = `${firstName} ${lastName}`;
   } else if (displayTypeRandom < 0.8) {
-    displayType = 'nickname';
+    displayType = 'pseudonym';
     displayName = randomChoice(nicknames) + Math.floor(Math.random() * 1000);
   } else {
     displayType = 'anonymous';
@@ -181,7 +181,12 @@ serve(async (req) => {
     );
   } catch (error: unknown) {
     console.error('Error:', error);
-    const message = error instanceof Error ? error.message : 'Unknown error';
+    const e = error as any;
+    const message =
+      (e && typeof e === 'object' && typeof e.message === 'string' && e.message) ||
+      (e && typeof e === 'object' && typeof e.error === 'string' && e.error) ||
+      (e && typeof e === 'object' ? JSON.stringify(e) : String(e));
+
     return new Response(
       JSON.stringify({ success: false, error: message }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
