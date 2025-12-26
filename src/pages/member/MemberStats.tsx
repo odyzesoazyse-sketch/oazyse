@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Star, Calendar, MessageSquare, Award, TrendingUp, Users } from 'lucide-react';
+import { Star, Calendar, MessageSquare, Award, Users } from 'lucide-react';
 
 interface Feedback {
   id: string;
@@ -47,7 +46,6 @@ const MemberStats = () => {
     if (!user) return;
 
     try {
-      // Get certification status
       const { data: cert } = await supabase
         .from('certifications')
         .select('passed, certified_at')
@@ -55,7 +53,6 @@ const MemberStats = () => {
         .eq('passed', true)
         .maybeSingle();
 
-      // Get sessions received (as requester)
       const { data: requestsData } = await supabase
         .from('session_requests')
         .select(`
@@ -71,28 +68,24 @@ const MemberStats = () => {
         r.session_bookings?.some((b: any) => b.status === 'completed')
       ).length || 0;
 
-      // Get sessions conducted (as practitioner)
       const { data: conductedData } = await supabase
         .from('session_bookings')
         .select('id')
         .eq('practitioner_id', user.id)
         .eq('status', 'completed');
 
-      // Get feedback received
       const { data: receivedFeedback } = await supabase
         .from('session_feedback')
         .select('*')
         .eq('to_user_id', user.id)
         .order('created_at', { ascending: false });
 
-      // Get feedback given
       const { data: givenFeedback } = await supabase
         .from('session_feedback')
         .select('*')
         .eq('from_user_id', user.id)
         .order('created_at', { ascending: false });
 
-      // Calculate average rating
       const avgRating = receivedFeedback && receivedFeedback.length > 0
         ? receivedFeedback.reduce((acc, f) => acc + f.rating, 0) / receivedFeedback.length
         : 0;
@@ -121,10 +114,10 @@ const MemberStats = () => {
         {[1, 2, 3, 4, 5].map((star) => (
           <Star
             key={star}
-            className={`w-4 h-4 ${
+            className={`w-3 h-3 ${
               star <= rating
-                ? 'fill-secondary text-secondary'
-                : 'text-muted-foreground'
+                ? 'fill-neon-green text-neon-green'
+                : 'text-muted-foreground/30'
             }`}
           />
         ))}
@@ -135,81 +128,76 @@ const MemberStats = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-pulse text-muted-foreground">Загрузка...</div>
+        <div className="animate-pulse text-muted-foreground font-light">Загрузка...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-light text-foreground">Статистика и отзывы</h1>
-        <p className="text-muted-foreground">
+        <p className="label text-neon-green">Аналитика</p>
+        <h1 className="title">Статистика</h1>
+        <p className="body max-w-xl">
           Ваша активность и обратная связь
         </p>
       </div>
 
       {/* Stats cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-card border-border">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Получено сеансов
-            </CardTitle>
-            <Calendar className="w-4 h-4 text-primary" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-foreground">{stats.sessionsReceived}</div>
+        <Card className="bg-card border-border hover:border-neon-purple/30 transition-colors group">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <span className="label">Получено</span>
+              <Calendar className="w-4 h-4 text-neon-purple group-hover:animate-neon-text-pulse" />
+            </div>
+            <div className="text-3xl font-light text-foreground">{stats.sessionsReceived}</div>
+            <p className="text-xs text-muted-foreground mt-1">сеансов</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-card border-border">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Проведено сеансов
-            </CardTitle>
-            <Users className="w-4 h-4 text-secondary" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-foreground">{stats.sessionsConducted}</div>
+        <Card className="bg-card border-border hover:border-neon-green/30 transition-colors group">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <span className="label">Проведено</span>
+              <Users className="w-4 h-4 text-neon-green group-hover:animate-neon-text-pulse" />
+            </div>
+            <div className="text-3xl font-light text-foreground">{stats.sessionsConducted}</div>
+            <p className="text-xs text-muted-foreground mt-1">сеансов</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-card border-border">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Средний рейтинг
-            </CardTitle>
-            <Star className="w-4 h-4 text-secondary" />
-          </CardHeader>
-          <CardContent>
+        <Card className="bg-card border-border hover:border-neon-green/30 transition-colors group">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <span className="label">Рейтинг</span>
+              <Star className="w-4 h-4 text-neon-green group-hover:animate-neon-text-pulse" />
+            </div>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-foreground">
+              <span className="text-3xl font-light text-foreground">
                 {stats.averageRating > 0 ? stats.averageRating.toFixed(1) : '—'}
               </span>
-              {stats.averageRating > 0 && renderStars(Math.round(stats.averageRating))}
             </div>
+            {stats.averageRating > 0 && (
+              <div className="mt-2">{renderStars(Math.round(stats.averageRating))}</div>
+            )}
           </CardContent>
         </Card>
 
-        <Card className="bg-card border-border">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Статус
-            </CardTitle>
-            <Award className="w-4 h-4 text-primary" />
-          </CardHeader>
-          <CardContent>
+        <Card className="bg-card border-border hover:border-neon-purple/30 transition-colors group">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <span className="label">Статус</span>
+              <Award className="w-4 h-4 text-neon-purple group-hover:animate-neon-text-pulse" />
+            </div>
             {stats.isCertified ? (
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary" className="bg-secondary/20 text-secondary">
-                  <Award className="w-3 h-3 mr-1" />
-                  Сертифицирован
-                </Badge>
+              <div className="flex items-center gap-2 text-neon-green">
+                <Award className="w-4 h-4" />
+                <span className="text-sm font-light">Сертифицирован</span>
               </div>
             ) : (
-              <span className="text-foreground">Ученик</span>
+              <span className="text-lg font-light text-foreground">Ученик</span>
             )}
           </CardContent>
         </Card>
@@ -217,40 +205,38 @@ const MemberStats = () => {
 
       {/* Feedback tabs */}
       <Tabs defaultValue="received" className="space-y-6">
-        <TabsList className="bg-muted">
-          <TabsTrigger value="received">
-            Полученные отзывы ({feedbackReceived.length})
+        <TabsList className="bg-muted/50 border border-border">
+          <TabsTrigger value="received" className="data-[state=active]:bg-neon-green/10 data-[state=active]:text-neon-green">
+            Полученные ({feedbackReceived.length})
           </TabsTrigger>
-          <TabsTrigger value="given">
-            Оставленные отзывы ({feedbackGiven.length})
+          <TabsTrigger value="given" className="data-[state=active]:bg-neon-purple/10 data-[state=active]:text-neon-purple">
+            Оставленные ({feedbackGiven.length})
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="received" className="space-y-4">
+        <TabsContent value="received" className="space-y-3">
           {feedbackReceived.length === 0 ? (
             <Card className="bg-card border-border">
               <CardContent className="py-12 text-center">
-                <MessageSquare className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-lg font-medium text-foreground mb-2">
-                  Пока нет отзывов
-                </h3>
-                <p className="text-muted-foreground">
-                  Отзывы появятся после проведённых сеансов
+                <MessageSquare className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="font-light text-foreground mb-2">Нет отзывов</h3>
+                <p className="body text-sm">
+                  Отзывы появятся после сеансов
                 </p>
               </CardContent>
             </Card>
           ) : (
             feedbackReceived.map((feedback) => (
               <Card key={feedback.id} className="bg-card border-border">
-                <CardContent className="p-6">
+                <CardContent className="p-5">
                   <div className="flex items-start justify-between mb-2">
                     {renderStars(feedback.rating)}
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {new Date(feedback.created_at).toLocaleDateString('ru-RU')}
                     </span>
                   </div>
                   {feedback.comment && (
-                    <p className="text-foreground">{feedback.comment}</p>
+                    <p className="text-sm text-foreground font-light">{feedback.comment}</p>
                   )}
                 </CardContent>
               </Card>
@@ -258,31 +244,29 @@ const MemberStats = () => {
           )}
         </TabsContent>
 
-        <TabsContent value="given" className="space-y-4">
+        <TabsContent value="given" className="space-y-3">
           {feedbackGiven.length === 0 ? (
             <Card className="bg-card border-border">
               <CardContent className="py-12 text-center">
-                <MessageSquare className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-lg font-medium text-foreground mb-2">
-                  Вы ещё не оставляли отзывов
-                </h3>
-                <p className="text-muted-foreground">
-                  После сеанса не забудьте оставить отзыв практику
+                <MessageSquare className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="font-light text-foreground mb-2">Нет отзывов</h3>
+                <p className="body text-sm">
+                  Не забудьте оставить отзыв после сеанса
                 </p>
               </CardContent>
             </Card>
           ) : (
             feedbackGiven.map((feedback) => (
               <Card key={feedback.id} className="bg-card border-border">
-                <CardContent className="p-6">
+                <CardContent className="p-5">
                   <div className="flex items-start justify-between mb-2">
                     {renderStars(feedback.rating)}
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {new Date(feedback.created_at).toLocaleDateString('ru-RU')}
                     </span>
                   </div>
                   {feedback.comment && (
-                    <p className="text-foreground">{feedback.comment}</p>
+                    <p className="text-sm text-foreground font-light">{feedback.comment}</p>
                   )}
                 </CardContent>
               </Card>

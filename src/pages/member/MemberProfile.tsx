@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { User, Mail, Award, Save } from 'lucide-react';
+import { User, Award, Save } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Profile {
@@ -39,7 +38,6 @@ const MemberProfile = () => {
     if (!user) return;
 
     try {
-      // Get profile
       const { data: profileData } = await supabase
         .from('profiles')
         .select('full_name, avatar_url')
@@ -51,7 +49,6 @@ const MemberProfile = () => {
         setFullName(profileData.full_name || '');
       }
 
-      // Get certification
       const { data: certData } = await supabase
         .from('certifications')
         .select('passed, certified_at, test_score')
@@ -82,10 +79,10 @@ const MemberProfile = () => {
       if (error) throw error;
 
       setProfile(prev => ({ ...prev, full_name: fullName }));
-      toast.success('Профиль сохранён');
+      toast.success('Сохранено');
     } catch (error) {
       console.error('Error saving profile:', error);
-      toast.error('Ошибка сохранения профиля');
+      toast.error('Ошибка сохранения');
     } finally {
       setSaving(false);
     }
@@ -104,78 +101,76 @@ const MemberProfile = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-pulse text-muted-foreground">Загрузка...</div>
+        <div className="animate-pulse text-muted-foreground font-light">Загрузка...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 max-w-2xl">
+    <div className="space-y-8 max-w-2xl animate-fade-in">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-light text-foreground">Мой профиль</h1>
-        <p className="text-muted-foreground">
+        <p className="label text-neon-purple">Настройки</p>
+        <h1 className="title">Профиль</h1>
+        <p className="body">
           Управление личными данными
         </p>
       </div>
 
       {/* Profile card */}
       <Card className="bg-card border-border">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-foreground">
-            <User className="w-5 h-5" />
-            Личные данные
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="p-6 space-y-6">
           {/* Avatar */}
           <div className="flex items-center gap-4">
-            <Avatar className="w-20 h-20">
+            <Avatar className="w-16 h-16 border-2 border-neon-purple/30">
               <AvatarImage src={profile.avatar_url || undefined} />
-              <AvatarFallback className="bg-primary/20 text-primary text-xl">
+              <AvatarFallback className="bg-neon-purple/10 text-neon-purple text-xl font-light">
                 {getInitials(profile.full_name)}
               </AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="font-medium text-foreground">
+              <h3 className="font-light text-foreground text-lg">
                 {profile.full_name || 'Пользователь'}
               </h3>
               <p className="text-sm text-muted-foreground">{user?.email}</p>
               {certification?.passed && (
-                <Badge variant="secondary" className="mt-2 bg-secondary/20 text-secondary">
-                  <Award className="w-3 h-3 mr-1" />
-                  Сертифицированный практик
-                </Badge>
+                <div className="flex items-center gap-1 mt-2 text-neon-green text-xs">
+                  <Award className="w-3 h-3" />
+                  <span className="uppercase tracking-wider">Практик</span>
+                </div>
               )}
             </div>
           </div>
 
           {/* Form */}
-          <div className="space-y-4">
+          <div className="space-y-4 pt-4 border-t border-border">
             <div className="space-y-2">
-              <Label htmlFor="fullName">Полное имя</Label>
+              <Label className="text-xs uppercase tracking-wider text-muted-foreground">Имя</Label>
               <Input
-                id="fullName"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Введите ваше имя"
+                placeholder="Введите имя"
+                className="bg-background border-border"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label className="text-xs uppercase tracking-wider text-muted-foreground">Email</Label>
               <Input
-                id="email"
                 value={user?.email || ''}
                 disabled
-                className="bg-muted"
+                className="bg-muted border-border"
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-[10px] text-muted-foreground">
                 Email нельзя изменить
               </p>
             </div>
 
-            <Button onClick={saveProfile} disabled={saving}>
+            <Button 
+              onClick={saveProfile} 
+              disabled={saving}
+              className="bg-neon-purple hover:bg-neon-purple/80"
+            >
               <Save className="w-4 h-4 mr-2" />
               {saving ? 'Сохранение...' : 'Сохранить'}
             </Button>
@@ -185,29 +180,29 @@ const MemberProfile = () => {
 
       {/* Certification info */}
       {certification?.passed && (
-        <Card className="bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-foreground">
-              <Award className="w-5 h-5 text-secondary" />
-              Сертификация
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2">
+        <Card className="bg-card border-neon-green/30">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-sm bg-neon-green/10 flex items-center justify-center">
+                <Award className="w-5 h-5 text-neon-green" />
+              </div>
               <div>
-                <p className="text-sm text-muted-foreground">Дата получения</p>
-                <p className="text-foreground font-medium">
+                <p className="label text-neon-green">Сертификация</p>
+                <h3 className="font-light text-foreground">Подтверждена</h3>
+              </div>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 pt-4 border-t border-border">
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Дата</p>
+                <p className="text-foreground font-light">
                   {new Date(certification.certified_at).toLocaleDateString('ru-RU')}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Результат теста</p>
-                <p className="text-foreground font-medium">{certification.test_score}%</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Результат</p>
+                <p className="text-foreground font-light">{certification.test_score}%</p>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Вы являетесь сертифицированным практиком метасинхроники и можете проводить сеансы другим участникам платформы.
-            </p>
           </CardContent>
         </Card>
       )}

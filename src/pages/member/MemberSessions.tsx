@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Calendar, Clock, User, Plus, Star, MessageSquare } from 'lucide-react';
+import { Calendar, Clock, User, Plus, Star } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface SessionRequest {
@@ -73,7 +72,6 @@ const MemberSessions = () => {
     setLoading(true);
 
     try {
-      // Check certification
       const { data: cert } = await supabase
         .from('certifications')
         .select('passed')
@@ -83,7 +81,6 @@ const MemberSessions = () => {
 
       setIsCertified(!!cert?.passed);
 
-      // Fetch open requests (not from current user)
       const { data: openRequests } = await supabase
         .from('session_requests')
         .select('*')
@@ -93,7 +90,6 @@ const MemberSessions = () => {
 
       setRequests(openRequests || []);
 
-      // Fetch my requests
       const { data: myReqs } = await supabase
         .from('session_requests')
         .select('*')
@@ -102,7 +98,6 @@ const MemberSessions = () => {
 
       setMyRequests(myReqs || []);
 
-      // Fetch my bookings (as practitioner)
       const { data: bookings } = await supabase
         .from('session_bookings')
         .select(`
@@ -139,7 +134,7 @@ const MemberSessions = () => {
 
       if (error) throw error;
 
-      toast.success('Заявка создана успешно');
+      toast.success('Заявка создана');
       setCreateDialogOpen(false);
       resetForm();
       fetchData();
@@ -153,7 +148,6 @@ const MemberSessions = () => {
     if (!user || !selectedRequest) return;
 
     try {
-      // Create booking
       const { error: bookingError } = await supabase
         .from('session_bookings')
         .insert({
@@ -165,7 +159,6 @@ const MemberSessions = () => {
 
       if (bookingError) throw bookingError;
 
-      // Update request status
       const { error: updateError } = await supabase
         .from('session_requests')
         .update({ status: 'booked' })
@@ -193,78 +186,82 @@ const MemberSessions = () => {
     setNotes('');
   };
 
-  const getStatusBadge = (status: string) => {
-    const statusConfig: Record<string, { variant: 'default' | 'secondary' | 'destructive' | 'outline'; label: string }> = {
-      open: { variant: 'outline', label: 'Открыта' },
-      booked: { variant: 'secondary', label: 'Назначен' },
-      completed: { variant: 'default', label: 'Завершён' },
-      cancelled: { variant: 'destructive', label: 'Отменён' }
+  const getStatusLabel = (status: string) => {
+    const labels: Record<string, { text: string; color: string }> = {
+      open: { text: 'Открыта', color: 'text-neon-purple' },
+      booked: { text: 'Назначен', color: 'text-neon-green' },
+      completed: { text: 'Завершён', color: 'text-muted-foreground' },
+      cancelled: { text: 'Отменён', color: 'text-destructive' }
     };
-    const config = statusConfig[status] || { variant: 'outline' as const, label: status };
-    return <Badge variant={config.variant}>{config.label}</Badge>;
+    const config = labels[status] || { text: status, color: 'text-muted-foreground' };
+    return <span className={`text-xs uppercase tracking-wider ${config.color}`}>{config.text}</span>;
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-pulse text-muted-foreground">Загрузка...</div>
+        <div className="animate-pulse text-muted-foreground font-light">Загрузка...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-2">
-          <h1 className="text-3xl font-light text-foreground">Сеансы метасинхроники</h1>
-          <p className="text-muted-foreground">
-            Получайте и проводите сеансы трансформации сознания
+          <p className="label text-neon-green">Практика</p>
+          <h1 className="title">Сеансы</h1>
+          <p className="body max-w-xl">
+            Получайте и проводите сеансы метасинхроники
           </p>
         </div>
         
         <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
           <DialogTrigger asChild>
-            <Button>
+            <Button className="bg-neon-purple hover:bg-neon-purple/80 text-primary-foreground">
               <Plus className="w-4 h-4 mr-2" />
-              Создать заявку
+              Новая заявка
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[425px] bg-card border-border">
             <DialogHeader>
-              <DialogTitle>Новая заявка на сеанс</DialogTitle>
+              <DialogTitle className="font-light">Новая заявка на сеанс</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 pt-4">
               <div className="space-y-2">
-                <Label>Предпочтительная дата</Label>
+                <Label className="text-xs uppercase tracking-wider text-muted-foreground">Дата</Label>
                 <Input
                   type="date"
                   value={preferredDate}
                   onChange={(e) => setPreferredDate(e.target.value)}
+                  className="bg-background border-border"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Время с</Label>
+                  <Label className="text-xs uppercase tracking-wider text-muted-foreground">С</Label>
                   <Input
                     type="time"
                     value={preferredTimeStart}
                     onChange={(e) => setPreferredTimeStart(e.target.value)}
+                    className="bg-background border-border"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>Время до</Label>
+                  <Label className="text-xs uppercase tracking-wider text-muted-foreground">До</Label>
                   <Input
                     type="time"
                     value={preferredTimeEnd}
                     onChange={(e) => setPreferredTimeEnd(e.target.value)}
+                    className="bg-background border-border"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label>Предпочтение по полу практика</Label>
+                <Label className="text-xs uppercase tracking-wider text-muted-foreground">Пол практика</Label>
                 <Select value={genderPreference} onValueChange={setGenderPreference}>
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-background border-border">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -275,15 +272,16 @@ const MemberSessions = () => {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label>Дополнительные пожелания</Label>
+                <Label className="text-xs uppercase tracking-wider text-muted-foreground">Пожелания</Label>
                 <Textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Опишите ваш запрос или тему для работы..."
+                  placeholder="Опишите ваш запрос..."
+                  className="bg-background border-border resize-none"
                 />
               </div>
-              <Button onClick={createRequest} className="w-full">
-                Создать заявку
+              <Button onClick={createRequest} className="w-full bg-neon-purple hover:bg-neon-purple/80">
+                Создать
               </Button>
             </div>
           </DialogContent>
@@ -291,53 +289,63 @@ const MemberSessions = () => {
       </div>
 
       <Tabs defaultValue="requests" className="space-y-6">
-        <TabsList className="bg-muted">
-          <TabsTrigger value="requests">Мои заявки</TabsTrigger>
-          {isCertified && <TabsTrigger value="available">Доступные заявки</TabsTrigger>}
-          {isCertified && <TabsTrigger value="booked">Назначенные сеансы</TabsTrigger>}
+        <TabsList className="bg-muted/50 border border-border">
+          <TabsTrigger value="requests" className="data-[state=active]:bg-neon-purple/10 data-[state=active]:text-neon-purple">
+            Мои заявки
+          </TabsTrigger>
+          {isCertified && (
+            <TabsTrigger value="available" className="data-[state=active]:bg-neon-green/10 data-[state=active]:text-neon-green">
+              Доступные
+            </TabsTrigger>
+          )}
+          {isCertified && (
+            <TabsTrigger value="booked" className="data-[state=active]:bg-neon-purple/10 data-[state=active]:text-neon-purple">
+              Назначенные
+            </TabsTrigger>
+          )}
         </TabsList>
 
-        <TabsContent value="requests" className="space-y-4">
+        <TabsContent value="requests" className="space-y-3">
           {myRequests.length === 0 ? (
             <Card className="bg-card border-border">
               <CardContent className="py-12 text-center">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-lg font-medium text-foreground mb-2">У вас пока нет заявок</h3>
-                <p className="text-muted-foreground mb-4">
-                  Создайте заявку, чтобы получить сеанс метасинхроники
+                <Calendar className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="font-light text-foreground mb-2">Нет заявок</h3>
+                <p className="body text-sm mb-4">
+                  Создайте заявку на сеанс
                 </p>
-                <Button onClick={() => setCreateDialogOpen(true)}>
+                <Button onClick={() => setCreateDialogOpen(true)} variant="outline" className="border-neon-purple/30 text-neon-purple">
                   <Plus className="w-4 h-4 mr-2" />
-                  Создать заявку
+                  Создать
                 </Button>
               </CardContent>
             </Card>
           ) : (
             myRequests.map((request) => (
-              <Card key={request.id} className="bg-card border-border">
-                <CardContent className="p-6">
+              <Card key={request.id} className="bg-card border-border hover:border-neon-purple/30 transition-colors">
+                <CardContent className="p-5">
                   <div className="flex items-start justify-between">
                     <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        {getStatusBadge(request.status)}
-                        <span className="text-sm text-muted-foreground">
+                      <div className="flex items-center gap-3">
+                        {getStatusLabel(request.status)}
+                        <span className="text-xs text-muted-foreground">
                           {new Date(request.created_at).toLocaleDateString('ru-RU')}
                         </span>
                       </div>
                       {request.preferred_date && (
-                        <div className="flex items-center gap-2 text-foreground">
-                          <Calendar className="w-4 h-4" />
+                        <div className="flex items-center gap-2 text-foreground text-sm">
+                          <Calendar className="w-3 h-3 text-neon-purple" />
                           <span>{new Date(request.preferred_date).toLocaleDateString('ru-RU')}</span>
                           {request.preferred_time_start && (
                             <>
-                              <Clock className="w-4 h-4 ml-2" />
+                              <Clock className="w-3 h-3 text-neon-purple ml-2" />
                               <span>{request.preferred_time_start} - {request.preferred_time_end}</span>
                             </>
                           )}
                         </div>
                       )}
                       {request.notes && (
-                        <p className="text-muted-foreground">{request.notes}</p>
+                        <p className="text-sm text-muted-foreground">{request.notes}</p>
                       )}
                     </div>
                   </div>
@@ -348,49 +356,49 @@ const MemberSessions = () => {
         </TabsContent>
 
         {isCertified && (
-          <TabsContent value="available" className="space-y-4">
+          <TabsContent value="available" className="space-y-3">
             {requests.length === 0 ? (
               <Card className="bg-card border-border">
                 <CardContent className="py-12 text-center">
-                  <User className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                  <h3 className="text-lg font-medium text-foreground mb-2">Нет доступных заявок</h3>
-                  <p className="text-muted-foreground">
-                    Пока нет открытых заявок от других участников
+                  <User className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
+                  <h3 className="font-light text-foreground mb-2">Нет заявок</h3>
+                  <p className="body text-sm">
+                    Пока нет открытых заявок
                   </p>
                 </CardContent>
               </Card>
             ) : (
               requests.map((request) => (
-                <Card key={request.id} className="bg-card border-border hover:border-primary/50 transition-colors">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          {getStatusBadge(request.status)}
-                          <span className="text-sm text-muted-foreground">
+                <Card key={request.id} className="bg-card border-border hover:border-neon-green/50 transition-colors group">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-2 flex-1">
+                        <div className="flex items-center gap-3">
+                          {getStatusLabel(request.status)}
+                          <span className="text-xs text-muted-foreground">
                             {new Date(request.created_at).toLocaleDateString('ru-RU')}
                           </span>
                         </div>
                         {request.preferred_date && (
-                          <div className="flex items-center gap-2 text-foreground">
-                            <Calendar className="w-4 h-4" />
+                          <div className="flex items-center gap-2 text-foreground text-sm">
+                            <Calendar className="w-3 h-3 text-neon-green" />
                             <span>{new Date(request.preferred_date).toLocaleDateString('ru-RU')}</span>
                             {request.preferred_time_start && (
                               <>
-                                <Clock className="w-4 h-4 ml-2" />
+                                <Clock className="w-3 h-3 text-neon-green ml-2" />
                                 <span>{request.preferred_time_start} - {request.preferred_time_end}</span>
                               </>
                             )}
                           </div>
                         )}
                         {request.gender_preference && request.gender_preference !== 'any' && (
-                          <div className="flex items-center gap-2 text-muted-foreground">
-                            <User className="w-4 h-4" />
+                          <div className="flex items-center gap-2 text-muted-foreground text-xs">
+                            <User className="w-3 h-3" />
                             <span>Предпочтение: {request.gender_preference === 'male' ? 'мужчина' : 'женщина'}</span>
                           </div>
                         )}
                         {request.notes && (
-                          <p className="text-muted-foreground">{request.notes}</p>
+                          <p className="text-sm text-muted-foreground">{request.notes}</p>
                         )}
                       </div>
                       <Button
@@ -398,8 +406,9 @@ const MemberSessions = () => {
                           setSelectedRequest(request);
                           setBookDialogOpen(true);
                         }}
+                        className="bg-neon-green hover:bg-neon-green/80 text-secondary-foreground"
                       >
-                        Взять сеанс
+                        Взять
                       </Button>
                     </div>
                   </CardContent>
@@ -410,28 +419,26 @@ const MemberSessions = () => {
         )}
 
         {isCertified && (
-          <TabsContent value="booked" className="space-y-4">
+          <TabsContent value="booked" className="space-y-3">
             {myBookings.length === 0 ? (
               <Card className="bg-card border-border">
                 <CardContent className="py-12 text-center">
-                  <Star className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                  <h3 className="text-lg font-medium text-foreground mb-2">Нет назначенных сеансов</h3>
-                  <p className="text-muted-foreground">
-                    Возьмите заявку, чтобы провести сеанс
+                  <Star className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
+                  <h3 className="font-light text-foreground mb-2">Нет сеансов</h3>
+                  <p className="body text-sm">
+                    Возьмите заявку для проведения сеанса
                   </p>
                 </CardContent>
               </Card>
             ) : (
               myBookings.map((booking) => (
                 <Card key={booking.id} className="bg-card border-border">
-                  <CardContent className="p-6">
+                  <CardContent className="p-5">
                     <div className="flex items-start justify-between">
                       <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          {getStatusBadge(booking.status)}
-                        </div>
-                        <div className="flex items-center gap-2 text-foreground">
-                          <Calendar className="w-4 h-4" />
+                        {getStatusLabel(booking.status)}
+                        <div className="flex items-center gap-2 text-foreground text-sm">
+                          <Calendar className="w-3 h-3 text-neon-purple" />
                           <span>{new Date(booking.scheduled_at).toLocaleString('ru-RU')}</span>
                         </div>
                         {booking.meeting_link && (
@@ -439,10 +446,13 @@ const MemberSessions = () => {
                             href={booking.meeting_link} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-primary hover:underline"
+                            className="text-neon-purple hover:underline text-sm"
                           >
                             Ссылка на встречу
                           </a>
+                        )}
+                        {booking.session_requests?.notes && (
+                          <p className="text-sm text-muted-foreground">{booking.session_requests.notes}</p>
                         )}
                       </div>
                     </div>
@@ -456,29 +466,31 @@ const MemberSessions = () => {
 
       {/* Book session dialog */}
       <Dialog open={bookDialogOpen} onOpenChange={setBookDialogOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] bg-card border-border">
           <DialogHeader>
-            <DialogTitle>Назначить сеанс</DialogTitle>
+            <DialogTitle className="font-light">Назначить сеанс</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 pt-4">
             <div className="space-y-2">
-              <Label>Дата и время сеанса</Label>
+              <Label className="text-xs uppercase tracking-wider text-muted-foreground">Дата и время</Label>
               <Input
                 type="datetime-local"
                 value={scheduledTime}
                 onChange={(e) => setScheduledTime(e.target.value)}
+                className="bg-background border-border"
               />
             </div>
             <div className="space-y-2">
-              <Label>Ссылка на встречу (Zoom, Google Meet и т.д.)</Label>
+              <Label className="text-xs uppercase tracking-wider text-muted-foreground">Ссылка на встречу</Label>
               <Input
                 value={meetingLink}
                 onChange={(e) => setMeetingLink(e.target.value)}
-                placeholder="https://..."
+                placeholder="https://zoom.us/..."
+                className="bg-background border-border"
               />
             </div>
-            <Button onClick={bookSession} className="w-full" disabled={!scheduledTime}>
-              Назначить сеанс
+            <Button onClick={bookSession} className="w-full bg-neon-green hover:bg-neon-green/80 text-secondary-foreground">
+              Назначить
             </Button>
           </div>
         </DialogContent>
