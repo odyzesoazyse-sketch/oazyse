@@ -16,6 +16,7 @@ import {
   Award
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface UserStats {
   completedLessons: number;
@@ -56,20 +57,17 @@ const MemberDashboard = () => {
     if (!user) return;
 
     try {
-      // Get total lessons
       const { data: lessons } = await supabase
         .from('lessons')
         .select('id')
         .eq('is_published', true);
 
-      // Get completed lessons
       const { data: progress } = await supabase
         .from('lesson_progress')
         .select('id')
         .eq('user_id', user.id)
         .eq('completed', true);
 
-      // Get certification status
       const { data: cert } = await supabase
         .from('certifications')
         .select('passed')
@@ -77,20 +75,17 @@ const MemberDashboard = () => {
         .eq('passed', true)
         .maybeSingle();
 
-      // Get sessions received
       const { data: received } = await supabase
         .from('session_requests')
         .select('id, session_bookings!inner(status)')
         .eq('requester_id', user.id);
 
-      // Get sessions conducted
       const { data: conducted } = await supabase
         .from('session_bookings')
         .select('id')
         .eq('practitioner_id', user.id)
         .eq('status', 'completed');
 
-      // Get average rating
       const { data: ratings } = await supabase
         .from('session_feedback')
         .select('rating')
@@ -121,7 +116,9 @@ const MemberDashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Загрузка...</div>
+        <div className="text-muted-foreground animate-pulse font-light tracking-wide">
+          Загрузка...
+        </div>
       </div>
     );
   }
@@ -149,34 +146,41 @@ const MemberDashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Mobile header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-card border-b border-border p-4 flex items-center justify-between">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border p-4 flex items-center justify-between">
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="text-foreground hover:text-neon-purple"
         >
           {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </Button>
-        <span className="font-medium text-primary">Метасинхроника</span>
-        <Button variant="ghost" size="icon" onClick={handleSignOut}>
-          <LogOut className="w-5 h-5" />
-        </Button>
+        <Link to="/" className="font-light tracking-[0.3em] text-foreground uppercase text-sm">
+          OAZYSE
+        </Link>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button variant="ghost" size="icon" onClick={handleSignOut} className="text-muted-foreground hover:text-foreground">
+            <LogOut className="w-5 h-5" />
+          </Button>
+        </div>
       </header>
 
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed top-0 left-0 h-full w-64 bg-card border-r border-border z-40 transform transition-transform duration-300 lg:translate-x-0",
+          "fixed top-0 left-0 h-full w-64 bg-background border-r border-border z-40 transform transition-transform duration-300 lg:translate-x-0",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
+        {/* Neon line accent */}
+        <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-neon-purple via-neon-green to-neon-purple opacity-30 animate-neon-line-pulse" />
+        
         <div className="p-6 border-b border-border">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-              <Award className="w-4 h-4 text-primary" />
-            </div>
-            <span className="font-semibold text-foreground">Метасинхроника</span>
+          <Link to="/" className="block">
+            <span className="font-light tracking-[0.3em] text-foreground uppercase text-lg">OAZYSE</span>
           </Link>
+          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">Метасинхроника</p>
         </div>
 
         <nav className="p-4 space-y-1">
@@ -186,35 +190,38 @@ const MemberDashboard = () => {
               to={item.path}
               onClick={() => setSidebarOpen(false)}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
+                "flex items-center gap-3 px-4 py-3 rounded-sm transition-all duration-300 group",
                 isActive(item.path, item.exact)
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-neon-purple/10 text-neon-purple border-l-2 border-neon-purple"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
               )}
             >
-              <item.icon className="w-5 h-5" />
-              <span>{item.label}</span>
+              <item.icon className={cn(
+                "w-4 h-4 transition-colors",
+                isActive(item.path, item.exact) && "animate-neon-text-pulse"
+              )} />
+              <span className="text-sm font-light tracking-wide">{item.label}</span>
             </Link>
           ))}
         </nav>
 
         {/* Stats summary */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border bg-muted/50">
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Уроки</span>
-              <span className="text-foreground">{stats.completedLessons}/{stats.totalLessons}</span>
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border bg-muted/30">
+          <div className="space-y-3 text-xs">
+            <div className="flex justify-between items-center">
+              <span className="text-muted-foreground uppercase tracking-wider">Уроки</span>
+              <span className="text-foreground font-medium">{stats.completedLessons}/{stats.totalLessons}</span>
             </div>
             {stats.isCertified && (
-              <div className="flex items-center gap-2 text-secondary">
-                <Award className="w-4 h-4" />
-                <span>Сертифицирован</span>
+              <div className="flex items-center gap-2 text-neon-green">
+                <Award className="w-3 h-3" />
+                <span className="uppercase tracking-wider text-[10px]">Сертифицирован</span>
               </div>
             )}
           </div>
           <Button
             variant="ghost"
-            className="w-full mt-4 justify-start text-muted-foreground hover:text-foreground"
+            className="w-full mt-4 justify-start text-muted-foreground hover:text-foreground text-sm font-light"
             onClick={handleSignOut}
           >
             <LogOut className="w-4 h-4 mr-2" />
@@ -233,6 +240,9 @@ const MemberDashboard = () => {
 
       {/* Main content */}
       <main className="lg:ml-64 min-h-screen pt-16 lg:pt-0">
+        <div className="hidden lg:flex items-center justify-end p-4 border-b border-border bg-background/80 backdrop-blur-md">
+          <ThemeToggle />
+        </div>
         <div className="p-6 lg:p-8">
           <Outlet context={{ stats, refreshStats: fetchUserStats }} />
         </div>

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -158,7 +157,6 @@ const MemberCertification = () => {
     if (!user) return;
 
     try {
-      // Check certification status
       const { data: cert } = await supabase
         .from('certifications')
         .select('*')
@@ -170,7 +168,6 @@ const MemberCertification = () => {
         setCertification(cert);
       }
 
-      // Check if all lessons completed
       const { data: lessons } = await supabase
         .from('lessons')
         .select('id')
@@ -218,7 +215,6 @@ const MemberCertification = () => {
   const submitTest = async () => {
     if (!user) return;
 
-    // Calculate score
     let correctAnswers = 0;
     testQuestions.forEach(q => {
       if (answers[q.id] === q.correct) {
@@ -245,25 +241,25 @@ const MemberCertification = () => {
       if (error) throw error;
 
       if (passed) {
-        toast.success('Поздравляем! Вы успешно прошли сертификацию!');
+        toast.success('Поздравляем! Сертификация пройдена!');
         setCertification({
           passed: true,
           test_score: scorePercent,
           certified_at: new Date().toISOString()
         });
       } else {
-        toast.error('К сожалению, тест не пройден. Попробуйте ещё раз после повторения материала.');
+        toast.error('Тест не пройден. Попробуйте снова.');
       }
     } catch (error) {
       console.error('Error saving certification:', error);
-      toast.error('Ошибка сохранения результата');
+      toast.error('Ошибка сохранения');
     }
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-pulse text-muted-foreground">Загрузка...</div>
+        <div className="animate-pulse text-muted-foreground font-light">Загрузка...</div>
       </div>
     );
   }
@@ -271,31 +267,32 @@ const MemberCertification = () => {
   // Already certified
   if (certification?.passed) {
     return (
-      <div className="space-y-8">
+      <div className="space-y-8 animate-fade-in">
         <div className="text-center py-12">
-          <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-secondary/20 flex items-center justify-center">
-            <Award className="w-12 h-12 text-secondary" />
+          <div className="w-20 h-20 mx-auto mb-6 rounded-sm bg-neon-green/10 flex items-center justify-center animate-neon-pulse-green">
+            <Award className="w-10 h-10 text-neon-green" />
           </div>
-          <h1 className="text-3xl font-light text-foreground mb-2">Вы сертифицированы!</h1>
-          <p className="text-muted-foreground mb-4">
-            Сертификат получен {new Date(certification.certified_at).toLocaleDateString('ru-RU')}
+          <p className="label text-neon-green mb-2">Сертификация</p>
+          <h1 className="title mb-4">Вы сертифицированы</h1>
+          <p className="body mb-6">
+            Получено {new Date(certification.certified_at).toLocaleDateString('ru-RU')}
           </p>
-          <Badge variant="secondary" className="text-lg px-4 py-2">
-            Результат теста: {certification.test_score}%
-          </Badge>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-neon-green/10 rounded-sm text-neon-green">
+            <span className="text-2xl font-light">{certification.test_score}%</span>
+          </div>
         </div>
 
-        <Card className="bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/20">
+        <Card className="bg-card border-neon-green/30">
           <CardContent className="p-6 text-center">
-            <h3 className="text-lg font-medium text-foreground mb-2">
+            <h3 className="font-light text-foreground mb-2">
               Теперь вы можете проводить сеансы
             </h3>
-            <p className="text-muted-foreground mb-4">
-              Перейдите в раздел сеансов, чтобы увидеть заявки от других участников
+            <p className="body text-sm mb-4">
+              Перейдите в раздел сеансов
             </p>
-            <Button asChild variant="secondary">
+            <Button asChild className="bg-neon-green hover:bg-neon-green/80 text-secondary-foreground">
               <Link to="/member/sessions">
-                Перейти к сеансам
+                К сеансам
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
@@ -308,24 +305,25 @@ const MemberCertification = () => {
   // Test completed but not passed
   if (testCompleted && score < 80) {
     return (
-      <div className="space-y-8">
+      <div className="space-y-8 animate-fade-in">
         <div className="text-center py-12">
-          <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-destructive/20 flex items-center justify-center">
-            <XCircle className="w-12 h-12 text-destructive" />
+          <div className="w-20 h-20 mx-auto mb-6 rounded-sm bg-destructive/10 flex items-center justify-center">
+            <XCircle className="w-10 h-10 text-destructive" />
           </div>
-          <h1 className="text-3xl font-light text-foreground mb-2">Тест не пройден</h1>
-          <p className="text-muted-foreground mb-4">
-            Ваш результат: {score}%. Для сертификации необходимо набрать минимум 80%.
+          <p className="label text-destructive mb-2">Результат</p>
+          <h1 className="title mb-4">Тест не пройден</h1>
+          <p className="body mb-6">
+            Результат: {score}%. Необходимо минимум 80%.
           </p>
           <div className="flex gap-4 justify-center">
-            <Button asChild variant="outline">
+            <Button asChild variant="outline" className="border-border">
               <Link to="/member/lessons">
                 <BookOpen className="w-4 h-4 mr-2" />
-                Повторить материал
+                Повторить
               </Link>
             </Button>
-            <Button onClick={startTest}>
-              Пройти тест снова
+            <Button onClick={startTest} className="bg-neon-purple hover:bg-neon-purple/80">
+              Ещё раз
             </Button>
           </div>
         </div>
@@ -336,31 +334,35 @@ const MemberCertification = () => {
   // Test in progress
   if (testStarted && !testCompleted) {
     const question = testQuestions[currentQuestion];
-    const progress = ((currentQuestion + 1) / testQuestions.length) * 100;
+    const progressValue = ((currentQuestion + 1) / testQuestions.length) * 100;
     const allAnswered = Object.keys(answers).length === testQuestions.length;
 
     return (
-      <div className="space-y-8 max-w-2xl mx-auto">
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>Вопрос {currentQuestion + 1} из {testQuestions.length}</span>
-            <span>{Math.round(progress)}%</span>
+      <div className="space-y-8 max-w-2xl mx-auto animate-fade-in">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="label">Вопрос {currentQuestion + 1} из {testQuestions.length}</span>
+            <span className="text-sm text-muted-foreground">{Math.round(progressValue)}%</span>
           </div>
-          <Progress value={progress} className="h-2" />
+          <Progress value={progressValue} className="h-1 bg-muted" />
         </div>
 
         <Card className="bg-card border-border">
           <CardContent className="p-6 space-y-6">
-            <h2 className="text-xl font-medium text-foreground">{question.question}</h2>
+            <h2 className="text-lg font-light text-foreground">{question.question}</h2>
 
             <RadioGroup
               value={answers[question.id]?.toString()}
               onValueChange={(value) => selectAnswer(question.id, parseInt(value))}
             >
               {question.options.map((option, index) => (
-                <div key={index} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors">
+                <div 
+                  key={index} 
+                  className="flex items-center space-x-3 p-4 rounded-sm border border-border hover:border-neon-purple/50 transition-colors cursor-pointer"
+                  onClick={() => selectAnswer(question.id, index)}
+                >
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
+                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer text-sm font-light">
                     {option}
                   </Label>
                 </div>
@@ -374,18 +376,24 @@ const MemberCertification = () => {
             variant="outline"
             onClick={prevQuestion}
             disabled={currentQuestion === 0}
+            className="border-border"
           >
             Назад
           </Button>
           
           {currentQuestion === testQuestions.length - 1 ? (
-            <Button onClick={submitTest} disabled={!allAnswered}>
-              Завершить тест
+            <Button 
+              onClick={submitTest} 
+              disabled={!allAnswered}
+              className="bg-neon-green hover:bg-neon-green/80 text-secondary-foreground"
+            >
+              Завершить
             </Button>
           ) : (
             <Button
               onClick={nextQuestion}
               disabled={answers[question.id] === undefined}
+              className="bg-neon-purple hover:bg-neon-purple/80"
             >
               Далее
             </Button>
@@ -397,62 +405,60 @@ const MemberCertification = () => {
 
   // Not started yet
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       <div className="space-y-2">
-        <h1 className="text-3xl font-light text-foreground">Сертификация практика</h1>
-        <p className="text-muted-foreground">
-          Пройдите тест и получите возможность проводить сеансы метасинхроники
+        <p className="label text-neon-purple">Тестирование</p>
+        <h1 className="title">Сертификация</h1>
+        <p className="body max-w-xl">
+          Пройдите тест и получите возможность проводить сеансы
         </p>
       </div>
 
       {!lessonsCompleted ? (
         <Card className="bg-card border-border">
           <CardContent className="py-12 text-center">
-            <BookOpen className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="text-lg font-medium text-foreground mb-2">
+            <BookOpen className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
+            <h3 className="font-light text-foreground mb-2">
               Сначала завершите обучение
             </h3>
-            <p className="text-muted-foreground mb-4">
-              Для прохождения сертификации необходимо изучить все уроки
+            <p className="body text-sm mb-4">
+              Для сертификации необходимо изучить все уроки
             </p>
-            <Button asChild>
+            <Button asChild variant="outline" className="border-neon-purple/30 text-neon-purple">
               <Link to="/member/lessons">
                 <BookOpen className="w-4 h-4 mr-2" />
-                Перейти к урокам
+                К урокам
               </Link>
             </Button>
           </CardContent>
         </Card>
       ) : (
-        <div className="space-y-6">
-          <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
-            <CardContent className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                  <Award className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-foreground mb-2">
-                    Вы готовы к сертификации!
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    Тест состоит из {testQuestions.length} вопросов. Для успешной сертификации 
-                    необходимо ответить правильно минимум на 80% вопросов.
-                  </p>
-                  <ul className="text-sm text-muted-foreground space-y-1 mb-4">
-                    <li>• Время не ограничено</li>
-                    <li>• Можно возвращаться к предыдущим вопросам</li>
-                    <li>• При неудаче можно пройти тест повторно</li>
-                  </ul>
-                  <Button onClick={startTest}>
-                    Начать тест
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </div>
+        <Card className="bg-card border-neon-purple/30 hover:border-neon-purple/50 transition-colors">
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-sm bg-neon-purple/10 flex items-center justify-center flex-shrink-0">
+                <Award className="w-6 h-6 text-neon-purple" />
               </div>
-            </CardContent>
-          </Card>
-        </div>
+              <div>
+                <h3 className="font-light text-foreground mb-2">
+                  Вы готовы к сертификации
+                </h3>
+                <p className="body text-sm mb-4">
+                  Тест: {testQuestions.length} вопросов. Минимум 80% для прохождения.
+                </p>
+                <ul className="text-xs text-muted-foreground space-y-1 mb-4">
+                  <li>• Время не ограничено</li>
+                  <li>• Можно вернуться к предыдущим вопросам</li>
+                  <li>• Повторные попытки разрешены</li>
+                </ul>
+                <Button onClick={startTest} className="bg-neon-purple hover:bg-neon-purple/80">
+                  Начать тест
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

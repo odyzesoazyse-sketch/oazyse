@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle2, PlayCircle, Clock, ChevronLeft } from 'lucide-react';
 import { toast } from 'sonner';
@@ -81,7 +80,7 @@ const MemberLessons = () => {
       if (error) throw error;
 
       setProgress(prev => new Map(prev).set(lessonId, true));
-      toast.success('Урок отмечен как завершённый');
+      toast.success('Урок завершён');
     } catch (error) {
       console.error('Error marking lesson:', error);
       toast.error('Ошибка сохранения прогресса');
@@ -94,38 +93,41 @@ const MemberLessons = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-pulse text-muted-foreground">Загрузка уроков...</div>
+        <div className="animate-pulse text-muted-foreground font-light">Загрузка...</div>
       </div>
     );
   }
 
   if (selectedLesson) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-8 animate-fade-in">
         <Button
           variant="ghost"
           onClick={() => setSelectedLesson(null)}
-          className="text-muted-foreground hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground -ml-2"
         >
-          <ChevronLeft className="w-4 h-4 mr-2" />
-          Назад к урокам
+          <ChevronLeft className="w-4 h-4 mr-1" />
+          Назад
         </Button>
 
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-light text-foreground">{selectedLesson.title}</h1>
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <p className="label text-neon-purple">
+              Урок {lessons.findIndex(l => l.id === selectedLesson.id) + 1}
+            </p>
             {progress.get(selectedLesson.id) && (
-              <Badge variant="secondary" className="bg-secondary/20 text-secondary">
-                <CheckCircle2 className="w-3 h-3 mr-1" />
+              <span className="inline-flex items-center gap-1 text-xs text-neon-green">
+                <CheckCircle2 className="w-3 h-3" />
                 Завершён
-              </Badge>
+              </span>
             )}
           </div>
-          <p className="text-muted-foreground">{selectedLesson.description}</p>
+          <h1 className="title text-2xl md:text-3xl">{selectedLesson.title}</h1>
+          <p className="body">{selectedLesson.description}</p>
         </div>
 
         {/* Video player */}
-        <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+        <div className="aspect-video bg-muted rounded-sm overflow-hidden border border-border">
           <iframe
             src={selectedLesson.video_url}
             className="w-full h-full"
@@ -137,19 +139,21 @@ const MemberLessons = () => {
         {/* Actions */}
         <div className="flex gap-4">
           {!progress.get(selectedLesson.id) && (
-            <Button onClick={() => markAsCompleted(selectedLesson.id)}>
+            <Button 
+              onClick={() => markAsCompleted(selectedLesson.id)}
+              className="bg-neon-green hover:bg-neon-green/80 text-secondary-foreground"
+            >
               <CheckCircle2 className="w-4 h-4 mr-2" />
-              Отметить как завершённый
+              Завершить урок
             </Button>
           )}
           
-          {/* Navigate to next lesson */}
           {(() => {
             const currentIndex = lessons.findIndex(l => l.id === selectedLesson.id);
             const nextLesson = lessons[currentIndex + 1];
             if (nextLesson) {
               return (
-                <Button variant="outline" onClick={() => setSelectedLesson(nextLesson)}>
+                <Button variant="outline" onClick={() => setSelectedLesson(nextLesson)} className="border-border">
                   Следующий урок
                 </Button>
               );
@@ -162,69 +166,68 @@ const MemberLessons = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-light text-foreground">Видео-обучение</h1>
-        <p className="text-muted-foreground">
+        <p className="label text-neon-purple">Обучение</p>
+        <h1 className="title">Видео-уроки</h1>
+        <p className="body max-w-xl">
           Освойте технику метасинхроники через последовательные уроки
         </p>
       </div>
 
       {/* Progress bar */}
       <Card className="bg-card border-border">
-        <CardContent className="pt-6">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-muted-foreground">Ваш прогресс</span>
-            <span className="text-sm font-medium text-foreground">{completedCount} из {lessons.length} уроков</span>
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between mb-3">
+            <span className="label">Ваш прогресс</span>
+            <span className="text-sm font-light text-foreground">{completedCount} из {lessons.length}</span>
           </div>
-          <Progress value={progressPercent} className="h-2" />
+          <Progress value={progressPercent} className="h-1 bg-muted" />
         </CardContent>
       </Card>
 
       {/* Lessons list */}
-      <div className="grid gap-4">
+      <div className="space-y-3">
         {lessons.map((lesson, index) => {
           const isCompleted = progress.get(lesson.id);
-          const prevCompleted = index === 0 || progress.get(lessons[index - 1]?.id);
 
           return (
             <Card
               key={lesson.id}
-              className={`bg-card border-border transition-all cursor-pointer hover:border-primary/50 ${
-                isCompleted ? 'border-secondary/50' : ''
+              className={`bg-card border-border transition-all duration-300 cursor-pointer hover:border-neon-purple/50 group ${
+                isCompleted ? 'border-neon-green/30' : ''
               }`}
               onClick={() => setSelectedLesson(lesson)}
             >
-              <CardContent className="p-6">
+              <CardContent className="p-5">
                 <div className="flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+                  <div className={`w-12 h-12 rounded-sm flex items-center justify-center flex-shrink-0 transition-all ${
                     isCompleted 
-                      ? 'bg-secondary/20 text-secondary' 
-                      : 'bg-primary/10 text-primary'
+                      ? 'bg-neon-green/10 text-neon-green' 
+                      : 'bg-neon-purple/10 text-neon-purple group-hover:animate-neon-pulse-purple'
                   }`}>
                     {isCompleted ? (
-                      <CheckCircle2 className="w-6 h-6" />
+                      <CheckCircle2 className="w-5 h-5" />
                     ) : (
-                      <PlayCircle className="w-6 h-6" />
+                      <PlayCircle className="w-5 h-5" />
                     )}
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs text-muted-foreground">Урок {index + 1}</span>
+                      <span className="label">Урок {index + 1}</span>
                       {isCompleted && (
-                        <Badge variant="secondary" className="bg-secondary/20 text-secondary text-xs">
+                        <span className="text-[10px] uppercase tracking-wider text-neon-green">
                           Завершён
-                        </Badge>
+                        </span>
                       )}
                     </div>
-                    <h3 className="font-medium text-foreground truncate">{lesson.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-1">{lesson.description}</p>
+                    <h3 className="font-light text-foreground truncate">{lesson.title}</h3>
                   </div>
 
-                  <div className="flex items-center gap-1 text-muted-foreground text-sm">
-                    <Clock className="w-4 h-4" />
+                  <div className="flex items-center gap-1 text-muted-foreground text-xs">
+                    <Clock className="w-3 h-3" />
                     {lesson.duration_minutes} мин
                   </div>
                 </div>
