@@ -9,6 +9,7 @@ import ServicesSection from '@/components/sections/ServicesSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ContactsSection from '@/components/sections/ContactsSection';
 import HypnotherapyChat from '@/components/HypnotherapyChat';
+import IntroModal from '@/components/IntroModal';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -28,6 +29,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <IntroModal />
       <Header />
       <main className="pt-12 pb-16">
         <div key={activeTab} className="animate-fade-in">
