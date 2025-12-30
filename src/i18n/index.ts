@@ -53,7 +53,12 @@ i18n
     resources: { ru: { translation: ru }, en: { translation: en }, es: { translation: es }, de: { translation: de }, fr: { translation: fr }, zh: { translation: zh }, ja: { translation: ja }, ko: { translation: ko }, ar: { translation: ar }, hi: { translation: hi }, pt: { translation: pt }, it: { translation: it }, tr: { translation: tr }, pl: { translation: pl }, nl: { translation: nl }, uk: { translation: uk }, vi: { translation: vi }, th: { translation: th }, sv: { translation: sv }, he: { translation: he } },
     fallbackLng: 'ru',
     interpolation: { escapeValue: false },
-    detection: { order: ['localStorage', 'navigator'], caches: ['localStorage'] }
+    detection: { 
+      order: ['localStorage', 'navigator', 'htmlTag'], 
+      lookupLocalStorage: 'i18nextLng',
+      caches: ['localStorage']
+    },
+    supportedLngs: ['ru', 'en', 'es', 'de', 'fr', 'zh', 'ja', 'ko', 'ar', 'hi', 'pt', 'it', 'tr', 'pl', 'nl', 'uk', 'vi', 'th', 'sv', 'he']
   });
 
 export default i18n;
