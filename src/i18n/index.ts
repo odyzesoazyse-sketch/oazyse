@@ -24,26 +24,9 @@ import sv from './locales/sv.json';
 import he from './locales/he.json';
 
 export const languages = [
-  { code: 'ru', name: 'Русский' },
   { code: 'en', name: 'English' },
-  { code: 'es', name: 'Español' },
-  { code: 'de', name: 'Deutsch' },
-  { code: 'fr', name: 'Français' },
+  { code: 'ru', name: 'Русский' },
   { code: 'zh', name: '中文' },
-  { code: 'ja', name: '日本語' },
-  { code: 'ko', name: '한국어' },
-  { code: 'ar', name: 'العربية' },
-  { code: 'hi', name: 'हिंदी' },
-  { code: 'pt', name: 'Português' },
-  { code: 'it', name: 'Italiano' },
-  { code: 'tr', name: 'Türkçe' },
-  { code: 'pl', name: 'Polski' },
-  { code: 'nl', name: 'Nederlands' },
-  { code: 'uk', name: 'Українська' },
-  { code: 'vi', name: 'Tiếng Việt' },
-  { code: 'th', name: 'ไทย' },
-  { code: 'sv', name: 'Svenska' },
-  { code: 'he', name: 'עברית' },
 ];
 
 i18n
@@ -58,7 +41,7 @@ i18n
       lookupLocalStorage: 'i18nextLng',
       caches: ['localStorage']
     },
-    supportedLngs: ['ru', 'en', 'es', 'de', 'fr', 'zh', 'ja', 'ko', 'ar', 'hi', 'pt', 'it', 'tr', 'pl', 'nl', 'uk', 'vi', 'th', 'sv', 'he']
+    supportedLngs: ['en', 'ru', 'zh']
   });
 
 export default i18n;
