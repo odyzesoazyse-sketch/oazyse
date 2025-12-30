@@ -11,23 +11,23 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-background z-50 border-b border-border">
-      <div className="flex items-center justify-between h-12 px-6">
-        <span className="text-sm tracking-wide font-semibold bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent">OAZYSE</span>
+      <div className="flex items-center justify-between h-6 px-4">
+        <span className="text-xs tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent" style={{ fontFamily: 'Questrial, sans-serif' }}>oazyse°</span>
         <div className="flex items-center">
           <ThemeToggle />
           <LanguageSwitcher />
           {isAdmin && (
-            <Link to="/admin" className="p-3 text-neon-purple hover:text-neon-green transition-colors">
-              <Settings className="w-4 h-4" />
+            <Link to="/admin" className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
+              <Settings className="w-3 h-3" />
             </Link>
           )}
           {user ? (
-            <button onClick={() => signOut()} className="p-3 text-neon-purple hover:text-neon-green transition-colors">
-              <LogOut className="w-4 h-4" />
+            <button onClick={() => signOut()} className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
+              <LogOut className="w-3 h-3" />
             </button>
           ) : (
-            <Link to="/auth" className="p-3 text-neon-purple hover:text-neon-green transition-colors">
-              <User className="w-4 h-4" />
+            <Link to="/auth" className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
+              <User className="w-3 h-3" />
             </Link>
           )}
         </div>
