@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Copy, MessageCircle, Share2, ArrowLeft } from 'lucide-react';
+import { useState, useRef, useEffect, TouchEvent } from 'react';
+import { Copy, MessageCircle, Share2, ChevronUp, ChevronDown, ArrowLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { toast } from '@/hooks/use-toast';
 import Header from './Header';
@@ -20,7 +20,15 @@ interface NewsViewerProps {
 
 const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
   const { t } = useTranslation();
-  const currentArticle = articles[initialIndex];
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [translateY, setTranslateY] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const minSwipeDistance = 50;
+  const currentArticle = articles[currentIndex];
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -31,14 +39,83 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'ArrowUp' && currentIndex > 0) {
+        goToPrevious();
+      } else if (e.key === 'ArrowDown' && currentIndex < articles.length - 1) {
+        goToNext();
+      } else if (e.key === 'Escape') {
         onClose();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [currentIndex, articles.length, onClose]);
+
+  const goToNext = () => {
+    if (currentIndex < articles.length - 1 && !isAnimating) {
+      setIsAnimating(true);
+      setTranslateY(-100);
+      setTimeout(() => {
+        setCurrentIndex(prev => prev + 1);
+        setTranslateY(0);
+        setIsAnimating(false);
+      }, 300);
+    }
+  };
+
+  const goToPrevious = () => {
+    if (currentIndex > 0 && !isAnimating) {
+      setIsAnimating(true);
+      setTranslateY(100);
+      setTimeout(() => {
+        setCurrentIndex(prev => prev - 1);
+        setTranslateY(0);
+        setIsAnimating(false);
+      }, 300);
+    }
+  };
+
+  const onTouchStart = (e: TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientY);
+  };
+
+  const onTouchMove = (e: TouchEvent) => {
+    const currentTouch = e.targetTouches[0].clientY;
+    setTouchEnd(currentTouch);
+    
+    if (touchStart !== null) {
+      const diff = touchStart - currentTouch;
+      const percentage = (diff / window.innerHeight) * 100;
+      
+      if (percentage > -30 && percentage < 30) {
+        setTranslateY(-percentage);
+      }
+    }
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) {
+      setTranslateY(0);
+      return;
+    }
+    
+    const distance = touchStart - touchEnd;
+    const isUpSwipe = distance > minSwipeDistance;
+    const isDownSwipe = distance < -minSwipeDistance;
+    
+    if (isUpSwipe && currentIndex < articles.length - 1) {
+      goToNext();
+    } else if (isDownSwipe && currentIndex > 0) {
+      goToPrevious();
+    } else {
+      setTranslateY(0);
+    }
+    
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString();
@@ -79,92 +156,143 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
     }
   };
 
+  const handleWheel = (e: React.WheelEvent) => {
+    if (isAnimating) return;
+    
+    if (e.deltaY > 30 && currentIndex < articles.length - 1) {
+      goToNext();
+    } else if (e.deltaY < -30 && currentIndex > 0) {
+      goToPrevious();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 bg-background flex flex-col">
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-50 bg-background flex flex-col"
+    >
       {/* Original Header */}
       <Header />
 
-      {/* Back button */}
-      <div className="pt-12 px-4 flex items-center shrink-0">
+      {/* Back button and counter */}
+      <div className="pt-12 px-4 flex items-center justify-between shrink-0">
         <button 
           onClick={onClose}
           className="flex items-center gap-1 text-[8px] uppercase tracking-[0.15em] text-muted-foreground hover:text-neon-purple transition-colors"
         >
           <ArrowLeft className="w-3 h-3" />
         </button>
+        <span className="text-[8px] text-muted-foreground">
+          {currentIndex + 1}/{articles.length}
+        </span>
       </div>
 
       {/* Main content area */}
-      <div className="flex-1 overflow-y-auto px-4 md:px-12 lg:px-24 py-4">
-        <div className="max-w-2xl mx-auto w-full">
-          {/* News card with corner borders */}
-          <div className="relative p-4 md:p-6">
-            {/* Corner borders */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-neon-purple" />
-            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-neon-green" />
-            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-neon-green" />
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-neon-purple" />
+      <div 
+        className="flex-1 overflow-hidden relative"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        onWheel={handleWheel}
+      >
+        {/* Content */}
+        <div
+          className="h-full w-full flex flex-col px-4 md:px-12 lg:px-24 py-4 overflow-y-auto"
+          style={{
+            transform: `translateY(${translateY}%)`,
+            transition: isAnimating ? 'transform 0.3s ease-out' : 'none',
+          }}
+        >
+          <div className="max-w-2xl mx-auto w-full">
+            {/* News card with corner borders */}
+            <div className="relative p-4 md:p-6">
+              {/* Corner borders */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-neon-purple" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-neon-green" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-neon-green" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-neon-purple" />
 
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[8px] uppercase tracking-[0.2em] text-neon-purple">
-                  {t('home.news.title')}
-                </span>
-                <span className="text-[8px] text-muted-foreground">{formatDate(currentArticle.created_at)}</span>
-              </div>
-              
-              <h1 className="text-base md:text-lg font-light leading-tight">
-                {currentArticle.title}
-              </h1>
-              
-              <div>
-                <p className="text-[11px] md:text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed">
-                  {currentArticle.content}
-                </p>
-              </div>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[8px] uppercase tracking-[0.2em] text-neon-purple">
+                    {t('home.news.title')}
+                  </span>
+                  <span className="text-[8px] text-muted-foreground">{formatDate(currentArticle.created_at)}</span>
+                </div>
+                
+                <h1 className="text-base md:text-lg font-light leading-tight">
+                  {currentArticle.title}
+                </h1>
+                
+                <div>
+                  <p className="text-[11px] md:text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed">
+                    {currentArticle.content}
+                  </p>
+                </div>
 
-              {/* Share section */}
-              <div className="pt-3 border-t border-border/50">
-                <p className="text-[7px] uppercase tracking-[0.2em] text-muted-foreground mb-2">
-                  {t('home.news.share')}
-                </p>
-                <div className="flex gap-2 flex-wrap">
-                  <button
-                    onClick={handleCopyLink}
-                    className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-purple/30 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors rounded-sm"
-                  >
-                    <Copy className="w-2.5 h-2.5" />
-                    {t('home.news.copy')}
-                  </button>
-                  <button
-                    onClick={handleShareTelegram}
-                    className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-purple/30 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors rounded-sm"
-                  >
-                    <MessageCircle className="w-2.5 h-2.5" />
-                    Telegram
-                  </button>
-                  <button
-                    onClick={handleShareWhatsApp}
-                    className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-green/30 hover:border-neon-green hover:bg-neon-green/10 transition-colors rounded-sm"
-                  >
-                    <MessageCircle className="w-2.5 h-2.5" />
-                    WhatsApp
-                  </button>
-                  {navigator.share && (
+                {/* Share section */}
+                <div className="pt-3 border-t border-border/50">
+                  <p className="text-[7px] uppercase tracking-[0.2em] text-muted-foreground mb-2">
+                    {t('home.news.share')}
+                  </p>
+                  <div className="flex gap-2 flex-wrap">
                     <button
-                      onClick={handleShareNative}
+                      onClick={handleCopyLink}
                       className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-purple/30 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors rounded-sm"
                     >
-                      <Share2 className="w-2.5 h-2.5" />
-                      {t('home.news.share')}
+                      <Copy className="w-2.5 h-2.5" />
+                      {t('home.news.copy')}
                     </button>
-                  )}
+                    <button
+                      onClick={handleShareTelegram}
+                      className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-purple/30 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors rounded-sm"
+                    >
+                      <MessageCircle className="w-2.5 h-2.5" />
+                      Telegram
+                    </button>
+                    <button
+                      onClick={handleShareWhatsApp}
+                      className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-green/30 hover:border-neon-green hover:bg-neon-green/10 transition-colors rounded-sm"
+                    >
+                      <MessageCircle className="w-2.5 h-2.5" />
+                      WhatsApp
+                    </button>
+                    {navigator.share && (
+                      <button
+                        onClick={handleShareNative}
+                        className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-purple/30 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors rounded-sm"
+                      >
+                        <Share2 className="w-2.5 h-2.5" />
+                        {t('home.news.share')}
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Navigation arrows - fixed at bottom */}
+      {articles.length > 1 && (
+        <div className="flex items-center justify-center gap-4 py-2 shrink-0">
+          <button
+            onClick={goToPrevious}
+            disabled={currentIndex === 0}
+            className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
+          >
+            <ChevronUp className="w-3 h-3 text-neon-purple" />
+          </button>
+          <button
+            onClick={goToNext}
+            disabled={currentIndex === articles.length - 1}
+            className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
+          >
+            <ChevronDown className="w-3 h-3 text-neon-purple" />
+          </button>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-background border-t border-border shrink-0">
