@@ -1,7 +1,13 @@
 import { useState, useRef, useEffect, TouchEvent } from 'react';
 import { X, Copy, MessageCircle, Share2, ChevronUp, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from '@/hooks/use-toast';
+import ThemeToggle from './ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useAuth } from '@/hooks/useAuth';
+import { useAdmin } from '@/hooks/useAdmin';
+import { User, LogOut, Settings } from 'lucide-react';
 
 interface NewsArticle {
   id: string;
@@ -19,6 +25,8 @@ interface NewsViewerProps {
 
 const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
   const { t } = useTranslation();
+  const { user, signOut } = useAuth();
+  const { isAdmin } = useAdmin();
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -88,7 +96,6 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
       const diff = touchStart - currentTouch;
       const percentage = (diff / window.innerHeight) * 100;
       
-      // Limit drag range
       if (percentage > -30 && percentage < 30) {
         setTranslateY(-percentage);
       }
@@ -121,15 +128,25 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
     return new Date(dateStr).toLocaleDateString();
   };
 
+  const getNewsLink = () => {
+    return `${window.location.origin}/?news=${currentArticle.id}`;
+  };
+
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
+    navigator.clipboard.writeText(getNewsLink());
     toast({ title: t('home.news.copied') });
   };
 
   const handleShareTelegram = () => {
-    const url = encodeURIComponent(window.location.href);
+    const url = encodeURIComponent(getNewsLink());
     const text = encodeURIComponent(currentArticle?.title || '');
     window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+  };
+
+  const handleShareWhatsApp = () => {
+    const url = encodeURIComponent(getNewsLink());
+    const text = encodeURIComponent(currentArticle?.title || '');
+    window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
   };
 
   const handleShareNative = async () => {
@@ -138,7 +155,7 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
         await navigator.share({
           title: currentArticle.title,
           text: currentArticle.preview,
-          url: window.location.href,
+          url: getNewsLink(),
         });
       } catch {
         // Share cancelled
@@ -159,101 +176,181 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 bg-background"
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-      onWheel={handleWheel}
+      className="fixed inset-0 z-50 bg-background flex flex-col"
     >
-      {/* Close button */}
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 z-10 p-2 hover:opacity-70 transition-opacity"
-      >
-        <X className="w-6 h-6" />
-      </button>
-
-      {/* Progress indicator */}
-      <div className="absolute top-4 left-4 z-10">
-        <span className="text-xs text-muted-foreground">
-          {currentIndex + 1} / {articles.length}
-        </span>
-      </div>
-
-      {/* Navigation arrows */}
-      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-4">
-        <button
-          onClick={goToPrevious}
-          disabled={currentIndex === 0}
-          className="p-2 border border-border rounded-full disabled:opacity-20 hover:bg-muted transition-colors"
-        >
-          <ChevronUp className="w-5 h-5" />
-        </button>
-        <button
-          onClick={goToNext}
-          disabled={currentIndex === articles.length - 1}
-          className="p-2 border border-border rounded-full disabled:opacity-20 hover:bg-muted transition-colors"
-        >
-          <ChevronDown className="w-5 h-5" />
-        </button>
-      </div>
-
-      {/* Content */}
-      <div
-        className="h-full w-full flex flex-col justify-center px-6 md:px-16 lg:px-32 max-w-3xl mx-auto"
-        style={{
-          transform: `translateY(${translateY}%)`,
-          transition: isAnimating ? 'transform 0.3s ease-out' : 'none',
-        }}
-      >
-        <div className="space-y-6 overflow-y-auto max-h-[80vh] scrollbar-hide">
-          <span className="label">{formatDate(currentArticle.created_at)}</span>
-          
-          <h1 className="text-2xl md:text-3xl font-light leading-tight">
-            {currentArticle.title}
-          </h1>
-          
-          <p className="text-base md:text-lg text-muted-foreground whitespace-pre-wrap">
-            {currentArticle.content}
-          </p>
-
-          {/* Share buttons */}
-          <div className="flex gap-3 pt-6 border-t border-border">
-            <button
-              onClick={handleCopyLink}
-              className="flex items-center gap-2 px-3 py-2 text-[10px] uppercase tracking-[0.15em] border border-border hover:border-foreground transition-colors"
-            >
-              <Copy className="w-3 h-3" />
-              {t('home.news.copy')}
-            </button>
-            <button
-              onClick={handleShareTelegram}
-              className="flex items-center gap-2 px-3 py-2 text-[10px] uppercase tracking-[0.15em] border border-border hover:border-foreground transition-colors"
-            >
-              <MessageCircle className="w-3 h-3" />
-              Telegram
-            </button>
-            {navigator.share && (
-              <button
-                onClick={handleShareNative}
-                className="flex items-center gap-2 px-3 py-2 text-[10px] uppercase tracking-[0.15em] border border-border hover:border-foreground transition-colors"
-              >
-                <Share2 className="w-3 h-3" />
-                {t('home.news.share')}
+      {/* Header */}
+      <header className="bg-background z-50 border-b border-border shrink-0">
+        <div className="flex items-center justify-between h-6 px-4">
+          <button 
+            onClick={onClose}
+            className="text-xs tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent hover:opacity-70 transition-opacity" 
+            style={{ fontFamily: 'Questrial, sans-serif' }}
+          >
+            oazyse°
+          </button>
+          <div className="flex items-center">
+            <span className="text-[8px] text-muted-foreground mr-2">
+              {currentIndex + 1}/{articles.length}
+            </span>
+            <ThemeToggle />
+            <LanguageSwitcher />
+            {isAdmin && (
+              <Link to="/admin" className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
+                <Settings className="w-3 h-3" />
+              </Link>
+            )}
+            {user ? (
+              <button onClick={() => signOut()} className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
+                <LogOut className="w-3 h-3" />
               </button>
+            ) : (
+              <Link to="/auth" className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
+                <User className="w-3 h-3" />
+              </Link>
             )}
           </div>
         </div>
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-purple to-transparent animate-neon-line-pulse" />
+      </header>
 
-        {/* Swipe hint */}
-        {articles.length > 1 && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
-            <p className="text-xs text-muted-foreground animate-pulse">
-              {currentIndex < articles.length - 1 ? '↑ Swipe up for next' : '↓ Swipe down for previous'}
-            </p>
+      {/* Main content area */}
+      <div 
+        className="flex-1 overflow-hidden relative"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        onWheel={handleWheel}
+      >
+        {/* Navigation arrows */}
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-2">
+          <button
+            onClick={goToPrevious}
+            disabled={currentIndex === 0}
+            className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
+          >
+            <ChevronUp className="w-4 h-4 text-neon-purple" />
+          </button>
+          <button
+            onClick={goToNext}
+            disabled={currentIndex === articles.length - 1}
+            className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
+          >
+            <ChevronDown className="w-4 h-4 text-neon-purple" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div
+          className="h-full w-full flex flex-col justify-center px-4 md:px-12 lg:px-24"
+          style={{
+            transform: `translateY(${translateY}%)`,
+            transition: isAnimating ? 'transform 0.3s ease-out' : 'none',
+          }}
+        >
+          <div className="max-w-2xl mx-auto w-full">
+            {/* News card with gradient border */}
+            <div className="p-[1px] bg-gradient-to-r from-neon-purple via-neon-green to-neon-purple rounded-sm">
+              <div className="bg-background p-4 md:p-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[8px] uppercase tracking-[0.2em] text-neon-purple">
+                    {t('home.news.title')}
+                  </span>
+                  <span className="text-[8px] text-muted-foreground">{formatDate(currentArticle.created_at)}</span>
+                </div>
+                
+                <h1 className="text-base md:text-lg font-light leading-tight">
+                  {currentArticle.title}
+                </h1>
+                
+                <div className="max-h-[40vh] overflow-y-auto scrollbar-hide">
+                  <p className="text-[11px] md:text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed">
+                    {currentArticle.content}
+                  </p>
+                </div>
+
+                {/* Share section */}
+                <div className="pt-3 border-t border-neon-purple/20">
+                  <p className="text-[7px] uppercase tracking-[0.2em] text-muted-foreground mb-2">
+                    {t('home.news.share')}
+                  </p>
+                  <div className="flex gap-2 flex-wrap">
+                    <button
+                      onClick={handleCopyLink}
+                      className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-purple/30 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors rounded-sm"
+                    >
+                      <Copy className="w-2.5 h-2.5" />
+                      {t('home.news.copy')}
+                    </button>
+                    <button
+                      onClick={handleShareTelegram}
+                      className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-purple/30 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors rounded-sm"
+                    >
+                      <MessageCircle className="w-2.5 h-2.5" />
+                      Telegram
+                    </button>
+                    <button
+                      onClick={handleShareWhatsApp}
+                      className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-green/30 hover:border-neon-green hover:bg-neon-green/10 transition-colors rounded-sm"
+                    >
+                      <MessageCircle className="w-2.5 h-2.5" />
+                      WhatsApp
+                    </button>
+                    {navigator.share && (
+                      <button
+                        onClick={handleShareNative}
+                        className="flex items-center gap-1.5 px-2 py-1 text-[8px] uppercase tracking-[0.1em] border border-neon-purple/30 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors rounded-sm"
+                      >
+                        <Share2 className="w-2.5 h-2.5" />
+                        {t('home.news.share')}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Swipe hint */}
+            {articles.length > 1 && (
+              <p className="text-[8px] text-center text-muted-foreground mt-3 animate-pulse">
+                {currentIndex < articles.length - 1 ? '↑' : '↓'}
+              </p>
+            )}
           </div>
-        )}
+        </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-background border-t border-border shrink-0">
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-green to-transparent animate-neon-line-pulse" />
+        <div className="flex items-center justify-center gap-4 h-8 px-4">
+          <a 
+            href="https://t.me/oazyse" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-[8px] uppercase tracking-[0.15em] text-muted-foreground hover:text-neon-purple transition-colors"
+          >
+            Telegram
+          </a>
+          <span className="text-neon-purple/30">•</span>
+          <a 
+            href="https://instagram.com/oazyse" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-[8px] uppercase tracking-[0.15em] text-muted-foreground hover:text-neon-purple transition-colors"
+          >
+            Instagram
+          </a>
+          <span className="text-neon-purple/30">•</span>
+          <a 
+            href="https://wa.me/oazyse" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-[8px] uppercase tracking-[0.15em] text-muted-foreground hover:text-neon-green transition-colors"
+          >
+            WhatsApp
+          </a>
+        </div>
+      </footer>
     </div>
   );
 };
