@@ -181,7 +181,6 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
           className="flex items-center gap-1 text-[8px] uppercase tracking-[0.15em] text-muted-foreground hover:text-neon-purple transition-colors"
         >
           <ArrowLeft className="w-3 h-3" />
-          {t('home.news.back') || 'Назад'}
         </button>
         <span className="text-[8px] text-muted-foreground">
           {currentIndex + 1}/{articles.length}
@@ -198,7 +197,7 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
       >
         {/* Content */}
         <div
-          className="h-full w-full flex flex-col justify-center px-4 md:px-12 lg:px-24"
+          className="h-full w-full flex flex-col px-4 md:px-12 lg:px-24 py-4 overflow-y-auto"
           style={{
             transform: `translateY(${translateY}%)`,
             transition: isAnimating ? 'transform 0.3s ease-out' : 'none',
@@ -225,7 +224,7 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
                   {currentArticle.title}
                 </h1>
                 
-                <div className="max-h-[35vh] overflow-y-auto scrollbar-hide">
+                <div>
                   <p className="text-[11px] md:text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed">
                     {currentArticle.content}
                   </p>
@@ -271,30 +270,29 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
                 </div>
               </div>
             </div>
-
-            {/* Navigation arrows - below content */}
-            {articles.length > 1 && (
-              <div className="flex items-center justify-center gap-4 mt-4">
-                <button
-                  onClick={goToPrevious}
-                  disabled={currentIndex === 0}
-                  className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
-                >
-                  <ChevronUp className="w-3 h-3 text-neon-purple" />
-                </button>
-                <span className="text-[8px] text-muted-foreground">scroll</span>
-                <button
-                  onClick={goToNext}
-                  disabled={currentIndex === articles.length - 1}
-                  className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
-                >
-                  <ChevronDown className="w-3 h-3 text-neon-purple" />
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </div>
+
+      {/* Navigation arrows - fixed at bottom */}
+      {articles.length > 1 && (
+        <div className="flex items-center justify-center gap-4 py-2 shrink-0">
+          <button
+            onClick={goToPrevious}
+            disabled={currentIndex === 0}
+            className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
+          >
+            <ChevronUp className="w-3 h-3 text-neon-purple" />
+          </button>
+          <button
+            onClick={goToNext}
+            disabled={currentIndex === articles.length - 1}
+            className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
+          >
+            <ChevronDown className="w-3 h-3 text-neon-purple" />
+          </button>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-background border-t border-border shrink-0">
