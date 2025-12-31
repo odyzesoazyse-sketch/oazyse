@@ -20,7 +20,7 @@ const HomeSection = () => {
   const isRussian = i18n.language === 'ru';
   const bookCover = isRussian ? bookCoverRu : bookCoverEn;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [selectedFormat, setSelectedFormat] = useState<'physical' | 'digital' | null>(null);
+  
   const [news, setNews] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -43,7 +43,7 @@ const HomeSection = () => {
   }, []);
 
   const handlePurchase = () => {
-    window.open('https://example.com/payment', '_blank');
+    navigate('/auth');
   };
 
   const formatDate = (dateStr: string) => {
@@ -75,55 +75,31 @@ const HomeSection = () => {
       </section>
 
       {/* Book */}
-      <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all space-y-3">
-        <span className="label">{t('home.featured')}</span>
+      <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all space-y-2">
+        <span className="text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{t('home.featured')}</span>
         
-        <div className="flex gap-2 md:gap-3">
-          {/* Book image with thin green gradient frame */}
-          <div className="relative flex-shrink-0 p-[2px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
+        <div className="flex gap-3 md:gap-4">
+          {/* Book image with green gradient frame matching quiz banner thickness */}
+          <div className="relative flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
             <img src={bookCover} alt="" className="w-28 md:w-40 rounded" />
           </div>
           
-          <div className="flex flex-col justify-start gap-1 flex-1 min-w-0">
-            <h1 className="text-[11px] md:text-sm font-medium lowercase leading-tight">{t('home.book.title')}</h1>
-            <div className="flex items-center gap-2 text-[8px] md:text-[10px] text-muted-foreground">
+          <div className="flex flex-col justify-start gap-1.5 flex-1 min-w-0">
+            <h1 className="text-sm md:text-base font-medium lowercase leading-tight">{t('home.book.title')}</h1>
+            <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground">
               <span>{t('home.book.author')}</span>
               <span>•</span>
               <span>2026</span>
             </div>
-            <p className="text-[8px] md:text-[10px] text-muted-foreground leading-tight mt-1">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed mt-1">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
           </div>
         </div>
         
-        {/* Fixed button row - no wrapping, no movement */}
-        <div className="flex items-center justify-between gap-2 pt-1">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setSelectedFormat('physical')}
-              className={`px-2 md:px-3 py-1.5 text-[8px] md:text-[9px] uppercase tracking-[0.08em] border transition-colors rounded whitespace-nowrap ${
-                selectedFormat === 'physical' 
-                  ? 'bg-neon-purple text-white border-neon-purple' 
-                  : 'border-border hover:border-neon-purple hover:text-neon-purple'
-              }`}
-            >
-              {t('home.book.physical')}
-            </button>
-            <button
-              onClick={() => setSelectedFormat('digital')}
-              className={`px-2 md:px-3 py-1.5 text-[8px] md:text-[9px] uppercase tracking-[0.08em] border transition-colors rounded whitespace-nowrap ${
-                selectedFormat === 'digital' 
-                  ? 'bg-neon-green text-white border-neon-green' 
-                  : 'border-border hover:border-neon-green hover:text-neon-green'
-              }`}
-            >
-              {t('home.book.digital')}
-            </button>
-            <span className="text-sm md:text-base font-medium text-neon-green">$35</span>
-          </div>
+        {/* Simple buy button */}
+        <div className="pt-1">
           <button
             onClick={handlePurchase}
-            disabled={!selectedFormat}
-            className="px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[8px] md:text-[9px] uppercase tracking-[0.08em] disabled:opacity-30 rounded transition-opacity whitespace-nowrap"
+            className="w-full py-2 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[10px] md:text-xs uppercase tracking-[0.1em] rounded transition-opacity hover:opacity-90"
           >
             {t('home.book.buyButton')}
           </button>
