@@ -78,16 +78,14 @@ const HomeSection = () => {
       <section className="space-y-3">
         <span className="label">{t('home.featured')}</span>
         
-        <div className="flex gap-4 items-start">
-          <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted flex-shrink-0" />
-          
-          <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
-            <span className="text-[10px] text-muted-foreground">{t('home.book.author')}</span>
-          </div>
+        <div>
+          <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted float-left mr-4 mb-2" />
+          <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
+          <span className="text-[10px] text-muted-foreground block mb-2">{t('home.book.author')}</span>
+          <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.description')}</p>
         </div>
         
-        <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.description')}</p>
+        <div className="clear-both"></div>
         
         <div className="flex flex-wrap items-center gap-3">
           <button
