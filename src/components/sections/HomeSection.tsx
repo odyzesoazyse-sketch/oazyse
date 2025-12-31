@@ -81,51 +81,46 @@ const HomeSection = () => {
         <div className="flex gap-4 items-start">
           <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted flex-shrink-0" />
           
-          <div className="space-y-3 flex-1 min-w-0">
-            {/* Title and Author in one line area */}
+          <div className="space-y-2 flex-1 min-w-0">
             <div>
               <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
               <span className="text-[10px] text-muted-foreground">{t('home.book.author')}</span>
             </div>
-            
             <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.description')}</p>
-            
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setSelectedFormat('physical')}
-                className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
-                  selectedFormat === 'physical' 
-                    ? 'bg-neon-purple text-white border-neon-purple shadow-[0_0_10px_hsl(var(--neon-purple)/0.4)]' 
-                    : 'border-border hover:border-neon-purple hover:text-neon-purple'
-                }`}
-              >
-                {t('home.book.physical')}
-              </button>
-              <button
-                onClick={() => setSelectedFormat('digital')}
-                className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
-                  selectedFormat === 'digital' 
-                    ? 'bg-neon-green text-white border-neon-green shadow-[0_0_10px_hsl(var(--neon-green)/0.4)]' 
-                    : 'border-border hover:border-neon-green hover:text-neon-green'
-                }`}
-              >
-                {t('home.book.digital')}
-              </button>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <span className="text-base font-light">
-                {selectedFormat === 'digital' ? t('home.book.priceDigital') : t('home.book.pricePhysical')}
-              </span>
-              <button
-                onClick={handlePurchase}
-                disabled={!selectedFormat}
-                className="px-4 py-2 bg-gradient-to-r from-neon-purple to-neon-green text-white text-[9px] uppercase tracking-[0.1em] disabled:opacity-30 rounded hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.5)] transition-all"
-              >
-                {t('home.book.buyButton')}
-              </button>
-            </div>
           </div>
+        </div>
+        
+        <div className="flex flex-wrap items-center gap-3 pt-2">
+          <button
+            onClick={() => setSelectedFormat('physical')}
+            className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
+              selectedFormat === 'physical' 
+                ? 'bg-neon-purple text-white border-neon-purple shadow-[0_0_10px_hsl(var(--neon-purple)/0.4)]' 
+                : 'border-border hover:border-neon-purple hover:text-neon-purple'
+            }`}
+          >
+            {t('home.book.physical')}
+          </button>
+          <button
+            onClick={() => setSelectedFormat('digital')}
+            className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
+              selectedFormat === 'digital' 
+                ? 'bg-neon-green text-white border-neon-green shadow-[0_0_10px_hsl(var(--neon-green)/0.4)]' 
+                : 'border-border hover:border-neon-green hover:text-neon-green'
+            }`}
+          >
+            {t('home.book.digital')}
+          </button>
+          <span className="text-base font-light">
+            {selectedFormat === 'digital' ? t('home.book.priceDigital') : t('home.book.pricePhysical')}
+          </span>
+          <button
+            onClick={handlePurchase}
+            disabled={!selectedFormat}
+            className="px-4 py-2 bg-gradient-to-r from-neon-purple to-neon-green text-white text-[9px] uppercase tracking-[0.1em] disabled:opacity-30 rounded hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.5)] transition-all"
+          >
+            {t('home.book.buyButton')}
+          </button>
         </div>
       </section>
 
