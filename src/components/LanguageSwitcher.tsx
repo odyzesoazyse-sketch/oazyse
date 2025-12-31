@@ -13,10 +13,9 @@ const LanguageSwitcher = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 text-xs p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-sm transition-all uppercase"
+        className="flex items-center p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-sm transition-all"
       >
         <Globe className="w-3.5 h-3.5" strokeWidth={1.5} />
-        <span className="text-[9px] tracking-wider">{currentLang.code}</span>
       </button>
 
       {isOpen && (

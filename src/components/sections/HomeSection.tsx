@@ -50,28 +50,29 @@ const HomeSection = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="px-6 py-16 max-w-2xl mx-auto space-y-24">
-      {/* Quiz Banner */}
+    <div className="px-4 py-6 max-w-2xl mx-auto space-y-8">
+      {/* Quiz Banner - Compact */}
       <section 
         onClick={() => navigate('/quiz')}
-        className="p-6 border border-neon-purple/30 rounded-lg cursor-pointer hover:border-neon-purple hover:shadow-[0_0_30px_hsl(var(--neon-purple)/0.2)] transition-all group relative overflow-hidden"
+        className="px-4 py-2.5 border border-neon-purple/30 rounded cursor-pointer hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all group"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/5 to-neon-green/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="flex items-center gap-4 relative">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-purple to-neon-green text-white flex items-center justify-center animate-neon-pulse-purple">
-            <Brain className="w-6 h-6" />
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-neon-purple to-neon-green text-white flex items-center justify-center flex-shrink-0">
+            <Brain className="w-4 h-4" />
           </div>
-          <div className="flex-1">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-neon-green font-medium">БЕСПЛАТНО</span>
-            <h2 className="text-lg font-medium mt-1">Экспресс-анализ</h2>
-            <p className="body mt-1">Пройдите короткий тест и получите персональные рекомендации от AI</p>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm font-medium">Экспресс-анализ</h2>
+              <span className="text-[8px] uppercase tracking-[0.15em] text-neon-green">бесплатно</span>
+            </div>
+            <p className="text-[10px] text-muted-foreground truncate">Персональные рекомендации от AI</p>
           </div>
-          <span className="text-neon-purple group-hover:translate-x-1 group-hover:text-neon-green transition-all">→</span>
+          <span className="text-neon-purple group-hover:translate-x-1 group-hover:text-neon-green transition-all text-sm">→</span>
         </div>
       </section>
 
       {/* Book */}
-      <section className="space-y-8">
+      <section className="space-y-4">
         <span className="label">{t('home.featured')}</span>
         
         <div className="flex flex-col md:flex-row gap-8 items-start">
@@ -121,10 +122,10 @@ const HomeSection = () => {
       </section>
 
       {/* News */}
-      <section className="space-y-6">
+      <section className="space-y-3">
         <span className="label">{t('home.news.title')}</span>
         
-        <div className="space-y-4">
+        <div className="space-y-2">
           {loading ? (
             <p className="body">Loading...</p>
           ) : news.length === 0 ? (
