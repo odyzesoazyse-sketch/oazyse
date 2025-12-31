@@ -75,11 +75,15 @@ const HomeSection = () => {
       </section>
 
       {/* Book */}
-      <section className="space-y-2">
+      <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_25px_hsl(var(--neon-purple)/0.2)] transition-all space-y-3">
         <span className="label">{t('home.featured')}</span>
         
         <div className="flex gap-4">
-          <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted flex-shrink-0" />
+          {/* Book image with gradient glow */}
+          <div className="relative flex-shrink-0">
+            <div className="absolute -inset-2 bg-gradient-to-br from-neon-purple/40 via-neon-purple/20 to-neon-green/30 blur-lg rounded-lg" />
+            <img src={bookCover} alt="" className="relative w-36 md:w-44 rounded shadow-lg" />
+          </div>
           
           <div className="flex flex-col justify-between py-0.5">
             <div>
