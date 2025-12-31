@@ -20,7 +20,7 @@ const HomeSection = () => {
   const isRussian = i18n.language === 'ru';
   const bookCover = isRussian ? bookCoverRu : bookCoverEn;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  
+  const [selectedFormat, setSelectedFormat] = useState<'physical' | 'digital'>('physical');
   const [news, setNews] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -75,31 +75,55 @@ const HomeSection = () => {
       </section>
 
       {/* Book */}
-      <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all space-y-2">
-        <span className="text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{t('home.featured')}</span>
+      <section className="p-3 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-[7px] uppercase tracking-[0.12em] text-muted-foreground">{t('home.featured')}</span>
+        </div>
         
-        <div className="flex gap-3 md:gap-4">
-          {/* Book image with green gradient frame matching quiz banner thickness */}
-          <div className="relative flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
-            <img src={bookCover} alt="" className="w-28 md:w-40 rounded" />
+        <div className="flex gap-3">
+          {/* Book image with green gradient frame - fixed size container */}
+          <div className="relative flex-shrink-0 w-24 md:w-36">
+            <div className="p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40 inline-block">
+              <img src={bookCover} alt="" className="w-full rounded block" />
+            </div>
           </div>
           
-          <div className="flex flex-col justify-start gap-1.5 flex-1 min-w-0">
+          <div className="flex flex-col justify-start gap-1 flex-1 min-w-0">
             <h1 className="text-sm md:text-base font-medium lowercase leading-tight">{t('home.book.title')}</h1>
             <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground">
               <span>{t('home.book.author')}</span>
               <span>•</span>
               <span>2026</span>
             </div>
-            <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed mt-1">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
+            <p className="text-[9px] md:text-xs text-muted-foreground leading-snug mt-1 break-words">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
           </div>
         </div>
         
-        {/* Simple buy button */}
-        <div className="pt-1">
+        {/* Format buttons + buy button */}
+        <div className="flex items-center gap-2 mt-3">
+          <button
+            onClick={() => setSelectedFormat('physical')}
+            className={`px-2 py-1 text-[8px] uppercase tracking-[0.08em] border transition-colors rounded ${
+              selectedFormat === 'physical' 
+                ? 'bg-neon-purple text-white border-neon-purple' 
+                : 'border-border hover:border-neon-purple'
+            }`}
+          >
+            {t('home.book.physical')}
+          </button>
+          <button
+            onClick={() => setSelectedFormat('digital')}
+            className={`px-2 py-1 text-[8px] uppercase tracking-[0.08em] border transition-colors rounded ${
+              selectedFormat === 'digital' 
+                ? 'bg-neon-green text-white border-neon-green' 
+                : 'border-border hover:border-neon-green'
+            }`}
+          >
+            {t('home.book.digital')}
+          </button>
           <button
             onClick={handlePurchase}
-            className="w-full py-2 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[10px] md:text-xs uppercase tracking-[0.1em] rounded transition-opacity hover:opacity-90"
+            className="flex-1 py-1.5 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[9px] uppercase tracking-[0.1em] rounded transition-opacity hover:opacity-90"
           >
             {t('home.book.buyButton')}
           </button>
