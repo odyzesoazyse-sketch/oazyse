@@ -75,18 +75,23 @@ const HomeSection = () => {
       </section>
 
       {/* Book */}
-      <section className="space-y-3">
+      <section className="space-y-2">
         <span className="label">{t('home.featured')}</span>
         
-        <div>
-          <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted float-left mr-4 mb-2" />
-          <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
-          <span className="text-[10px] text-muted-foreground block">{t('home.book.author')}</span>
-          <span className="text-[10px] text-muted-foreground block mb-2">2026</span>
-          <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.descriptionPart1')}</p>
+        <div className="flex gap-4">
+          <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted flex-shrink-0" />
+          
+          <div className="flex flex-col justify-between py-0.5">
+            <div>
+              <h1 className="text-sm font-medium lowercase leading-tight">{t('home.book.title')}</h1>
+              <span className="text-[10px] text-muted-foreground block">{t('home.book.author')}</span>
+              <span className="text-[10px] text-muted-foreground block">2026</span>
+            </div>
+            <p className="text-[10px] text-muted-foreground leading-snug">{t('home.book.descriptionPart1')}</p>
+          </div>
         </div>
         
-        <p className="text-[11px] text-muted-foreground leading-relaxed clear-both">{t('home.book.descriptionPart2')}</p>
+        <p className="text-[10px] text-muted-foreground leading-snug text-justify">{t('home.book.descriptionPart2')}</p>
         
         <div className="flex flex-wrap items-center gap-3">
           <button
