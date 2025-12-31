@@ -53,52 +53,52 @@ const HomeSection = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="px-4 py-6 max-w-2xl mx-auto space-y-8">
+    <div className="px-4 py-4 max-w-2xl mx-auto space-y-3">
       {/* Quiz Banner - Compact */}
       <section 
         onClick={() => navigate('/quiz')}
-        className="px-4 py-2.5 border border-neon-purple/30 rounded cursor-pointer hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all group"
+        className="px-3 py-2 border border-neon-purple/30 rounded cursor-pointer hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all group"
       >
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-neon-purple to-neon-green text-white flex items-center justify-center flex-shrink-0">
-            <Brain className="w-4 h-4" />
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-neon-purple to-neon-green text-white flex items-center justify-center flex-shrink-0">
+            <Brain className="w-3 h-3" />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2">
-              <h2 className="text-sm font-medium">Экспресс-анализ</h2>
-              <span className="text-[8px] uppercase tracking-[0.15em] text-neon-green">бесплатно</span>
+            <div className="flex items-center gap-1.5">
+              <h2 className="text-xs font-medium">Экспресс-анализ</h2>
+              <span className="text-[6px] uppercase tracking-[0.12em] text-neon-green">бесплатно</span>
             </div>
-            <p className="text-[10px] text-muted-foreground truncate">Персональные рекомендации от AI</p>
+            <p className="text-[8px] text-muted-foreground truncate">Персональные рекомендации от AI</p>
           </div>
-          <span className="text-neon-purple group-hover:translate-x-1 group-hover:text-neon-green transition-all text-sm">→</span>
+          <span className="text-neon-purple group-hover:translate-x-1 group-hover:text-neon-green transition-all text-xs">→</span>
         </div>
       </section>
 
       {/* Book */}
-      <section className="p-3 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
-        <span className="text-[7px] uppercase tracking-[0.12em] text-muted-foreground block mb-2">{t('home.featured')}</span>
+      <section className="p-2.5 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
+        <span className="text-[6px] uppercase tracking-[0.1em] text-muted-foreground block mb-1.5">{t('home.featured')}</span>
         
         {/* Book image full width with gradient frame */}
-        <div className="p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40 mb-3">
+        <div className="p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40 mb-2">
           <img src={bookCover} alt="" className="w-full rounded block" />
         </div>
         
         {/* Text content */}
-        <div className="space-y-1 mb-3">
-          <h1 className="text-sm md:text-base font-medium lowercase leading-tight">{t('home.book.title')}</h1>
-          <div className="flex items-center gap-2 text-[10px] md:text-xs text-muted-foreground">
+        <div className="space-y-0.5 mb-2">
+          <h1 className="text-xs md:text-sm font-medium lowercase leading-tight">{t('home.book.title')}</h1>
+          <div className="flex items-center gap-1.5 text-[8px] md:text-[10px] text-muted-foreground">
             <span>{t('home.book.author')}</span>
             <span>•</span>
             <span>2026</span>
           </div>
-          <p className="text-[9px] md:text-xs text-muted-foreground leading-snug">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
+          <p className="text-[8px] md:text-[10px] text-muted-foreground leading-snug">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
         </div>
         
         {/* Format buttons + buy button - all same size */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => setSelectedFormat('physical')}
-            className={`px-3 py-1.5 text-[8px] uppercase tracking-[0.08em] border transition-colors rounded ${
+            className={`px-2 py-1 text-[7px] uppercase tracking-[0.08em] border transition-colors rounded ${
               selectedFormat === 'physical' 
                 ? 'bg-neon-purple text-white border-neon-purple' 
                 : 'border-border hover:border-neon-purple'
@@ -108,7 +108,7 @@ const HomeSection = () => {
           </button>
           <button
             onClick={() => setSelectedFormat('digital')}
-            className={`px-3 py-1.5 text-[8px] uppercase tracking-[0.08em] border transition-colors rounded ${
+            className={`px-2 py-1 text-[7px] uppercase tracking-[0.08em] border transition-colors rounded ${
               selectedFormat === 'digital' 
                 ? 'bg-neon-green text-white border-neon-green' 
                 : 'border-border hover:border-neon-green'
@@ -118,7 +118,7 @@ const HomeSection = () => {
           </button>
           <button
             onClick={handlePurchase}
-            className="px-3 py-1.5 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[8px] uppercase tracking-[0.08em] rounded transition-opacity hover:opacity-90 ml-auto"
+            className="px-2 py-1 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[7px] uppercase tracking-[0.08em] rounded transition-opacity hover:opacity-90 ml-auto"
           >
             {t('home.book.buyButton')}
           </button>
@@ -126,28 +126,30 @@ const HomeSection = () => {
       </section>
 
       {/* News */}
-      <section className="space-y-3">
-        <span className="label">{t('home.news.title')}</span>
+      <section className="p-2.5 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
+        <span className="text-[6px] uppercase tracking-[0.1em] text-muted-foreground block mb-1.5">{t('home.news.title')}</span>
         
-        <div className="space-y-2">
-          {loading ? (
-            <p className="body">Loading...</p>
-          ) : news.length === 0 ? (
-            <p className="body">{t('home.news.empty') || 'No news yet'}</p>
-          ) : (
-            news.map((article, index) => (
+        {loading ? (
+          <p className="text-[8px] text-muted-foreground">Loading...</p>
+        ) : news.length === 0 ? (
+          <p className="text-[8px] text-muted-foreground">{t('home.news.empty') || 'No news yet'}</p>
+        ) : (
+          <div className="space-y-1.5">
+            {news.map((article, index) => (
               <div
                 key={article.id}
                 onClick={() => setSelectedIndex(index)}
-                className="py-4 border-b border-border cursor-pointer hover:border-neon-purple transition-all group"
+                className="py-1.5 border-b border-border/50 cursor-pointer hover:border-neon-purple transition-all group last:border-b-0"
               >
-                <span className="label group-hover:text-neon-green transition-colors">{formatDate(article.created_at)}</span>
-                <h3 className="mt-2 text-sm group-hover:text-neon-purple transition-colors">{article.title}</h3>
-                <p className="mt-2 body line-clamp-2">{article.preview}</p>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[6px] text-muted-foreground group-hover:text-neon-green transition-colors">{formatDate(article.created_at)}</span>
+                  <h3 className="text-[9px] group-hover:text-neon-purple transition-colors truncate">{article.title}</h3>
+                </div>
+                <p className="text-[7px] text-muted-foreground line-clamp-1 mt-0.5">{article.preview}</p>
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Full-screen News Viewer */}
