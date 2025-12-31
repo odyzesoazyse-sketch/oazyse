@@ -79,7 +79,7 @@ const HomeSection = () => {
         <span className="label">{t('home.featured')}</span>
         
         <div className="flex gap-4 items-start">
-          <img src={bookCover} alt="" className="w-24 md:w-28 bg-muted flex-shrink-0" />
+          <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted flex-shrink-0" />
           
           <div className="space-y-3 flex-1 min-w-0">
             {/* Title and Author in one line area */}
