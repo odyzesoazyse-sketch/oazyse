@@ -81,7 +81,8 @@ const HomeSection = () => {
         <div>
           <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted float-left mr-4 mb-2" />
           <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
-          <span className="text-[10px] text-muted-foreground block mb-2">{t('home.book.author')}</span>
+          <span className="text-[10px] text-muted-foreground block">{t('home.book.author')}</span>
+          <span className="text-[10px] text-muted-foreground block mb-2">2026</span>
           <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.description')}</p>
         </div>
         
