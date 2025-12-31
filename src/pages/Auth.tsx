@@ -106,23 +106,27 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-5">
-      <div className="w-full max-w-sm space-y-10 animate-fade-in">
-        <div className="text-center space-y-3">
-          <h1 className="font-serif italic text-4xl">Oazyse</h1>
-          <p className="text-sm text-muted-foreground tracking-wide">
+    <div className="min-h-screen bg-background flex items-center justify-center px-4">
+      <div className="w-full max-w-xs space-y-6 animate-fade-in">
+        {/* Logo */}
+        <div className="text-center space-y-2">
+          <h1 className="font-questrial text-lg tracking-[0.2em] text-foreground">
+            oazyse<span className="text-neon-purple">°</span>
+          </h1>
+          <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground">
             {isSignUp ? t('auth.createAccount') : t('auth.welcomeBack')}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-3">
           {isSignUp && (
             <Input
               type="text"
               placeholder={t('auth.fullName')}
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="input-elegant"
+              className="h-9 text-[10px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
             />
           )}
           
@@ -132,7 +136,7 @@ const Auth = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="input-elegant"
+            className="h-9 text-[10px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
           />
           
           <Input
@@ -141,52 +145,56 @@ const Auth = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="input-elegant"
+            className="h-9 text-[10px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
           />
 
           <Button
             type="submit"
             disabled={loading}
-            className="btn-primary w-full mt-2"
+            className="w-full h-9 text-[9px] uppercase tracking-[0.15em] bg-neon-purple/20 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple/30 transition-all"
           >
             {loading ? '...' : isSignUp ? t('auth.signUp') : t('auth.signIn')}
           </Button>
         </form>
 
+        {/* Divider */}
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border/30" />
+            <span className="w-full border-t border-neon-purple/20" />
           </div>
-          <div className="relative flex justify-center text-[10px] uppercase tracking-[0.15em]">
-            <span className="bg-background px-4 text-muted-foreground">{t('auth.or')}</span>
+          <div className="relative flex justify-center text-[8px] uppercase tracking-[0.2em]">
+            <span className="bg-background px-3 text-muted-foreground">{t('auth.or')}</span>
           </div>
         </div>
 
+        {/* Google Button */}
         <Button
           type="button"
           variant="outline"
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="w-full h-12 text-xs uppercase tracking-[0.1em] font-medium border-border/50 hover:border-foreground hover:bg-muted/30 transition-all"
+          className="w-full h-9 text-[9px] uppercase tracking-[0.15em] border-border/30 hover:border-neon-green/50 hover:bg-neon-green/10 hover:text-neon-green transition-all"
         >
           {t('auth.continueWithGoogle')}
         </Button>
 
-        <p className="text-center text-sm text-muted-foreground">
+        {/* Toggle Sign Up / Sign In */}
+        <p className="text-center text-[9px] text-muted-foreground tracking-wide">
           {isSignUp ? t('auth.haveAccount') : t('auth.noAccount')}{' '}
           <button
             type="button"
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-foreground font-medium link-underline"
+            className="text-neon-purple hover:text-neon-purple/80 transition-colors"
           >
             {isSignUp ? t('auth.signIn') : t('auth.signUp')}
           </button>
         </p>
 
+        {/* Back Link */}
         <button
           type="button"
           onClick={() => navigate('/')}
-          className="block w-full text-center text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider"
+          className="block w-full text-center text-[8px] uppercase tracking-[0.2em] text-muted-foreground hover:text-neon-green transition-colors"
         >
           ← {t('auth.backToHome')}
         </button>
