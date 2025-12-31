@@ -1,13 +1,8 @@
 import { useState, useRef, useEffect, TouchEvent } from 'react';
-import { X, Copy, MessageCircle, Share2, ChevronUp, ChevronDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Copy, MessageCircle, Share2, ChevronUp, ChevronDown, ArrowLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { toast } from '@/hooks/use-toast';
-import ThemeToggle from './ThemeToggle';
-import LanguageSwitcher from './LanguageSwitcher';
-import { useAuth } from '@/hooks/useAuth';
-import { useAdmin } from '@/hooks/useAdmin';
-import { User, LogOut, Settings } from 'lucide-react';
+import Header from './Header';
 
 interface NewsArticle {
   id: string;
@@ -25,8 +20,6 @@ interface NewsViewerProps {
 
 const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
   const { t } = useTranslation();
-  const { user, signOut } = useAuth();
-  const { isAdmin } = useAdmin();
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -178,40 +171,22 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
       ref={containerRef}
       className="fixed inset-0 z-50 bg-background flex flex-col"
     >
-      {/* Header */}
-      <header className="bg-background z-50 border-b border-border shrink-0">
-        <div className="flex items-center justify-between h-6 px-4">
-          <button 
-            onClick={onClose}
-            className="text-xs tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent hover:opacity-70 transition-opacity" 
-            style={{ fontFamily: 'Questrial, sans-serif' }}
-          >
-            oazyse°
-          </button>
-          <div className="flex items-center">
-            <span className="text-[8px] text-muted-foreground mr-2">
-              {currentIndex + 1}/{articles.length}
-            </span>
-            <ThemeToggle />
-            <LanguageSwitcher />
-            {isAdmin && (
-              <Link to="/admin" className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
-                <Settings className="w-3 h-3" />
-              </Link>
-            )}
-            {user ? (
-              <button onClick={() => signOut()} className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
-                <LogOut className="w-3 h-3" />
-              </button>
-            ) : (
-              <Link to="/auth" className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
-                <User className="w-3 h-3" />
-              </Link>
-            )}
-          </div>
-        </div>
-        <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-purple to-transparent animate-neon-line-pulse" />
-      </header>
+      {/* Original Header */}
+      <Header />
+
+      {/* Back button and counter */}
+      <div className="pt-12 px-4 flex items-center justify-between shrink-0">
+        <button 
+          onClick={onClose}
+          className="flex items-center gap-1 text-[8px] uppercase tracking-[0.15em] text-muted-foreground hover:text-neon-purple transition-colors"
+        >
+          <ArrowLeft className="w-3 h-3" />
+          {t('home.news.back') || 'Назад'}
+        </button>
+        <span className="text-[8px] text-muted-foreground">
+          {currentIndex + 1}/{articles.length}
+        </span>
+      </div>
 
       {/* Main content area */}
       <div 
@@ -221,24 +196,6 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
         onTouchEnd={onTouchEnd}
         onWheel={handleWheel}
       >
-        {/* Navigation arrows */}
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-2">
-          <button
-            onClick={goToPrevious}
-            disabled={currentIndex === 0}
-            className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
-          >
-            <ChevronUp className="w-4 h-4 text-neon-purple" />
-          </button>
-          <button
-            onClick={goToNext}
-            disabled={currentIndex === articles.length - 1}
-            className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
-          >
-            <ChevronDown className="w-4 h-4 text-neon-purple" />
-          </button>
-        </div>
-
         {/* Content */}
         <div
           className="h-full w-full flex flex-col justify-center px-4 md:px-12 lg:px-24"
@@ -248,9 +205,15 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
           }}
         >
           <div className="max-w-2xl mx-auto w-full">
-            {/* News card with gradient border */}
-            <div className="p-[1px] bg-gradient-to-r from-neon-purple via-neon-green to-neon-purple rounded-sm">
-              <div className="bg-background p-4 md:p-6 space-y-4">
+            {/* News card with corner borders */}
+            <div className="relative p-4 md:p-6">
+              {/* Corner borders */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-neon-purple" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-neon-green" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-neon-green" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-neon-purple" />
+
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-[8px] uppercase tracking-[0.2em] text-neon-purple">
                     {t('home.news.title')}
@@ -262,14 +225,14 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
                   {currentArticle.title}
                 </h1>
                 
-                <div className="max-h-[40vh] overflow-y-auto scrollbar-hide">
+                <div className="max-h-[35vh] overflow-y-auto scrollbar-hide">
                   <p className="text-[11px] md:text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed">
                     {currentArticle.content}
                   </p>
                 </div>
 
                 {/* Share section */}
-                <div className="pt-3 border-t border-neon-purple/20">
+                <div className="pt-3 border-t border-border/50">
                   <p className="text-[7px] uppercase tracking-[0.2em] text-muted-foreground mb-2">
                     {t('home.news.share')}
                   </p>
@@ -309,11 +272,25 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
               </div>
             </div>
 
-            {/* Swipe hint */}
+            {/* Navigation arrows - below content */}
             {articles.length > 1 && (
-              <p className="text-[8px] text-center text-muted-foreground mt-3 animate-pulse">
-                {currentIndex < articles.length - 1 ? '↑' : '↓'}
-              </p>
+              <div className="flex items-center justify-center gap-4 mt-4">
+                <button
+                  onClick={goToPrevious}
+                  disabled={currentIndex === 0}
+                  className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
+                >
+                  <ChevronUp className="w-3 h-3 text-neon-purple" />
+                </button>
+                <span className="text-[8px] text-muted-foreground">scroll</span>
+                <button
+                  onClick={goToNext}
+                  disabled={currentIndex === articles.length - 1}
+                  className="p-1.5 border border-neon-purple/30 rounded-full disabled:opacity-20 hover:border-neon-purple hover:bg-neon-purple/10 transition-colors"
+                >
+                  <ChevronDown className="w-3 h-3 text-neon-purple" />
+                </button>
+              </div>
             )}
           </div>
         </div>
