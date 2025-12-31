@@ -83,10 +83,10 @@ const HomeSection = () => {
           <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
           <span className="text-[10px] text-muted-foreground block">{t('home.book.author')}</span>
           <span className="text-[10px] text-muted-foreground block mb-2">2026</span>
-          <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.description')}</p>
+          <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.descriptionPart1')}</p>
         </div>
         
-        <div className="clear-both"></div>
+        <p className="text-[11px] text-muted-foreground leading-relaxed clear-both">{t('home.book.descriptionPart2')}</p>
         
         <div className="flex flex-wrap items-center gap-3">
           <button
