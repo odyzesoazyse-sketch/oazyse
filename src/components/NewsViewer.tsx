@@ -23,8 +23,6 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const [translateY, setTranslateY] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const minSwipeDistance = 50;
@@ -53,26 +51,14 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
   }, [currentIndex, articles.length, onClose]);
 
   const goToNext = () => {
-    if (currentIndex < articles.length - 1 && !isAnimating) {
-      setIsAnimating(true);
-      setTranslateY(-100);
-      setTimeout(() => {
-        setCurrentIndex(prev => prev + 1);
-        setTranslateY(0);
-        setIsAnimating(false);
-      }, 300);
+    if (currentIndex < articles.length - 1) {
+      setCurrentIndex(prev => prev + 1);
     }
   };
 
   const goToPrevious = () => {
-    if (currentIndex > 0 && !isAnimating) {
-      setIsAnimating(true);
-      setTranslateY(100);
-      setTimeout(() => {
-        setCurrentIndex(prev => prev - 1);
-        setTranslateY(0);
-        setIsAnimating(false);
-      }, 300);
+    if (currentIndex > 0) {
+      setCurrentIndex(prev => prev - 1);
     }
   };
 
@@ -82,22 +68,11 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
   };
 
   const onTouchMove = (e: TouchEvent) => {
-    const currentTouch = e.targetTouches[0].clientY;
-    setTouchEnd(currentTouch);
-    
-    if (touchStart !== null) {
-      const diff = touchStart - currentTouch;
-      const percentage = (diff / window.innerHeight) * 100;
-      
-      if (percentage > -30 && percentage < 30) {
-        setTranslateY(-percentage);
-      }
-    }
+    setTouchEnd(e.targetTouches[0].clientY);
   };
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) {
-      setTranslateY(0);
       return;
     }
     
@@ -109,8 +84,6 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
       goToNext();
     } else if (isDownSwipe && currentIndex > 0) {
       goToPrevious();
-    } else {
-      setTranslateY(0);
     }
     
     setTouchStart(null);
@@ -157,8 +130,6 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
   };
 
   const handleWheel = (e: React.WheelEvent) => {
-    if (isAnimating) return;
-    
     if (e.deltaY > 30 && currentIndex < articles.length - 1) {
       goToNext();
     } else if (e.deltaY < -30 && currentIndex > 0) {
@@ -196,13 +167,7 @@ const NewsViewer = ({ articles, initialIndex, onClose }: NewsViewerProps) => {
         onWheel={handleWheel}
       >
         {/* Content */}
-        <div
-          className="h-full w-full flex flex-col px-4 md:px-12 lg:px-24 py-4 overflow-y-auto"
-          style={{
-            transform: `translateY(${translateY}%)`,
-            transition: isAnimating ? 'transform 0.3s ease-out' : 'none',
-          }}
-        >
+        <div className="h-full w-full flex flex-col px-4 md:px-12 lg:px-24 py-4 overflow-y-auto">
           <div className="max-w-2xl mx-auto w-full">
             {/* News card with corner borders */}
             <div className="relative p-4 md:p-6">
