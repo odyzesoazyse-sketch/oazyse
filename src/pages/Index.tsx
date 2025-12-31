@@ -32,7 +32,7 @@ const Index = () => {
       <Header />
       <TopNav activeTab={activeTab} onTabChange={setActiveTab} />
       <MarqueeBanner />
-      <main className="pt-16 pb-4">
+      <main className="pt-20 pb-4">
         <div key={activeTab} className="animate-fade-in">
           {renderSection()}
         </div>
