@@ -75,14 +75,13 @@ const HomeSection = () => {
       </section>
 
       {/* Book */}
-      <section className="p-4 border border-neon-green/40 rounded hover:border-neon-green hover:shadow-[0_0_30px_hsl(var(--neon-green)/0.25)] transition-all space-y-3 bg-gradient-to-br from-neon-green/5 via-transparent to-neon-purple/5">
+      <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all space-y-3">
         <span className="label">{t('home.featured')}</span>
         
         <div className="flex gap-3 md:gap-4">
-          {/* Book image with green gradient glow */}
-          <div className="relative flex-shrink-0">
-            <div className="absolute -inset-2 bg-gradient-to-br from-neon-green/50 via-neon-green/25 to-neon-purple/20 blur-lg rounded-lg" />
-            <img src={bookCover} alt="" className="relative w-32 md:w-44 rounded shadow-lg" />
+          {/* Book image with green gradient frame */}
+          <div className="relative flex-shrink-0 p-1 rounded bg-gradient-to-br from-neon-green via-neon-green/70 to-neon-purple/50">
+            <img src={bookCover} alt="" className="relative w-32 md:w-44 rounded" />
           </div>
           
           <div className="flex flex-col justify-between py-0.5 flex-1 min-w-0">
