@@ -87,11 +87,11 @@ const HomeSection = () => {
               <span className="text-[10px] text-muted-foreground block">{t('home.book.author')}</span>
               <span className="text-[10px] text-muted-foreground block">2026</span>
             </div>
-            <p className="text-[10px] text-muted-foreground leading-snug">{t('home.book.descriptionPart1')}</p>
+            <p className="text-[10px] text-muted-foreground leading-snug text-balance">{t('home.book.descriptionPart1')}</p>
           </div>
         </div>
         
-        <p className="text-[10px] text-muted-foreground leading-snug text-justify">{t('home.book.descriptionPart2')}</p>
+        <p className="text-[10px] text-muted-foreground leading-snug text-balance">{t('home.book.descriptionPart2')}</p>
         
         <div className="flex flex-wrap items-center gap-3">
           <button
