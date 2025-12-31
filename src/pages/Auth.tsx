@@ -110,8 +110,8 @@ const Auth = () => {
       <div className="w-full max-w-xs space-y-6 animate-fade-in">
         {/* Logo */}
         <div className="text-center space-y-2">
-          <h1 className="font-questrial text-lg tracking-[0.2em] text-foreground">
-            oazyse<span className="text-neon-purple">°</span>
+          <h1 className="text-xs tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent" style={{ fontFamily: 'Questrial, sans-serif' }}>
+            oazyse°
           </h1>
           <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground">
             {isSignUp ? t('auth.createAccount') : t('auth.welcomeBack')}
