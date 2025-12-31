@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
-import BottomNav from '@/components/BottomNav';
+import TopNav from '@/components/TopNav';
 import HomeSection from '@/components/sections/HomeSection';
-import HelpSection from '@/components/sections/HelpSection';
 import OazyseSection from '@/components/sections/OazyseSection';
 import InstituteSection from '@/components/sections/InstituteSection';
 import ServicesSection from '@/components/sections/ServicesSection';
@@ -17,7 +16,6 @@ const Index = () => {
   const renderSection = () => {
     switch (activeTab) {
       case 'home': return <HomeSection />;
-      case 'help': return <HelpSection />;
       case 'oazyse': return <OazyseSection />;
       case 'institute': return <InstituteSection />;
       case 'services': return <ServicesSection />;
@@ -31,12 +29,12 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <IntroModal />
       <Header />
-      <main className="pt-12 pb-16">
+      <TopNav activeTab={activeTab} onTabChange={setActiveTab} />
+      <main className="pt-16 pb-4">
         <div key={activeTab} className="animate-fade-in">
           {renderSection()}
         </div>
       </main>
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
       <HypnotherapyChat />
     </div>
   );
