@@ -15,6 +15,27 @@
   "footer": {
     "rights": "© 2025 Oazyse. 保留所有权利。"
   },
+  "home": {
+    "featured": "推荐",
+    "book": {
+      "label": "新书",
+      "title": "art of ascension",
+      "author": "Adizele Oazyse",
+      "description": "Adizele Oazyse 的著作，讲述如何在没有知识、老师和技术的情况下看到宇宙和自己。它揭示了现实和意识的基本法则——对每个人都显而易见。不需要证明、不依赖信仰的真理。不是哲学，不是宗教——是对始终存在之物的纯粹理解。",
+      "selectFormat": "选择格式",
+      "physical": "纸质版",
+      "digital": "电子版",
+      "pricePhysical": "¥250",
+      "priceDigital": "¥99",
+      "buyButton": "购买"
+    },
+    "news": {
+      "title": "新闻",
+      "copy": "复制",
+      "share": "分享",
+      "copied": "链接已复制"
+    }
+  },
   "news": {
     "article1": { "title": "本周成就", "date": "2025年1月15日", "content": "我们的项目在意识发展方面达到了重要里程碑。" },
     "article2": { "title": "新冥想课程", "date": "2025年1月10日", "content": "我们推出了更新的冥想实践计划。" },
