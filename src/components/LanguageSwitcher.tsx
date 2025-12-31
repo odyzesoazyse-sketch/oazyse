@@ -21,15 +21,15 @@ const LanguageSwitcher = () => {
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 top-full mt-2 z-50 bg-popover border border-border max-h-64 overflow-y-auto w-40 shadow-lg animate-fade-in scrollbar-hide">
+          <div className="absolute right-0 top-full mt-1 z-50 bg-background border border-neon-purple/30 overflow-hidden w-24 shadow-lg animate-fade-in">
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => { i18n.changeLanguage(lang.code); setIsOpen(false); }}
-                className={`w-full text-left px-4 py-2.5 text-xs transition-all ${
+                className={`w-full text-left px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] transition-all ${
                   i18n.language === lang.code 
-                    ? 'bg-foreground text-background' 
-                    : 'hover:bg-muted/50'
+                    ? 'bg-neon-purple/20 text-neon-purple' 
+                    : 'text-muted-foreground hover:bg-neon-purple/10 hover:text-foreground'
                 }`}
               >
                 {lang.name}
