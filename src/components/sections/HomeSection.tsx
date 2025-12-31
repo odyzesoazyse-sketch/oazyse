@@ -81,16 +81,15 @@ const HomeSection = () => {
         <div className="flex gap-4 items-start">
           <img src={bookCover} alt="" className="w-36 md:w-44 bg-muted flex-shrink-0" />
           
-          <div className="space-y-2 flex-1 min-w-0">
-            <div>
-              <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
-              <span className="text-[10px] text-muted-foreground">{t('home.book.author')}</span>
-            </div>
-            <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.description')}</p>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
+            <span className="text-[10px] text-muted-foreground">{t('home.book.author')}</span>
           </div>
         </div>
         
-        <div className="flex flex-wrap items-center gap-3 pt-2">
+        <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.description')}</p>
+        
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={() => setSelectedFormat('physical')}
             className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
