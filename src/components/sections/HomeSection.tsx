@@ -78,23 +78,22 @@ const HomeSection = () => {
       <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all space-y-3">
         <span className="label">{t('home.featured')}</span>
         
-        <div className="flex gap-3 md:gap-4">
-          {/* Book image with green gradient frame */}
-          <div className="relative flex-shrink-0 p-1 rounded bg-gradient-to-br from-neon-green via-neon-green/70 to-neon-purple/50">
-            <img src={bookCover} alt="" className="relative w-32 md:w-44 rounded" />
+        <div className="flex gap-2 md:gap-3">
+          {/* Book image with thin green gradient frame */}
+          <div className="relative flex-shrink-0 p-[2px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
+            <img src={bookCover} alt="" className="w-28 md:w-40 rounded" />
           </div>
           
-          <div className="flex flex-col justify-between py-0.5 flex-1 min-w-0">
-            <div>
-              <h1 className="text-xs md:text-sm font-medium lowercase leading-tight">{t('home.book.title')}</h1>
-              <span className="text-[9px] md:text-[10px] text-muted-foreground block">{t('home.book.author')}</span>
-              <span className="text-[9px] md:text-[10px] text-muted-foreground block">2026</span>
+          <div className="flex flex-col justify-start gap-1 flex-1 min-w-0">
+            <h1 className="text-[11px] md:text-sm font-medium lowercase leading-tight">{t('home.book.title')}</h1>
+            <div className="flex items-center gap-2 text-[8px] md:text-[10px] text-muted-foreground">
+              <span>{t('home.book.author')}</span>
+              <span>•</span>
+              <span>2026</span>
             </div>
-            <p className="text-[9px] md:text-[10px] text-muted-foreground leading-snug text-balance">{t('home.book.descriptionPart1')}</p>
+            <p className="text-[8px] md:text-[10px] text-muted-foreground leading-tight mt-1">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
           </div>
         </div>
-        
-        <p className="text-[9px] md:text-[10px] text-muted-foreground leading-snug text-balance">{t('home.book.descriptionPart2')}</p>
         
         {/* Fixed button row - no wrapping, no movement */}
         <div className="flex items-center justify-between gap-2 pt-1">
