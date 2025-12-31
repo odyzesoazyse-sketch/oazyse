@@ -75,56 +75,57 @@ const HomeSection = () => {
       </section>
 
       {/* Book */}
-      <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_25px_hsl(var(--neon-purple)/0.2)] transition-all space-y-3">
+      <section className="p-4 border border-neon-green/40 rounded hover:border-neon-green hover:shadow-[0_0_30px_hsl(var(--neon-green)/0.25)] transition-all space-y-3 bg-gradient-to-br from-neon-green/5 via-transparent to-neon-purple/5">
         <span className="label">{t('home.featured')}</span>
         
-        <div className="flex gap-4">
-          {/* Book image with gradient glow */}
+        <div className="flex gap-3 md:gap-4">
+          {/* Book image with green gradient glow */}
           <div className="relative flex-shrink-0">
-            <div className="absolute -inset-2 bg-gradient-to-br from-neon-purple/40 via-neon-purple/20 to-neon-green/30 blur-lg rounded-lg" />
-            <img src={bookCover} alt="" className="relative w-36 md:w-44 rounded shadow-lg" />
+            <div className="absolute -inset-2 bg-gradient-to-br from-neon-green/50 via-neon-green/25 to-neon-purple/20 blur-lg rounded-lg" />
+            <img src={bookCover} alt="" className="relative w-32 md:w-44 rounded shadow-lg" />
           </div>
           
-          <div className="flex flex-col justify-between py-0.5">
+          <div className="flex flex-col justify-between py-0.5 flex-1 min-w-0">
             <div>
-              <h1 className="text-sm font-medium lowercase leading-tight">{t('home.book.title')}</h1>
-              <span className="text-[10px] text-muted-foreground block">{t('home.book.author')}</span>
-              <span className="text-[10px] text-muted-foreground block">2026</span>
+              <h1 className="text-xs md:text-sm font-medium lowercase leading-tight">{t('home.book.title')}</h1>
+              <span className="text-[9px] md:text-[10px] text-muted-foreground block">{t('home.book.author')}</span>
+              <span className="text-[9px] md:text-[10px] text-muted-foreground block">2026</span>
             </div>
-            <p className="text-[10px] text-muted-foreground leading-snug text-balance">{t('home.book.descriptionPart1')}</p>
+            <p className="text-[9px] md:text-[10px] text-muted-foreground leading-snug text-balance">{t('home.book.descriptionPart1')}</p>
           </div>
         </div>
         
-        <p className="text-[10px] text-muted-foreground leading-snug text-balance">{t('home.book.descriptionPart2')}</p>
+        <p className="text-[9px] md:text-[10px] text-muted-foreground leading-snug text-balance">{t('home.book.descriptionPart2')}</p>
         
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            onClick={() => setSelectedFormat('physical')}
-            className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
-              selectedFormat === 'physical' 
-                ? 'bg-neon-purple text-white border-neon-purple shadow-[0_0_10px_hsl(var(--neon-purple)/0.4)]' 
-                : 'border-border hover:border-neon-purple hover:text-neon-purple'
-            }`}
-          >
-            {t('home.book.physical')}
-          </button>
-          <button
-            onClick={() => setSelectedFormat('digital')}
-            className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
-              selectedFormat === 'digital' 
-                ? 'bg-neon-green text-white border-neon-green shadow-[0_0_10px_hsl(var(--neon-green)/0.4)]' 
-                : 'border-border hover:border-neon-green hover:text-neon-green'
-            }`}
-          >
-            {t('home.book.digital')}
-          </button>
-          <span className="text-base font-light">
-            {selectedFormat === 'digital' ? t('home.book.priceDigital') : t('home.book.pricePhysical')}
-          </span>
+        {/* Fixed button row - no wrapping, no movement */}
+        <div className="flex items-center justify-between gap-2 pt-1">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSelectedFormat('physical')}
+              className={`px-2 md:px-3 py-1.5 text-[8px] md:text-[9px] uppercase tracking-[0.08em] border transition-colors rounded whitespace-nowrap ${
+                selectedFormat === 'physical' 
+                  ? 'bg-neon-purple text-white border-neon-purple' 
+                  : 'border-border hover:border-neon-purple hover:text-neon-purple'
+              }`}
+            >
+              {t('home.book.physical')}
+            </button>
+            <button
+              onClick={() => setSelectedFormat('digital')}
+              className={`px-2 md:px-3 py-1.5 text-[8px] md:text-[9px] uppercase tracking-[0.08em] border transition-colors rounded whitespace-nowrap ${
+                selectedFormat === 'digital' 
+                  ? 'bg-neon-green text-white border-neon-green' 
+                  : 'border-border hover:border-neon-green hover:text-neon-green'
+              }`}
+            >
+              {t('home.book.digital')}
+            </button>
+            <span className="text-sm md:text-base font-medium text-neon-green">$35</span>
+          </div>
           <button
             onClick={handlePurchase}
             disabled={!selectedFormat}
-            className="px-4 py-2 bg-gradient-to-r from-neon-purple to-neon-green text-white text-[9px] uppercase tracking-[0.1em] disabled:opacity-30 rounded hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.5)] transition-all"
+            className="px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[8px] md:text-[9px] uppercase tracking-[0.08em] disabled:opacity-30 rounded transition-opacity whitespace-nowrap"
           >
             {t('home.book.buyButton')}
           </button>
