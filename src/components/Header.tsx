@@ -10,7 +10,7 @@ const Header = () => {
   const { isAdmin } = useAdmin();
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background z-50 border-b border-border">
+    <header className="fixed top-0 left-0 right-0 bg-background z-50">
       <div className="flex items-center justify-between h-6 px-4">
         <span className="text-xs tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent" style={{ fontFamily: 'Questrial, sans-serif' }}>oazyse°</span>
         <div className="flex items-center">
