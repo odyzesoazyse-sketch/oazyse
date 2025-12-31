@@ -24,8 +24,9 @@
     },
     "book": {
       "label": "New Book",
-      "title": "The Art of Ascension",
-      "description": "A guide to spiritual awakening and consciousness transformation. Practices and meditations for achieving higher states of awareness.",
+      "title": "art of ascension",
+      "author": "Adizele Oazyse",
+      "description": "A book by Adizele Oazyse about how to see the Universe and yourself without knowledge, teachers, or technology. It reveals the fundamental laws of reality and consciousness — obvious to everyone. Truths that require no proof and do not depend on faith. Not philosophy, not religion — pure understanding of what is always near.",
       "selectFormat": "Select format",
       "physical": "Physical",
       "digital": "Digital",

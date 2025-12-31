@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import bookCover from '@/assets/book-cover.png';
+import bookCoverRu from '@/assets/book-cover-ru.png';
+import bookCoverEn from '@/assets/book-cover-en.png';
 import { supabase } from '@/integrations/supabase/client';
 import NewsViewer from '@/components/NewsViewer';
 import { Brain } from 'lucide-react';
@@ -15,7 +16,9 @@ interface NewsArticle {
 }
 
 const HomeSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isRussian = i18n.language === 'ru';
+  const bookCover = isRussian ? bookCoverRu : bookCoverEn;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [selectedFormat, setSelectedFormat] = useState<'physical' | 'digital' | null>(null);
   const [news, setNews] = useState<NewsArticle[]>([]);
@@ -72,22 +75,27 @@ const HomeSection = () => {
       </section>
 
       {/* Book */}
-      <section className="space-y-4">
+      <section className="space-y-3">
         <span className="label">{t('home.featured')}</span>
         
-        <div className="flex flex-col md:flex-row gap-8 items-start">
-          <img src={bookCover} alt="" className="w-32 md:w-40 bg-muted" />
+        <div className="flex gap-4 items-start">
+          <img src={bookCover} alt="" className="w-24 md:w-28 bg-muted flex-shrink-0" />
           
-          <div className="space-y-6 flex-1">
-            <h1 className="title">{t('home.book.title')}</h1>
-            <p className="body">{t('home.book.description')}</p>
+          <div className="space-y-3 flex-1 min-w-0">
+            {/* Title and Author in one line area */}
+            <div>
+              <h1 className="text-sm font-medium lowercase">{t('home.book.title')}</h1>
+              <span className="text-[10px] text-muted-foreground">{t('home.book.author')}</span>
+            </div>
             
-            <div className="flex gap-3">
+            <p className="text-[11px] text-muted-foreground leading-relaxed">{t('home.book.description')}</p>
+            
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedFormat('physical')}
-                className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] border transition-all rounded ${
+                className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
                   selectedFormat === 'physical' 
-                    ? 'bg-neon-purple text-white border-neon-purple shadow-[0_0_15px_hsl(var(--neon-purple)/0.4)]' 
+                    ? 'bg-neon-purple text-white border-neon-purple shadow-[0_0_10px_hsl(var(--neon-purple)/0.4)]' 
                     : 'border-border hover:border-neon-purple hover:text-neon-purple'
                 }`}
               >
@@ -95,9 +103,9 @@ const HomeSection = () => {
               </button>
               <button
                 onClick={() => setSelectedFormat('digital')}
-                className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] border transition-all rounded ${
+                className={`px-3 py-1.5 text-[9px] uppercase tracking-[0.1em] border transition-all rounded ${
                   selectedFormat === 'digital' 
-                    ? 'bg-neon-green text-white border-neon-green shadow-[0_0_15px_hsl(var(--neon-green)/0.4)]' 
+                    ? 'bg-neon-green text-white border-neon-green shadow-[0_0_10px_hsl(var(--neon-green)/0.4)]' 
                     : 'border-border hover:border-neon-green hover:text-neon-green'
                 }`}
               >
@@ -105,14 +113,14 @@ const HomeSection = () => {
               </button>
             </div>
             
-            <div className="flex items-center gap-6">
-              <span className="text-xl font-light">
+            <div className="flex items-center gap-4">
+              <span className="text-base font-light">
                 {selectedFormat === 'digital' ? t('home.book.priceDigital') : t('home.book.pricePhysical')}
               </span>
               <button
                 onClick={handlePurchase}
                 disabled={!selectedFormat}
-                className="px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-green text-white text-[10px] uppercase tracking-[0.15em] disabled:opacity-30 rounded hover:shadow-[0_0_25px_hsl(var(--neon-purple)/0.5)] transition-all"
+                className="px-4 py-2 bg-gradient-to-r from-neon-purple to-neon-green text-white text-[9px] uppercase tracking-[0.1em] disabled:opacity-30 rounded hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.5)] transition-all"
               >
                 {t('home.book.buyButton')}
               </button>
