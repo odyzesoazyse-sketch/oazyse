@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
 import TopNav from '@/components/TopNav';
+import MarqueeBanner from '@/components/MarqueeBanner';
 import HomeSection from '@/components/sections/HomeSection';
 import OazyseSection from '@/components/sections/OazyseSection';
 import InstituteSection from '@/components/sections/InstituteSection';
@@ -30,6 +31,7 @@ const Index = () => {
       <IntroModal />
       <Header />
       <TopNav activeTab={activeTab} onTabChange={setActiveTab} />
+      <MarqueeBanner />
       <main className="pt-16 pb-4">
         <div key={activeTab} className="animate-fade-in">
           {renderSection()}
