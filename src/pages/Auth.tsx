@@ -110,7 +110,7 @@ const Auth = () => {
       <div className="w-full max-w-xs space-y-6 animate-fade-in">
         {/* Logo */}
         <div className="text-center space-y-2">
-          <h1 className="text-xs tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent" style={{ fontFamily: 'Questrial, sans-serif' }}>
+          <h1 className="text-2xl tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent" style={{ fontFamily: 'Questrial, sans-serif' }}>
             oazyse°
           </h1>
           <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground">
