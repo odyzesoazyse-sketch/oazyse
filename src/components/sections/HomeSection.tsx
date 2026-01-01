@@ -75,31 +75,29 @@ const HomeSection = () => {
       </section>
 
       {/* Book - Compact horizontal layout */}
-      <section className="p-2 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
-        <div className="flex gap-2.5">
-          {/* Book cover - left side */}
-          <div className="w-20 flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
-            <img src={bookCover} alt="" className="w-full rounded block" />
-          </div>
+      <section className="p-3 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
+        <div className="flex gap-3">
+          {/* Book cover - left side, no extra gradient wrapper */}
+          <img src={bookCover} alt="" className="w-24 flex-shrink-0 rounded" />
           
           {/* Content - right side */}
           <div className="flex-1 flex flex-col justify-between min-w-0">
-            <div>
-              <span className="text-[5px] uppercase tracking-[0.1em] text-muted-foreground">{t('home.featured')}</span>
-              <h1 className="text-[10px] font-medium lowercase leading-tight">{t('home.book.title')}</h1>
-              <div className="flex items-center gap-1 text-[7px] text-muted-foreground">
+            <div className="space-y-1">
+              <span className="text-[6px] uppercase tracking-[0.1em] text-muted-foreground">{t('home.featured')}</span>
+              <h1 className="text-xs font-medium lowercase leading-tight">{t('home.book.title')}</h1>
+              <div className="flex items-center gap-1.5 text-[8px] text-muted-foreground">
                 <span>{t('home.book.author')}</span>
                 <span>•</span>
                 <span>2026</span>
               </div>
-              <p className="text-[7px] text-muted-foreground leading-tight line-clamp-2 mt-0.5">{t('home.book.descriptionPart1')}</p>
+              <p className="text-[8px] text-muted-foreground leading-snug">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
             </div>
             
             {/* Buttons row */}
-            <div className="flex items-center gap-1 mt-1">
+            <div className="flex items-center gap-1.5 mt-2">
               <button
                 onClick={() => setSelectedFormat('physical')}
-                className={`px-1.5 py-0.5 text-[6px] uppercase tracking-[0.06em] border transition-colors rounded ${
+                className={`px-2 py-1 text-[7px] uppercase tracking-[0.08em] border transition-colors rounded ${
                   selectedFormat === 'physical' 
                     ? 'bg-neon-purple text-white border-neon-purple' 
                     : 'border-border hover:border-neon-purple'
@@ -109,7 +107,7 @@ const HomeSection = () => {
               </button>
               <button
                 onClick={() => setSelectedFormat('digital')}
-                className={`px-1.5 py-0.5 text-[6px] uppercase tracking-[0.06em] border transition-colors rounded ${
+                className={`px-2 py-1 text-[7px] uppercase tracking-[0.08em] border transition-colors rounded ${
                   selectedFormat === 'digital' 
                     ? 'bg-neon-green text-white border-neon-green' 
                     : 'border-border hover:border-neon-green'
@@ -119,7 +117,7 @@ const HomeSection = () => {
               </button>
               <button
                 onClick={handlePurchase}
-                className="px-1.5 py-0.5 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[6px] uppercase tracking-[0.06em] rounded transition-opacity hover:opacity-90 ml-auto"
+                className="px-2 py-1 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[7px] uppercase tracking-[0.08em] rounded transition-opacity hover:opacity-90 ml-auto"
               >
                 {t('home.book.buyButton')}
               </button>
