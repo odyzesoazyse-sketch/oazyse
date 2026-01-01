@@ -77,8 +77,10 @@ const HomeSection = () => {
       {/* Book - Compact horizontal layout */}
       <section className="p-3 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
         <div className="flex gap-3">
-          {/* Book cover - left side, no extra gradient wrapper */}
-          <img src={bookCover} alt="" className="w-24 flex-shrink-0 rounded" />
+          {/* Book cover - left side with gradient frame */}
+          <div className="w-24 flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40 self-start">
+            <img src={bookCover} alt="" className="w-full h-auto rounded block" />
+          </div>
           
           {/* Content - right side */}
           <div className="flex-1 flex flex-col justify-between min-w-0">
