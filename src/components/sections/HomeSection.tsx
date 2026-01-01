@@ -75,25 +75,23 @@ const HomeSection = () => {
       </section>
 
       {/* Book - Compact horizontal layout */}
-      <section className="p-3 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
-        <div className="flex gap-3">
-          {/* Book cover - left side with gradient frame */}
-          <div className="w-24 flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40 self-start">
+      <section className="p-2.5 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
+        <span className="text-[6px] uppercase tracking-[0.1em] text-muted-foreground block mb-1.5">{t('home.featured')}</span>
+        <div className="flex gap-3 items-start">
+          {/* Book cover - left side with gradient frame, aligned to top */}
+          <div className="w-20 flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
             <img src={bookCover} alt="" className="w-full h-auto rounded block" />
           </div>
           
           {/* Content - right side */}
-          <div className="flex-1 flex flex-col justify-between min-w-0">
-            <div className="space-y-1">
-              <span className="text-[6px] uppercase tracking-[0.1em] text-muted-foreground">{t('home.featured')}</span>
-              <h1 className="text-xs font-medium lowercase leading-tight">{t('home.book.title')}</h1>
-              <div className="flex items-center gap-1.5 text-[8px] text-muted-foreground">
-                <span>{t('home.book.author')}</span>
-                <span>•</span>
-                <span>2026</span>
-              </div>
-              <p className="text-[8px] text-muted-foreground leading-snug">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-xs font-medium lowercase leading-tight">{t('home.book.title')}</h1>
+            <div className="flex items-center gap-1.5 text-[8px] text-muted-foreground mt-0.5">
+              <span>{t('home.book.author')}</span>
+              <span>•</span>
+              <span>2026</span>
             </div>
+            <p className="text-[8px] text-muted-foreground leading-snug mt-1">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
             
             {/* Buttons row */}
             <div className="flex items-center gap-1.5 mt-2">
