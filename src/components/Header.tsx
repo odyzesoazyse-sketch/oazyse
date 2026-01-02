@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-background z-50">
-        <div className="flex items-center justify-between h-7 px-4">
+        <div className="flex items-center justify-between h-11 px-4">
           {/* Left - Stories trigger */}
           <div className="flex-1 flex items-center">
             <StoriesTrigger 
@@ -25,26 +25,26 @@ const Header = () => {
           </div>
           
           {/* Center - Logo */}
-          <span className="text-sm tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent" style={{ fontFamily: 'Questrial, sans-serif' }}>
+          <span className="text-lg tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent" style={{ fontFamily: 'Questrial, sans-serif' }}>
             oazyse°
           </span>
           
           {/* Right - Actions */}
-          <div className="flex-1 flex items-center justify-end">
+          <div className="flex-1 flex items-center justify-end gap-1">
             <ThemeToggle />
             <LanguageSwitcher />
             {isAdmin && (
-              <Link to="/admin" className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
-                <Settings className="w-3.5 h-3.5" />
+              <Link to="/admin" className="p-2 text-neon-purple hover:text-neon-green transition-colors">
+                <Settings className="w-5 h-5" />
               </Link>
             )}
             {user ? (
-              <button onClick={() => signOut()} className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
-                <LogOut className="w-3.5 h-3.5" />
+              <button onClick={() => signOut()} className="p-2 text-neon-purple hover:text-neon-green transition-colors">
+                <LogOut className="w-5 h-5" />
               </button>
             ) : (
-              <Link to="/auth" className="p-1.5 text-neon-purple hover:text-neon-green transition-colors">
-                <User className="w-3.5 h-3.5" />
+              <Link to="/auth" className="p-2 text-neon-purple hover:text-neon-green transition-colors">
+                <User className="w-5 h-5" />
               </Link>
             )}
           </div>
