@@ -229,40 +229,23 @@ export const StoriesTrigger = ({ onClick, hasNew }: StoriesTriggerProps) => {
   return (
     <button
       onClick={onClick}
-      className="relative flex items-center gap-1.5 group"
+      className="relative flex items-center group"
     >
-      {/* Animated ring for new stories */}
+      {/* Animated ring for new stories - hollow circle */}
       <div
         className={cn(
-          "w-6 h-6 rounded-full p-[2px] transition-all duration-300",
+          "w-8 h-8 rounded-full p-[2px] transition-all duration-300",
           hasNew
             ? "bg-gradient-to-r from-neon-purple via-neon-green to-neon-purple animate-[spin_3s_linear_infinite] bg-[length:200%_100%]"
             : "bg-muted-foreground/30"
         )}
       >
-        <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
-          <div
-            className={cn(
-              "w-4 h-4 rounded-full",
-              hasNew
-                ? "bg-gradient-to-r from-neon-purple to-neon-green"
-                : "bg-muted-foreground/20"
-            )}
-          />
-        </div>
+        <div className="w-full h-full rounded-full bg-background" />
       </div>
-      <span className={cn(
-        "text-[10px] font-medium transition-colors",
-        hasNew
-          ? "bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent"
-          : "text-muted-foreground"
-      )}>
-        Stories
-      </span>
       
       {/* New indicator dot */}
       {hasNew && (
-        <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse" />
+        <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-neon-green animate-pulse" />
       )}
     </button>
   );
