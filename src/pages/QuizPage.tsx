@@ -1,10 +1,18 @@
 import { Quiz } from '@/components/quiz/Quiz';
 import { useEffect } from 'react';
+import Header from '@/components/Header';
 
 export default function QuizPage() {
   useEffect(() => {
-    document.title = 'Омега-300 | Oazyse';
+    document.title = 'Экспресс-анализ | Oazyse';
   }, []);
 
-  return <Quiz />;
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="pt-10">
+        <Quiz />
+      </div>
+    </div>
+  );
 }

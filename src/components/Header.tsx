@@ -47,33 +47,33 @@ const Header = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="p-1 text-foreground hover:text-foreground/70 transition-colors">
-                    <User className="w-4 h-4" strokeWidth={1.5} />
+                    <User className="w-3 h-3" strokeWidth={1.5} />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="bg-background border-border z-50">
                   {isAdmin && (
                     <DropdownMenuItem asChild>
                       <Link to="/admin" className="flex items-center gap-2 cursor-pointer">
-                        <Settings className="w-4 h-4" />
+                        <Settings className="w-3 h-3" />
                         <span>Админ</span>
                       </Link>
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuItem asChild>
                     <Link to="/member" className="flex items-center gap-2 cursor-pointer">
-                      <Settings className="w-4 h-4" />
+                      <Settings className="w-3 h-3" />
                       <span>Настройки</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => signOut()} className="flex items-center gap-2 cursor-pointer">
-                    <LogOut className="w-4 h-4" />
+                    <LogOut className="w-3 h-3" />
                     <span>Выйти</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <Link to="/auth" className="p-1 text-foreground hover:text-foreground/70 transition-colors">
-                <User className="w-4 h-4" strokeWidth={1.5} />
+                <User className="w-3 h-3" strokeWidth={1.5} />
               </Link>
             )}
           </div>

@@ -16,7 +16,7 @@ const BackButton = () => {
       className="p-1 text-foreground hover:text-foreground/70 transition-colors"
       aria-label="Go back"
     >
-      <ArrowLeft className="w-4 h-4" strokeWidth={1.5} />
+      <ArrowLeft className="w-3 h-3" strokeWidth={1.5} />
     </button>
   );
 };
