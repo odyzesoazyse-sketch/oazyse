@@ -16,20 +16,32 @@ const TopNav = ({ activeTab, onTabChange }: TopNavProps) => {
     { id: 'about', labelKey: 'nav.about' },
   ];
 
+  // Map tab ids to section routes/actions
+  const handleTabClick = (tabId: string) => {
+    onTabChange(tabId);
+  };
+
   return (
     <nav className="fixed top-9 left-0 right-0 bg-background z-40">
-      <div className="flex items-center justify-center h-6 gap-1 px-2">
+      <div className="flex items-center justify-center h-6 gap-0.5 px-1">
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => onTabChange(tab.id)}
-            className={`px-3 py-1 text-[10px] uppercase tracking-[0.1em] transition-all relative ${
+            onClick={() => handleTabClick(tab.id)}
+            className={`px-1.5 md:px-3 py-1 text-[8px] md:text-[10px] uppercase tracking-[0.05em] md:tracking-[0.1em] transition-all relative whitespace-nowrap ${
               activeTab === tab.id 
                 ? 'text-neon-purple' 
                 : 'text-muted-foreground hover:text-neon-green'
             }`}
           >
-            {t(tab.labelKey)}
+            {tab.id === 'institute' ? (
+              <span className="leading-tight">
+                <span className="hidden md:inline">{t(tab.labelKey)}</span>
+                <span className="md:hidden">институт</span>
+              </span>
+            ) : (
+              t(tab.labelKey)
+            )}
             {activeTab === tab.id && (
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-neon-purple animate-neon-pulse-purple" />
             )}

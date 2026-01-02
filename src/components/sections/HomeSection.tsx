@@ -75,25 +75,25 @@ const HomeSection = () => {
         </div>
       </section>
 
-      {/* Book Section */}
-      <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
+      {/* Book Section - Mobile Optimized */}
+      <section className="p-3 md:p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
         <span className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground block mb-2">{t('home.featured')}</span>
-        <div className="flex gap-4 items-start">
-          <div className="w-28 flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
+        <div className="flex gap-3 md:gap-4 items-start">
+          <div className="w-20 md:w-28 flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
             <img src={bookCover} alt="" className="w-full h-auto rounded block" />
           </div>
           <div className="flex-1 min-w-0">
-            <h1 className="text-base font-medium lowercase leading-tight">{t('home.book.title')}</h1>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1">
+            <h1 className="text-sm md:text-base font-medium lowercase leading-tight">{t('home.book.title')}</h1>
+            <div className="flex items-center gap-1.5 md:gap-2 text-[10px] md:text-xs text-muted-foreground mt-0.5 md:mt-1">
               <span>{t('home.book.author')}</span>
               <span>•</span>
               <span>2026</span>
             </div>
-            <p className="text-xs text-muted-foreground leading-relaxed mt-2">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
-            <div className="flex items-center gap-2 mt-3">
+            <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed mt-1.5 md:mt-2 line-clamp-2 md:line-clamp-none">{t('home.book.descriptionPart1')}</p>
+            <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mt-2 md:mt-3">
               <button
                 onClick={() => setSelectedFormat('physical')}
-                className={`px-3 py-1.5 text-[10px] uppercase tracking-[0.08em] border transition-colors rounded ${
+                className={`px-2 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] uppercase tracking-[0.05em] md:tracking-[0.08em] border transition-colors rounded ${
                   selectedFormat === 'physical' 
                     ? 'bg-neon-purple text-white border-neon-purple' 
                     : 'border-border hover:border-neon-purple'
@@ -103,7 +103,7 @@ const HomeSection = () => {
               </button>
               <button
                 onClick={() => setSelectedFormat('digital')}
-                className={`px-3 py-1.5 text-[10px] uppercase tracking-[0.08em] border transition-colors rounded ${
+                className={`px-2 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] uppercase tracking-[0.05em] md:tracking-[0.08em] border transition-colors rounded ${
                   selectedFormat === 'digital' 
                     ? 'bg-neon-green text-white border-neon-green' 
                     : 'border-border hover:border-neon-green'
@@ -113,7 +113,7 @@ const HomeSection = () => {
               </button>
               <button
                 onClick={handlePurchase}
-                className="px-3 py-1.5 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[10px] uppercase tracking-[0.08em] rounded transition-opacity hover:opacity-90 ml-auto"
+                className="px-2 md:px-3 py-1 md:py-1.5 bg-gradient-to-r from-neon-green to-neon-purple text-white text-[9px] md:text-[10px] uppercase tracking-[0.05em] md:tracking-[0.08em] rounded transition-opacity hover:opacity-90 ml-auto"
               >
                 {t('home.book.buyButton')}
               </button>
