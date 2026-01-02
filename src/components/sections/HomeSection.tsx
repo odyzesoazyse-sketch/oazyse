@@ -5,7 +5,7 @@ import bookCoverRu from '@/assets/book-cover-ru.png';
 import bookCoverEn from '@/assets/book-cover-en.png';
 import { supabase } from '@/integrations/supabase/client';
 import NewsViewer from '@/components/NewsViewer';
-import { Brain } from 'lucide-react';
+import { Brain, Zap, GraduationCap, Sparkles } from 'lucide-react';
 
 interface NewsArticle {
   id: string;
@@ -78,12 +78,9 @@ const HomeSection = () => {
       <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
         <span className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground block mb-2">{t('home.featured')}</span>
         <div className="flex gap-4 items-start">
-          {/* Book cover */}
           <div className="w-28 flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-green via-neon-green/60 to-neon-purple/40">
             <img src={bookCover} alt="" className="w-full h-auto rounded block" />
           </div>
-          
-          {/* Content */}
           <div className="flex-1 min-w-0">
             <h1 className="text-base font-medium lowercase leading-tight">{t('home.book.title')}</h1>
             <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1">
@@ -92,8 +89,6 @@ const HomeSection = () => {
               <span>2026</span>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed mt-2">{t('home.book.descriptionPart1')} {t('home.book.descriptionPart2')}</p>
-            
-            {/* Buttons */}
             <div className="flex items-center gap-2 mt-3">
               <button
                 onClick={() => setSelectedFormat('physical')}
@@ -125,6 +120,60 @@ const HomeSection = () => {
           </div>
         </div>
       </section>
+
+      {/* Content Cards Grid */}
+      <div className="grid grid-cols-1 gap-3">
+        {/* Oazyse Card */}
+        <section 
+          onClick={() => navigate('/oazyse')}
+          className="p-4 border border-neon-green/30 rounded cursor-pointer hover:border-neon-green hover:shadow-[0_0_20px_hsl(var(--neon-green)/0.15)] transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-green to-neon-purple text-white flex items-center justify-center flex-shrink-0">
+              <Zap className="w-5 h-5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-base font-medium">OAZYSE</h2>
+              <p className="text-xs text-muted-foreground">Платформа сознания и трансформации</p>
+            </div>
+            <span className="text-neon-green group-hover:translate-x-1 transition-all text-lg">→</span>
+          </div>
+        </section>
+
+        {/* Institute Card */}
+        <section 
+          onClick={() => navigate('/institute')}
+          className="p-4 border border-neon-purple/30 rounded cursor-pointer hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-purple to-neon-green text-white flex items-center justify-center flex-shrink-0">
+              <GraduationCap className="w-5 h-5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-base font-medium">Институт Сознания</h2>
+              <p className="text-xs text-muted-foreground">Обучение и сертификация</p>
+            </div>
+            <span className="text-neon-purple group-hover:translate-x-1 transition-all text-lg">→</span>
+          </div>
+        </section>
+
+        {/* Metahuman Card */}
+        <section 
+          onClick={() => navigate('/metahuman')}
+          className="p-4 border border-neon-green/30 rounded cursor-pointer hover:border-neon-green hover:shadow-[0_0_20px_hsl(var(--neon-green)/0.15)] transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-green via-neon-purple to-neon-green text-white flex items-center justify-center flex-shrink-0">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-base font-medium">Мета-человек</h2>
+              <p className="text-xs text-muted-foreground">Стань создателем своей реальности</p>
+            </div>
+            <span className="text-neon-green group-hover:translate-x-1 transition-all text-lg">→</span>
+          </div>
+        </section>
+      </div>
 
       {/* News */}
       <section className="p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
