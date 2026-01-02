@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-background z-50">
-        <div className="flex items-center justify-between h-11 px-4">
+        <div className="flex items-center justify-between h-9 px-4">
           {/* Left - Stories trigger */}
           <div className="flex-1 flex items-center">
             <StoriesTrigger 
