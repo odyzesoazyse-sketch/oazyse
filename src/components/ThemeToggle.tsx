@@ -11,19 +11,19 @@ const ThemeToggle = () => {
   }, []);
 
   if (!mounted) {
-    return <div className="w-7 h-7" />;
+    return <div className="w-6 h-6" />;
   }
 
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-1.5 hover:bg-muted/50 rounded-sm transition-colors"
+      className="p-1 text-foreground hover:text-foreground/70 transition-colors"
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? (
-        <Sun className="w-3.5 h-3.5" />
+        <Sun className="w-4 h-4" strokeWidth={1.5} />
       ) : (
-        <Moon className="w-3.5 h-3.5" />
+        <Moon className="w-4 h-4" strokeWidth={1.5} />
       )}
     </button>
   );

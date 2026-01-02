@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { User, LogOut, Settings } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
+import BackButton from './BackButton';
 import { useAuth } from '@/hooks/useAuth';
 import { useAdmin } from '@/hooks/useAdmin';
 import { Stories, StoriesTrigger, hasNewStories } from './Stories';
@@ -17,13 +18,16 @@ const Header = () => {
   const { user, signOut } = useAuth();
   const { isAdmin } = useAdmin();
   const [storiesOpen, setStoriesOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-background z-50">
         <div className="flex items-center justify-between h-9 px-4">
-          {/* Left - Stories trigger */}
-          <div className="flex-1 flex items-center">
+          {/* Left - Back button or Stories trigger */}
+          <div className="flex-1 flex items-center gap-1">
+            {!isHomePage && <BackButton />}
             <StoriesTrigger 
               onClick={() => setStoriesOpen(true)} 
               hasNew={hasNewStories()} 
@@ -36,14 +40,14 @@ const Header = () => {
           </span>
           
           {/* Right - Actions */}
-          <div className="flex-1 flex items-center justify-end gap-1">
+          <div className="flex-1 flex items-center justify-end gap-0.5">
             <ThemeToggle />
             <LanguageSwitcher />
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="p-2 text-neon-purple hover:text-neon-green transition-colors">
-                    <User className="w-5 h-5" />
+                  <button className="p-1 text-foreground hover:text-foreground/70 transition-colors">
+                    <User className="w-4 h-4" strokeWidth={1.5} />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="bg-background border-border z-50">
@@ -68,8 +72,8 @@ const Header = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link to="/auth" className="p-2 text-neon-purple hover:text-neon-green transition-colors">
-                <User className="w-5 h-5" />
+              <Link to="/auth" className="p-1 text-foreground hover:text-foreground/70 transition-colors">
+                <User className="w-4 h-4" strokeWidth={1.5} />
               </Link>
             )}
           </div>
