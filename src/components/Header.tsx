@@ -6,6 +6,12 @@ import ThemeToggle from './ThemeToggle';
 import { useAuth } from '@/hooks/useAuth';
 import { useAdmin } from '@/hooks/useAdmin';
 import { Stories, StoriesTrigger, hasNewStories } from './Stories';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Header = () => {
   const { user, signOut } = useAuth();
@@ -33,15 +39,34 @@ const Header = () => {
           <div className="flex-1 flex items-center justify-end gap-1">
             <ThemeToggle />
             <LanguageSwitcher />
-            {isAdmin && (
-              <Link to="/admin" className="p-2 text-neon-purple hover:text-neon-green transition-colors">
-                <Settings className="w-5 h-5" />
-              </Link>
-            )}
             {user ? (
-              <button onClick={() => signOut()} className="p-2 text-neon-purple hover:text-neon-green transition-colors">
-                <LogOut className="w-5 h-5" />
-              </button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="p-2 text-neon-purple hover:text-neon-green transition-colors">
+                    <User className="w-5 h-5" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="bg-background border-border z-50">
+                  {isAdmin && (
+                    <DropdownMenuItem asChild>
+                      <Link to="/admin" className="flex items-center gap-2 cursor-pointer">
+                        <Settings className="w-4 h-4" />
+                        <span>Админ</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem asChild>
+                    <Link to="/member" className="flex items-center gap-2 cursor-pointer">
+                      <Settings className="w-4 h-4" />
+                      <span>Настройки</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => signOut()} className="flex items-center gap-2 cursor-pointer">
+                    <LogOut className="w-4 h-4" />
+                    <span>Выйти</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <Link to="/auth" className="p-2 text-neon-purple hover:text-neon-green transition-colors">
                 <User className="w-5 h-5" />
