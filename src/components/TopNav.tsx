@@ -17,13 +17,13 @@ const TopNav = ({ activeTab, onTabChange }: TopNavProps) => {
   ];
 
   return (
-    <nav className="fixed top-6 left-0 right-0 bg-background z-40">
-      <div className="flex items-center justify-center h-5 gap-0.5 px-2">
+    <nav className="fixed top-9 left-0 right-0 bg-background z-40">
+      <div className="flex items-center justify-center h-6 gap-1 px-2">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`px-2 py-0.5 text-[7px] uppercase tracking-[0.1em] transition-all relative ${
+            className={`px-3 py-1 text-[10px] uppercase tracking-[0.1em] transition-all relative ${
               activeTab === tab.id 
                 ? 'text-neon-purple' 
                 : 'text-muted-foreground hover:text-neon-green'
@@ -31,7 +31,7 @@ const TopNav = ({ activeTab, onTabChange }: TopNavProps) => {
           >
             {t(tab.labelKey)}
             {activeTab === tab.id && (
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-0.5 rounded-full bg-neon-purple animate-neon-pulse-purple" />
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-neon-purple animate-neon-pulse-purple" />
             )}
           </button>
         ))}
