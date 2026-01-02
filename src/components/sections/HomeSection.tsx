@@ -123,18 +123,18 @@ const HomeSection = () => {
 
       {/* Content Cards Grid */}
       <div className="grid grid-cols-1 gap-3">
-        {/* Oazyse Card */}
+        {/* Metahuman Card */}
         <section 
-          onClick={() => navigate('/oazyse')}
+          onClick={() => navigate('/metahuman')}
           className="p-4 border border-neon-green/30 rounded cursor-pointer hover:border-neon-green hover:shadow-[0_0_20px_hsl(var(--neon-green)/0.15)] transition-all group"
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-green to-neon-purple text-white flex items-center justify-center flex-shrink-0">
-              <Zap className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-green via-neon-purple to-neon-green text-white flex items-center justify-center flex-shrink-0">
+              <Sparkles className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-base font-medium">OAZYSE</h2>
-              <p className="text-xs text-muted-foreground">Платформа сознания и трансформации</p>
+              <h2 className="text-base font-medium">мета-человек</h2>
+              <p className="text-xs text-muted-foreground">Стань создателем своей реальности через метод метафракталлизма</p>
             </div>
             <span className="text-neon-green group-hover:translate-x-1 transition-all text-lg">→</span>
           </div>
@@ -150,25 +150,25 @@ const HomeSection = () => {
               <GraduationCap className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-base font-medium">Институт Сознания</h2>
-              <p className="text-xs text-muted-foreground">Обучение и сертификация</p>
+              <h2 className="text-base font-medium">институт сознания космического разума</h2>
+              <p className="text-xs text-muted-foreground">Обучение и сертификация практиков метафракталлизма</p>
             </div>
             <span className="text-neon-purple group-hover:translate-x-1 transition-all text-lg">→</span>
           </div>
         </section>
 
-        {/* Metahuman Card */}
+        {/* Oazyse Card */}
         <section 
-          onClick={() => navigate('/metahuman')}
+          onClick={() => navigate('/oazyse')}
           className="p-4 border border-neon-green/30 rounded cursor-pointer hover:border-neon-green hover:shadow-[0_0_20px_hsl(var(--neon-green)/0.15)] transition-all group"
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-green via-neon-purple to-neon-green text-white flex items-center justify-center flex-shrink-0">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-green to-neon-purple text-white flex items-center justify-center flex-shrink-0">
+              <Zap className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-base font-medium">Мета-человек</h2>
-              <p className="text-xs text-muted-foreground">Стань создателем своей реальности</p>
+              <h2 className="text-base font-medium">oazyse°</h2>
+              <p className="text-xs text-muted-foreground">Платформа сознания и трансформации</p>
             </div>
             <span className="text-neon-green group-hover:translate-x-1 transition-all text-lg">→</span>
           </div>
