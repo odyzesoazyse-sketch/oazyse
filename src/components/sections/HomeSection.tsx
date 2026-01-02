@@ -154,7 +154,7 @@ const HomeSection = () => {
               <GraduationCap className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
-              <h2 className="text-base font-medium">институт сознания космического разума</h2>
+              <h2 className="text-base font-medium leading-[1.05]">институт сознания космического разума</h2>
               <p className="text-xs text-muted-foreground">Обучение и сертификация практиков метафракталлизма</p>
             </div>
             <span className="text-neon-purple group-hover:translate-x-1 transition-all text-lg">→</span>
