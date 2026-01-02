@@ -35,9 +35,8 @@ const TopNav = ({ activeTab, onTabChange }: TopNavProps) => {
             }`}
           >
             {tab.id === 'institute' ? (
-              <span className="leading-tight">
-                <span className="hidden md:inline">{t(tab.labelKey)}</span>
-                <span className="md:hidden">институт</span>
+              <span className="leading-tight" style={{ wordSpacing: '-0.15em' }}>
+                {t(tab.labelKey)}
               </span>
             ) : (
               t(tab.labelKey)
