@@ -122,6 +122,36 @@ const HomeSection = () => {
         </div>
       </section>
 
+      {/* Sessions Recommendation Section */}
+      <section className="p-3 md:p-4 border border-neon-green/30 rounded hover:border-neon-green hover:shadow-[0_0_20px_hsl(var(--neon-green)/0.15)] transition-all">
+        <span className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground block mb-2">{t('home.featured')}</span>
+        <div className="flex gap-3 md:gap-4 items-start">
+          <div className="w-20 md:w-28 flex-shrink-0 p-[1px] rounded bg-gradient-to-br from-neon-purple via-neon-purple/60 to-neon-green/40 flex items-center justify-center aspect-[3/4]">
+            <Sparkles className="w-8 h-8 text-neon-green" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-sm md:text-base font-medium lowercase leading-tight">сессия с создателем</h1>
+            <div className="flex items-center gap-1.5 md:gap-2 text-[10px] md:text-xs text-muted-foreground mt-0.5 md:mt-1">
+              <span>Адизель Оазис</span>
+              <span>•</span>
+              <span className="text-neon-green">100% гарантия</span>
+            </div>
+            <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed mt-1.5 md:mt-2 line-clamp-2 md:line-clamp-none">
+              Персональная сессия метафракталлизма с основателем метода. Глубинная трансформация сознания.
+            </p>
+            <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mt-2 md:mt-3">
+              <span className="text-[9px] md:text-[10px] text-neon-purple">Возврат средств при отсутствии результата</span>
+              <button
+                onClick={() => navigate('/oazyse')}
+                className="px-2 md:px-3 py-1 md:py-1.5 bg-gradient-to-r from-neon-purple to-neon-green text-white text-[9px] md:text-[10px] uppercase tracking-[0.05em] md:tracking-[0.08em] rounded transition-opacity hover:opacity-90 ml-auto"
+              >
+                Подробнее
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Social Proof */}
       <SocialProof />
 
