@@ -5,6 +5,7 @@ import bookCoverRu from '@/assets/book-cover-ru.png';
 import bookCoverEn from '@/assets/book-cover-en.png';
 import { supabase } from '@/integrations/supabase/client';
 import NewsViewer from '@/components/NewsViewer';
+import SocialProof from '@/components/SocialProof';
 import { Brain, Zap, GraduationCap, Sparkles } from 'lucide-react';
 
 interface NewsArticle {
@@ -120,6 +121,9 @@ const HomeSection = () => {
           </div>
         </div>
       </section>
+
+      {/* Social Proof */}
+      <SocialProof />
 
       {/* Content Cards Grid */}
       <div className="grid grid-cols-1 gap-3">
