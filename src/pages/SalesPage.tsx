@@ -24,6 +24,7 @@ import {
   Lightbulb
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Header from '@/components/Header';
 
 const SalesPage = () => {
   const { t } = useTranslation();
@@ -60,8 +61,10 @@ const SalesPage = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Header />
+      
       {/* Hero Section */}
-      <section className="relative py-24 px-4 overflow-hidden">
+      <section className="relative pt-16 pb-24 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-neon-pulse-purple" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-neon-pulse-green" />

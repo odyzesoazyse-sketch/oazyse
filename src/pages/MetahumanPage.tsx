@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Sparkles, Brain, Zap, Shield, CheckCircle2, Star } from 'lucide-react';
+import { Sparkles, Brain, Zap, Shield, CheckCircle2, Star } from 'lucide-react';
+import Header from '@/components/Header';
 
 const MetahumanPage = () => {
   const navigate = useNavigate();
@@ -15,21 +16,10 @@ const MetahumanPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-sm z-50 border-b border-border">
-        <div className="flex items-center h-12 px-4">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-neon-purple transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>назад</span>
-          </button>
-        </div>
-      </header>
+      <Header />
 
       {/* Content */}
-      <div className="pt-16 pb-12 px-4 max-w-2xl mx-auto">
+      <div className="pt-12 pb-12 px-4 max-w-2xl mx-auto">
         {/* Hero */}
         <section className="text-center mb-8">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-neon-green via-neon-purple to-neon-green flex items-center justify-center">

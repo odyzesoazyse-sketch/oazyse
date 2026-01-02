@@ -231,10 +231,10 @@ export const StoriesTrigger = ({ onClick, hasNew }: StoriesTriggerProps) => {
       onClick={onClick}
       className="relative flex items-center group p-1"
     >
-      {/* Animated ring for new stories - hollow circle, same size as other icons (w-4 h-4) */}
+      {/* Animated ring for new stories - hollow circle, same size as other icons (w-3 h-3) */}
       <div
         className={cn(
-          "w-4 h-4 rounded-full p-[1px] transition-all duration-300",
+          "w-3 h-3 rounded-full p-[1px] transition-all duration-300",
           hasNew
             ? "bg-gradient-to-r from-neon-purple via-neon-green to-neon-purple animate-[spin_8s_linear_infinite] bg-[length:200%_100%]"
             : "bg-foreground/30"

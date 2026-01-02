@@ -15,7 +15,7 @@ const LanguageSwitcher = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center p-1 text-foreground hover:text-foreground/70 transition-all"
       >
-        <Globe className="w-4 h-4" strokeWidth={1.5} />
+        <Globe className="w-3 h-3" strokeWidth={1.5} />
       </button>
 
       {isOpen && (

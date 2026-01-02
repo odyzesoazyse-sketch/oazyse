@@ -11,7 +11,7 @@ const ThemeToggle = () => {
   }, []);
 
   if (!mounted) {
-    return <div className="w-6 h-6" />;
+    return <div className="w-5 h-5" />;
   }
 
   return (
@@ -21,9 +21,9 @@ const ThemeToggle = () => {
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? (
-        <Sun className="w-4 h-4" strokeWidth={1.5} />
+        <Sun className="w-3 h-3" strokeWidth={1.5} />
       ) : (
-        <Moon className="w-4 h-4" strokeWidth={1.5} />
+        <Moon className="w-3 h-3" strokeWidth={1.5} />
       )}
     </button>
   );
