@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
+import ProtectedHome from "./pages/ProtectedHome";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import QuizPage from "./pages/QuizPage";
@@ -34,6 +35,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/home" element={<ProtectedHome />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/quiz" element={<QuizPage />} />
