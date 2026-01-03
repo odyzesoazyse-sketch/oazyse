@@ -28,6 +28,11 @@ const Admin = () => {
   const { user, loading: authLoading } = useAuth();
   const { isAdmin, loading: adminLoading } = useAdmin();
   
+  // Temporarily disabled
+  useEffect(() => {
+    navigate('/');
+  }, [navigate]);
+  
   const [news, setNews] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingArticle, setEditingArticle] = useState<NewsArticle | null>(null);

@@ -51,20 +51,6 @@ const Header = () => {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="bg-background border-border z-50">
-                  {isAdmin && (
-                    <DropdownMenuItem asChild>
-                      <Link to="/admin" className="flex items-center gap-2 cursor-pointer">
-                        <Settings className="w-3 h-3" />
-                        <span>Админ</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuItem asChild>
-                    <Link to="/member" className="flex items-center gap-2 cursor-pointer">
-                      <Settings className="w-3 h-3" />
-                      <span>Настройки</span>
-                    </Link>
-                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => signOut()} className="flex items-center gap-2 cursor-pointer">
                     <LogOut className="w-3 h-3" />
                     <span>Выйти</span>
