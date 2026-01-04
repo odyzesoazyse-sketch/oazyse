@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Export oazyse° Logo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+      color: white;
+    }
+    .preview {
+      background: repeating-conic-gradient(#333 0% 25%, #444 0% 50%) 50% / 20px 20px;
+      padding: 40px 80px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    .logo {
+      font-family: 'Questrial', sans-serif;
+      font-size: 96px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      background: linear-gradient(90deg, #9b4dff 0%, #00e676 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    canvas {
+      display: none;
+    }
+    button {
+      background: linear-gradient(90deg, #9b4dff, #00e676);
+      border: none;
+      padding: 16px 32px;
+      font-size: 18px;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .info {
+      color: #888;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>oazyse° Logo Export</h1>
+  <div class="preview">
+    <div class="logo" id="logo">oazyse°</div>
+  </div>
+  <canvas id="canvas" width="1024" height="256"></canvas>
+  <button onclick="downloadPNG()">Скачать PNG (1024×256)</button>
+  <p class="info">PNG с прозрачным фоном, шрифт Questrial, градиент от фиолетового к зелёному</p>
+
+  <script>
+    async function downloadPNG() {
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Clear canvas (transparent)
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Wait for font to load
+      await document.fonts.ready;
+      
+      // Create gradient
+      const gradient = ctx.createLinearGradient(200, 0, 824, 0);
+      gradient.addColorStop(0, '#9b4dff');
+      gradient.addColorStop(1, '#00e676');
+      
+      // Draw text
+      ctx.font = '96px Questrial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = gradient;
+      ctx.fillText('oazyse°', canvas.width / 2, canvas.height / 2);
+      
+      // Download
+      const link = document.createElement('a');
+      link.download = 'oazyse-logo.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+  </script>
+</body>
+</html>
