@@ -8,6 +8,8 @@ import { QuizReport } from './QuizReport';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
+const QUIZ_OPS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/quiz-operations`;
+
 export function Quiz() {
   const [currentLevel, setCurrentLevel] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -31,17 +33,32 @@ export function Quiz() {
     }).length;
   };
 
-  // Initialize session
+  // Initialize session via edge function
   useEffect(() => {
     const initSession = async () => {
-      const { data, error } = await supabase
-        .from('quiz_responses')
-        .insert({})
-        .select('session_id')
-        .single();
-      
-      if (data) {
-        setSessionId(data.session_id);
+      try {
+        const response = await fetch(QUIZ_OPS_URL, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`
+          },
+          body: JSON.stringify({ action: 'create' })
+        });
+        
+        if (!response.ok) throw new Error('Failed to create session');
+        
+        const data = await response.json();
+        if (data.session_id) {
+          setSessionId(data.session_id);
+        }
+      } catch (error) {
+        console.error('Error creating session:', error);
+        toast({
+          title: 'Ошибка',
+          description: 'Не удалось создать сессию',
+          variant: 'destructive'
+        });
       }
     };
     initSession();
@@ -66,10 +83,22 @@ export function Quiz() {
       });
       
       if (Object.keys(filteredAnswers).length > 0) {
-        await supabase
-          .from('quiz_responses')
-          .update(filteredAnswers)
-          .eq('session_id', sessionId);
+        const response = await fetch(QUIZ_OPS_URL, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`
+          },
+          body: JSON.stringify({ 
+            action: 'update', 
+            session_id: sessionId,
+            data: filteredAnswers 
+          })
+        });
+        
+        if (!response.ok) {
+          console.error('Failed to save progress');
+        }
       }
     } catch (error) {
       console.error('Error saving progress:', error);
@@ -119,13 +148,8 @@ export function Quiz() {
     try {
       // Save final answers
       await saveProgress();
-      
-      await supabase
-        .from('quiz_responses')
-        .update({ completed: true })
-        .eq('session_id', sessionId);
 
-      // Generate AI report
+      // Generate AI report via edge function
       const response = await supabase.functions.invoke('quiz-report', {
         body: { answers, sessionId }
       });
@@ -135,13 +159,6 @@ export function Quiz() {
       }
 
       setReport(response.data.report);
-
-      // Save report to database
-      await supabase
-        .from('quiz_responses')
-        .update({ ai_report: response.data.report })
-        .eq('session_id', sessionId);
-
       setIsCompleted(true);
     } catch (error) {
       console.error('Error completing quiz:', error);
