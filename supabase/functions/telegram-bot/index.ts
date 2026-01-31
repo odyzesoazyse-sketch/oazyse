@@ -81,6 +81,32 @@ serve(async (req) => {
       throw new Error("TELEGRAM_BOT_TOKEN is not configured");
     }
 
+    const url = new URL(req.url);
+    
+    // Handle webhook setup via GET request
+    if (req.method === "GET" && url.searchParams.get("setup") === "webhook") {
+      const webhookUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/telegram-bot`;
+      const result = await sendTelegramRequest("setWebhook", {
+        url: webhookUrl,
+      }, TELEGRAM_BOT_TOKEN);
+      
+      return new Response(JSON.stringify({ 
+        message: "Webhook setup attempted",
+        webhook_url: webhookUrl,
+        telegram_response: result 
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Handle webhook info check
+    if (req.method === "GET" && url.searchParams.get("check") === "webhook") {
+      const result = await sendTelegramRequest("getWebhookInfo", {}, TELEGRAM_BOT_TOKEN);
+      return new Response(JSON.stringify(result), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
