@@ -3,6 +3,9 @@ project_id = "uuclwirtbkwrsbctxnpp"
 [functions.hypnotherapy-chat]
 verify_jwt = false
 
+[functions.telegram-bot]
+verify_jwt = false
+
 [functions.quiz-report]
 verify_jwt = false
 
