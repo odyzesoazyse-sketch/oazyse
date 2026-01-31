@@ -968,6 +968,33 @@ export type Database = {
         }
         Relationships: []
       }
+      telegram_bot_users: {
+        Row: {
+          chat_id: number
+          created_at: string
+          id: string
+          is_admin: boolean | null
+          language: string | null
+          updated_at: string
+        }
+        Insert: {
+          chat_id: number
+          created_at?: string
+          id?: string
+          is_admin?: boolean | null
+          language?: string | null
+          updated_at?: string
+        }
+        Update: {
+          chat_id?: number
+          created_at?: string
+          id?: string
+          is_admin?: boolean | null
+          language?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
