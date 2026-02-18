@@ -14,6 +14,7 @@ import OazysePage from "./pages/OazysePage";
 import InstitutePage from "./pages/InstitutePage";
 import MetahumanPage from "./pages/MetahumanPage";
 import NotFound from "./pages/NotFound";
+import TestLanding from "./pages/TestLanding";
 import MemberDashboard from "./pages/member/MemberDashboard";
 import MemberHome from "./pages/member/MemberHome";
 import MemberLessons from "./pages/member/MemberLessons";
@@ -51,6 +52,7 @@ const App = () => (
                 <Route path="profile" element={<MemberProfile />} />
                 <Route path="oasis-rating" element={<MemberOasisRating />} />
               </Route>
+              <Route path="/landing" element={<TestLanding />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
