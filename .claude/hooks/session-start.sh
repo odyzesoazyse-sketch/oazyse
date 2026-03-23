@@ -13,5 +13,11 @@ cd "$CLAUDE_PROJECT_DIR"
 # Install npm dependencies
 npm install
 
-# Start the dev server
-npm run dev
+# Start the dev server in background
+npm run dev &
+
+# Wait for dev server to be ready
+sleep 5
+
+# Start public tunnel and print URL
+npx localtunnel --port 8080
