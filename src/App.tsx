@@ -13,6 +13,12 @@ import QuizPage from "./pages/QuizPage";
 import OazysePage from "./pages/OazysePage";
 import InstitutePage from "./pages/InstitutePage";
 import MetahumanPage from "./pages/MetahumanPage";
+import AboutFounderPage from "./pages/AboutFounderPage";
+import MethodPage from "./pages/MethodPage";
+import PhilosophyPage from "./pages/PhilosophyPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import JoinPage from "./pages/JoinPage";
+import GlossaryPage from "./pages/GlossaryPage";
 import NotFound from "./pages/NotFound";
 import TestLanding from "./pages/TestLanding";
 import MemberDashboard from "./pages/member/MemberDashboard";
@@ -43,6 +49,12 @@ const App = () => (
               <Route path="/oazyse" element={<OazysePage />} />
               <Route path="/institute" element={<InstitutePage />} />
               <Route path="/metahuman" element={<MetahumanPage />} />
+              <Route path="/about" element={<AboutFounderPage />} />
+              <Route path="/method" element={<MethodPage />} />
+              <Route path="/philosophy" element={<PhilosophyPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/join" element={<JoinPage />} />
+              <Route path="/glossary" element={<GlossaryPage />} />
               <Route path="/member" element={<MemberDashboard />}>
                 <Route index element={<MemberHome />} />
                 <Route path="lessons" element={<MemberLessons />} />

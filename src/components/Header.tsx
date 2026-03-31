@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { User, LogOut, Settings } from 'lucide-react';
+import { User, LogOut } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
 import BackButton from './BackButton';
@@ -65,6 +65,29 @@ const Header = () => {
           </div>
         </div>
         <div className="h-[1px] bg-gradient-to-r from-transparent via-neon-purple to-transparent animate-neon-line-pulse" />
+        {/* Public nav — hidden on /member routes */}
+        {!location.pathname.startsWith('/member') && (
+          <nav className="flex items-center justify-center gap-4 py-1.5 px-4 overflow-x-auto scrollbar-hide">
+            {[
+              { to: '/method', label: 'метод' },
+              { to: '/philosophy', label: 'философия' },
+              { to: '/institute', label: 'институт' },
+              { to: '/projects', label: 'проекты' },
+              { to: '/about', label: 'создатель' },
+              { to: '/join', label: 'войти' },
+              { to: '/glossary', label: 'глоссарий' },
+            ].map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
+                className="text-[0.55rem] tracking-[0.2em] text-muted-foreground/50 hover:text-neon-purple transition-colors whitespace-nowrap lowercase"
+                style={{ fontFamily: 'Questrial, sans-serif' }}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+        )}
       </header>
       
       {/* Stories modal */}
