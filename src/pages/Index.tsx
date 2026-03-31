@@ -20,6 +20,7 @@ const Index = () => {
   }, [user, navigate]);
 
   if (user) return null;
+  // TEST MARKER — NEW VERSION LOADED
 
   return (
     <LandingShell withHeader={false}>
