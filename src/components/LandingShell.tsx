@@ -455,11 +455,10 @@ const SHELL_CSS = `
 interface LandingShellProps {
   children: React.ReactNode;
   withHeader?: boolean;
-  withCursor?: boolean;
 }
 
-const LandingShell = ({ children, withHeader = true, withCursor = true }: LandingShellProps) => {
-  if (withCursor) useCursorTrail();
+const LandingShell = ({ children, withHeader = true }: LandingShellProps) => {
+  useCursorTrail();
   useReveal();
 
   return (
