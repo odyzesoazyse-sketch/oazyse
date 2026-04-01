@@ -19,7 +19,6 @@ const Index = () => {
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="l-hero" style={{ paddingTop: '6rem' }}>
         <div data-reveal>
-          <span className="l-label" style={{ marginBottom: '2rem', display: 'block' }}>системный протокол · 2026</span>
           <h1 className="l-logo">oazyse°</h1>
         </div>
         <p className="l-hero-sub" data-reveal data-delay="1">архитектура нового сознания.</p>
