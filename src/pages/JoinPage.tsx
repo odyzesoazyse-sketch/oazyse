@@ -1,29 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import LandingShell, { Divider } from '@/components/LandingShell';
 
-const prices = [
-  {
-    amount: '$10+/мес',
-    title: 'вступить в оазис',
-    desc: 'сообщество. причастность. метод бесплатно внутри. доступ к институту. статус основателя для первых участников.',
-  },
-  {
-    amount: '$150',
-    title: 'ранний доступ AI метасинхроника',
-    desc: 'только 15 мест. первые в мире. тестовая версия AI системы. прямая связь с Adizele. ты формируешь продукт.',
-  },
-  {
-    amount: '$500',
-    title: 'сеанс с Adizele',
-    desc: 'один запрос. один-три сеанса до результата. гарантия или возврат денег. дальше договариваемся индивидуально.',
-  },
-  {
-    amount: '$100,000',
-    title: 'личная работа один на один',
-    desc: 'формат обсуждается индивидуально. для тех кто строит большое и хочет делать это из правильного состояния.',
-  },
-];
-
 const JoinPage = () => {
   const navigate = useNavigate();
 
@@ -59,44 +36,26 @@ const JoinPage = () => {
         </div>
       </section>
 
-      {/* 02 · ЛИНЕЙКА */}
-      <Divider />
-      <section className="l-section-wide">
-        <span className="l-label" data-reveal style={{ textAlign: 'center', display: 'block' }}>[ 02 ] — линейка</span>
-        <h2 className="l-title" data-reveal data-delay="1" style={{ textAlign: 'center' }}>выбери свой вход.</h2>
-        <div style={{ display: 'grid', gap: '1px', background: 'hsl(var(--border))' }} data-reveal data-delay="2">
-          {prices.map((p) => (
-            <div key={p.amount} className="l-price-card" style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-              <div style={{ flexShrink: 0, minWidth: '120px' }}>
-                <span className="l-price-amount" style={{ fontSize: '1.1rem' }}>{p.amount}</span>
-                <span className="l-mono" style={{ display: 'block' }}>{p.title}</span>
-              </div>
-              <p className="l-price-desc" style={{ paddingTop: '0.2rem' }}>{p.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 03 · ВКЛАД В ОАЗИС */}
+      {/* 02 · ВКЛАД В ОАЗИС */}
       <Divider />
       <section className="l-section">
-        <span className="l-label" data-reveal>[ 03 ] — вклад в оазис</span>
+        <span className="l-label" data-reveal>[ 02 ] — вклад в оазис</span>
         <h2 className="l-title" data-reveal data-delay="1">оазис не продаёт членство.<br />он принимает вклад.</h2>
         <p className="l-text" data-reveal data-delay="2">
           когда ты приходишь в оазис — ты не покупаешь продукт. ты решаешь поддержать то во что веришь. это другое намерение. и оно меняет всё.
         </p>
         <p className="l-text" data-reveal data-delay="3">
-          минимальный вклад — $10 в месяц. не потому что это цена входа. а потому что это момент когда ты говоришь себе: я с этим проектом. я его часть.
+          размер вклада — это личное дело каждого. внутри нет уровней и иерархий. нет VIP-доступа и эконома.
         </p>
         <div className="l-card" data-reveal data-delay="4" style={{ marginTop: '2rem' }}>
-          <p className="l-mono">оазис не делит людей на уровни. здесь нет VIP-доступа и эконома. все участники равны. разница только в размере вклада — и это личное дело каждого.</p>
+          <p className="l-mono">все участники равны. оазис — пространство для тех кто выбрал жить из полноты. независимо от того сколько они вносят.</p>
         </div>
       </section>
 
-      {/* 04 · РИТУАЛ ВХОДА */}
+      {/* 03 · РИТУАЛ ВХОДА */}
       <Divider />
       <div className="l-cta">
-        <span className="l-label" data-reveal>[ 04 ] — ритуал входа</span>
+        <span className="l-label" data-reveal>[ 03 ] — ритуал входа</span>
         <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '1rem' }}>
           ты дочитал до этого места.
         </p>

@@ -152,23 +152,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 05 · ВХОД */}
-      <Divider />
-      <section className="l-section">
-        <span className="l-label" data-reveal>[ 05 ] — вход</span>
-        <h2 className="l-title" data-reveal data-delay="1">от $10 в месяц.<br />или один запрос.</h2>
-        <p className="l-text" data-reveal data-delay="2">
-          войти в оазис можно по-разному — в зависимости от того где ты сейчас и чего ты хочешь. минимальный вклад $10 в месяц. сеанс с Adizele — $500 с гарантией.
-        </p>
-        <div style={{ marginTop: '2rem', textAlign: 'center' }} data-reveal data-delay="3">
-          <Link to="/join" className="l-btn-ghost">все варианты →</Link>
-        </div>
-      </section>
-
-      {/* 06 · РИТУАЛ ВХОДА */}
+      {/* 05 · РИТУАЛ ВХОДА */}
       <Divider />
       <div className="l-cta">
-        <span className="l-label" data-reveal>[ 06 ] — ритуал входа</span>
+        <span className="l-label" data-reveal>[ 05 ] — ритуал входа</span>
         <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '1rem' }}>
           ты дочитал до этого места.
         </p>
