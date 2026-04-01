@@ -1,4 +1,5 @@
-import LandingShell from '@/components/LandingShell';
+import { Link } from 'react-router-dom';
+import LandingShell, { Divider } from '@/components/LandingShell';
 
 const terms = [
   {
@@ -77,6 +78,19 @@ const GlossaryPage = () => {
           ))}
         </div>
       </section>
+
+      {/* CTA */}
+      <Divider />
+      <div className="l-cta">
+        <span className="l-label" data-reveal>[ теперь ты знаешь язык ]</span>
+        <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '3rem' }}>
+          слова — это карта. оазис — это территория.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }} data-reveal data-delay="2">
+          <Link to="/join" className="l-btn">войти в оазис</Link>
+          <Link to="/method" className="l-btn-ghost">узнать метод →</Link>
+        </div>
+      </div>
 
       {/* FOOTER */}
       <footer className="l-footer">

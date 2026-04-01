@@ -6,7 +6,7 @@ import bookCoverEn from '@/assets/book-cover-en.png';
 import { supabase } from '@/integrations/supabase/client';
 import NewsViewer from '@/components/NewsViewer';
 import SocialProof from '@/components/SocialProof';
-import { Brain, Zap, GraduationCap, Sparkles } from 'lucide-react';
+import { Zap, GraduationCap, Sparkles } from 'lucide-react';
 
 interface NewsArticle {
   id: string;
@@ -55,26 +55,6 @@ const HomeSection = () => {
 
   return (
     <div className="px-4 py-5 max-w-2xl mx-auto space-y-4">
-      {/* Quiz Banner */}
-      <section 
-        onClick={() => navigate('/quiz')}
-        className="px-4 py-3 border border-neon-purple/30 rounded cursor-pointer hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all group"
-      >
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-purple to-neon-green text-white flex items-center justify-center flex-shrink-0">
-            <Brain className="w-5 h-5" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2">
-              <h2 className="text-base font-medium">Экспресс-анализ</h2>
-              <span className="text-[9px] uppercase tracking-[0.12em] text-neon-green">бесплатно</span>
-            </div>
-            <p className="text-xs text-muted-foreground">Персональные рекомендации от AI</p>
-          </div>
-          <span className="text-neon-purple group-hover:translate-x-1 group-hover:text-neon-green transition-all text-lg">→</span>
-        </div>
-      </section>
-
       {/* Book Section - Mobile Optimized */}
       <section className="p-3 md:p-4 border border-neon-purple/30 rounded hover:border-neon-purple hover:shadow-[0_0_20px_hsl(var(--neon-purple)/0.15)] transition-all">
         <span className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground block mb-2">{t('home.featured')}</span>

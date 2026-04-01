@@ -74,7 +74,7 @@ const Header = () => {
               { to: '/institute', label: 'институт' },
               { to: '/projects', label: 'проекты' },
               { to: '/about', label: 'создатель' },
-              { to: '/join', label: 'войти' },
+              { to: '/join', label: 'вступить' },
               { to: '/glossary', label: 'глоссарий' },
             ].map(({ to, label }) => (
               <Link
