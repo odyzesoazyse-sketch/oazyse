@@ -9,7 +9,6 @@ import Index from "./pages/Index";
 import ProtectedHome from "./pages/ProtectedHome";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
-import QuizPage from "./pages/QuizPage";
 import OazysePage from "./pages/OazysePage";
 import InstitutePage from "./pages/InstitutePage";
 import MetahumanPage from "./pages/MetahumanPage";
@@ -45,7 +44,6 @@ const App = () => (
               <Route path="/home" element={<ProtectedHome />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<Admin />} />
-              <Route path="/quiz" element={<QuizPage />} />
               <Route path="/oazyse" element={<OazysePage />} />
               <Route path="/institute" element={<InstitutePage />} />
               <Route path="/metahuman" element={<MetahumanPage />} />

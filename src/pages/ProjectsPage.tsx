@@ -1,12 +1,5 @@
-import LandingShell from '@/components/LandingShell';
-
-const Divider = () => (
-  <div className="l-divider">
-    <div className="l-div-line" />
-    <div className="l-div-dot" />
-    <div className="l-div-line" />
-  </div>
-);
+import { Link } from 'react-router-dom';
+import LandingShell, { Divider } from '@/components/LandingShell';
 
 const projects = [
   { name: 'метасинхроника', desc: 'метод работы с сознанием которому мы даём гарантию. через живого практика или через искусственный интеллект. доступен каждому участнику оазиса бесплатно.' },
@@ -109,6 +102,19 @@ const ProjectsPage = () => {
           <p className="l-mono">оазис — первое пространство в истории где технология служит сознанию а не наоборот.</p>
         </div>
       </section>
+
+      {/* CTA */}
+      <Divider />
+      <div className="l-cta">
+        <span className="l-label" data-reveal>[ все проекты растут изнутри ]</span>
+        <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '3rem' }}>
+          стань частью — и сам станешь проектом.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }} data-reveal data-delay="2">
+          <Link to="/join" className="l-btn">войти в оазис</Link>
+          <Link to="/method" className="l-btn-ghost">узнать метод →</Link>
+        </div>
+      </div>
 
       {/* FOOTER */}
       <footer className="l-footer">

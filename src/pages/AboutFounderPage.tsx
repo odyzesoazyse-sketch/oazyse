@@ -1,12 +1,5 @@
-import LandingShell from '@/components/LandingShell';
-
-const Divider = () => (
-  <div className="l-divider">
-    <div className="l-div-line" />
-    <div className="l-div-dot" />
-    <div className="l-div-line" />
-  </div>
-);
+import { Link } from 'react-router-dom';
+import LandingShell, { Divider } from '@/components/LandingShell';
 
 const AboutFounderPage = () => {
   return (
@@ -70,6 +63,19 @@ const AboutFounderPage = () => {
         </p>
         <p className="l-founder-sig" data-reveal data-delay="4">— adizele oazyse</p>
       </section>
+
+      {/* CTA */}
+      <Divider />
+      <div className="l-cta">
+        <span className="l-label" data-reveal>[ следующий шаг ]</span>
+        <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '3rem' }}>
+          если это резонирует — войди в оазис.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }} data-reveal data-delay="2">
+          <Link to="/join" className="l-btn">войти в оазис</Link>
+          <Link to="/method" className="l-btn-ghost">узнать метод →</Link>
+        </div>
+      </div>
 
       {/* FOOTER */}
       <footer className="l-footer">

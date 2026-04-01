@@ -80,7 +80,11 @@ const Header = () => {
               <Link
                 key={to}
                 to={to}
-                className="text-[0.55rem] tracking-[0.2em] text-muted-foreground/50 hover:text-neon-purple transition-colors whitespace-nowrap lowercase"
+                className={`text-[0.55rem] tracking-[0.2em] lowercase whitespace-nowrap transition-colors ${
+                  location.pathname === to
+                    ? 'text-neon-purple'
+                    : 'text-muted-foreground/50 hover:text-neon-purple'
+                }`}
                 style={{ fontFamily: 'Questrial, sans-serif' }}
               >
                 {label}

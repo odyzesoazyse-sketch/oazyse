@@ -1,12 +1,5 @@
-import LandingShell from '@/components/LandingShell';
-
-const Divider = () => (
-  <div className="l-divider">
-    <div className="l-div-line" />
-    <div className="l-div-dot" />
-    <div className="l-div-line" />
-  </div>
-);
+import { Link } from 'react-router-dom';
+import LandingShell, { Divider } from '@/components/LandingShell';
 
 const PhilosophyPage = () => {
   return (
@@ -100,6 +93,19 @@ const PhilosophyPage = () => {
           <p className="l-mono" style={{ marginTop: '0.75rem' }}>и ещё одно: в оазисе продукт и миссия — одно и то же.</p>
         </div>
       </section>
+
+      {/* CTA */}
+      <Divider />
+      <div className="l-cta">
+        <span className="l-label" data-reveal>[ философия оживает в действии ]</span>
+        <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '3rem' }}>
+          метафрактализм — это не концепция. это то что происходит когда ты входишь.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }} data-reveal data-delay="2">
+          <Link to="/join" className="l-btn">войти в оазис</Link>
+          <Link to="/method" className="l-btn-ghost">посмотреть метод →</Link>
+        </div>
+      </div>
 
       {/* FOOTER */}
       <footer className="l-footer">

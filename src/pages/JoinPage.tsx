@@ -1,13 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import LandingShell from '@/components/LandingShell';
-
-const Divider = () => (
-  <div className="l-divider">
-    <div className="l-div-line" />
-    <div className="l-div-dot" />
-    <div className="l-div-line" />
-  </div>
-);
+import LandingShell, { Divider } from '@/components/LandingShell';
 
 const prices = [
   {

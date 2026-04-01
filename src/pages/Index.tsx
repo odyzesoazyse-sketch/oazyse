@@ -1,15 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import LandingShell from '@/components/LandingShell';
-
-const Divider = () => (
-  <div className="l-divider">
-    <div className="l-div-line" />
-    <div className="l-div-dot" />
-    <div className="l-div-line" />
-  </div>
-);
+import LandingShell, { Divider } from '@/components/LandingShell';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -22,36 +14,41 @@ const Index = () => {
   if (user) return null;
 
   return (
-    <LandingShell withHeader={false}>
+    <LandingShell>
 
       {/* HERO */}
-      <section className="l-hero" style={{ paddingTop: '2rem' }}>
+      <section className="l-hero" style={{ paddingTop: '6rem' }}>
         <div data-reveal>
           <span className="l-label" style={{ marginBottom: '2rem', display: 'block' }}>системный протокол · 2026</span>
           <h1 className="l-logo">oazyse°</h1>
         </div>
         <p className="l-hero-sub" data-reveal data-delay="1">архитектура нового сознания.</p>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }} data-reveal data-delay="2">
+        <p className="l-mono" data-reveal data-delay="2" style={{ marginBottom: '3rem', color: 'hsl(var(--muted-foreground)/0.4)', textAlign: 'center' }}>
+          один сеанс &nbsp;·&nbsp; полтора часа &nbsp;·&nbsp; гарантия или возврат
+        </p>
+        <div data-reveal data-delay="3">
           <button className="l-btn" onClick={() => navigate('/auth')}>войти в оазис</button>
-          <button className="l-btn-ghost" onClick={() => navigate('/quiz')}>пройти анализ →</button>
         </div>
-        <div className="l-hero-line" style={{ marginTop: '5rem' }} data-reveal data-delay="3" />
+        <div className="l-hero-line" style={{ marginTop: '5rem' }} data-reveal data-delay="4" />
         <p className="l-hero-tag">институт сознания космического разума.</p>
       </section>
 
-      {/* NAV */}
-      <nav className="l-nav">
-        {[
-          { to: '/method', label: 'метод' },
-          { to: '/philosophy', label: 'философия' },
-          { to: '/institute', label: 'институт' },
-          { to: '/projects', label: 'проекты' },
-          { to: '/about', label: 'о создателе' },
-          { to: '/join', label: 'войти' },
-        ].map(({ to, label }) => (
-          <Link key={to} to={to} className="l-nav-link">{label}</Link>
+      {/* MARQUEE STRIP */}
+      <div style={{
+        borderTop: '1px solid hsl(var(--border))',
+        borderBottom: '1px solid hsl(var(--border))',
+        padding: '0.875rem 2rem',
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '2.5rem',
+        flexWrap: 'wrap',
+        position: 'relative',
+        zIndex: 2,
+      }}>
+        {['свобода изнутри', 'аппаратное изменение', 'гарантия или возврат', 'первые в мире', 'институт сознания', 'метафрактализм'].map((phrase) => (
+          <span key={phrase} className="l-label" style={{ marginBottom: 0, opacity: 0.35 }}>{phrase}</span>
         ))}
-      </nav>
+      </div>
 
       {/* 01 · ЧТО ТАКОЕ ОАЗИС */}
       <Divider />
@@ -67,6 +64,9 @@ const Index = () => {
         </p>
         <p className="l-text" data-reveal data-delay="4">
           каждый человек который становится свободнее изнутри — создаёт оазис вокруг себя. в семье. в окружении. в пространстве где он живёт. так один человек меняет мир. не метафора — механизм.
+        </p>
+        <p className="l-text" data-reveal data-delay="4">
+          к 2030 году в оазисе будет миллион человек. не потому что мы будем рекламироваться. потому что каждый кто прошёл — приводит других. не по просьбе. по состоянию.
         </p>
       </section>
 
@@ -113,6 +113,9 @@ const Index = () => {
             есть программное изменение. а есть аппаратное.<br />
             метасинхроника — это аппаратное изменение.
           </p>
+          <p className="l-text" style={{ fontStyle: 'italic', marginBottom: '1.5rem' }}>
+            за один сеанс убирается программа которую человек нёс всю жизнь. ту которую он даже не считал программой — просто думал что это он.
+          </p>
           <p className="l-mono" style={{ marginTop: '1.5rem' }}>
             один сеанс. &nbsp;·&nbsp; полтора часа. &nbsp;·&nbsp; гарантия или возврат.
           </p>
@@ -122,35 +125,50 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 04 · ЛИНЕЙКА */}
+      {/* 04 · ЧТО МЕНЯЕТСЯ */}
       <Divider />
       <section className="l-section-wide">
-        <span className="l-label" data-reveal style={{ textAlign: 'center', display: 'block' }}>[ 04 ] — с чего начать</span>
-        <h2 className="l-title" data-reveal data-delay="1" style={{ textAlign: 'center' }}>выбери свой путь.</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1px', background: 'hsl(var(--border))' }} data-reveal data-delay="2">
-          <div className="l-price-card">
-            <span className="l-price-amount">$10<span style={{ fontSize: '0.65rem', letterSpacing: '0.1em', opacity: 0.7 }}>/мес</span></span>
-            <p className="l-price-desc">вступить в оазис. сообщество, метод бесплатно внутри, доступ к институту. статус основателя для первых.</p>
+        <span className="l-label" data-reveal style={{ textAlign: 'center', display: 'block' }}>[ 04 ] — что меняется</span>
+        <h2 className="l-title" data-reveal data-delay="1" style={{ textAlign: 'center' }}>не симптом.<br />источник.</h2>
+        <div className="l-three-grid" data-reveal data-delay="2">
+          <div className="l-card-hover">
+            <span className="l-mono" style={{ display: 'block', marginBottom: '1rem' }}>страх · блок · паттерн</span>
+            <p className="l-text" style={{ marginBottom: 0 }}>
+              за один сеанс убирается то что человек нёс всю жизнь. не заглушается — убирается. насовсем.
+            </p>
           </div>
-          <div className="l-price-card">
-            <span className="l-price-amount">$150</span>
-            <p className="l-price-desc">ранний доступ AI метасинхроника. только 15 мест. первые в мире. прямая связь с Adizele.</p>
+          <div className="l-card-hover">
+            <span className="l-mono" style={{ display: 'block', marginBottom: '1rem' }}>ощущение что живёшь<br />не свою жизнь</span>
+            <p className="l-text" style={{ marginBottom: 0 }}>
+              после сеанса люди говорят: "я впервые почувствовал что я — это я". не роль. не маска. я.
+            </p>
           </div>
-          <div className="l-price-card">
-            <span className="l-price-amount">$500</span>
-            <p className="l-price-desc">сеанс с Adizele. один запрос. один-три сеанса до результата. гарантия или возврат.</p>
-          </div>
-          <div className="l-price-card">
-            <span className="l-price-amount">$100k</span>
-            <p className="l-price-desc">личная работа один на один. для тех кто строит большое и хочет делать это из правильного состояния.</p>
+          <div className="l-card-hover">
+            <span className="l-mono" style={{ display: 'block', marginBottom: '1rem' }}>потолок в деньгах ·<br />отношениях · здоровье</span>
+            <p className="l-text" style={{ marginBottom: 0 }}>
+              потолок не снаружи. он внутри. снимается источник — исчезает ограничение. жизнь расширяется сама.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* 05 · РИТУАЛ ВХОДА */}
+      {/* 05 · ВХОД */}
+      <Divider />
+      <section className="l-section">
+        <span className="l-label" data-reveal>[ 05 ] — вход</span>
+        <h2 className="l-title" data-reveal data-delay="1">от $10 в месяц.<br />или один запрос.</h2>
+        <p className="l-text" data-reveal data-delay="2">
+          войти в оазис можно по-разному — в зависимости от того где ты сейчас и чего ты хочешь. минимальный вклад $10 в месяц. сеанс с Adizele — $500 с гарантией.
+        </p>
+        <div style={{ marginTop: '2rem', textAlign: 'center' }} data-reveal data-delay="3">
+          <Link to="/join" className="l-btn-ghost">все варианты →</Link>
+        </div>
+      </section>
+
+      {/* 06 · РИТУАЛ ВХОДА */}
       <Divider />
       <div className="l-cta">
-        <span className="l-label" data-reveal>[ 05 ] — ритуал входа</span>
+        <span className="l-label" data-reveal>[ 06 ] — ритуал входа</span>
         <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '1rem' }}>
           ты дочитал до этого места.
         </p>

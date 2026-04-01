@@ -471,5 +471,13 @@ const LandingShell = ({ children, withHeader = true }: LandingShellProps) => {
   );
 };
 
+const Divider = () => (
+  <div className="l-divider">
+    <div className="l-div-line" />
+    <div className="l-div-dot" />
+    <div className="l-div-line" />
+  </div>
+);
+
 export default LandingShell;
-export { useCursorTrail, useReveal, SHELL_CSS };
+export { useCursorTrail, useReveal, SHELL_CSS, Divider };
