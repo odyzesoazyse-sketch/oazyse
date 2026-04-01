@@ -1,23 +1,29 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import LandingShell from '@/components/LandingShell';
 
 const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    console.error('404:', location.pathname);
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
-      </div>
-    </div>
+    <LandingShell>
+      <section className="l-hero" style={{ minHeight: '90vh' }}>
+        <div data-reveal>
+          <span className="l-label" style={{ marginBottom: '2rem', display: 'block' }}>[ 404 ]</span>
+          <h1 className="l-logo" style={{ fontSize: 'clamp(2.5rem, 9vw, 6rem)' }}>страница<br />не найдена</h1>
+        </div>
+        <p className="l-hero-sub" data-reveal data-delay="1">
+          ты ищешь что-то — но этого здесь нет.
+        </p>
+        <div data-reveal data-delay="2" style={{ marginTop: '1rem' }}>
+          <Link to="/" className="l-btn">вернуться домой</Link>
+        </div>
+      </section>
+    </LandingShell>
   );
 };
 
