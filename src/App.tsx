@@ -24,6 +24,7 @@ const OazysePage = lazy(() => import('./pages/OazysePage'));
 const MetahumanPage = lazy(() => import('./pages/MetahumanPage'));
 const ProtectedHome = lazy(() => import('./pages/ProtectedHome'));
 const Admin = lazy(() => import('./pages/Admin'));
+const SessionPage = lazy(() => import('./pages/SessionPage'));
 
 // Lazily loaded — member area
 const MemberDashboard = lazy(() => import('./pages/member/MemberDashboard'));
@@ -60,6 +61,7 @@ const App = () => (
                 <Route path="/metahuman" element={<MetahumanPage />} />
                 <Route path="/home" element={<ProtectedHome />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/session" element={<SessionPage />} />
                 <Route path="/member" element={<MemberDashboard />}>
                   <Route index element={<MemberHome />} />
                   <Route path="lessons" element={<MemberLessons />} />

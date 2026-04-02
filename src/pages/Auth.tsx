@@ -1,28 +1,22 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { z } from 'zod';
-
-const authSchema = z.object({
-  email: z.string().email('Неверный формат email'),
-  password: z.string().min(6, 'Пароль должен быть не менее 6 символов'),
-  fullName: z.string().optional()
-});
 
 const Auth = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { user, signUp, signIn, signInWithGoogle } = useAuth();
+  const { user, signIn } = useAuth();
   const { toast } = useToast();
   
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [mode, setMode] = useState<'waitlist' | 'success' | 'login'>('waitlist');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
+  const [telegram, setTelegram] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -31,52 +25,51 @@ const Auth = () => {
     }
   }, [user, navigate]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!fullName || (!email && !telegram)) {
+      toast({
+        variant: 'destructive',
+        title: 'Ошибка',
+        description: 'Пожалуйста, введите имя и контакт для связи (email или telegram)'
+      });
+      return;
+    }
+
+    setLoading(true);
+    
     try {
-      authSchema.parse({ email, password, fullName: isSignUp ? fullName : undefined });
-    } catch (err) {
-      if (err instanceof z.ZodError) {
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { error } = await supabase.from('waitlist').insert([
+        { full_name: fullName, email: email || null, telegram: telegram || null }
+      ]);
+      
+      if (error) throw error;
+      
+      setMode('success');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: 'Ошибка сервера',
+        description: error.message || 'Не удалось сохранить заявку. Попробуйте позже.'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLoginSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const { error } = await signIn(email, password);
+      if (error) {
         toast({
           variant: 'destructive',
           title: t('auth.error'),
-          description: err.errors[0].message
+          description: t('auth.invalidCredentials')
         });
-        return;
-      }
-    }
-
-    setLoading(true);
-    
-    try {
-      if (isSignUp) {
-        const { error } = await signUp(email, password, fullName);
-        if (error) {
-          if (error.message.includes('already registered')) {
-            toast({
-              variant: 'destructive',
-              title: t('auth.error'),
-              description: t('auth.alreadyRegistered')
-            });
-          } else {
-            throw error;
-          }
-        } else {
-          toast({
-            title: t('auth.success'),
-            description: t('auth.signupSuccess')
-          });
-        }
-      } else {
-        const { error } = await signIn(email, password);
-        if (error) {
-          toast({
-            variant: 'destructive',
-            title: t('auth.error'),
-            description: t('auth.invalidCredentials')
-          });
-        }
       }
     } catch (error: any) {
       toast({
@@ -89,21 +82,34 @@ const Auth = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setLoading(true);
-    try {
-      const { error } = await signInWithGoogle();
-      if (error) throw error;
-    } catch (error: any) {
-      toast({
-        variant: 'destructive',
-        title: t('auth.error'),
-        description: error.message
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (mode === 'success') {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 animate-fade-in text-center space-y-6">
+        <h1 className="text-3xl tracking-wide font-normal bg-gradient-to-r from-neon-purple to-neon-green bg-clip-text text-transparent" style={{ fontFamily: 'Questrial, sans-serif' }}>
+          заявка принята.
+        </h1>
+        <p className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground max-w-sm leading-relaxed">
+          В данный момент оазис находится в закрытом режиме. <br /><br />
+          Ваша заявка сохранена. Мы свяжемся с вами, когда откроем набор новых участников.
+        </p>
+        <div className="space-y-4 w-full max-w-xs pt-4">
+          <p className="text-[9px] uppercase tracking-[0.2em] text-muted-foreground">наши соцсети</p>
+          <a href="https://t.me/oazyse" target="_blank" rel="noopener noreferrer" className="block w-full h-10 leading-10 text-[10px] uppercase tracking-[0.15em] bg-neon-purple/10 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple/20 transition-all rounded-md">
+            Telegram
+          </a>
+          <a href="https://instagram.com/oazyse" target="_blank" rel="noopener noreferrer" className="block w-full h-10 leading-10 text-[10px] uppercase tracking-[0.15em] bg-transparent text-muted-foreground border border-border/50 hover:border-neon-purple/50 transition-all rounded-md">
+            Instagram
+          </a>
+          <a href="https://youtube.com/@oazyse" target="_blank" rel="noopener noreferrer" className="block w-full h-10 leading-10 text-[10px] uppercase tracking-[0.15em] bg-transparent text-muted-foreground border border-border/50 hover:border-neon-purple/50 transition-all rounded-md">
+            YouTube
+          </a>
+        </div>
+        <button onClick={() => navigate('/')} className="text-[8px] uppercase tracking-[0.2em] text-muted-foreground hover:text-neon-green transition-colors mt-8">
+          ← вернуться на главную
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
@@ -114,79 +120,80 @@ const Auth = () => {
             oazyse°
           </h1>
           <p className="text-[9px] uppercase tracking-[0.15em] text-muted-foreground">
-            {isSignUp ? t('auth.createAccount') : t('auth.welcomeBack')}
+            {mode === 'waitlist' ? 'лист ожидания' : 'вход для участников'}
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-3">
-          {isSignUp && (
+        {mode === 'waitlist' ? (
+          <form onSubmit={handleWaitlistSubmit} className="space-y-3">
             <Input
               type="text"
-              placeholder={t('auth.fullName')}
+              placeholder="ваше имя"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="h-9 text-[10px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
+              required
+              className="h-10 text-[11px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
             />
-          )}
-          
-          <Input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="h-9 text-[10px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
-          />
-          
-          <Input
-            type="password"
-            placeholder={t('auth.password')}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="h-9 text-[10px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
-          />
+            <Input
+              type="email"
+              placeholder="email (необязательно)"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="h-10 text-[11px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
+            />
+            <Input
+              type="text"
+              placeholder="telegram @username"
+              value={telegram}
+              onChange={(e) => setTelegram(e.target.value)}
+              className="h-10 text-[11px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
+            />
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full h-9 text-[9px] uppercase tracking-[0.15em] bg-neon-purple/20 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple/30 transition-all"
-          >
-            {loading ? '...' : isSignUp ? t('auth.signUp') : t('auth.signIn')}
-          </Button>
-        </form>
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full h-10 mt-2 text-[10px] uppercase tracking-[0.15em] bg-neon-purple/20 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple/30 transition-all"
+            >
+              {loading ? '...' : 'оставить заявку'}
+            </Button>
+          </form>
+        ) : (
+          <form onSubmit={handleLoginSubmit} className="space-y-3">
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="h-10 text-[11px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
+            />
+            <Input
+              type="password"
+              placeholder={t('auth.password')}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="h-10 text-[11px] bg-transparent border-border/30 focus:border-neon-purple/50 placeholder:text-muted-foreground/50 tracking-wide"
+            />
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full h-10 mt-2 text-[10px] uppercase tracking-[0.15em] bg-neon-purple/20 text-neon-purple border border-neon-purple/30 hover:bg-neon-purple/30 transition-all"
+            >
+              {loading ? '...' : t('auth.signIn')}
+            </Button>
+          </form>
+        )}
 
-        {/* Divider */}
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-neon-purple/20" />
-          </div>
-          <div className="relative flex justify-center text-[8px] uppercase tracking-[0.2em]">
-            <span className="bg-background px-3 text-muted-foreground">{t('auth.or')}</span>
-          </div>
-        </div>
-
-        {/* Google Button */}
-        <Button
-          type="button"
-          variant="outline"
-          onClick={handleGoogleSignIn}
-          disabled={loading}
-          className="w-full h-9 text-[9px] uppercase tracking-[0.15em] border-border/30 hover:border-neon-green/50 hover:bg-neon-green/10 hover:text-neon-green transition-all"
-        >
-          {t('auth.continueWithGoogle')}
-        </Button>
-
-        {/* Toggle Sign Up / Sign In */}
-        <p className="text-center text-[9px] text-muted-foreground tracking-wide">
-          {isSignUp ? t('auth.haveAccount') : t('auth.noAccount')}{' '}
+        {/* Toggle Login/Waitlist */}
+        <p className="text-center text-[9px] text-muted-foreground tracking-wide mt-4">
           <button
             type="button"
-            onClick={() => setIsSignUp(!isSignUp)}
-            className="text-neon-purple hover:text-neon-purple/80 transition-colors"
+            onClick={() => setMode(mode === 'waitlist' ? 'login' : 'waitlist')}
+            className="hover:text-neon-purple transition-colors"
           >
-            {isSignUp ? t('auth.signIn') : t('auth.signUp')}
+            {mode === 'waitlist' ? 'уже есть доступ?' : 'создать заявку'}
           </button>
         </p>
 
@@ -194,7 +201,7 @@ const Auth = () => {
         <button
           type="button"
           onClick={() => navigate('/')}
-          className="block w-full text-center text-[8px] uppercase tracking-[0.2em] text-muted-foreground hover:text-neon-green transition-colors"
+          className="block w-full text-center pt-2 text-[8px] uppercase tracking-[0.2em] text-muted-foreground hover:text-neon-green transition-colors"
         >
           ← {t('auth.backToHome')}
         </button>

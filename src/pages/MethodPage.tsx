@@ -117,11 +117,6 @@ const MethodPage = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="l-footer">
-        <p className="l-footer-text">
-          oazyse° &nbsp;·&nbsp; институт сознания космического разума &nbsp;·&nbsp; метафрактализм
-        </p>
-      </footer>
 
     </LandingShell>
   );

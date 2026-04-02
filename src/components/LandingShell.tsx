@@ -457,6 +457,19 @@ interface LandingShellProps {
   withHeader?: boolean;
 }
 
+const Footer = () => (
+  <footer className="l-footer">
+    <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', marginBottom: '2rem' }}>
+      <a href="https://t.me/oazyse" target="_blank" rel="noopener noreferrer" className="l-nav-link">telegram</a>
+      <a href="https://instagram.com/oazyse" target="_blank" rel="noopener noreferrer" className="l-nav-link">instagram</a>
+      <a href="https://youtube.com/@oazyse" target="_blank" rel="noopener noreferrer" className="l-nav-link">youtube</a>
+    </div>
+    <p className="l-footer-text">
+      oazyse° &nbsp;·&nbsp; институт сознания космического разума &nbsp;·&nbsp; метафрактализм
+    </p>
+  </footer>
+);
+
 const LandingShell = ({ children, withHeader = true }: LandingShellProps) => {
   useCursorTrail();
   useReveal();
@@ -467,6 +480,7 @@ const LandingShell = ({ children, withHeader = true }: LandingShellProps) => {
       <div className="ls-orb" />
       {withHeader && <Header />}
       {children}
+      <Footer />
     </div>
   );
 };
