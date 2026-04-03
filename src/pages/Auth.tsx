@@ -41,7 +41,7 @@ const Auth = () => {
     
     try {
       const { supabase } = await import('@/integrations/supabase/client');
-      const { error } = await supabase.from('waitlist').insert([
+      const { error } = await (supabase.from as any)('waitlist').insert([
         { full_name: fullName, email: email || null, telegram: telegram || null }
       ]);
       
