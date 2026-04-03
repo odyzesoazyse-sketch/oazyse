@@ -16,4 +16,4 @@ CREATE POLICY "Enable insert for anonymous users" ON public.waitlist
 
 CREATE POLICY "Enable read access for admins" ON public.waitlist
     FOR SELECT TO authenticated
-    USING (has_role('admin', auth.uid()));
+    USING (public.has_role(auth.uid(), 'admin'));
