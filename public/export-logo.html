@@ -24,10 +24,10 @@
     }
     .logo {
       font-family: 'Questrial', sans-serif;
-      font-size: 96px;
+      font-size: 160px;
       font-weight: 400;
       letter-spacing: 4px;
-      background: linear-gradient(90deg, #9b4dff 0%, #00e676 100%);
+      background: linear-gradient(90deg, #ab4dff 0%, #00e673 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -36,7 +36,7 @@
       display: none;
     }
     button {
-      background: linear-gradient(90deg, #9b4dff, #00e676);
+      background: linear-gradient(90deg, #ab4dff, #00e673);
       border: none;
       padding: 16px 32px;
       font-size: 18px;
@@ -56,13 +56,13 @@
   </style>
 </head>
 <body>
-  <h1>oazyse° Logo Export</h1>
+  <h1>oazyse° Logo PNG Generator</h1>
   <div class="preview">
     <div class="logo" id="logo">oazyse°</div>
   </div>
-  <canvas id="canvas" width="1024" height="256"></canvas>
-  <button onclick="downloadPNG()">Скачать PNG (1024×256)</button>
-  <p class="info">PNG с прозрачным фоном, шрифт Questrial, градиент от фиолетового к зелёному</p>
+  <canvas id="canvas" width="2000" height="500"></canvas>
+  <button onclick="downloadPNG()">Скачать идеальный PNG (2000×500)</button>
+  <p class="info">PNG с прозрачным фоном, шрифт Questrial, неон-градиент. Идеально для Figma!</p>
 
   <script>
     async function downloadPNG() {
@@ -76,20 +76,20 @@
       await document.fonts.ready;
       
       // Create gradient
-      const gradient = ctx.createLinearGradient(200, 0, 824, 0);
-      gradient.addColorStop(0, '#9b4dff');
-      gradient.addColorStop(1, '#00e676');
+      const gradient = ctx.createLinearGradient(400, 0, 1600, 0);
+      gradient.addColorStop(0, '#ab4dff');
+      gradient.addColorStop(1, '#00e673');
       
       // Draw text
-      ctx.font = '96px Questrial';
+      ctx.font = '300px Questrial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = gradient;
-      ctx.fillText('oazyse°', canvas.width / 2, canvas.height / 2);
+      ctx.fillText('oazyse°', canvas.width / 2, canvas.height / 2 + 20);
       
       // Download
       const link = document.createElement('a');
-      link.download = 'oazyse-logo.png';
+      link.download = 'oazyse-logo-transparent-highres.png';
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
