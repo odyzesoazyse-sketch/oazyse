@@ -38,9 +38,19 @@
       padding: 20px;
       border-radius: 12px;
       display: flex;
+      flex-direction: column;
       gap: 20px;
       align-items: center;
       margin-bottom: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+    .row {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
     }
     input {
       background: #111;
@@ -55,13 +65,19 @@
       display: none;
     }
     button {
-      background: linear-gradient(90deg, #ab4dff, #00e673);
       border: none;
-      padding: 16px 32px;
-      font-size: 18px;
+      padding: 14px 24px;
+      font-size: 16px;
       color: white;
       border-radius: 8px;
       cursor: pointer;
+      flex: 1;
+    }
+    .btn-1 {
+      background: linear-gradient(90deg, #444, #666);
+    }
+    .btn-2 {
+      background: linear-gradient(90deg, #ab4dff, #00e673);
     }
     button:hover {
       opacity: 0.9;
@@ -70,81 +86,103 @@
       color: #888;
       margin-top: 20px;
       text-align: center;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
-  <h1>oazyse° Logo Generator (Тримминг)</h1>
+  <h1>oazyse° Logo Generator</h1>
   <div class="preview">
     <div class="logo" id="logo">oazyse°</div>
   </div>
   
   <div class="controls">
-    <label>Ширина текста (px):</label>
-    <input type="number" id="widthInput" value="4000" min="500" max="10000" />
-    <button onclick="downloadPNG()">Скачать плотный PNG (без полей)</button>
+    <div class="row">
+      <label>Ширина текста (px):</label>
+      <input type="number" id="widthInput" value="4000" min="500" max="10000" />
+    </div>
+    <div class="row">
+      <button class="btn-1" onclick="downloadPNG('tight')">1. Точный обрез (Без полей)</button>
+      <button class="btn-2" onclick="downloadPNG('centered')">2. Слово "oazyse" по центру</button>
+    </div>
   </div>
   
   <canvas id="canvas"></canvas>
-  <p class="info">PNG обрезается точно по краям текста (идеально для Figma).</p>
+  <p class="info">
+    <b>Вариант 1:</b> Логотип обрезан строго по краям (впритык).<br>
+    <b>Вариант 2 (Идеальный):</b> Слева добавляется пустое пространство, равное ширине значка градуса (°). Благодаря этому слово <b>oazyse</b> встает математически ровно по центру холста!
+  </p>
 
   <script>
-    async function downloadPNG() {
-      // Wait for font to load
+    async function downloadPNG(mode) {
       await document.fonts.ready;
 
       const targetWidth = parseInt(document.getElementById('widthInput').value, 10);
-      const fontSize = Math.floor(targetWidth * 0.35); // Initial guess
+      const fontSize = Math.floor(targetWidth * 0.35);
 
       const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
       
       // Setup font to measure
       ctx.font = `${fontSize}px Questrial`;
-      const metrics = ctx.measureText('oazyse°');
       
-      // Calculate exact text dimensions
-      const textWidth = Math.ceil(metrics.actualBoundingBoxRight + metrics.actualBoundingBoxLeft);
-      const textHeight = Math.ceil(metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent);
+      // Measure full text "oazyse°"
+      const metricsFull = ctx.measureText('oazyse°');
+      const fullWidth = Math.ceil(metricsFull.actualBoundingBoxRight + metricsFull.actualBoundingBoxLeft);
+      const textHeight = Math.ceil(metricsFull.actualBoundingBoxAscent + metricsFull.actualBoundingBoxDescent);
       
-      // Calculate scale factor to match target width exactly
-      const scale = targetWidth / textWidth;
+      // Measure just "oazyse" to find the width of the degree symbol
+      const metricsBase = ctx.measureText('oazyse');
+      const baseWidth = Math.ceil(metricsBase.actualBoundingBoxRight + metricsBase.actualBoundingBoxLeft);
+      
+      // The width of the "°" symbol (including its spacing from the "e")
+      const degreeWidth = fullWidth - baseWidth;
+
+      // Scale factor
+      const scale = targetWidth / fullWidth;
       const finalFontSize = Math.floor(fontSize * scale);
       
-      // Setup context again with exact font size
+      // Re-measure with final font size
       ctx.font = `${finalFontSize}px Questrial`;
-      const finalMetrics = ctx.measureText('oazyse°');
-      const exactWidth = Math.ceil(finalMetrics.actualBoundingBoxRight + finalMetrics.actualBoundingBoxLeft);
-      const exactHeight = Math.ceil(finalMetrics.actualBoundingBoxAscent + finalMetrics.actualBoundingBoxDescent);
+      const fFull = ctx.measureText('oazyse°');
+      const fBase = ctx.measureText('oazyse');
       
-      // Set canvas to EXACT dimensions (no padding)
-      canvas.width = exactWidth;
+      const exactFullWidth = Math.ceil(fFull.actualBoundingBoxRight + fFull.actualBoundingBoxLeft);
+      const exactHeight = Math.ceil(fFull.actualBoundingBoxAscent + fFull.actualBoundingBoxDescent);
+      const exactBaseWidth = Math.ceil(fBase.actualBoundingBoxRight + fBase.actualBoundingBoxLeft);
+      const exactDegreeWidth = exactFullWidth - exactBaseWidth;
+
+      let canvasWidth = exactFullWidth;
+      let xOffset = fFull.actualBoundingBoxLeft;
+      
+      if (mode === 'centered') {
+        // Add left padding equal to the degree symbol width so "oazyse" is perfectly centered
+        canvasWidth = exactFullWidth + exactDegreeWidth;
+        xOffset = fFull.actualBoundingBoxLeft + exactDegreeWidth;
+      }
+
+      // Set canvas to calculated dimensions
+      canvas.width = canvasWidth;
       canvas.height = exactHeight;
       
-      // Clear canvas (transparent)
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Setup font
       ctx.font = `${finalFontSize}px Questrial`;
       ctx.textAlign = 'left';
-      ctx.textBaseline = 'alphabetic'; // Easier for precise Y positioning
+      ctx.textBaseline = 'alphabetic';
       
-      // Create gradient matching the text width
-      const gradient = ctx.createLinearGradient(0, 0, exactWidth, 0);
+      // Create gradient matching the text width (not the whole canvas if padded)
+      const gradient = ctx.createLinearGradient(xOffset, 0, xOffset + exactFullWidth, 0);
       gradient.addColorStop(0, '#ab4dff');
       gradient.addColorStop(1, '#00e673');
       
-      // Draw text exactly at the calculated offset so it touches the top-left edge
       ctx.fillStyle = gradient;
-      const x = finalMetrics.actualBoundingBoxLeft;
-      // We align using alphabetic baseline, so Y needs to be shifted down by Ascent
-      const y = finalMetrics.actualBoundingBoxAscent;
       
-      ctx.fillText('oazyse°', x, y);
+      const yOffset = fFull.actualBoundingBoxAscent;
+      ctx.fillText('oazyse°', xOffset, yOffset);
       
-      // Download
       const link = document.createElement('a');
-      link.download = `oazyse-logo-tight-${exactWidth}x${exactHeight}.png`;
+      link.download = `oazyse-logo-${mode}-${canvasWidth}x${exactHeight}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
