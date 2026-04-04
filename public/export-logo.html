@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <h2>2. Геометрическая Иконка (O + °)</h2>
+  <h2>2. Геометрическая Иконка (O + ° по Золотому Сечению)</h2>
   <div class="preview" style="padding: 40px;"><canvas id="previewGeomCanvas" width="250" height="250" style="display: block;"></canvas></div>
   <div class="controls">
     <div class="row"><label>Размер (px):</label><input type="number" id="widthInput4" value="1024" min="100" max="5000" /></div>
@@ -53,18 +53,22 @@
     </div>
   </div>
 
-  <h2>3. Фрактальный Символ (Спираль с °)</h2>
-  <div class="preview" style="padding: 40px;">
+  <h2>3. Фрактальный Символ (°Спираль по Золотому Сечению)</h2>
+  <div class="preview" style="padding: 40px; overflow: hidden;">
     <canvas id="previewFractalCanvas" width="300" height="300" style="display: block;"></canvas>
   </div>
   <div class="controls">
     <div class="row"><label>Размер (px):</label><input type="number" id="widthInput3" value="2000" min="500" max="10000" /></div>
     <div class="row">
-      <button class="btn-3" onclick="downloadFractalPNG('golden')">PNG: Скачать Фрактал с °</button>
+      <button class="btn-1" onclick="downloadFractalPNG('smooth')">PNG: Плавная спираль</button>
+      <button class="btn-3" onclick="downloadFractalPNG('golden')">PNG: Золотое Сечение (1.618)</button>
     </div>
   </div>
+  <p class="info">
+    В режиме "Золотое Сечение" каждый внутренний круг идеально касается внешнего (в одной точке сверху-справа).
+  </p>
 
-  <h2>4. Анимированные Фракталы (Гипнотические)</h2>
+  <h2>4. Анимированные Фракталы (Эпициклы)</h2>
   <div class="preview" style="padding: 40px;" id="svgPreviewContainer"></div>
   <div class="controls">
     <div class="row">
@@ -72,7 +76,7 @@
       <button class="btn-2" id="btnThemeSVGRight" onclick="downloadAnimatedSVG('right')">SVG: Вращение вправо</button>
     </div>
   </div>
-  <p class="info">Каждый круг внутри фрактала крутится с собственной скоростью, создавая эффект гипнотического туннеля!</p>
+  <p class="info">Каждый круг вращается внутри своего "родителя", идеально скользя по его границе. Настоящая математическая гипно-анимация!</p>
   
   <canvas id="canvas"></canvas>
 
@@ -104,24 +108,26 @@
       const R_big = 460;
       
       const angle = -Math.PI / 4; 
-      const K = 0.85; 
+      
+      // Set K=1.0 for perfect internal tangency in Golden mode
+      const K = mode === 'golden' ? 1.0 : 0.85; 
+      
       let currentR = R_big;
       let cx = cxOffset;
       let cy = cyOffset;
 
       for(let i=0; i<7; i++) {
         circles.push({x: cx * scale, y: cy * scale, r: currentR * scale, id: i});
-        const nextR = currentR / PHI;
+        const nextR = mode === 'golden' ? (currentR / PHI) : (currentR * 0.7);
         const shiftDist = (currentR - nextR) * K;
         cx += shiftDist * Math.cos(angle);
         cy += shiftDist * Math.sin(angle);
         currentR = nextR;
       }
       
-      if (includeDegree) {
-        // Degree circle calculation (smaller and closer as requested)
-        const R_deg = R_big / Math.pow(PHI, 4.5); // Approx 0.12 * R_big
-        const dist = R_big * 1.25; // Closer to the main circle
+      if (includeDegree && mode === 'golden') {
+        const R_deg = R_big / Math.pow(PHI, 4.5); 
+        const dist = R_big * 1.25; 
         const degAngle = -Math.PI / 4; 
         
         const degCx = cxOffset + Math.cos(degAngle) * dist;
@@ -169,42 +175,44 @@
       drawFractalToCanvas(canvas, size, c1, c2, mode);
       
       const link = document.createElement('a');
-      link.download = `oazyse-fractal-${size}px.png`;
+      link.download = `oazyse-fractal-${mode}-${size}px.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
 
     function generateAnimatedSVG(color1, color2, direction, size = 1000) {
-      // For animation, no degree symbol, just the spiral
-      const circles = getFractalCircles(1, 750, 750, 'golden', false);
-      const center = "750 750";
+      const R_big = 460;
+      const angle = -Math.PI / 4; 
       
-      let svgCircles = circles.map(c => {
-        // Individual rotation speeds! 
-        // c.id 0 is outer (centered), doesn't rotate effectively. 
-        // 1 to 6 get progressively faster.
-        if (c.id === 0) {
-          return `<circle cx="${c.x}" cy="${c.y}" r="${c.r}" fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round"/>`;
-        }
+      // Speeds for concentric rotations
+      const speeds = [0, 20, 16, 12, 8, 5, 3]; 
+
+      let currentR = R_big / Math.pow(PHI, 6);
+      let nested = '';
+      
+      for (let i = 6; i >= 1; i--) {
+        const parentR = R_big / Math.pow(PHI, i - 1);
+        const dist = parentR - currentR; // Perfect internal tangency
+        const dx = dist * Math.cos(angle);
+        const dy = dist * Math.sin(angle);
         
-        // Durations: 12s, 8s, 5s, 3s, 2s, 1.5s
-        const durations = [0, 15, 10, 6, 4, 2.5, 1.5];
-        const dur = durations[c.id] + 's';
+        const dur = speeds[i] + 's';
         const rotateFrom = direction === 'left' ? "360" : "0";
         const rotateTo = direction === 'left' ? "0" : "360";
         
-        return `<g>
-          <circle cx="${c.x}" cy="${c.y}" r="${c.r}" fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round"/>
-          <animateTransform 
-            attributeName="transform" 
-            type="rotate" 
-            from="${rotateFrom} ${center}" 
-            to="${rotateTo} ${center}" 
-            dur="${dur}" 
-            repeatCount="indefinite" 
-          />
-        </g>`;
-      }).join('\n    ');
+        const circleStr = `<circle cx="0" cy="0" r="${currentR}" fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round"/>`;
+        
+        nested = `
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="${rotateFrom} 0 0" to="${rotateTo} 0 0" dur="${dur}" repeatCount="indefinite" />
+          <g transform="translate(${dx}, ${dy})">
+            ${circleStr}
+            ${nested}
+          </g>
+        </g>
+        `;
+        currentR = parentR;
+      }
 
       return `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500" width="${size}" height="${size}">
@@ -214,17 +222,9 @@
       <stop offset="100%" stop-color="${color2}" />
     </linearGradient>
   </defs>
-  <g>
-    ${svgCircles}
-    <!-- Outer group rotation for extra hypnotic effect -->
-    <animateTransform 
-      attributeName="transform" 
-      type="rotate" 
-      from="${direction === 'left' ? '360' : '0'} ${center}" 
-      to="${direction === 'left' ? '0' : '360'}" 
-      dur="30s" 
-      repeatCount="indefinite" 
-    />
+  <g transform="translate(750, 750)">
+    <circle cx="0" cy="0" r="${R_big}" fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round"/>
+    ${nested}
   </g>
 </svg>`.trim();
     }
@@ -237,7 +237,7 @@
       const blob = new Blob([svg], {type: "image/svg+xml"});
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.download = `oazyse-fractal-animated-${direction}.svg`;
+      link.download = `oazyse-fractal-epicycles-${direction}.svg`;
       link.href = url;
       link.click();
       URL.revokeObjectURL(url);
