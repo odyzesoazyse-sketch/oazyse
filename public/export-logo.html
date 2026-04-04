@@ -98,19 +98,19 @@
   
   <div class="controls">
     <div class="row">
-      <label>Ширина текста (px):</label>
+      <label>Ширина (px):</label>
       <input type="number" id="widthInput" value="4000" min="500" max="10000" />
     </div>
     <div class="row">
-      <button class="btn-1" onclick="downloadPNG('tight')">1. Точный обрез (Без полей)</button>
-      <button class="btn-2" onclick="downloadPNG('centered')">2. Слово "oazyse" по центру</button>
+      <button class="btn-1" onclick="downloadPNG('tight')">1. Обрезка впритык</button>
+      <button class="btn-2" onclick="downloadPNG('centered')">2. OAZYSE идеально по центру</button>
     </div>
   </div>
   
   <canvas id="canvas"></canvas>
   <p class="info">
-    <b>Вариант 1:</b> Логотип обрезан строго по краям (впритык).<br>
-    <b>Вариант 2 (Идеальный):</b> Слева добавляется пустое пространство, равное ширине значка градуса (°). Благодаря этому слово <b>oazyse</b> встает математически ровно по центру холста!
+    <b>Вариант 1:</b> Логотип обрезан строго по краям текста без лишних пикселей.<br>
+    <b>Вариант 2 (Идеальный для дизайна):</b> Добавляет "воздух" слева и сверху, чтобы визуальный центр (буквы o, a, z, s, e) стоял математически ровно посередине холста, не смещаясь из-за хвостика буквы 'y' и значка '°'.
   </p>
 
   <script>
@@ -127,18 +127,10 @@
       ctx.font = `${fontSize}px Questrial`;
       
       // Measure full text "oazyse°"
-      const metricsFull = ctx.measureText('oazyse°');
-      const fullWidth = Math.ceil(metricsFull.actualBoundingBoxRight + metricsFull.actualBoundingBoxLeft);
-      const textHeight = Math.ceil(metricsFull.actualBoundingBoxAscent + metricsFull.actualBoundingBoxDescent);
+      const mFull = ctx.measureText('oazyse°');
+      const fullWidth = Math.ceil(mFull.actualBoundingBoxRight + mFull.actualBoundingBoxLeft);
       
-      // Measure just "oazyse" to find the width of the degree symbol
-      const metricsBase = ctx.measureText('oazyse');
-      const baseWidth = Math.ceil(metricsBase.actualBoundingBoxRight + metricsBase.actualBoundingBoxLeft);
-      
-      // The width of the "°" symbol (including its spacing from the "e")
-      const degreeWidth = fullWidth - baseWidth;
-
-      // Scale factor
+      // Scale factor to hit target width
       const scale = targetWidth / fullWidth;
       const finalFontSize = Math.floor(fontSize * scale);
       
@@ -146,43 +138,56 @@
       ctx.font = `${finalFontSize}px Questrial`;
       const fFull = ctx.measureText('oazyse°');
       const fBase = ctx.measureText('oazyse');
+      const fBody = ctx.measureText('oazse'); // Measure letters without descender to find true visual center
       
       const exactFullWidth = Math.ceil(fFull.actualBoundingBoxRight + fFull.actualBoundingBoxLeft);
-      const exactHeight = Math.ceil(fFull.actualBoundingBoxAscent + fFull.actualBoundingBoxDescent);
       const exactBaseWidth = Math.ceil(fBase.actualBoundingBoxRight + fBase.actualBoundingBoxLeft);
       const exactDegreeWidth = exactFullWidth - exactBaseWidth;
 
+      // VERTICAL MATH
+      // Center of 'oazse' relative to baseline
+      const baselineToCenter = (fBody.actualBoundingBoxAscent - fBody.actualBoundingBoxDescent) / 2;
+      const highestPoint = fFull.actualBoundingBoxAscent; // usually top of 'o' or degree symbol
+      const lowestPoint = -fFull.actualBoundingBoxDescent; // negative value, bottom of 'y'
+      
+      const distDown = baselineToCenter - lowestPoint; 
+      const distUp = highestPoint - baselineToCenter;
+
       let canvasWidth = exactFullWidth;
+      let canvasHeight = Math.ceil(fFull.actualBoundingBoxAscent + fFull.actualBoundingBoxDescent);
       let xOffset = fFull.actualBoundingBoxLeft;
+      let yOffset = fFull.actualBoundingBoxAscent;
       
       if (mode === 'centered') {
-        // Add left padding equal to the degree symbol width so "oazyse" is perfectly centered
+        // HORIZONTAL: Add left padding equal to degree symbol width
         canvasWidth = exactFullWidth + exactDegreeWidth;
         xOffset = fFull.actualBoundingBoxLeft + exactDegreeWidth;
+        
+        // VERTICAL: Make canvas symmetrical around the visual center of 'oazse'
+        const maxDist = Math.max(distDown, distUp);
+        canvasHeight = Math.ceil(maxDist * 2);
+        yOffset = Math.ceil(maxDist + baselineToCenter);
       }
 
-      // Set canvas to calculated dimensions
+      // Set canvas
       canvas.width = canvasWidth;
-      canvas.height = exactHeight;
-      
+      canvas.height = canvasHeight;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       ctx.font = `${finalFontSize}px Questrial`;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'alphabetic';
       
-      // Create gradient matching the text width (not the whole canvas if padded)
+      // Gradient
       const gradient = ctx.createLinearGradient(xOffset, 0, xOffset + exactFullWidth, 0);
       gradient.addColorStop(0, '#ab4dff');
       gradient.addColorStop(1, '#00e673');
       
       ctx.fillStyle = gradient;
-      
-      const yOffset = fFull.actualBoundingBoxAscent;
       ctx.fillText('oazyse°', xOffset, yOffset);
       
       const link = document.createElement('a');
-      link.download = `oazyse-logo-${mode}-${canvasWidth}x${exactHeight}.png`;
+      link.download = `oazyse-logo-${mode}-${canvasWidth}x${canvasHeight}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
