@@ -5,7 +5,7 @@
       <stop offset="100%" stop-color="#00e673" />
     </linearGradient>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Questrial&amp;display=swap');
       .logo-text {
         font-family: 'Questrial', sans-serif;
         font-size: 160px;

@@ -5,7 +5,7 @@
       <stop offset="100%" style="stop-color:#00e676"/>
     </linearGradient>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Questrial&amp;display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
     </style>
   </defs>
   <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" 
