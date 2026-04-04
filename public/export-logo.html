@@ -11,7 +11,7 @@
     .global-settings { background: #222; padding: 15px 30px; border-radius: 12px; display: flex; gap: 30px; margin-bottom: 20px; border: 1px solid #333; }
     .color-picker { display: flex; align-items: center; gap: 10px; }
     input[type="color"] { border: none; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; background: none; }
-    .preview { background: repeating-conic-gradient(#333 0% 25%, #444 0% 50%) 50% / 20px 20px; padding: 40px 80px; border-radius: 12px; margin: 20px 0; display: flex; justify-content: center; align-items: center; min-height: 150px; }
+    .preview { background: repeating-conic-gradient(#333 0% 25%, #444 0% 50%) 50% / 20px 20px; padding: 40px 80px; border-radius: 12px; margin: 20px 0; display: flex; justify-content: center; align-items: center; min-height: 150px; position: relative; }
     .logo, .icon-logo { font-family: 'Questrial', sans-serif; font-size: 140px; font-weight: 400; letter-spacing: 4px; line-height: 1; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .icon-logo { font-size: 200px; letter-spacing: 0; }
     .controls { background: #2a2a2a; padding: 20px; border-radius: 12px; display: flex; flex-direction: column; gap: 20px; align-items: center; margin-bottom: 20px; width: 100%; max-width: 600px; }
@@ -43,17 +43,7 @@
     </div>
   </div>
 
-  <h2>2. Шрифтовая Иконка (o°)</h2>
-  <div class="preview" style="padding: 20px 40px;"><div class="icon-logo" id="previewIcon">o°</div></div>
-  <div class="controls">
-    <div class="row"><label>Ширина (px):</label><input type="number" id="widthInput2" value="1024" min="100" max="5000" /></div>
-    <div class="row">
-      <button class="btn-1" onclick="downloadPNG('o°', 'icon', 'tight')">1. Обрезка впритык</button>
-      <button class="btn-2" id="btnThemeIcon" onclick="downloadPNG('o°', 'icon', 'centered')">2. Буква "o" по центру</button>
-    </div>
-  </div>
-
-  <h2>3. Геометрическая Иконка (O + ° по Золотому Сечению)</h2>
+  <h2>2. Геометрическая Иконка (O + ° по Золотому Сечению)</h2>
   <div class="preview" style="padding: 40px;"><canvas id="previewGeomCanvas" width="250" height="250" style="display: block;"></canvas></div>
   <div class="controls">
     <div class="row"><label>Размер (px):</label><input type="number" id="widthInput4" value="1024" min="100" max="5000" /></div>
@@ -62,21 +52,33 @@
       <button class="btn-2" id="btnThemeGeom" onclick="downloadGeometric('centered')">2. Идеально по центру O</button>
     </div>
   </div>
-  <p class="info">
-    Вместо шрифта здесь используются <b>математически идеальные круги</b>.<br>
-    Радиус градуса = Радиус О / φ³. Расстояние до градуса = Радиус О × φ.<br>
-    Угол = ровно 45° вправо-вверх.
-  </p>
 
-  <h2>4. Фрактальный Символ (Спираль)</h2>
-  <div class="preview" style="padding: 40px;"><canvas id="previewFractalCanvas" width="300" height="300" style="display: block;"></canvas></div>
+  <h2>3. Фрактальный Символ (°Спираль по Золотому Сечению)</h2>
+  <div class="preview" style="padding: 40px; overflow: hidden;">
+    <canvas id="previewFractalCanvas" width="300" height="300" style="display: block;"></canvas>
+  </div>
   <div class="controls">
     <div class="row"><label>Размер (px):</label><input type="number" id="widthInput3" value="2000" min="500" max="10000" /></div>
     <div class="row">
-      <button class="btn-2" id="btnThemeFractal" onclick="downloadFractal('smooth')">Плавная спираль</button>
-      <button class="btn-3" onclick="downloadFractal('golden')">Золотое Сечение (1.618)</button>
+      <button class="btn-1" onclick="downloadFractalPNG('smooth')">PNG: Плавная спираль</button>
+      <button class="btn-3" onclick="downloadFractalPNG('golden')">PNG: Золотое Сечение (1.618)</button>
     </div>
   </div>
+  <p class="info">
+    Фрактал теперь имеет "градус" (маленький кружок) справа сверху, рассчитанный по Золотому Сечению от основного круга.
+  </p>
+
+  <h2>4. Анимированные SVG (Вращение)</h2>
+  <div class="preview" style="padding: 40px;" id="svgPreviewContainer">
+    <!-- SVG preview injected here -->
+  </div>
+  <div class="controls">
+    <div class="row">
+      <button class="btn-2" id="btnThemeSVGLeft" onclick="downloadAnimatedSVG('left')">Скачать SVG (Вращение влево)</button>
+      <button class="btn-2" id="btnThemeSVGRight" onclick="downloadAnimatedSVG('right')">Скачать SVG (Вращение вправо)</button>
+    </div>
+  </div>
+  <p class="info">SVG файлы идеальны для веба: они весят пару килобайт, бесконечно масштабируются и вращаются сами по себе без тормозов!</p>
   
   <canvas id="canvas"></canvas>
 
@@ -91,135 +93,33 @@
       
       document.getElementById('previewLogo').style.background = grad;
       document.getElementById('previewLogo').style.webkitBackgroundClip = 'text';
-      document.getElementById('previewIcon').style.background = grad;
-      document.getElementById('previewIcon').style.webkitBackgroundClip = 'text';
       
       document.getElementById('btnThemeLogo').style.background = grad;
-      document.getElementById('btnThemeIcon').style.background = grad;
-      document.getElementById('btnThemeFractal').style.background = grad;
       document.getElementById('btnThemeGeom').style.background = grad;
+      document.getElementById('btnThemeSVGLeft').style.background = grad;
+      document.getElementById('btnThemeSVGRight').style.background = grad;
       
       drawFractalToCanvas(document.getElementById('previewFractalCanvas'), 300, c1, c2, currentFractalMode);
       drawGeometricToCanvas(document.getElementById('previewGeomCanvas'), 250, c1, c2, 'centered');
+      
+      // Update SVG preview
+      document.getElementById('svgPreviewContainer').innerHTML = generateAnimatedSVG(c1, c2, 'right', 300);
     }
 
-    function drawGeometricToCanvas(canvas, size, c1, c2, mode) {
-      const ctx = canvas.getContext('2d');
-      
-      const R_big = size * 0.25; 
-      const R_deg = R_big / Math.pow(PHI, 3); // Approx 0.236 * R_big
-      const dist = R_big * PHI; // Distance from center to center
-      const angle = -Math.PI / 4; // 45 degrees up and right
-      
-      const thickness = R_big * 0.15; // Stroke thickness
-      
-      // Calculate centers
-      const cx1 = 0; 
-      const cy1 = 0;
-      const cx2 = Math.cos(angle) * dist;
-      const cy2 = Math.sin(angle) * dist;
-      
-      // Bounding box
-      const minX = cx1 - R_big - thickness/2;
-      const maxX = cx2 + R_deg + thickness/2;
-      const minY = cy2 - R_deg - thickness/2;
-      const maxY = cy1 + R_big + thickness/2;
-      
-      const exactWidth = maxX - minX;
-      const exactHeight = maxY - minY;
-      
-      let canvasWidth = exactWidth;
-      let canvasHeight = exactHeight;
-      let drawX = -minX;
-      let drawY = -minY;
-      
-      if (mode === 'centered') {
-        // We want (0,0) [center of big circle] to be EXACTLY in the center of the canvas
-        // The max distance from center in any direction determines canvas size
-        const maxDistX = Math.max(Math.abs(minX), Math.abs(maxX));
-        const maxDistY = Math.max(Math.abs(minY), Math.abs(maxY));
-        canvasWidth = maxDistX * 2;
-        canvasHeight = maxDistY * 2;
-        drawX = maxDistX;
-        drawY = maxDistY;
-      }
-      
-      // Since preview canvas is fixed size, we just scale it to fit
-      if (canvas.id === 'previewGeomCanvas') {
-        canvasWidth = size;
-        canvasHeight = size;
-        drawX = size / 2;
-        drawY = size / 2 + (size * 0.05); // slight offset for visual balance in preview
-        const previewScale = size / (Math.max(exactWidth, exactHeight) * 1.5);
-        ctx.setTransform(previewScale, 0, 0, previewScale, drawX, drawY);
-      } else {
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
-        ctx.setTransform(1, 0, 0, 1, drawX, drawY);
-      }
-      
-      ctx.clearRect(-canvasWidth, -canvasHeight, canvasWidth*2, canvasHeight*2);
-      
-      const gradient = ctx.createLinearGradient(minX, 0, maxX, 0);
-      gradient.addColorStop(0, c1);
-      gradient.addColorStop(1, c2);
-      
-      ctx.strokeStyle = gradient;
-      ctx.lineCap = 'round';
-      ctx.lineWidth = thickness;
-      
-      // Draw big circle O
-      ctx.beginPath();
-      ctx.arc(cx1, cy1, R_big, 0, Math.PI * 2);
-      ctx.stroke();
-      
-      // Draw small circle °
-      ctx.beginPath();
-      ctx.arc(cx2, cy2, R_deg, 0, Math.PI * 2);
-      ctx.stroke();
-      
-      ctx.setTransform(1, 0, 0, 1, 0, 0); // reset transform
-    }
-
-    async function downloadGeometric(mode) {
-      const size = parseInt(document.getElementById('widthInput4').value, 10);
-      const c1 = document.getElementById('colorStart').value;
-      const c2 = document.getElementById('colorEnd').value;
-      const canvas = document.getElementById('canvas');
-      
-      drawGeometricToCanvas(canvas, size, c1, c2, mode);
-      
-      const link = document.createElement('a');
-      link.download = `oazyse-geom-icon-${mode}-${canvas.width}x${canvas.height}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }
-    
-    function drawFractalToCanvas(canvas, size, color1, color2, mode) {
-      currentFractalMode = mode;
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, size, size);
-      
-      const gradient = ctx.createLinearGradient(0, size*0.2, size, size*0.8);
-      gradient.addColorStop(0, color1);
-      gradient.addColorStop(1, color2);
-      
-      ctx.strokeStyle = gradient;
-      ctx.lineCap = 'round';
-      
-      const scale = size / 1000;
-      ctx.lineWidth = 6 * scale;
-      
+    function getFractalCircles(scale = 1, cxOffset = 500, cyOffset = 500, mode = 'golden') {
       let circles = [];
+      const R_big = 460;
+      
       if (mode === 'golden') {
         const angle = -Math.PI / 4; 
         const K = 0.85; 
-        let currentR = 460;
-        let cx = 500;
-        let cy = 500;
+        let currentR = R_big;
+        let cx = cxOffset;
+        let cy = cyOffset;
 
+        // Spiral
         for(let i=0; i<7; i++) {
-          circles.push({x: cx, y: cy, r: currentR});
+          circles.push({x: cx * scale, y: cy * scale, r: currentR * scale});
           const nextR = currentR / PHI;
           const shiftDist = (currentR - nextR) * K;
           cx += shiftDist * Math.cos(angle);
@@ -230,17 +130,50 @@
         circles = [
           {x: 500, y: 500, r: 460}, {x: 550, y: 440, r: 340}, {x: 585, y: 395, r: 240},
           {x: 615, y: 360, r: 160}, {x: 635, y: 335, r: 100}, {x: 650, y: 320, r: 60}
-        ];
+        ].map(c => ({x: c.x * scale, y: c.y * scale, r: c.r * scale}));
       }
+      
+      // Add the "Degree" circle to the fractal
+      // Degree radius = R_big / PHI^3
+      const R_deg = R_big / Math.pow(PHI, 3);
+      const dist = R_big * PHI; // Golden ratio distance
+      const degAngle = -Math.PI / 4; // Top Right
+      
+      const degCx = cxOffset + Math.cos(degAngle) * dist;
+      const degCy = cyOffset + Math.sin(degAngle) * dist;
+      
+      circles.push({x: degCx * scale, y: degCy * scale, r: R_deg * scale});
+      
+      return circles;
+    }
+
+    function drawFractalToCanvas(canvas, size, color1, color2, mode) {
+      currentFractalMode = mode;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, size, size);
+      
+      const scale = size / 1500; // Leave room for the degree symbol overhang
+      const cxOffset = 1500 / 2 - 100; // Shift center slightly left to fit the right overhang
+      const cyOffset = 1500 / 2 + 100; // Shift center slightly down to fit the top overhang
+
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, color1);
+      gradient.addColorStop(1, color2);
+      
+      ctx.strokeStyle = gradient;
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 6 * (size / 1000);
+      
+      const circles = getFractalCircles(scale, cxOffset, cyOffset, mode);
 
       circles.forEach(c => {
         ctx.beginPath();
-        ctx.arc(c.x * scale, c.y * scale, c.r * scale, 0, Math.PI * 2);
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
         ctx.stroke();
       });
     }
 
-    async function downloadFractal(mode) {
+    async function downloadFractalPNG(mode) {
       const size = parseInt(document.getElementById('widthInput3').value, 10);
       const c1 = document.getElementById('colorStart').value;
       const c2 = document.getElementById('colorEnd').value;
@@ -256,20 +189,118 @@
       updatePreviews();
     }
 
+    function generateAnimatedSVG(color1, color2, direction, size = 1000) {
+      const circles = getFractalCircles(1, 750, 750, 'golden');
+      // The canvas is 1500x1500 internally
+      const center = "750 750";
+      const rotateFrom = direction === 'left' ? "360" : "0";
+      const rotateTo = direction === 'left' ? "0" : "360";
+      
+      let svgCircles = circles.map(c => 
+        `<circle cx="${c.x}" cy="${c.y}" r="${c.r}" fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round"/>`
+      ).join('\n    ');
+
+      return `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500" width="${size}" height="${size}">
+  <defs>
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${color1}" />
+      <stop offset="100%" stop-color="${color2}" />
+    </linearGradient>
+  </defs>
+  <g>
+    ${svgCircles}
+    <animateTransform 
+      attributeName="transform" 
+      type="rotate" 
+      from="${rotateFrom} ${center}" 
+      to="${rotateTo} ${center}" 
+      dur="20s" 
+      repeatCount="indefinite" 
+    />
+  </g>
+</svg>`.trim();
+    }
+
+    function downloadAnimatedSVG(direction) {
+      const c1 = document.getElementById('colorStart').value;
+      const c2 = document.getElementById('colorEnd').value;
+      const svg = generateAnimatedSVG(c1, c2, direction, 2000);
+      
+      const blob = new Blob([svg], {type: "image/svg+xml"});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = `oazyse-fractal-animated-${direction}.svg`;
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function drawGeometricToCanvas(canvas, size, c1, c2, mode) {
+      const ctx = canvas.getContext('2d');
+      const R_big = size * 0.25; 
+      const R_deg = R_big / Math.pow(PHI, 3); 
+      const dist = R_big * PHI; 
+      const angle = -Math.PI / 4; 
+      const thickness = R_big * 0.15; 
+      const cx1 = 0; const cy1 = 0;
+      const cx2 = Math.cos(angle) * dist; const cy2 = Math.sin(angle) * dist;
+      const minX = cx1 - R_big - thickness/2; const maxX = cx2 + R_deg + thickness/2;
+      const minY = cy2 - R_deg - thickness/2; const maxY = cy1 + R_big + thickness/2;
+      const exactWidth = maxX - minX; const exactHeight = maxY - minY;
+      
+      let canvasWidth = exactWidth; let canvasHeight = exactHeight;
+      let drawX = -minX; let drawY = -minY;
+      
+      if (mode === 'centered') {
+        const maxDistX = Math.max(Math.abs(minX), Math.abs(maxX));
+        const maxDistY = Math.max(Math.abs(minY), Math.abs(maxY));
+        canvasWidth = maxDistX * 2; canvasHeight = maxDistY * 2;
+        drawX = maxDistX; drawY = maxDistY;
+      }
+      
+      if (canvas.id === 'previewGeomCanvas') {
+        canvasWidth = size; canvasHeight = size; drawX = size / 2; drawY = size / 2 + (size * 0.05);
+        const previewScale = size / (Math.max(exactWidth, exactHeight) * 1.5);
+        ctx.setTransform(previewScale, 0, 0, previewScale, drawX, drawY);
+      } else {
+        canvas.width = canvasWidth; canvas.height = canvasHeight;
+        ctx.setTransform(1, 0, 0, 1, drawX, drawY);
+      }
+      
+      ctx.clearRect(-canvasWidth, -canvasHeight, canvasWidth*2, canvasHeight*2);
+      const gradient = ctx.createLinearGradient(minX, 0, maxX, 0);
+      gradient.addColorStop(0, c1); gradient.addColorStop(1, c2);
+      ctx.strokeStyle = gradient; ctx.lineCap = 'round'; ctx.lineWidth = thickness;
+      
+      ctx.beginPath(); ctx.arc(cx1, cy1, R_big, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx2, cy2, R_deg, 0, Math.PI * 2); ctx.stroke();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+    }
+
+    async function downloadGeometric(mode) {
+      const size = parseInt(document.getElementById('widthInput4').value, 10);
+      const c1 = document.getElementById('colorStart').value;
+      const c2 = document.getElementById('colorEnd').value;
+      const canvas = document.getElementById('canvas');
+      drawGeometricToCanvas(canvas, size, c1, c2, mode);
+      const link = document.createElement('a');
+      link.download = `oazyse-geom-icon-${mode}-${canvas.width}x${canvas.height}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
     async function downloadPNG(text, type, mode) {
       await document.fonts.ready;
       const c1 = document.getElementById('colorStart').value;
       const c2 = document.getElementById('colorEnd').value;
-      const targetWidth = parseInt(document.getElementById(type === 'logo' ? 'widthInput1' : 'widthInput2').value, 10);
-      
-      const fontSize = Math.floor(targetWidth * (type === 'logo' ? 0.35 : 0.8));
+      const targetWidth = parseInt(document.getElementById('widthInput1').value, 10);
+      const fontSize = Math.floor(targetWidth * 0.35);
       const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
-      
       ctx.font = `${fontSize}px Questrial`;
       const mFull = ctx.measureText(text);
       const fullWidth = Math.ceil(mFull.actualBoundingBoxRight + mFull.actualBoundingBoxLeft);
-      
       const scale = targetWidth / fullWidth;
       const finalFontSize = Math.floor(fontSize * scale);
       
@@ -277,7 +308,7 @@
       const fFull = ctx.measureText(text);
       const exactFullWidth = Math.ceil(fFull.actualBoundingBoxRight + fFull.actualBoundingBoxLeft);
       
-      const baseText = type === 'logo' ? 'oazyse' : 'o';
+      const baseText = 'oazyse';
       const fBase = ctx.measureText(baseText);
       const exactBaseWidth = Math.ceil(fBase.actualBoundingBoxRight + fBase.actualBoundingBoxLeft);
       const exactDegreeWidth = exactFullWidth - exactBaseWidth;
@@ -286,7 +317,6 @@
       const baselineToCenter = (mO.actualBoundingBoxAscent - mO.actualBoundingBoxDescent) / 2;
       const highestPoint = fFull.actualBoundingBoxAscent;
       const lowestPoint = -fFull.actualBoundingBoxDescent; 
-      
       const distDown = baselineToCenter - lowestPoint; 
       const distUp = highestPoint - baselineToCenter;
 
@@ -303,23 +333,17 @@
         yOffset = Math.ceil(maxDist + baselineToCenter);
       }
 
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
+      canvas.width = canvasWidth; canvas.height = canvasHeight;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
       ctx.font = `${finalFontSize}px Questrial`;
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'alphabetic';
+      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
       
       const gradient = ctx.createLinearGradient(xOffset, 0, xOffset + exactFullWidth, 0);
-      gradient.addColorStop(0, c1);
-      gradient.addColorStop(1, c2);
-      
-      ctx.fillStyle = gradient;
-      ctx.fillText(text, xOffset, yOffset);
+      gradient.addColorStop(0, c1); gradient.addColorStop(1, c2);
+      ctx.fillStyle = gradient; ctx.fillText(text, xOffset, yOffset);
       
       const link = document.createElement('a');
-      link.download = `oazyse-${type}-${mode}-${canvasWidth}x${canvasHeight}.png`;
+      link.download = `oazyse-logo-${mode}-${canvasWidth}x${canvasHeight}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
