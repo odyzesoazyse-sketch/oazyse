@@ -11,7 +11,7 @@
     .global-settings { background: #222; padding: 15px 30px; border-radius: 12px; display: flex; gap: 30px; margin-bottom: 20px; border: 1px solid #333; }
     .color-picker { display: flex; align-items: center; gap: 10px; }
     input[type="color"] { border: none; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; background: none; }
-    .preview { background: repeating-conic-gradient(#333 0% 25%, #444 0% 50%) 50% / 20px 20px; padding: 40px 80px; border-radius: 12px; margin: 20px 0; display: flex; justify-content: center; align-items: center; min-height: 150px; position: relative; }
+    .preview { background: repeating-conic-gradient(#333 0% 25%, #444 0% 50%) 50% / 20px 20px; padding: 40px 80px; border-radius: 12px; margin: 20px 0; display: flex; justify-content: center; align-items: center; min-height: 150px; position: relative; overflow: hidden; }
     .logo, .icon-logo { font-family: 'Questrial', sans-serif; font-size: 140px; font-weight: 400; letter-spacing: 4px; line-height: 1; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .icon-logo { font-size: 200px; letter-spacing: 0; }
     .controls { background: #2a2a2a; padding: 20px; border-radius: 12px; display: flex; flex-direction: column; gap: 20px; align-items: center; margin-bottom: 20px; width: 100%; max-width: 600px; }
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <h2>2. Геометрическая Иконка (O + ° по Золотому Сечению)</h2>
+  <h2>2. Геометрическая Иконка (O + °)</h2>
   <div class="preview" style="padding: 40px;"><canvas id="previewGeomCanvas" width="250" height="250" style="display: block;"></canvas></div>
   <div class="controls">
     <div class="row"><label>Размер (px):</label><input type="number" id="widthInput4" value="1024" min="100" max="5000" /></div>
@@ -53,32 +53,26 @@
     </div>
   </div>
 
-  <h2>3. Фрактальный Символ (°Спираль по Золотому Сечению)</h2>
-  <div class="preview" style="padding: 40px; overflow: hidden;">
+  <h2>3. Фрактальный Символ (Спираль с °)</h2>
+  <div class="preview" style="padding: 40px;">
     <canvas id="previewFractalCanvas" width="300" height="300" style="display: block;"></canvas>
   </div>
   <div class="controls">
     <div class="row"><label>Размер (px):</label><input type="number" id="widthInput3" value="2000" min="500" max="10000" /></div>
     <div class="row">
-      <button class="btn-1" onclick="downloadFractalPNG('smooth')">PNG: Плавная спираль</button>
-      <button class="btn-3" onclick="downloadFractalPNG('golden')">PNG: Золотое Сечение (1.618)</button>
+      <button class="btn-3" onclick="downloadFractalPNG('golden')">PNG: Скачать Фрактал с °</button>
     </div>
   </div>
-  <p class="info">
-    Фрактал теперь имеет "градус" (маленький кружок) справа сверху, рассчитанный по Золотому Сечению от основного круга.
-  </p>
 
-  <h2>4. Анимированные SVG (Вращение)</h2>
-  <div class="preview" style="padding: 40px;" id="svgPreviewContainer">
-    <!-- SVG preview injected here -->
-  </div>
+  <h2>4. Анимированные Фракталы (Гипнотические)</h2>
+  <div class="preview" style="padding: 40px;" id="svgPreviewContainer"></div>
   <div class="controls">
     <div class="row">
-      <button class="btn-2" id="btnThemeSVGLeft" onclick="downloadAnimatedSVG('left')">Скачать SVG (Вращение влево)</button>
-      <button class="btn-2" id="btnThemeSVGRight" onclick="downloadAnimatedSVG('right')">Скачать SVG (Вращение вправо)</button>
+      <button class="btn-2" id="btnThemeSVGLeft" onclick="downloadAnimatedSVG('left')">SVG: Вращение влево</button>
+      <button class="btn-2" id="btnThemeSVGRight" onclick="downloadAnimatedSVG('right')">SVG: Вращение вправо</button>
     </div>
   </div>
-  <p class="info">SVG файлы идеальны для веба: они весят пару килобайт, бесконечно масштабируются и вращаются сами по себе без тормозов!</p>
+  <p class="info">Каждый круг внутри фрактала крутится с собственной скоростью, создавая эффект гипнотического туннеля!</p>
   
   <canvas id="canvas"></canvas>
 
@@ -102,47 +96,39 @@
       drawFractalToCanvas(document.getElementById('previewFractalCanvas'), 300, c1, c2, currentFractalMode);
       drawGeometricToCanvas(document.getElementById('previewGeomCanvas'), 250, c1, c2, 'centered');
       
-      // Update SVG preview
       document.getElementById('svgPreviewContainer').innerHTML = generateAnimatedSVG(c1, c2, 'right', 300);
     }
 
-    function getFractalCircles(scale = 1, cxOffset = 500, cyOffset = 500, mode = 'golden') {
+    function getFractalCircles(scale = 1, cxOffset = 500, cyOffset = 500, mode = 'golden', includeDegree = false) {
       let circles = [];
       const R_big = 460;
       
-      if (mode === 'golden') {
-        const angle = -Math.PI / 4; 
-        const K = 0.85; 
-        let currentR = R_big;
-        let cx = cxOffset;
-        let cy = cyOffset;
+      const angle = -Math.PI / 4; 
+      const K = 0.85; 
+      let currentR = R_big;
+      let cx = cxOffset;
+      let cy = cyOffset;
 
-        // Spiral
-        for(let i=0; i<7; i++) {
-          circles.push({x: cx * scale, y: cy * scale, r: currentR * scale});
-          const nextR = currentR / PHI;
-          const shiftDist = (currentR - nextR) * K;
-          cx += shiftDist * Math.cos(angle);
-          cy += shiftDist * Math.sin(angle);
-          currentR = nextR;
-        }
-      } else {
-        circles = [
-          {x: 500, y: 500, r: 460}, {x: 550, y: 440, r: 340}, {x: 585, y: 395, r: 240},
-          {x: 615, y: 360, r: 160}, {x: 635, y: 335, r: 100}, {x: 650, y: 320, r: 60}
-        ].map(c => ({x: c.x * scale, y: c.y * scale, r: c.r * scale}));
+      for(let i=0; i<7; i++) {
+        circles.push({x: cx * scale, y: cy * scale, r: currentR * scale, id: i});
+        const nextR = currentR / PHI;
+        const shiftDist = (currentR - nextR) * K;
+        cx += shiftDist * Math.cos(angle);
+        cy += shiftDist * Math.sin(angle);
+        currentR = nextR;
       }
       
-      // Add the "Degree" circle to the fractal
-      // Degree radius = R_big / PHI^3
-      const R_deg = R_big / Math.pow(PHI, 3);
-      const dist = R_big * PHI; // Golden ratio distance
-      const degAngle = -Math.PI / 4; // Top Right
-      
-      const degCx = cxOffset + Math.cos(degAngle) * dist;
-      const degCy = cyOffset + Math.sin(degAngle) * dist;
-      
-      circles.push({x: degCx * scale, y: degCy * scale, r: R_deg * scale});
+      if (includeDegree) {
+        // Degree circle calculation (smaller and closer as requested)
+        const R_deg = R_big / Math.pow(PHI, 4.5); // Approx 0.12 * R_big
+        const dist = R_big * 1.25; // Closer to the main circle
+        const degAngle = -Math.PI / 4; 
+        
+        const degCx = cxOffset + Math.cos(degAngle) * dist;
+        const degCy = cyOffset + Math.sin(degAngle) * dist;
+        
+        circles.push({x: degCx * scale, y: degCy * scale, r: R_deg * scale, id: 'deg'});
+      }
       
       return circles;
     }
@@ -152,9 +138,9 @@
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, size, size);
       
-      const scale = size / 1500; // Leave room for the degree symbol overhang
-      const cxOffset = 1500 / 2 - 100; // Shift center slightly left to fit the right overhang
-      const cyOffset = 1500 / 2 + 100; // Shift center slightly down to fit the top overhang
+      const scale = size / 1400; 
+      const cxOffset = 1400 / 2 - 50; 
+      const cyOffset = 1400 / 2 + 50; 
 
       const gradient = ctx.createLinearGradient(0, 0, size, size);
       gradient.addColorStop(0, color1);
@@ -164,7 +150,7 @@
       ctx.lineCap = 'round';
       ctx.lineWidth = 6 * (size / 1000);
       
-      const circles = getFractalCircles(scale, cxOffset, cyOffset, mode);
+      const circles = getFractalCircles(scale, cxOffset, cyOffset, mode, true);
 
       circles.forEach(c => {
         ctx.beginPath();
@@ -183,22 +169,42 @@
       drawFractalToCanvas(canvas, size, c1, c2, mode);
       
       const link = document.createElement('a');
-      link.download = `oazyse-fractal-${mode}-${size}px.png`;
+      link.download = `oazyse-fractal-${size}px.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
-      updatePreviews();
     }
 
     function generateAnimatedSVG(color1, color2, direction, size = 1000) {
-      const circles = getFractalCircles(1, 750, 750, 'golden');
-      // The canvas is 1500x1500 internally
+      // For animation, no degree symbol, just the spiral
+      const circles = getFractalCircles(1, 750, 750, 'golden', false);
       const center = "750 750";
-      const rotateFrom = direction === 'left' ? "360" : "0";
-      const rotateTo = direction === 'left' ? "0" : "360";
       
-      let svgCircles = circles.map(c => 
-        `<circle cx="${c.x}" cy="${c.y}" r="${c.r}" fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round"/>`
-      ).join('\n    ');
+      let svgCircles = circles.map(c => {
+        // Individual rotation speeds! 
+        // c.id 0 is outer (centered), doesn't rotate effectively. 
+        // 1 to 6 get progressively faster.
+        if (c.id === 0) {
+          return `<circle cx="${c.x}" cy="${c.y}" r="${c.r}" fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round"/>`;
+        }
+        
+        // Durations: 12s, 8s, 5s, 3s, 2s, 1.5s
+        const durations = [0, 15, 10, 6, 4, 2.5, 1.5];
+        const dur = durations[c.id] + 's';
+        const rotateFrom = direction === 'left' ? "360" : "0";
+        const rotateTo = direction === 'left' ? "0" : "360";
+        
+        return `<g>
+          <circle cx="${c.x}" cy="${c.y}" r="${c.r}" fill="none" stroke="url(#neonGradient)" stroke-width="8" stroke-linecap="round"/>
+          <animateTransform 
+            attributeName="transform" 
+            type="rotate" 
+            from="${rotateFrom} ${center}" 
+            to="${rotateTo} ${center}" 
+            dur="${dur}" 
+            repeatCount="indefinite" 
+          />
+        </g>`;
+      }).join('\n    ');
 
       return `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500" width="${size}" height="${size}">
@@ -210,12 +216,13 @@
   </defs>
   <g>
     ${svgCircles}
+    <!-- Outer group rotation for extra hypnotic effect -->
     <animateTransform 
       attributeName="transform" 
       type="rotate" 
-      from="${rotateFrom} ${center}" 
-      to="${rotateTo} ${center}" 
-      dur="20s" 
+      from="${direction === 'left' ? '360' : '0'} ${center}" 
+      to="${direction === 'left' ? '0' : '360'}" 
+      dur="30s" 
       repeatCount="indefinite" 
     />
   </g>
@@ -294,8 +301,9 @@
       await document.fonts.ready;
       const c1 = document.getElementById('colorStart').value;
       const c2 = document.getElementById('colorEnd').value;
-      const targetWidth = parseInt(document.getElementById('widthInput1').value, 10);
-      const fontSize = Math.floor(targetWidth * 0.35);
+      const targetWidth = parseInt(document.getElementById(type === 'logo' ? 'widthInput1' : 'widthInput2').value, 10);
+      
+      const fontSize = Math.floor(targetWidth * (type === 'logo' ? 0.35 : 0.8));
       const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
       ctx.font = `${fontSize}px Questrial`;
@@ -308,7 +316,7 @@
       const fFull = ctx.measureText(text);
       const exactFullWidth = Math.ceil(fFull.actualBoundingBoxRight + fFull.actualBoundingBoxLeft);
       
-      const baseText = 'oazyse';
+      const baseText = type === 'logo' ? 'oazyse' : 'o';
       const fBase = ctx.measureText(baseText);
       const exactBaseWidth = Math.ceil(fBase.actualBoundingBoxRight + fBase.actualBoundingBoxLeft);
       const exactDegreeWidth = exactFullWidth - exactBaseWidth;
@@ -343,7 +351,7 @@
       ctx.fillStyle = gradient; ctx.fillText(text, xOffset, yOffset);
       
       const link = document.createElement('a');
-      link.download = `oazyse-logo-${mode}-${canvasWidth}x${canvasHeight}.png`;
+      link.download = `oazyse-${type}-${mode}-${canvasWidth}x${canvasHeight}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
