@@ -31,6 +31,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: 1;
     }
     .controls {
       background: #2a2a2a;
@@ -73,53 +74,77 @@
   </style>
 </head>
 <body>
-  <h1>oazyse° Logo Generator</h1>
+  <h1>oazyse° Logo Generator (Тримминг)</h1>
   <div class="preview">
     <div class="logo" id="logo">oazyse°</div>
   </div>
   
   <div class="controls">
-    <label>Ширина (px):</label>
+    <label>Ширина текста (px):</label>
     <input type="number" id="widthInput" value="4000" min="500" max="10000" />
-    <button onclick="downloadPNG()">Скачать прозрачный PNG</button>
+    <button onclick="downloadPNG()">Скачать плотный PNG (без полей)</button>
   </div>
   
   <canvas id="canvas"></canvas>
-  <p class="info">PNG с прозрачным фоном, шрифт Questrial, неон-градиент. Идеально для Figma!</p>
+  <p class="info">PNG обрезается точно по краям текста (идеально для Figma).</p>
 
   <script>
     async function downloadPNG() {
-      const width = parseInt(document.getElementById('widthInput').value, 10);
-      const height = Math.floor(width / 4); // maintain 4:1 aspect ratio
-      
-      const canvas = document.getElementById('canvas');
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      
-      // Clear canvas (transparent)
-      ctx.clearRect(0, 0, width, height);
-      
       // Wait for font to load
       await document.fonts.ready;
+
+      const targetWidth = parseInt(document.getElementById('widthInput').value, 10);
+      const fontSize = Math.floor(targetWidth * 0.35); // Initial guess
+
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
       
-      // Create gradient (20% padding on sides)
-      const gradient = ctx.createLinearGradient(width * 0.2, 0, width * 0.8, 0);
+      // Setup font to measure
+      ctx.font = `${fontSize}px Questrial`;
+      const metrics = ctx.measureText('oazyse°');
+      
+      // Calculate exact text dimensions
+      const textWidth = Math.ceil(metrics.actualBoundingBoxRight + metrics.actualBoundingBoxLeft);
+      const textHeight = Math.ceil(metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent);
+      
+      // Calculate scale factor to match target width exactly
+      const scale = targetWidth / textWidth;
+      const finalFontSize = Math.floor(fontSize * scale);
+      
+      // Setup context again with exact font size
+      ctx.font = `${finalFontSize}px Questrial`;
+      const finalMetrics = ctx.measureText('oazyse°');
+      const exactWidth = Math.ceil(finalMetrics.actualBoundingBoxRight + finalMetrics.actualBoundingBoxLeft);
+      const exactHeight = Math.ceil(finalMetrics.actualBoundingBoxAscent + finalMetrics.actualBoundingBoxDescent);
+      
+      // Set canvas to EXACT dimensions (no padding)
+      canvas.width = exactWidth;
+      canvas.height = exactHeight;
+      
+      // Clear canvas (transparent)
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Setup font
+      ctx.font = `${finalFontSize}px Questrial`;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic'; // Easier for precise Y positioning
+      
+      // Create gradient matching the text width
+      const gradient = ctx.createLinearGradient(0, 0, exactWidth, 0);
       gradient.addColorStop(0, '#ab4dff');
       gradient.addColorStop(1, '#00e673');
       
-      // Draw text
-      const fontSize = Math.floor(width * 0.15); // Scale font to width
-      ctx.font = `${fontSize}px Questrial`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      // Draw text exactly at the calculated offset so it touches the top-left edge
       ctx.fillStyle = gradient;
-      // letter-spacing isn't natively supported in fillText reliably, but Questrial is wide enough.
-      ctx.fillText('oazyse°', width / 2, height / 2 + (fontSize * 0.05));
+      const x = finalMetrics.actualBoundingBoxLeft;
+      // We align using alphabetic baseline, so Y needs to be shifted down by Ascent
+      const y = finalMetrics.actualBoundingBoxAscent;
+      
+      ctx.fillText('oazyse°', x, y);
       
       // Download
       const link = document.createElement('a');
-      link.download = `oazyse-logo-${width}px.png`;
+      link.download = `oazyse-logo-tight-${exactWidth}x${exactHeight}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
