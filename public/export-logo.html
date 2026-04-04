@@ -32,6 +32,24 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .controls {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 12px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    input {
+      background: #111;
+      border: 1px solid #444;
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 6px;
+      width: 120px;
+    }
     canvas {
       display: none;
     }
@@ -43,7 +61,6 @@
       color: white;
       border-radius: 8px;
       cursor: pointer;
-      margin: 10px;
     }
     button:hover {
       opacity: 0.9;
@@ -56,40 +73,53 @@
   </style>
 </head>
 <body>
-  <h1>oazyse° Logo PNG Generator</h1>
+  <h1>oazyse° Logo Generator</h1>
   <div class="preview">
     <div class="logo" id="logo">oazyse°</div>
   </div>
-  <canvas id="canvas" width="2000" height="500"></canvas>
-  <button onclick="downloadPNG()">Скачать идеальный PNG (2000×500)</button>
+  
+  <div class="controls">
+    <label>Ширина (px):</label>
+    <input type="number" id="widthInput" value="4000" min="500" max="10000" />
+    <button onclick="downloadPNG()">Скачать прозрачный PNG</button>
+  </div>
+  
+  <canvas id="canvas"></canvas>
   <p class="info">PNG с прозрачным фоном, шрифт Questrial, неон-градиент. Идеально для Figma!</p>
 
   <script>
     async function downloadPNG() {
+      const width = parseInt(document.getElementById('widthInput').value, 10);
+      const height = Math.floor(width / 4); // maintain 4:1 aspect ratio
+      
       const canvas = document.getElementById('canvas');
+      canvas.width = width;
+      canvas.height = height;
       const ctx = canvas.getContext('2d');
       
       // Clear canvas (transparent)
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, width, height);
       
       // Wait for font to load
       await document.fonts.ready;
       
-      // Create gradient
-      const gradient = ctx.createLinearGradient(400, 0, 1600, 0);
+      // Create gradient (20% padding on sides)
+      const gradient = ctx.createLinearGradient(width * 0.2, 0, width * 0.8, 0);
       gradient.addColorStop(0, '#ab4dff');
       gradient.addColorStop(1, '#00e673');
       
       // Draw text
-      ctx.font = '300px Questrial';
+      const fontSize = Math.floor(width * 0.15); // Scale font to width
+      ctx.font = `${fontSize}px Questrial`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = gradient;
-      ctx.fillText('oazyse°', canvas.width / 2, canvas.height / 2 + 20);
+      // letter-spacing isn't natively supported in fillText reliably, but Questrial is wide enough.
+      ctx.fillText('oazyse°', width / 2, height / 2 + (fontSize * 0.05));
       
       // Download
       const link = document.createElement('a');
-      link.download = 'oazyse-logo-transparent-highres.png';
+      link.download = `oazyse-logo-${width}px.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
