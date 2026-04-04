@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Export oazyse° Logo</title>
+  <title>Export oazyse° Logo & Symbols</title>
   <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
   <style>
     body {
@@ -47,6 +47,9 @@
       padding: 40px 80px;
       border-radius: 12px;
       margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     
     .logo, .icon-logo {
@@ -139,6 +142,7 @@
     </div>
   </div>
 
+  <!-- SECTION 1 -->
   <h2>1. Основной Логотип</h2>
   <div class="preview">
     <div class="logo" id="previewLogo">oazyse°</div>
@@ -153,12 +157,9 @@
       <button class="btn-2" id="btnThemeLogo" onclick="downloadPNG('oazyse°', 'logo', 'centered')">2. Слово oazyse по центру</button>
     </div>
   </div>
-  <p class="info">
-    <b>Вариант 1:</b> Логотип обрезан строго по краям текста.<br>
-    <b>Вариант 2:</b> "oazyse" стоит по центру, значок "°" вынесен за рамку.
-  </p>
 
-  <h2>2. Иконка (Фавикон / Аватар)</h2>
+  <!-- SECTION 2 -->
+  <h2>2. Иконка (Фавикон)</h2>
   <div class="preview" style="padding: 20px 40px;">
     <div class="icon-logo" id="previewIcon">o°</div>
   </div>
@@ -172,10 +173,21 @@
       <button class="btn-2" id="btnThemeIcon" onclick="downloadPNG('o°', 'icon', 'centered')">2. Буква "o" по центру</button>
     </div>
   </div>
-  <p class="info">
-    <b>Вариант 1:</b> Обрезан по крайним пикселям "o" и "°".<br>
-    <b>Вариант 2:</b> Буква "o" ровно по центру, градус "свисает" справа. Идеально для аватарок в соцсетях!
-  </p>
+
+  <!-- SECTION 3 -->
+  <h2>3. Фрактальный Символ (Спираль)</h2>
+  <div class="preview" style="padding: 40px;">
+    <canvas id="previewFractalCanvas" width="300" height="300" style="display: block;"></canvas>
+  </div>
+  <div class="controls">
+    <div class="row">
+      <label>Размер (px):</label>
+      <input type="number" id="widthInput3" value="2000" min="500" max="10000" />
+    </div>
+    <div class="row">
+      <button class="btn-2" id="btnThemeFractal" onclick="downloadFractal()">Скачать прозрачный PNG</button>
+    </div>
+  </div>
   
   <canvas id="canvas"></canvas>
 
@@ -192,10 +204,61 @@
       
       document.getElementById('btnThemeLogo').style.background = grad;
       document.getElementById('btnThemeIcon').style.background = grad;
+      document.getElementById('btnThemeFractal').style.background = grad;
+      
+      // Update fractal preview
+      drawFractalToCanvas(document.getElementById('previewFractalCanvas'), 300, c1, c2);
     }
     
-    // Initialize previews
-    updatePreviews();
+    function drawFractalToCanvas(canvas, size, color1, color2) {
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, size, size);
+      
+      // Diagonal gradient: top-left to bottom-right
+      const gradient = ctx.createLinearGradient(0, size*0.2, size, size*0.8);
+      gradient.addColorStop(0, color1);
+      gradient.addColorStop(1, color2);
+      
+      ctx.strokeStyle = gradient;
+      ctx.lineCap = 'round';
+      
+      // We set relative positions based on a 1000x1000 grid
+      const scale = size / 1000;
+      ctx.lineWidth = 6 * scale; // Adjust thickness
+      
+      // C1 to C6
+      const circles = [
+        {x: 500, y: 500, r: 460},
+        {x: 550, y: 440, r: 340},
+        {x: 585, y: 395, r: 240},
+        {x: 615, y: 360, r: 160},
+        {x: 635, y: 335, r: 100},
+        {x: 650, y: 320, r: 60}
+      ];
+
+      circles.forEach(c => {
+        ctx.beginPath();
+        ctx.arc(c.x * scale, c.y * scale, c.r * scale, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+    }
+
+    async function downloadFractal() {
+      const size = parseInt(document.getElementById('widthInput3').value, 10);
+      const c1 = document.getElementById('colorStart').value;
+      const c2 = document.getElementById('colorEnd').value;
+      
+      const canvas = document.getElementById('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      
+      drawFractalToCanvas(canvas, size, c1, c2);
+      
+      const link = document.createElement('a');
+      link.download = `oazyse-fractal-${size}px.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
 
     async function downloadPNG(text, type, mode) {
       await document.fonts.ready;
@@ -204,18 +267,14 @@
       const c2 = document.getElementById('colorEnd').value;
       const targetWidth = parseInt(document.getElementById(type === 'logo' ? 'widthInput1' : 'widthInput2').value, 10);
       
-      // Rough starting font size
       const fontSize = Math.floor(targetWidth * (type === 'logo' ? 0.35 : 0.8));
-
       const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
       
       ctx.font = `${fontSize}px Questrial`;
-      
-      const mFull = ctx.measureText(text); // 'oazyse°' or 'o°'
+      const mFull = ctx.measureText(text);
       const fullWidth = Math.ceil(mFull.actualBoundingBoxRight + mFull.actualBoundingBoxLeft);
       
-      // Scale to exact width
       const scale = targetWidth / fullWidth;
       const finalFontSize = Math.floor(fontSize * scale);
       
@@ -223,13 +282,11 @@
       const fFull = ctx.measureText(text);
       const exactFullWidth = Math.ceil(fFull.actualBoundingBoxRight + fFull.actualBoundingBoxLeft);
       
-      // For centering, we measure the base word ('oazyse' or 'o')
       const baseText = type === 'logo' ? 'oazyse' : 'o';
       const fBase = ctx.measureText(baseText);
       const exactBaseWidth = Math.ceil(fBase.actualBoundingBoxRight + fBase.actualBoundingBoxLeft);
       const exactDegreeWidth = exactFullWidth - exactBaseWidth;
 
-      // Center vertically based on 'o'
       const mO = ctx.measureText('o');
       const baselineToCenter = (mO.actualBoundingBoxAscent - mO.actualBoundingBoxDescent) / 2;
       const highestPoint = fFull.actualBoundingBoxAscent;
@@ -260,7 +317,6 @@
       ctx.textAlign = 'left';
       ctx.textBaseline = 'alphabetic';
       
-      // Gradient across the text width
       const gradient = ctx.createLinearGradient(xOffset, 0, xOffset + exactFullWidth, 0);
       gradient.addColorStop(0, c1);
       gradient.addColorStop(1, c2);
@@ -273,6 +329,11 @@
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
+    
+    window.onload = () => {
+      // Force preview render on load
+      document.fonts.ready.then(updatePreviews);
+    };
   </script>
 </body>
 </html>
