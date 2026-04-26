@@ -90,7 +90,7 @@ const SalesPage = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Link to="/quiz">
+            <Link to="/session">
               <Button size="lg" className="group bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground px-8 py-6 text-lg">
                 {t('sales.hero.cta')}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -377,7 +377,7 @@ const SalesPage = () => {
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-4">{t('sales.guarantee.offer.title')}</h3>
                 <p className="text-lg text-muted-foreground mb-6">{t('sales.guarantee.offer.description')}</p>
-                <Link to="/quiz">
+                <Link to="/session">
                   <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground px-12 py-6 text-lg">
                     {t('sales.guarantee.offer.cta')}
                   </Button>
@@ -399,7 +399,7 @@ const SalesPage = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
             {t('sales.finalCta.description')}
           </p>
-          <Link to="/quiz">
+          <Link to="/session">
             <Button size="lg" className="group bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground px-12 py-8 text-xl">
               {t('sales.finalCta.cta')}
               <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />

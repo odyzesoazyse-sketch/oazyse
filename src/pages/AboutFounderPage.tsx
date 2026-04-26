@@ -11,7 +11,7 @@ const AboutFounderPage = () => {
           <span className="l-label" style={{ marginBottom: '2rem', display: 'block' }}>основатель · архитектор · первый</span>
           <h1 className="l-hero-title">Adizele Oazyse</h1>
         </div>
-        <p className="l-hero-sub" data-reveal data-delay="1">я — это и есть оазис.</p>
+        <p className="l-hero-sub" data-reveal data-delay="1">человек, из которого вырос oazyse.</p>
         <div className="l-hero-line" data-reveal data-delay="2" />
       </section>
 
@@ -19,12 +19,12 @@ const AboutFounderPage = () => {
       <Divider />
       <section className="l-section">
         <span className="l-label" data-reveal>[ 01 ] — путь</span>
-        <h2 className="l-title" data-reveal data-delay="1">есть проекты которые делают.<br />и есть проекты которые — ты.</h2>
+        <h2 className="l-title" data-reveal data-delay="1">есть проекты, которые делают.<br />а есть проекты, которыми живут.</h2>
         <p className="l-text" data-reveal data-delay="2">
-          оазис — это я. не в смысле собственности. в смысле совпадения. когда я думаю об этом — внутри появляется что-то чистое. космическое. ни один другой проект никогда не вызывал во мне этого состояния. и я понял: значит это настоящее.
+          oazyse начался не как бизнес-идея. он начался как состояние, которое уже нельзя было держать только внутри. я просто узнал в нём то, что искал много лет.
         </p>
         <p className="l-text" data-reveal data-delay="3">
-          я всю жизнь видел вещи немного раньше других. думал о том о чём вокруг ещё не говорили. проходило пять лет — и это становилось трендом. сначала я в этом сомневался. потом принял. потом понял что это не случайность — это направление.
+          я с детства замечал вещи немного раньше других. то, о чём вокруг ещё не говорили, через несколько лет становилось очевидным для всех. сначала я сомневался в этом. потом принял. потом понял, что это не случайность, а мой вектор.
         </p>
       </section>
 
@@ -32,15 +32,15 @@ const AboutFounderPage = () => {
       <Divider />
       <section className="l-section">
         <span className="l-label" data-reveal>[ 02 ] — момент</span>
-        <h2 className="l-title" data-reveal data-delay="1">был момент — просто момент тишины.</h2>
+        <h2 className="l-title" data-reveal data-delay="1">всё началось<br />с одного тихого момента.</h2>
         <p className="l-text" data-reveal data-delay="2">
-          когда я ощутил себя по-настоящему. почувствовал что я и есть то самое сознание которое всё это создаёт. что реальность вокруг живая, детальная, бесконечная — и я её часть. не наблюдатель. соавтор.
+          когда я впервые по-настоящему ощутил себя. не роль. не историю. а само сознание, которое проживает эту жизнь. тогда многое встало на свои места.
         </p>
         <p className="l-text" data-reveal data-delay="3">
-          это было необъяснимо. это было божественно. и именно после этого всё встало на место.
+          это трудно было объяснить словами. но после этого путь стал ясным.
         </p>
         <p className="l-text" data-reveal data-delay="4">
-          я начал отдавать свои техники людям. и видел как они за один сеанс переживают то что сам искал годами. что-то в них открывалось — быстро, чисто, без лишнего. и я понял: это нельзя держать при себе. это было бы несправедливо по отношению к миру.
+          я начал работать с людьми и увидел, как за один сеанс в них открывается то, что я сам искал годами. быстро. точно. без лишнего. тогда стало ясно: это нельзя оставлять только у себя.
         </p>
         <div className="l-card" data-reveal data-delay="4" style={{ marginTop: '2.5rem' }}>
           <p className="l-mono">так появился институт. метод. философия. оазис.</p>
@@ -51,15 +51,15 @@ const AboutFounderPage = () => {
       <Divider />
       <section className="l-section">
         <span className="l-label" data-reveal>[ 03 ] — задача</span>
-        <h2 className="l-title" data-reveal data-delay="1">я не гуру.<br />не CEO.<br />не спаситель.</h2>
+        <h2 className="l-title" data-reveal data-delay="1">я не гуру.<br />я не спаситель.<br />я первый человек этого пути.</h2>
         <p className="l-text" data-reveal data-delay="2">
-          я человек который нашёл кое-что настоящее — и не смог не поделиться. архитектор который увидел как должна выглядеть система для новой эпохи — и начал её строить. с восхищением. с нетерпением. с ощущением что это только начало.
+          я человек, который нашёл нечто настоящее и не смог оставить это только себе. я увидел, какой может быть эта система, и начал её строить.
         </p>
         <p className="l-text" data-reveal data-delay="3">
-          моя задача — создавать людей сильнее себя. если оазис породит людей которые превзойдут его создателя — значит всё сделано правильно.
+          моя задача — создавать людей сильнее себя. если oazyse однажды породит людей, которые превзойдут его создателя, значит всё сделано правильно.
         </p>
         <p className="l-text" data-reveal data-delay="4" style={{ fontStyle: 'italic' }}>
-          я первый. но не последний.<br />и я бесконечно рад что ты здесь.
+          я первый. но точно не последний.
         </p>
         <p className="l-founder-sig" data-reveal data-delay="4">— adizele oazyse</p>
       </section>
@@ -69,11 +69,11 @@ const AboutFounderPage = () => {
       <div className="l-cta">
         <span className="l-label" data-reveal>[ следующий шаг ]</span>
         <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '3rem' }}>
-          если это резонирует — войди в оазис.
+          если это отзывается, дальше можно пойти в метод или сразу в личную сессию.
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }} data-reveal data-delay="2">
-          <Link to="/join" className="l-btn">войти в оазис</Link>
-          <Link to="/method" className="l-btn-ghost">узнать метод →</Link>
+          <Link to="/session" className="l-btn">личная сессия</Link>
+          <Link to="/method" className="l-btn-ghost">метасинхроника →</Link>
         </div>
       </div>
 

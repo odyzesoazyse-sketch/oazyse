@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Calendar, Clock, User, Plus, Star } from 'lucide-react';
+import { Calendar, Clock, Plus, Star } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface SessionRequest {
@@ -210,10 +210,10 @@ const MemberSessions = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-2">
-          <p className="label text-neon-green">Практика</p>
-          <h1 className="title">Сеансы</h1>
+          <p className="label text-neon-green">мои сессии</p>
+          <h1 className="title">твоя живая линия работы.</h1>
           <p className="body max-w-xl">
-            Получайте и проводите сеансы метасинхроники
+            Здесь собираются твои запросы, назначенные встречи и доступные сессии внутри пространства oazyse°.
           </p>
         </div>
         
@@ -221,12 +221,12 @@ const MemberSessions = () => {
           <DialogTrigger asChild>
             <Button className="bg-neon-purple hover:bg-neon-purple/80 text-primary-foreground">
               <Plus className="w-4 h-4 mr-2" />
-              Новая заявка
+              новая заявка
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] bg-card border-border">
             <DialogHeader>
-              <DialogTitle className="font-light">Новая заявка на сеанс</DialogTitle>
+              <DialogTitle className="font-light">новая заявка на сессию</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 pt-4">
               <div className="space-y-2">
@@ -280,9 +280,9 @@ const MemberSessions = () => {
                   className="bg-background border-border resize-none"
                 />
               </div>
-              <Button onClick={createRequest} className="w-full bg-neon-purple hover:bg-neon-purple/80">
-                Создать
-              </Button>
+                <Button onClick={createRequest} className="w-full bg-neon-purple hover:bg-neon-purple/80">
+                создать заявку
+                </Button>
             </div>
           </DialogContent>
         </Dialog>
@@ -291,16 +291,16 @@ const MemberSessions = () => {
       <Tabs defaultValue="requests" className="space-y-6">
         <TabsList className="bg-muted/50 border border-border">
           <TabsTrigger value="requests" className="data-[state=active]:bg-neon-purple/10 data-[state=active]:text-neon-purple">
-            Мои заявки
+            мои заявки
           </TabsTrigger>
           {isCertified && (
             <TabsTrigger value="available" className="data-[state=active]:bg-neon-green/10 data-[state=active]:text-neon-green">
-              Доступные
+              доступные
             </TabsTrigger>
           )}
           {isCertified && (
             <TabsTrigger value="booked" className="data-[state=active]:bg-neon-purple/10 data-[state=active]:text-neon-purple">
-              Назначенные
+              назначенные
             </TabsTrigger>
           )}
         </TabsList>
@@ -310,13 +310,13 @@ const MemberSessions = () => {
             <Card className="bg-card border-border">
               <CardContent className="py-12 text-center">
                 <Calendar className="w-10 h-10 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="font-light text-foreground mb-2">Нет заявок</h3>
+                <h3 className="font-light text-foreground mb-2">пока пусто</h3>
                 <p className="body text-sm mb-4">
-                  Создайте заявку на сеанс
+                  создай первую заявку, чтобы зафиксировать свой запрос внутри пространства
                 </p>
                 <Button onClick={() => setCreateDialogOpen(true)} variant="outline" className="border-neon-purple/30 text-neon-purple">
                   <Plus className="w-4 h-4 mr-2" />
-                  Создать
+                  создать
                 </Button>
               </CardContent>
             </Card>

@@ -6,38 +6,37 @@ interface Story {
   id: string;
   title: string;
   content: string;
-  gradient: string;
+  kicker: string;
   isNew?: boolean;
 }
 
-// Demo stories data - in production this would come from the database
 const demoStories: Story[] = [
   {
     id: '1',
-    title: 'Метасинхроника',
-    content: 'Откройте силу синхронизации сознания с космическими ритмами',
-    gradient: 'from-neon-purple via-neon-green to-neon-purple',
+    kicker: 'главное',
+    title: 'oazyse выходит наружу',
+    content: 'мы собираем не витрину, а вход в живую систему: главная, хроника, книга и личные сессии.',
     isNew: true,
   },
   {
     id: '2',
-    title: 'Трансформация',
-    content: 'Каждый день — новая возможность для пробуждения',
-    gradient: 'from-neon-green via-neon-purple to-neon-green',
+    kicker: 'сессии',
+    title: 'один запрос — одна работа',
+    content: 'если внутри есть повторяющийся сценарий, его можно вынести в персональную метасинхронику с Adizele.',
     isNew: true,
   },
   {
     id: '3',
-    title: 'Осознанность',
-    content: 'Практикуйте присутствие в каждом моменте',
-    gradient: 'from-neon-purple to-neon-green',
+    kicker: 'книга',
+    title: 'искусство вознесения',
+    content: 'первый материальный объект оазиса: текст, который можно держать в руках до глубокого входа.',
     isNew: false,
   },
   {
     id: '4',
-    title: 'Энергия',
-    content: 'Раскройте свой внутренний потенциал через метасинк',
-    gradient: 'from-neon-green to-neon-purple',
+    kicker: 'хроника',
+    title: 'проект будет виден в движении',
+    content: 'новости нужны не для шума. они фиксируют, как oazyse становится реальностью шаг за шагом.',
     isNew: false,
   },
 ];
@@ -118,17 +117,18 @@ export const Stories = ({ isOpen, onClose }: StoriesProps) => {
   const currentStory = demoStories[currentIndex];
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black">
+    <div className="fixed inset-0 z-[100] bg-neutral-950/92 backdrop-blur-sm flex items-center justify-center p-0 sm:p-6">
+      <div className="relative h-full w-full overflow-hidden bg-white text-neutral-950 shadow-2xl sm:h-[760px] sm:max-h-[92vh] sm:w-[390px] sm:rounded-[34px] sm:border sm:border-white/20">
       {/* Progress bars */}
       <div className="absolute top-4 left-4 right-4 flex gap-1 z-10">
         {demoStories.map((_, idx) => (
           <div
             key={idx}
-            className="h-0.5 flex-1 bg-white/30 rounded-full overflow-hidden"
+            className="h-0.5 flex-1 bg-neutral-200 rounded-full overflow-hidden"
           >
             <div
               className={cn(
-                "h-full bg-gradient-to-r from-neon-purple to-neon-green transition-all duration-100",
+                "h-full bg-neutral-950 transition-all duration-100",
                 idx < currentIndex ? "w-full" : idx === currentIndex ? "" : "w-0"
               )}
               style={{
@@ -142,23 +142,23 @@ export const Stories = ({ isOpen, onClose }: StoriesProps) => {
       {/* Header */}
       <div className="absolute top-8 left-4 right-4 flex items-center justify-between z-10">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-neon-purple to-neon-green p-[1px]">
-            <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-              <span className="text-[8px] text-white font-medium">o°</span>
+          <div className="w-8 h-8 rounded-full bg-neutral-950 p-[1px]">
+            <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
+              <span className="text-[8px] text-neutral-950 font-medium">o°</span>
             </div>
           </div>
-          <span className="text-white text-sm font-medium">oazyse°</span>
+          <span className="text-neutral-950 text-sm font-medium">oazyse°</span>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsPaused(prev => !prev)}
-            className="p-2 text-white/80 hover:text-white transition-colors"
+            className="p-2 text-neutral-500 hover:text-neutral-950 transition-colors"
           >
             {isPaused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
           </button>
           <button
             onClick={onClose}
-            className="p-2 text-white/80 hover:text-white transition-colors"
+            className="p-2 text-neutral-500 hover:text-neutral-950 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -166,20 +166,22 @@ export const Stories = ({ isOpen, onClose }: StoriesProps) => {
       </div>
 
       {/* Story content */}
-      <div
-        className={cn(
-          "absolute inset-0 flex items-center justify-center",
-          "bg-gradient-to-br",
-          currentStory.gradient
-        )}
-      >
-        <div className="text-center px-8 max-w-md">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+      <div className="absolute inset-0 flex items-center justify-center bg-white">
+        <div className="absolute inset-x-8 top-28 flex items-center justify-between">
+          <span className="text-[10px] uppercase tracking-[0.32em] text-neutral-400">{currentStory.kicker}</span>
+          <span className="h-px w-14 bg-neutral-200" />
+        </div>
+        <div className="px-9 text-left">
+          <h2 className="text-[2.7rem] leading-[0.95] tracking-[-0.06em] text-neutral-950 mb-6">
             {currentStory.title}
           </h2>
-          <p className="text-lg md:text-xl text-white/90 drop-shadow-md">
+          <p className="text-[1rem] leading-8 text-neutral-500">
             {currentStory.content}
           </p>
+        </div>
+        <div className="absolute bottom-24 left-8 right-8">
+          <div className="h-px bg-gradient-to-r from-neutral-950 via-neutral-200 to-transparent" />
+          <p className="mt-4 text-[10px] uppercase tracking-[0.28em] text-neutral-400">oazyse stories</p>
         </div>
       </div>
 
@@ -189,13 +191,13 @@ export const Stories = ({ isOpen, onClose }: StoriesProps) => {
         className="absolute left-0 top-0 bottom-0 w-1/3 z-10 flex items-center justify-start pl-4 opacity-0 hover:opacity-100 transition-opacity"
         disabled={currentIndex === 0}
       >
-        <ChevronLeft className="w-8 h-8 text-white/60" />
+        <ChevronLeft className="w-8 h-8 text-neutral-400" />
       </button>
       <button
         onClick={goToNext}
         className="absolute right-0 top-0 bottom-0 w-1/3 z-10 flex items-center justify-end pr-4 opacity-0 hover:opacity-100 transition-opacity"
       >
-        <ChevronRight className="w-8 h-8 text-white/60" />
+        <ChevronRight className="w-8 h-8 text-neutral-400" />
       </button>
 
       {/* Story indicators at bottom */}
@@ -210,11 +212,12 @@ export const Stories = ({ isOpen, onClose }: StoriesProps) => {
             className={cn(
               "w-2 h-2 rounded-full transition-all duration-300",
               idx === currentIndex
-                ? "bg-white scale-125"
-                : "bg-white/40 hover:bg-white/60"
+                ? "bg-neutral-950 scale-125"
+                : "bg-neutral-300 hover:bg-neutral-500"
             )}
           />
         ))}
+      </div>
       </div>
     </div>
   );

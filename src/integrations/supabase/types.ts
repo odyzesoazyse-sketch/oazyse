@@ -235,6 +235,33 @@ export type Database = {
         }
         Relationships: []
       }
+      waitlist: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          status: string | null
+          telegram: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          status?: string | null
+          telegram?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          status?: string | null
+          telegram?: string | null
+        }
+        Relationships: []
+      }
       quiz_responses: {
         Row: {
           abortions_count: number | null

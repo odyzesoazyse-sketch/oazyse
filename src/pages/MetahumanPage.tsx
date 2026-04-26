@@ -94,10 +94,10 @@ const MetahumanPage = () => {
 
         {/* CTA */}
         <button
-          onClick={() => navigate('/join')}
+          onClick={() => navigate('/session')}
           className="w-full py-4 bg-gradient-to-r from-neon-purple to-neon-green text-white font-medium rounded hover:opacity-90 transition-opacity"
         >
-          начать трансформацию →
+          прийти с личным запросом →
         </button>
       </div>
     </div>

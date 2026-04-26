@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, Award, Save } from 'lucide-react';
+import { Award, Save } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Profile {
@@ -108,19 +108,16 @@ const MemberProfile = () => {
 
   return (
     <div className="space-y-8 max-w-2xl animate-fade-in">
-      {/* Header */}
       <div className="space-y-2">
-        <p className="label text-neon-purple">Настройки</p>
-        <h1 className="title">Профиль</h1>
+        <p className="label text-neon-purple">профиль</p>
+        <h1 className="title">твоя форма внутри oazyse°.</h1>
         <p className="body">
-          Управление личными данными
+          Здесь хранится базовая информация о тебе. Позже сюда же войдёт связка с Telegram и состояние твоего входа в пространство.
         </p>
       </div>
 
-      {/* Profile card */}
       <Card className="bg-card border-border">
         <CardContent className="p-6 space-y-6">
-          {/* Avatar */}
           <div className="flex items-center gap-4">
             <Avatar className="w-16 h-16 border-2 border-neon-purple/30">
               <AvatarImage src={profile.avatar_url || undefined} />
@@ -130,7 +127,7 @@ const MemberProfile = () => {
             </Avatar>
             <div>
               <h3 className="font-light text-foreground text-lg">
-                {profile.full_name || 'Пользователь'}
+                {profile.full_name || 'участник пространства'}
               </h3>
               <p className="text-sm text-muted-foreground">{user?.email}</p>
               {certification?.passed && (
@@ -142,27 +139,26 @@ const MemberProfile = () => {
             </div>
           </div>
 
-          {/* Form */}
           <div className="space-y-4 pt-4 border-t border-border">
             <div className="space-y-2">
-              <Label className="text-xs uppercase tracking-wider text-muted-foreground">Имя</Label>
+              <Label className="text-xs uppercase tracking-wider text-muted-foreground">имя</Label>
               <Input
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Введите имя"
+                placeholder="как к тебе обращаться"
                 className="bg-background border-border"
               />
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs uppercase tracking-wider text-muted-foreground">Email</Label>
+              <Label className="text-xs uppercase tracking-wider text-muted-foreground">email</Label>
               <Input
                 value={user?.email || ''}
                 disabled
                 className="bg-muted border-border"
               />
               <p className="text-[10px] text-muted-foreground">
-                Email нельзя изменить
+                email пока нельзя изменить из этого раздела
               </p>
             </div>
 
@@ -172,13 +168,12 @@ const MemberProfile = () => {
               className="bg-neon-purple hover:bg-neon-purple/80"
             >
               <Save className="w-4 h-4 mr-2" />
-              {saving ? 'Сохранение...' : 'Сохранить'}
+              {saving ? 'сохранение...' : 'сохранить'}
             </Button>
           </div>
         </CardContent>
       </Card>
 
-      {/* Certification info */}
       {certification?.passed && (
         <Card className="bg-card border-neon-green/30">
           <CardContent className="p-6">
@@ -187,19 +182,19 @@ const MemberProfile = () => {
                 <Award className="w-5 h-5 text-neon-green" />
               </div>
               <div>
-                <p className="label text-neon-green">Сертификация</p>
-                <h3 className="font-light text-foreground">Подтверждена</h3>
+                <p className="label text-neon-green">практика</p>
+                <h3 className="font-light text-foreground">статус подтверждён</h3>
               </div>
             </div>
             <div className="grid gap-4 md:grid-cols-2 pt-4 border-t border-border">
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Дата</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">дата</p>
                 <p className="text-foreground font-light">
                   {new Date(certification.certified_at).toLocaleDateString('ru-RU')}
                 </p>
               </div>
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Результат</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">результат</p>
                 <p className="text-foreground font-light">{certification.test_score}%</p>
               </div>
             </div>

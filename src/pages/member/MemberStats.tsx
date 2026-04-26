@@ -22,6 +22,14 @@ interface StatsData {
   certifiedAt: string | null;
 }
 
+interface BookingStatus {
+  status: string;
+}
+
+interface RequestWithBookings {
+  session_bookings?: BookingStatus[] | null;
+}
+
 const MemberStats = () => {
   const { user } = useAuth();
   const [stats, setStats] = useState<StatsData>({
@@ -64,8 +72,8 @@ const MemberStats = () => {
         `)
         .eq('requester_id', user.id);
 
-      const sessionsReceived = requestsData?.filter(r => 
-        r.session_bookings?.some((b: any) => b.status === 'completed')
+      const sessionsReceived = (requestsData as RequestWithBookings[] | null)?.filter((r) => 
+        r.session_bookings?.some((b) => b.status === 'completed')
       ).length || 0;
 
       const { data: conductedData } = await supabase

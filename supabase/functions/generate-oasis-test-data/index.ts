@@ -181,7 +181,7 @@ serve(async (req) => {
     );
   } catch (error: unknown) {
     console.error('Error:', error);
-    const e = error as any;
+    const e = error as { message?: unknown; error?: unknown };
     const message =
       (e && typeof e === 'object' && typeof e.message === 'string' && e.message) ||
       (e && typeof e === 'object' && typeof e.error === 'string' && e.error) ||
