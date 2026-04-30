@@ -1128,6 +1128,7 @@ const SHELL_CSS = `
 interface LandingShellProps {
   children: React.ReactNode;
   withHeader?: boolean;
+  withFooter?: boolean;
 }
 
 const Footer = () => (
@@ -1143,7 +1144,7 @@ const Footer = () => (
   </footer>
 );
 
-const LandingShell = ({ children, withHeader = true }: LandingShellProps) => {
+const LandingShell = ({ children, withHeader = true, withFooter = true }: LandingShellProps) => {
   useCursorTrail();
   useReveal();
 
@@ -1153,7 +1154,7 @@ const LandingShell = ({ children, withHeader = true }: LandingShellProps) => {
       <div className="ls-orb" />
       {withHeader && <Header />}
       {children}
-      <Footer />
+      {withFooter && <Footer />}
     </div>
   );
 };
