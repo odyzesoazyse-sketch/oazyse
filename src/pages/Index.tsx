@@ -1,49 +1,33 @@
 import { useEffect, useMemo, useState } from 'react';
 import LandingShell from '@/components/LandingShell';
 
-const COUNTDOWN_HOURS = 20;
-const COUNTDOWN_MS = COUNTDOWN_HOURS * 60 * 60 * 1000;
+const LAUNCH_AT = '2026-05-01T17:10:55+05:00';
+const LAUNCH_AT_MS = new Date(LAUNCH_AT).getTime();
 
 const TIMER_CSS = `
   .o-home {
     position: relative;
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     padding: 0 1.25rem;
     text-align: center;
     z-index: 2;
+    overflow: hidden;
   }
 
   .o-home-copy {
     width: min(100%, 54rem);
-    margin: auto;
-    padding: 8rem 0 6rem;
-  }
-
-  .o-home-eyebrow {
-    margin: 0 0 2rem;
-    font-size: clamp(0.58rem, 0.9vw, 0.68rem);
-    line-height: 1.8;
-    letter-spacing: 0.2em;
-    text-transform: lowercase;
-    color: hsl(var(--muted-foreground) / 0.4);
-  }
-
-  .o-home-subtitle {
-    margin: 1.25rem auto 0;
-    width: min(100%, 32rem);
-    font-size: clamp(0.72rem, 1.2vw, 0.88rem);
-    line-height: 1.75;
-    letter-spacing: 0.22em;
-    text-transform: lowercase;
-    color: hsl(var(--muted-foreground));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .o-launch {
     width: min(100%, 12.5rem);
-    margin: 3rem auto 0;
+    margin: 2.5rem auto 0;
     z-index: 3;
   }
 
@@ -103,27 +87,9 @@ const TIMER_CSS = `
       min-height: 100svh;
     }
 
-    .o-home-copy {
-      padding: 7.75rem 0 5rem;
-    }
-
-    .o-home-eyebrow {
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.14em;
-      line-height: 1.7;
-    }
-
-    .o-home-subtitle {
-      margin-top: 0.9rem;
-      max-width: 18rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      line-height: 1.75;
-    }
-
     .o-launch {
       width: min(100%, 10.75rem);
-      margin-top: 2.2rem;
+      margin-top: 2rem;
     }
 
     .o-launch-grid {
@@ -165,18 +131,26 @@ const TimerCell = ({ value }: { value: string }) => (
 );
 
 const Index = () => {
-  const targetTime = useMemo(() => Date.now() + COUNTDOWN_MS, []);
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
     const timer = window.setInterval(() => {
       setNow(Date.now());
     }, 1000);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearInterval(timer);
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevBodyOverflow;
+    };
   }, []);
 
-  const timeLeft = formatTimeLeft(targetTime, now);
+  const timeLeft = useMemo(() => formatTimeLeft(LAUNCH_AT_MS, now), [now]);
 
   return (
     <LandingShell withHeader={false} withFooter={false}>
@@ -185,14 +159,10 @@ const Index = () => {
       <section className="o-home">
         <div className="o-home-copy">
           <div data-reveal>
-            <p className="o-home-eyebrow">институт сознания космического разума открывает миру</p>
             <h1 className="l-logo" style={{ marginBottom: 0, letterSpacing: '0.04em' }}>oazyse°</h1>
           </div>
-          <p className="o-home-subtitle" data-reveal data-delay="1">
-            архитектура нового сознания.
-          </p>
 
-          <div className="o-launch" data-reveal data-delay="2">
+          <div className="o-launch" data-reveal data-delay="1">
             <div className="o-launch-grid">
               <TimerCell value={timeLeft.hours} />
               <div className="o-launch-divider" />
