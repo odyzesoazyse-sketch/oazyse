@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import LandingShell from '@/components/LandingShell';
 
-const LAUNCH_AT = '2026-05-01T17:10:55+05:00';
+const LAUNCH_AT = '2026-05-02T15:48:43+05:00';
 const LAUNCH_AT_MS = new Date(LAUNCH_AT).getTime();
 
 const TIMER_CSS = `
