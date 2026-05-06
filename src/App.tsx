@@ -55,6 +55,8 @@ const App = () => (
                 <Route path="/home" element={<Navigate to="/" replace />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/session" element={<SessionPage />} />
+                <Route path="/sessions" element={<Navigate to="/session" replace />} />
+                <Route path="/personal-session" element={<Navigate to="/session" replace />} />
                 <Route path="/member" element={<MemberDashboard />}>
                   <Route index element={<MemberHome />} />
                   <Route path="sessions" element={<MemberSessions />} />

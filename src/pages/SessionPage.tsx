@@ -1,146 +1,148 @@
 import { Link } from 'react-router-dom';
 import LandingShell, { Divider } from '@/components/LandingShell';
+import LeadForm from '@/components/LeadForm';
 
 const requests = [
-  ['страх и тревога', 'когда тело будто заранее ждёт опасность, даже если внешне всё спокойно.'],
-  ['деньги и потолок', 'когда человек много делает, но внутри есть запрет идти дальше и брать больше.'],
-  ['отношения', 'когда снова повторяется один и тот же сценарий: зависимость, холод, ревность, потеря себя.'],
-  ['энергия и воля', 'когда ум понимает, что пора действовать, но внутри нет движения.'],
-  ['переход', 'когда нужно принять решение, выйти на новый уровень или перестать держаться за старую жизнь.'],
+  ['тревога и страх', 'когда тело будто заранее живёт в опасности, даже если внешне всё уже спокойно.'],
+  ['деньги и потолок', 'когда человек много делает, но внутри есть запрет брать больше, проявляться сильнее и выходить на новый уровень.'],
+  ['отношения', 'когда повторяется один сценарий: зависимость, холод, ревность, потеря себя или выбор недоступных людей.'],
+  ['энергия и воля', 'когда ум понимает, что пора действовать, но внутри нет движения, ясности и внутреннего разрешения.'],
+  ['переход', 'когда старая жизнь уже не подходит, а новая ещё не собрана и нужен точный внутренний разворот.'],
 ];
 
-const steps = [
-  ['запрос', 'мы формулируем не красивую цель, а ту точку, где жизнь реально застряла.'],
-  ['погружение', 'ты остаёшься в сознании, всё слышишь и можешь остановить процесс в любой момент.'],
-  ['перезапись', 'мы находим программу, которая держит старый сценарий, и меняем саму внутреннюю опору.'],
-  ['фиксация', 'после сеанса остаётся ясный следующий шаг, чтобы изменение вошло в действие.'],
+const process = [
+  ['01', 'точный запрос', 'мы отделяем настоящую точку застревания от красивой формулировки и поверхностной истории.'],
+  ['02', 'состояние внимания', 'человек остаётся в контакте с собой, слышит процесс и может остановить работу в любой момент.'],
+  ['03', 'подсознательная программа', 'мы ищем внутренний механизм, который заставляет старый сценарий повторяться снова.'],
+  ['04', 'пересборка опоры', 'работа направлена на изменение состояния, из которого человек потом выбирает и действует.'],
+  ['05', 'фиксация', 'после сессии остаётся ясный следующий шаг, чтобы изменение не осталось впечатлением.'],
 ];
 
-const fit = [
-  ['подходит', 'если есть конкретный запрос, который повторяется в жизни и уже надоело объяснять его себе словами.'],
-  ['подходит', 'если ты готов смотреть честно, а не искать подтверждение привычной истории о себе.'],
-  ['не подходит', 'если нужен диагноз, медицинская помощь, кризисная терапия или кто-то, кто примет решение вместо тебя.'],
-  ['не подходит', 'если хочется просто поговорить без намерения что-то менять.'],
+const principles = [
+  ['не разговор ради облегчения', 'сессия нужна не для того, чтобы красиво обсудить проблему, а чтобы приблизиться к механизму, который её создаёт.'],
+  ['не потеря контроля', 'человек не исчезает и не становится объектом. работа строится через внимание, контакт и точность.'],
+  ['один запрос', 'лучше глубоко взять одну точку, чем распылить работу на десять тем и уйти с красивым туманом.'],
+  ['результат важнее ритуала', 'если после работы нет изменения в отношении к запросу, формат не выполнил свою задачу.'],
 ];
 
 const SessionPage = () => {
   return (
     <LandingShell>
-      {/* HERO */}
-      <section className="l-hero" style={{ minHeight: '72vh', paddingTop: '6rem' }}>
+      <section className="l-hero" style={{ minHeight: '78vh', paddingTop: '7rem' }}>
         <div data-reveal>
-          <span className="l-label" style={{ marginBottom: '2rem', display: 'block' }}>живой вход в метод adizele</span>
-          <h1 className="l-hero-title">попробовать,<br />как метод работает<br />с подсознанием.</h1>
+          <span className="l-label" style={{ marginBottom: '2rem', display: 'block' }}>
+            личная работа с подсознанием
+          </span>
+          <h1 className="l-hero-title">сессия,<br />где меняется не история,<br />а источник сценария.</h1>
         </div>
-        <p className="l-hero-sub" data-reveal data-delay="1">не витрина услуги, а прямое прикосновение к тому, как меняется внутренний механизм.</p>
-        <div data-reveal data-delay="2" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <a href="https://t.me/adizele" target="_blank" rel="noopener noreferrer" className="l-btn">связаться с adizele</a>
-          <Link to="/method" className="l-btn-ghost">метасинхроника →</Link>
+        <p className="l-hero-sub" data-reveal data-delay="1">
+          один запрос. глубокое внимание. подсознательный механизм. новая внутренняя опора.
+        </p>
+        <p className="l-text" data-reveal data-delay="2" style={{ maxWidth: '42rem', textAlign: 'center', marginBottom: '2rem' }}>
+          Эта страница для тех, кто хочет не просто понять Oazyse° как идею, а войти в метод через личную работу с Adizele.
+        </p>
+        <div data-reveal data-delay="3" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <a href="#session-apply" className="l-btn">оставить заявку</a>
+          <Link to="/" className="l-btn-ghost">о Oazyse° →</Link>
         </div>
-        <div className="l-hero-line" style={{ marginTop: '4rem' }} data-reveal data-delay="3" />
+        <div className="l-hero-line" style={{ marginTop: '4rem' }} data-reveal data-delay="4" />
       </section>
 
-      {/* 01 · СМЫСЛ */}
       <Divider />
       <section className="l-section">
         <span className="l-label" data-reveal>[ 01 ] — что это</span>
-        <h2 className="l-title" data-reveal data-delay="1">не продажа сеанса.<br />а живая встреча с методом.</h2>
+        <h2 className="l-title" data-reveal data-delay="1">это не консультация,<br />где тебе объясняют твою жизнь.</h2>
         <p className="l-text" data-reveal data-delay="2">
-          иногда человеку не нужен длинный маршрут объяснений. ему нужно один раз по-настоящему увидеть, как работает сам механизм изменений. этот формат существует именно для этого.
+          Личная сессия — это работа с тем местом, где повторяющийся сценарий держится внутри человека. Не на уровне мнения. Не на уровне мотивации. Не на уровне “я всё понял, но продолжаю делать по-старому”.
         </p>
         <p className="l-text" data-reveal data-delay="3">
-          если внутри есть повторяющийся узор, мы не спорим с его поверхностью. мы подходим к той точке, где формируется внутренняя программа, и смотрим, можно ли сдвинуть её вживую.
+          Мы идём к подсознательному механизму: к той внутренней программе, из которой человек снова выбирает страх, сжимается перед деньгами, теряет себя в отношениях, откладывает действие или не разрешает себе новый уровень жизни.
         </p>
         <div className="l-card" data-reveal data-delay="4" style={{ marginTop: '2.5rem' }}>
-          <p className="l-mono">это способ почувствовать не обещание, а сам принцип метода: как меняется состояние, из которого потом меняется жизнь.</p>
+          <p className="l-mono">цель сессии — не красивое осознание. цель — сдвиг внутренней опоры, из которой потом меняется действие.</p>
         </div>
       </section>
 
-      {/* 02 · ЗАПРОСЫ */}
       <Divider />
       <section className="l-section-wide">
         <span className="l-label" data-reveal style={{ textAlign: 'center', display: 'block' }}>[ 02 ] — с чем приходят</span>
-        <h2 className="l-title" data-reveal data-delay="1" style={{ textAlign: 'center' }}>обычно люди приходят<br />с тем, что давно повторяется.</h2>
-        <div style={{ marginTop: '2.5rem' }} data-reveal data-delay="2">
-          {requests.map(([title, desc]) => (
+        <h2 className="l-title" data-reveal data-delay="1" style={{ textAlign: 'center' }}>обычно человек приходит<br />с тем, что уже слишком долго повторяется.</h2>
+        <div data-reveal data-delay="2" style={{ marginTop: '2.5rem' }}>
+          {requests.map(([title, text]) => (
             <div key={title} className="l-term">
               <span className="l-term-word">{title}</span>
-              <p className="l-text" style={{ marginBottom: 0, fontSize: '0.82rem' }}>{desc}</p>
+              <p className="l-term-def">{text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 03 · КОМУ ПОДХОДИТ */}
       <Divider />
       <section className="l-section">
-        <span className="l-label" data-reveal>[ 03 ] — кому подходит</span>
-        <h2 className="l-title" data-reveal data-delay="1">кому это подходит,<br />а кому нет.</h2>
+        <span className="l-label" data-reveal>[ 03 ] — как проходит</span>
+        <h2 className="l-title" data-reveal data-delay="1">бережно.<br />точно.<br />без театра.</h2>
         <p className="l-text" data-reveal data-delay="2">
-          сессия не заменяет медицину, психиатрию или экстренную помощь. это работа с внутренним запросом для человека, который находится в устойчивом состоянии и хочет увидеть механизм своего повторяющегося сценария.
+          Формат: онлайн, один главный запрос, 90-120 минут. Мы не распыляемся на всю биографию. Мы берём одну точку, в которой видно, как человек создаёт свою повторяющуюся реальность.
         </p>
-        <div style={{ marginTop: '2rem' }} data-reveal data-delay="3">
-          {fit.map(([type, desc]) => (
-            <div key={desc} className="l-term">
-              <span className="l-term-word" style={{ color: type === 'подходит' ? 'hsl(var(--neon-green))' : 'hsl(var(--muted-foreground))' }}>{type}</span>
-              <p className="l-text" style={{ marginBottom: 0, fontSize: '0.84rem' }}>{desc}</p>
+        <div data-reveal data-delay="3" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '1rem', marginTop: '2.5rem' }}>
+          {process.map(([num, title, text]) => (
+            <div key={num} className="l-card-hover">
+              <span className="l-label" style={{ marginBottom: '1rem' }}>{num}</span>
+              <span className="l-term-word">{title}</span>
+              <p className="l-term-def">{text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 04 · ПРОЦЕСС */}
       <Divider />
       <section className="l-section">
-        <span className="l-label" data-reveal>[ 04 ] — как проходит</span>
-        <h2 className="l-title" data-reveal data-delay="1">бережно.<br />точно.<br />по делу.</h2>
-        <p className="l-text" data-reveal data-delay="2">
-          сеанс длится полтора-два часа. это онлайн-работа в спокойном состоянии внимания. человек не теряет контроль, не исчезает и не становится внушаемым объектом. наоборот, он впервые может ясно увидеть то, что обычно управляет им изнутри.
-        </p>
-        <div className="l-card" data-reveal data-delay="3" style={{ marginTop: '2rem' }}>
-          <p className="l-mono">формат: онлайн · один запрос · 90-120 минут · короткая фиксация следующего шага после работы.</p>
-        </div>
-        <div style={{ marginTop: '2.5rem' }} data-reveal data-delay="3">
-          {steps.map(([title, desc], index) => (
+        <span className="l-label" data-reveal>[ 04 ] — принципы</span>
+        <h2 className="l-title" data-reveal data-delay="1">здесь важна точность,<br />а не мистическая упаковка.</h2>
+        <div data-reveal data-delay="2" style={{ marginTop: '2rem' }}>
+          {principles.map(([title, text]) => (
             <div key={title} className="l-term">
-              <span className="l-term-word">{String(index + 1).padStart(2, '0')} · {title}</span>
-              <p className="l-term-def">{desc}</p>
+              <span className="l-term-word">{title}</span>
+              <p className="l-term-def">{text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 05 · ГАРАНТИЯ */}
       <Divider />
       <section className="l-section">
-        <span className="l-label" data-reveal>[ 05 ] — гарантия</span>
-        <h2 className="l-title" data-reveal data-delay="1">здесь важен результат,<br />а не процесс ради процесса.</h2>
+        <span className="l-label" data-reveal>[ 05 ] — кому подходит</span>
+        <h2 className="l-title" data-reveal data-delay="1">подходит тем,<br />кто готов смотреть в механизм.</h2>
         <p className="l-text" data-reveal data-delay="2">
-          если после сеанса ты честно не чувствуешь изменения в отношении к своему запросу, деньги возвращаются. это принципиальная часть формата.
+          Сессия подходит, если у тебя есть конкретный запрос, который уже надоело объяснять себе словами. Если ты чувствуешь, что проблема живёт глубже логики, глубже советов и глубже очередного обещания “начать с понедельника”.
         </p>
         <p className="l-text" data-reveal data-delay="3">
-          гарантия нужна не для громкой упаковки. она нужна, чтобы человек входил в работу без страха, что ему снова продадут процесс вместо результата.
+          Она не подходит, если тебе нужно просто поговорить, получить чужое решение вместо своего или оставить всё как есть, но почувствовать красивое облегчение на один вечер.
         </p>
         <div className="l-card" data-reveal data-delay="4" style={{ marginTop: '2rem' }}>
-          <p className="l-mono">один запрос. один сеанс. гарантия результата или полный возврат средств.</p>
+          <p className="l-mono">один запрос. одна глубокая работа. ясный следующий шаг после сессии.</p>
         </div>
       </section>
 
-      {/* 06 · ЗАПИСЬ */}
       <Divider />
-      <div className="l-cta">
-        <span className="l-label" data-reveal>[ 06 ] — следующий шаг</span>
-        <p className="l-text" data-reveal data-delay="1" style={{ marginBottom: '1rem' }}>
-          если ты хочешь ближе подойти к методу, напиши коротко: кто ты, что сейчас повторяется в твоей жизни и почему ты чувствуешь, что время пришло.
+      <section id="session-apply" className="l-section">
+        <span className="l-label" data-reveal>[ 06 ] — заявка на сессию</span>
+        <h2 className="l-title" data-reveal data-delay="1">если время пришло,<br />оставь контакт.</h2>
+        <p className="l-text" data-reveal data-delay="2">
+          После заявки мы свяжемся и уточним запрос. Если формат подходит, договоримся о времени. Если нет, лучше сказать это сразу, чем продавать человеку процесс, который не нужен.
         </p>
-        <p className="l-text" data-reveal data-delay="2" style={{ marginBottom: '3rem' }}>
-          если этот путь тебе подходит, мы продолжим дальше. если нет, я скажу об этом прямо. здесь важна честная точность, а не продажа ради продажи.
-        </p>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.25rem' }} data-reveal data-delay="3">
-          <a href="https://t.me/adizele" target="_blank" rel="noopener noreferrer" className="l-btn">связаться с adizele</a>
-          <a href="https://t.me/oazysebot" target="_blank" rel="noopener noreferrer" className="l-btn-ghost">связать путь через бот →</a>
+        <div data-reveal data-delay="3">
+          <LeadForm
+            status="personal-subconscious-session"
+            title="заявка на личную сессию"
+            description="Оставь имя и контакт. В следующем сообщении мы уточним запрос и поймём, подходит ли формат личной работы."
+            submitLabel="отправить заявку"
+          />
         </div>
-      </div>
+        <div data-reveal data-delay="4" style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+          <a href="https://t.me/adizele" target="_blank" rel="noopener noreferrer" className="l-btn-ghost">или написать напрямую в Telegram →</a>
+        </div>
+      </section>
 
       <Divider />
     </LandingShell>
