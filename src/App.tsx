@@ -18,6 +18,7 @@ const PhilosophyPage = lazy(() => import('./pages/PhilosophyPage'));
 const AboutFounderPage = lazy(() => import('./pages/AboutFounderPage'));
 const NewsPage = lazy(() => import('./pages/NewsPage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const PeopleXPage = lazy(() => import('./pages/PeopleXPage'));
 const InstitutePage = lazy(() => import('./pages/InstitutePage'));
 const Admin = lazy(() => import('./pages/Admin'));
 const SessionPage = lazy(() => import('./pages/SessionPage'));
@@ -47,6 +48,7 @@ const App = () => (
                 <Route path="/about" element={<AboutFounderPage />} />
                 <Route path="/news" element={<NewsPage />} />
                 <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/people-x" element={<PeopleXPage />} />
                 <Route path="/join" element={<Navigate to="/auth" replace />} />
                 <Route path="/glossary" element={<Navigate to="/method" replace />} />
                 <Route path="/institute" element={<InstitutePage />} />
