@@ -49,6 +49,7 @@ const App = () => (
                 <Route path="/news" element={<NewsPage />} />
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/people-x" element={<PeopleXPage />} />
+                <Route path="/quiz" element={<Navigate to="/auth" replace />} />
                 <Route path="/join" element={<Navigate to="/auth" replace />} />
                 <Route path="/glossary" element={<Navigate to="/method" replace />} />
                 <Route path="/institute" element={<InstitutePage />} />
